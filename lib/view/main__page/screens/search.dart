@@ -7,8 +7,8 @@ import 'package:get/get.dart';
 import '../../../controllers/mainController.dart';
 import '../../../utils/AppColors.dart';
 
-class HomeScreen extends StatelessWidget {
-  HomeScreen({Key? key}) : super(key: key);
+class SearchScreen extends StatelessWidget {
+  SearchScreen({Key? key}) : super(key: key);
   final MainController mainController = Get.put(MainController());
 
   @override
@@ -21,48 +21,10 @@ class HomeScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SizedBox(height: 20),
-            Container(
-              margin: EdgeInsets.only(right: 20),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  CircleAvatar(
-                    radius: 25,
-                    backgroundImage: AssetImage("assets/images/avatar.png"),
-                  ),
-                  IconButton(
-                    onPressed: () {},
-                    icon: Icon(
-                      Icons.add,
-                      color: AppColors.darkBlack,
-                      size: 30,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            SizedBox(height: 20),
-            AutoSizeText.rich(
-              TextSpan(
-                text: mainController.allFirstWordLetterToUppercase("Hey, "),
-                children: [
-                  TextSpan(
-                    text: mainController.allFirstWordLetterToUppercase("anas"),
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                ],
-              ),
-              textAlign: TextAlign.left,
-              style: TextStyle(
-                fontSize: 30,
-              ),
-            ),
-            Divider(),
+
             SizedBox(height: 20),
             AutoSizeText(
-              mainController
-                  .allFirstWordLetterToUppercase("latest added notification"),
+              mainController.allFirstWordLetterToUppercase("search by title"),
               maxLines: 2,
               style: TextStyle(
                 fontSize: 25,
@@ -70,7 +32,30 @@ class HomeScreen extends StatelessWidget {
               ),
             ),
             //
-            SizedBox(height: 20),
+            SizedBox(height: 30),
+
+            Container(
+              margin: EdgeInsets.only(right: 20),
+              child: TextField(
+                decoration: InputDecoration(
+                  alignLabelWithHint: false,
+                  contentPadding: EdgeInsets.all(15),
+                  suffixIcon: Icon(Icons.search),
+                  filled: true,
+                  fillColor: AppColors.darkBlack.withOpacity(.05),
+                  hintText: "Search",
+                  focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                      borderSide: BorderSide.none),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                    borderSide: BorderSide.none,
+                  ),
+                ),
+              ),
+            ),
+            //
+            SizedBox(height: 30),
             ...List.generate(
               10,
               (index) => Container(
@@ -137,21 +122,24 @@ class HomeScreen extends StatelessWidget {
                               ],
                             ),
                           ),
-                          Positioned(
-                              top: 00,
-                              right: 00,
-                              child: Theme(
-                                data: ThemeData(
-                                  highlightColor: Colors.transparent,
-                                  splashColor: Colors.transparent,
-                                ),
-                                child: IconButton(
-                                  onPressed: () {},
-                                  icon: Icon(
-                                    Icons.star_border,
+                          Visibility(
+                            visible: false,
+                            child: Positioned(
+                                top: 00,
+                                right: 00,
+                                child: Theme(
+                                  data: ThemeData(
+                                    highlightColor: Colors.transparent,
+                                    splashColor: Colors.transparent,
                                   ),
-                                ),
-                              )),
+                                  child: IconButton(
+                                    onPressed: () {},
+                                    icon: Icon(
+                                      Icons.star_border,
+                                    ),
+                                  ),
+                                )),
+                          ),
                         ],
                       ),
                     ),

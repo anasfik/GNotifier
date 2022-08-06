@@ -8,6 +8,7 @@ import 'package:watch_it_later/view/main__page/screens/favorites.dart';
 import '../../controllers/home__page__tab__controller.dart/home__page__tab__controller.dart.dart';
 import '../../utils/AppColors.dart';
 import 'screens/home.dart';
+import 'screens/search.dart';
 
 class MainPage extends StatelessWidget {
   MainPage({Key? key}) : super(key: key);
