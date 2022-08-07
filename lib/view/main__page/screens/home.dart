@@ -31,12 +31,19 @@ class HomeScreen extends StatelessWidget {
                     radius: 25,
                     backgroundImage: AssetImage("assets/images/avatar.png"),
                   ),
-                  IconButton(
-                    onPressed: () {},
-                    icon: Icon(
-                      Icons.add,
+                  Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(15),
                       color: AppColors.darkBlack,
-                      size: 30,
+                    ),
+                    padding: EdgeInsets.all(3),
+                    child: IconButton(
+                      onPressed: () {},
+                      icon: Icon(
+                        Icons.add,
+                        color: AppColors.white,
+                        size: 30,
+                      ),
                     ),
                   ),
                 ],

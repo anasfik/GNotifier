@@ -9,6 +9,7 @@ import '../../controllers/home__page__tab__controller.dart/home__page__tab__cont
 import '../../utils/AppColors.dart';
 import 'screens/home.dart';
 import 'screens/search.dart';
+import 'screens/settings.dart';
 
 class MainPage extends StatelessWidget {
   MainPage({Key? key}) : super(key: key);
@@ -53,13 +54,13 @@ class MainPage extends StatelessWidget {
           ),
         ),
         body: TabBarView(
+          controller: bottomBarController.tabController,
           children: [
             HomeScreen(),
             SearchScreen(),
             FavoritesScreen(),
-            HomeScreen(),
+            SettingsScreen(),
           ],
-          controller: bottomBarController.tabController,
         ),
       ),
     );

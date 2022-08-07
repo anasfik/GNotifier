@@ -7,15 +7,15 @@ import 'package:get/get.dart';
 import '../../../controllers/mainController.dart';
 import '../../../utils/AppColors.dart';
 
-class SearchScreen extends StatelessWidget {
-  SearchScreen({Key? key}) : super(key: key);
+class SettingsScreen extends StatelessWidget {
+  SettingsScreen({Key? key}) : super(key: key);
   final MainController mainController = Get.put(MainController());
 
   @override
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      margin: EdgeInsets.only(left: 20),
+      margin: EdgeInsets.symmetric(horizontal: 20),
       child: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -24,7 +24,7 @@ class SearchScreen extends StatelessWidget {
 
             SizedBox(height: 20),
             AutoSizeText(
-              mainController.allFirstWordLetterToUppercase("search by title"),
+              mainController.allFirstWordLetterToUppercase("settings"),
               maxLines: 2,
               style: TextStyle(
                 fontSize: 25,
@@ -32,125 +32,61 @@ class SearchScreen extends StatelessWidget {
               ),
             ),
             //
-            SizedBox(height: 30),
 
-            Container(
-              margin: EdgeInsets.only(right: 20),
-              child: TextField(
-                decoration: InputDecoration(
-                  alignLabelWithHint: false,
-                  contentPadding: EdgeInsets.all(15),
-                  suffixIcon: Icon(Icons.search),
-                  filled: true,
-                  fillColor: AppColors.darkBlack.withOpacity(.05),
-                  hintText: "Search",
-                  focusedBorder: OutlineInputBorder(
+            //
+            SizedBox(height: 20),
+
+            GridView(
+              shrinkWrap: true,
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                childAspectRatio: 1,
+                crossAxisCount: 2,
+                crossAxisSpacing: 15,
+                mainAxisSpacing: 15,
+              ),
+              children: [
+                ...List.generate(
+                  6,
+                  (index) => Container(
+                    padding: EdgeInsets.all(15),
+                    decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
-                      borderSide: BorderSide.none),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
-                    borderSide: BorderSide.none,
+                      color: AppColors.darkBlack.withOpacity(.05),
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Spacer(),
+                        Icon(
+                          Icons.brightness_2,
+                          color: AppColors.darkBlack.withOpacity(.45),
+                          size: 35,
+                        ),
+                        Spacer(),
+                        AutoSizeText(
+                          mainController
+                              .allFirstWordLetterToUppercase("dark mode"),
+                          maxLines: 1,
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        AutoSizeText(
+                            mainController.allFirstWordLetterToUppercase(
+                                "Switch app theme to dark / light mode"),
+                            maxLines: 2,
+                            style: TextStyle(
+                              fontSize: 12,
+                              color: AppColors.darkBlack.withOpacity(.65),
+                              fontWeight: FontWeight.w500,
+                            )),
+                      ],
+                    ),
                   ),
                 ),
-              ),
-            ),
-            //
-            SizedBox(height: 30),
-            ...List.generate(
-              10,
-              (index) => Container(
-                width: double.infinity,
-                margin: EdgeInsets.only(bottom: 20),
-                height: 120,
-                child: Row(
-                  children: [
-                    Container(
-                      width: 15,
-                      height: 15,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(50),
-                        border:
-                            Border.all(width: 3.5, color: AppColors.darkBlack),
-                      ),
-                    ),
-                    Container(
-                      width: 7,
-                      height: 2,
-                      color: AppColors.darkBlack,
-                    ),
-                    Expanded(
-                      child: Stack(
-                        children: [
-                          Container(
-                            padding: EdgeInsets.symmetric(horizontal: 10),
-                            decoration: BoxDecoration(
-                              color: AppColors.darkBlack.withOpacity(.03),
-                              borderRadius: BorderRadius.circular(20),
-                            ),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                Spacer(
-                                  flex: 2,
-                                ),
-                                AutoSizeText(
-                                  mainController.allFirstWordLetterToUppercase(
-                                      "Blade runner"),
-                                  style: TextStyle(
-                                    color: AppColors.darkBlack,
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.w500,
-                                  ),
-                                  maxFontSize: 20,
-                                  maxLines: 1,
-                                ),
-                                SizedBox(
-                                  height: 5,
-                                ),
-                                AutoSizeText(
-                                  mainController.allFirstWordLetterToUppercase(
-                                      "this is a notification example, for tzsting purpose"),
-                                  style: TextStyle(
-                                      color:
-                                          AppColors.darkBlack.withOpacity(.6),
-                                      fontSize: 15),
-                                  maxFontSize: 15,
-                                  maxLines: 2,
-                                ),
-                                Spacer(),
-                              ],
-                            ),
-                          ),
-                          Visibility(
-                            visible: false,
-                            child: Positioned(
-                                top: 00,
-                                right: 00,
-                                child: Theme(
-                                  data: ThemeData(
-                                    highlightColor: Colors.transparent,
-                                    splashColor: Colors.transparent,
-                                  ),
-                                  child: IconButton(
-                                    onPressed: () {},
-                                    icon: Icon(
-                                      Icons.star_border,
-                                    ),
-                                  ),
-                                )),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Container(
-                      width: 7 * 2,
-                      height: 2,
-                      color: AppColors.darkBlack,
-                    ),
-                  ],
-                ),
-              ),
+              ],
             ),
           ],
         ),
@@ -158,3 +94,22 @@ class SearchScreen extends StatelessWidget {
     );
   }
 }
+
+List settingsBoxContents = [
+  {
+    "title": "dark mode",
+    "icon": Icons.brightness_2,
+  },
+  {
+    "title": "delete notes",
+    "icon": Icons.notes,
+  },
+  {
+    "title": "about",
+    "icon": Icons.info,
+  },
+  {
+    "title": "logout",
+    "icon": Icons.exit_to_app,
+  }
+];
