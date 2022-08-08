@@ -3,12 +3,16 @@
 import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hive/hive.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:watch_it_later/utils/AppColors.dart';
 import 'package:watch_it_later/utils/AppTexts.dart';
 
 import 'view/main__page/main__page.dart';
 
-void main() {
+void main() async {
+await Hive.initFlutter();
+Box newNotifications = await Hive.openBox("newNotificationsBox");
   runApp(WatchItLaterApp());
 }
 

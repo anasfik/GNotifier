@@ -4,9 +4,10 @@ import 'package:flutter/material.dart';
 import '../../utils/AppColors.dart';
 
 class CustomButton extends StatelessWidget {
-  CustomButton({Key? key, this.text = "Go", this.shouldReverseColors = false})
+  CustomButton({Key? key, this.text = "Go", this.shouldReverseColors = false, this.onPressed})
       : super(key: key);
   bool shouldReverseColors;
+  void Function()? onPressed;
   String text;
   @override
   Widget build(BuildContext context) {
@@ -16,7 +17,7 @@ class CustomButton extends StatelessWidget {
       decoration: BoxDecoration(borderRadius: BorderRadius.circular(20)),
       height: 60,
       child: ElevatedButton(
-        onPressed: () {},
+        onPressed: onPressed,
         style: ElevatedButton.styleFrom(
           primary: shouldReverseColors ? AppColors.darkBlack : AppColors.white,
           onPrimary:

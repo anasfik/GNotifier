@@ -8,12 +8,13 @@ import 'package:watch_it_later/utils/AppColors.dart';
 import 'package:watch_it_later/view/general__widgets/button.dart';
 import 'package:watch_it_later/view/general__widgets/text__field.dart';
 
+import '../../../controllers/notificationsControllers/newItemNotificationController.dart';
 import '../../general__widgets/action__button.dart';
 
 class AddNewItemScreen extends StatelessWidget {
   AddNewItemScreen({Key? key}) : super(key: key);
   MainController mainController = Get.find();
-
+NewNotificationController newNotificationController = Get.put(NewNotificationController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -99,6 +100,10 @@ class AddNewItemScreen extends StatelessWidget {
             Container(
               width: double.infinity,
               child: CustomButton(
+                onPressed: () {
+                  
+    
+                },
                 text: mainController.allFirstWordLetterToUppercase("create"),
                 shouldReverseColors: true,
               ),
