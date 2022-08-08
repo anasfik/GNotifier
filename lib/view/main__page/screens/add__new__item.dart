@@ -76,18 +76,46 @@ class AddNewItemScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                ...List.generate(
-                  3,
-                  (index) => Column(
+                Expanded(
+                  child: GestureDetector(
+                    onTap: () async {
+                      DateTime? gettedTime =
+                          await newNotificationController.getDateFromUser();
+
+                      print(gettedTime);
+                    },
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Icon(
+                          Icons.calendar_month_outlined,
+                          size: 35,
+                        ),
+                        AutoSizeText(
+                          mainController.allFirstWordLetterToUppercase("date"),
+                          style: TextStyle(
+                            fontSize: 18,
+                            color: AppColors.darkBlack,
+                          ),
+                          maxLines: 1,
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Icon(
-                        Icons.schedule,
+                        Icons.repeat,
                         size: 35,
                       ),
                       AutoSizeText(
-                        "Schedule",
+                        mainController
+                            .allFirstWordLetterToUppercase("repeated"),
                         style: TextStyle(
                           fontSize: 18,
                           color: AppColors.darkBlack,
@@ -96,7 +124,27 @@ class AddNewItemScreen extends StatelessWidget {
                       ),
                     ],
                   ),
-                )
+                ),
+                Expanded(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Icon(
+                        Icons.alarm,
+                        size: 35,
+                      ),
+                      AutoSizeText(
+                        mainController.allFirstWordLetterToUppercase("alarm"),
+                        style: TextStyle(
+                          fontSize: 18,
+                          color: AppColors.darkBlack,
+                        ),
+                        maxLines: 1,
+                      ),
+                    ],
+                  ),
+                ),
               ],
             ),
             Spacer(),
@@ -104,7 +152,9 @@ class AddNewItemScreen extends StatelessWidget {
               width: double.infinity,
               child: CustomButton(
                 onPressed: () {
-                  print(Hive.box<NewItemNotifcationModel>("newNotificationsBox").values.length);
+                  print(Hive.box<NewItemNotifcationModel>("newNotificationsBox")
+                      .values
+                      .length);
                 },
                 text: mainController.allFirstWordLetterToUppercase("create"),
                 shouldReverseColors: true,
