@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 
 import '../../../controllers/mainController.dart';
 import '../../../utils/AppColors.dart';
+import '../../general__widgets/action__button.dart';
 import 'add__new__item.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -36,17 +37,8 @@ class HomeScreen extends StatelessWidget {
                   OpenContainer(
                     closedElevation: 0,
                     closedBuilder: (context, action) {
-                      return Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(15),
-                          color: AppColors.lightGrey,
-                        ),
-                        padding: EdgeInsets.all(10),
-                        child: Icon(
-                          Icons.add,
-                          color: AppColors.darkBlack,
-                          size: 30,
-                        ),
+                      return CustomActionIconButton(
+                        icon: Icons.add,
                       );
                     },
                     openBuilder: (context, action) {
