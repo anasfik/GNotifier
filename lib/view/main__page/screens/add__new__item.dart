@@ -23,29 +23,54 @@ class AddNewItemScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               AutoSizeText(
-                "Add new item",
+                "New",
                 style: TextStyle(
-                  fontSize: 50,
+                  fontSize: 40,
                   fontWeight: FontWeight.bold,
                   color: AppColors.darkBlack,
                 ),
               ),
               AutoSizeText(
                 mainController.allFirstWordLetterToUppercase(
-                    "write the title and description of your notifivation and set a schedule for it"),
+                    "write the title and description of your notification and set a schedule"),
                 style: TextStyle(
-                  color: AppColors.darkBlack,
+                  fontSize: 20,
+                  color: AppColors.darkBlack.withOpacity(.55),
                 ),
-                maxLines: 2,
+                maxLines: 3,
               ),
+              SizedBox(height: 20),
               CustomTextField(
                 hintText: mainController.allFirstWordLetterToUppercase("title"),
               ),
+              SizedBox(height: 20),
               CustomTextField(
                 hintText:
                     mainController.allFirstWordLetterToUppercase("description"),
                 contentPadding:
                     EdgeInsets.symmetric(vertical: 30, horizontal: 15),
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  ...List.generate(
+                    3,
+                    (index) => Column(
+                      children: [
+                        Icon(Icons.schedule),
+                        AutoSizeText(
+                          "Schedule",
+                          style: TextStyle(
+                            fontSize: 20,
+                            color: AppColors.darkBlack,
+                          ),
+                          maxLines: 1,
+                        ),
+                      ],
+                    ),
+                  )
+                ],
               )
             ],
           ),
