@@ -1,10 +1,9 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 import 'package:flutter_point_tab_bar/pointTabBar.dart';
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:watch_it_later/view/main__page/screens/favorites.dart';
-
+import 'package:animations/animations.dart';
 import '../../controllers/home__page__tab__controller.dart/home__page__tab__controller.dart.dart';
 import '../../utils/AppColors.dart';
 import 'screens/home.dart';

@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 
 import '../../../controllers/mainController.dart';
 import '../../../utils/AppColors.dart';
+import '../../general__widgets/text__field.dart';
 
 class SearchScreen extends StatelessWidget {
   SearchScreen({Key? key}) : super(key: key);
@@ -36,22 +37,10 @@ class SearchScreen extends StatelessWidget {
 
             Container(
               margin: EdgeInsets.only(right: 20),
-              child: TextField(
-                decoration: InputDecoration(
-                  alignLabelWithHint: false,
-                  contentPadding: EdgeInsets.all(15),
-                  suffixIcon: Icon(Icons.search),
-                  filled: true,
-                  fillColor: AppColors.darkBlack.withOpacity(.05),
-                  hintText: "Search",
-                  focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10),
-                      borderSide: BorderSide.none),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
-                    borderSide: BorderSide.none,
-                  ),
-                ),
+              child: CustomTextField(
+                hintText:
+                    mainController.allFirstWordLetterToUppercase("search"),
+                suffixIcon: Icon(Icons.search),
               ),
             ),
             //

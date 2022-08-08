@@ -40,6 +40,7 @@ dependencies:
   floating_navbar: ^2.0.2
   floating_bottom_navigation_bar: ^1.5.2
   flutter_point_tab_bar: ^0.2.0
+  animations: ^2.0.3
 
 
 dev_dependencies:

@@ -1,11 +1,13 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'package:animations/animations.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../controllers/mainController.dart';
 import '../../../utils/AppColors.dart';
+import 'add__new__item.dart';
 
 class HomeScreen extends StatelessWidget {
   HomeScreen({Key? key}) : super(key: key);
@@ -31,20 +33,25 @@ class HomeScreen extends StatelessWidget {
                     radius: 25,
                     backgroundImage: AssetImage("assets/images/avatar.png"),
                   ),
-                  Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15),
-                      color: AppColors.darkBlack,
-                    ),
-                    padding: EdgeInsets.all(3),
-                    child: IconButton(
-                      onPressed: () {},
-                      icon: Icon(
-                        Icons.add,
-                        color: AppColors.white,
-                        size: 30,
-                      ),
-                    ),
+                  OpenContainer(
+                    closedElevation: 0,
+                    closedBuilder: (context, action) {
+                      return Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(15),
+                          color: AppColors.lightGrey,
+                        ),
+                        padding: EdgeInsets.all(10),
+                        child: Icon(
+                          Icons.add,
+                          color: AppColors.darkBlack,
+                          size: 30,
+                        ),
+                      );
+                    },
+                    openBuilder: (context, action) {
+                      return AddNewItemScreen();
+                    },
                   ),
                 ],
               ),
@@ -132,7 +139,7 @@ class HomeScreen extends StatelessWidget {
                                 ),
                                 AutoSizeText(
                                   mainController.allFirstWordLetterToUppercase(
-                                      "this is a notification example, for tzsting purpose"),
+                                      "this is a notification example, for testing purpose"),
                                   style: TextStyle(
                                       color:
                                           AppColors.darkBlack.withOpacity(.6),
@@ -156,6 +163,7 @@ class HomeScreen extends StatelessWidget {
                                   onPressed: () {},
                                   icon: Icon(
                                     Icons.star_border,
+                                    color: AppColors.darkBlack.withOpacity(.7),
                                   ),
                                 ),
                               )),
