@@ -4,8 +4,11 @@ import 'package:animations/animations.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:hive/hive.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
 import '../../../controllers/mainController.dart';
+import '../../../model/newItemNotificationModel.dart';
 import '../../../utils/AppColors.dart';
 import '../../general__widgets/action__button.dart';
 import 'add__new__item.dart';
@@ -77,100 +80,124 @@ class HomeScreen extends StatelessWidget {
             ),
             //
             SizedBox(height: 20),
-            ...List.generate(
-              10,
-              (index) => Container(
-                width: double.infinity,
-                margin: EdgeInsets.only(bottom: 20),
-                height: 120,
-                child: Row(
-                  children: [
-                    Container(
-                      width: 15,
-                      height: 15,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(50),
-                        border:
-                            Border.all(width: 3.5, color: AppColors.darkBlack),
-                      ),
-                    ),
-                    Container(
-                      width: 7,
-                      height: 2,
-                      color: AppColors.darkBlack,
-                    ),
-                    Expanded(
-                      child: Stack(
-                        children: [
-                          Container(
-                            padding: EdgeInsets.symmetric(horizontal: 10),
-                            decoration: BoxDecoration(
-                              color: AppColors.darkBlack.withOpacity(.03),
-                              borderRadius: BorderRadius.circular(20),
-                            ),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                Spacer(
-                                  flex: 2,
+            ValueListenableBuilder(
+                valueListenable:
+                    Hive.box<NewItemNotifcationModel>("newNotificationsBox")
+                        .listenable(),
+                builder: (BuildContext context,
+                    Box<NewItemNotifcationModel> box, __) {
+                  if (box.values.isEmpty)
+                    return Center(
+                      child: Text("No notifications"),
+                    );
+                  return Column(
+                    children: [
+                      ...List.generate(box.values.length, (index) {
+                                                  NewItemNotifcationModel? currentNotification =
+                            box.getAt(index);
+
+                        return Container(
+                          width: double.infinity,
+                          margin: EdgeInsets.only(bottom: 20),
+                          height: 120,
+                          child: Row(
+                            children: [
+                              Container(
+                                width: 15,
+                                height: 15,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(50),
+                                  border: Border.all(
+                                      width: 3.5, color: AppColors.darkBlack),
                                 ),
-                                AutoSizeText(
-                                  mainController.allFirstWordLetterToUppercase(
-                                      "Blade runner"),
-                                  style: TextStyle(
-                                    color: AppColors.darkBlack,
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.w500,
-                                  ),
-                                  maxFontSize: 20,
-                                  maxLines: 1,
+                              ),
+                              Container(
+                                width: 7,
+                                height: 2,
+                                color: AppColors.darkBlack,
+                              ),
+                              Expanded(
+                                child: Stack(
+                                  children: [
+                                    Container(
+                                      padding:
+                                          EdgeInsets.symmetric(horizontal: 10),
+                                      decoration: BoxDecoration(
+                                        color: AppColors.darkBlack
+                                            .withOpacity(.03),
+                                        borderRadius: BorderRadius.circular(20),
+                                      ),
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceEvenly,
+                                        children: [
+                                          Spacer(
+                                            flex: 2,
+                                          ),
+                                          AutoSizeText(
+                                            mainController
+                                                .allFirstWordLetterToUppercase(
+                                                    "Blade runner"),
+                                            style: TextStyle(
+                                              color: AppColors.darkBlack,
+                                              fontSize: 20,
+                                              fontWeight: FontWeight.w500,
+                                            ),
+                                            maxFontSize: 20,
+                                            maxLines: 1,
+                                          ),
+                                          SizedBox(
+                                            height: 5,
+                                          ),
+                                          AutoSizeText(
+                                            mainController
+                                                .allFirstWordLetterToUppercase(
+                                                    "this is a notification example, for testing purpose"),
+                                            style: TextStyle(
+                                                color: AppColors.darkBlack
+                                                    .withOpacity(.6),
+                                                fontSize: 15),
+                                            maxFontSize: 15,
+                                            maxLines: 2,
+                                          ),
+                                          Spacer(),
+                                        ],
+                                      ),
+                                    ),
+                                    Positioned(
+                                        top: 00,
+                                        right: 00,
+                                        child: Theme(
+                                          data: ThemeData(
+                                            highlightColor: Colors.transparent,
+                                            splashColor: Colors.transparent,
+                                          ),
+                                          child: IconButton(
+                                            onPressed: () {},
+                                            icon: Icon(
+                                              Icons.star_border,
+                                              color: AppColors.darkBlack
+                                                  .withOpacity(.7),
+                                            ),
+                                          ),
+                                        )),
+                                  ],
                                 ),
-                                SizedBox(
-                                  height: 5,
-                                ),
-                                AutoSizeText(
-                                  mainController.allFirstWordLetterToUppercase(
-                                      "this is a notification example, for testing purpose"),
-                                  style: TextStyle(
-                                      color:
-                                          AppColors.darkBlack.withOpacity(.6),
-                                      fontSize: 15),
-                                  maxFontSize: 15,
-                                  maxLines: 2,
-                                ),
-                                Spacer(),
-                              ],
-                            ),
+                              ),
+                              Container(
+                                width: 7 * 2,
+                                height: 2,
+                                color: AppColors.darkBlack,
+                              ),
+                            ],
                           ),
-                          Positioned(
-                              top: 00,
-                              right: 00,
-                              child: Theme(
-                                data: ThemeData(
-                                  highlightColor: Colors.transparent,
-                                  splashColor: Colors.transparent,
-                                ),
-                                child: IconButton(
-                                  onPressed: () {},
-                                  icon: Icon(
-                                    Icons.star_border,
-                                    color: AppColors.darkBlack.withOpacity(.7),
-                                  ),
-                                ),
-                              )),
-                        ],
-                      ),
-                    ),
-                    Container(
-                      width: 7 * 2,
-                      height: 2,
-                      color: AppColors.darkBlack,
-                    ),
-                  ],
-                ),
-              ),
-            ),
+                        );
+                      }),
+                    ],
+                  );
+                }),
           ],
         ),
       ),

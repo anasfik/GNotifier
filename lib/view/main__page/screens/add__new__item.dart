@@ -3,18 +3,21 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:hive/hive.dart';
 import 'package:watch_it_later/controllers/mainController.dart';
 import 'package:watch_it_later/utils/AppColors.dart';
 import 'package:watch_it_later/view/general__widgets/button.dart';
 import 'package:watch_it_later/view/general__widgets/text__field.dart';
 
 import '../../../controllers/notificationsControllers/newItemNotificationController.dart';
+import '../../../model/newItemNotificationModel.dart';
 import '../../general__widgets/action__button.dart';
 
 class AddNewItemScreen extends StatelessWidget {
   AddNewItemScreen({Key? key}) : super(key: key);
   MainController mainController = Get.find();
-NewNotificationController newNotificationController = Get.put(NewNotificationController());
+  NewNotificationController newNotificationController =
+      Get.put(NewNotificationController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -101,8 +104,7 @@ NewNotificationController newNotificationController = Get.put(NewNotificationCon
               width: double.infinity,
               child: CustomButton(
                 onPressed: () {
-                  
-    
+                  print(Hive.box<NewItemNotifcationModel>("newNotificationsBox").values.length);
                 },
                 text: mainController.allFirstWordLetterToUppercase("create"),
                 shouldReverseColors: true,

@@ -8,11 +8,17 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:watch_it_later/utils/AppColors.dart';
 import 'package:watch_it_later/utils/AppTexts.dart';
 
+import 'model/newItemNotificationModel.dart';
 import 'view/main__page/main__page.dart';
 
 void main() async {
-await Hive.initFlutter();
-Box newNotifications = await Hive.openBox("newNotificationsBox");
+  await Hive.initFlutter();
+  Hive.registerAdapter<NewItemNotifcationModel>(
+      NewItemNotifcationModelAdapter());
+
+  Box newNotifications =
+      await Hive.openBox<NewItemNotifcationModel>("newNotificationsBox");
+  newNotifications.clear();
   runApp(WatchItLaterApp());
 }
 

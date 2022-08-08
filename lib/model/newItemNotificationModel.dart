@@ -1,5 +1,6 @@
 import 'package:hive_flutter/hive_flutter.dart';
 
+part 'newItemNotificationModel.g.dart';
 @HiveType(typeId: 0)
 class NewItemNotifcationModel extends HiveObject {
   @HiveField(0)
