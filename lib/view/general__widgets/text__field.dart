@@ -5,6 +5,7 @@ import '../../utils/AppColors.dart';
 class CustomTextField extends StatelessWidget {
   CustomTextField(
       {Key? key,
+      this.controller,
       this.hintText,
       this.suffixIcon = null,
       this.contentPadding = const EdgeInsets.all(15)})
@@ -14,9 +15,11 @@ class CustomTextField extends StatelessWidget {
   String? hintText;
   Icon? suffixIcon;
   EdgeInsets contentPadding;
+  TextEditingController? controller;
   @override
   Widget build(BuildContext context) {
     return TextField(
+      controller: controller,
       decoration: InputDecoration(
         alignLabelWithHint: false,
         contentPadding: contentPadding,

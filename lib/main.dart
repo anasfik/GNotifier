@@ -15,7 +15,6 @@ void main() async {
   await Hive.initFlutter();
   Hive.registerAdapter<NewItemNotifcationModel>(
       NewItemNotifcationModelAdapter());
-
   Box newNotifications =
       await Hive.openBox<NewItemNotifcationModel>("newNotificationsBox");
   newNotifications.clear();

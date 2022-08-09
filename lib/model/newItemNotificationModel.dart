@@ -9,11 +9,18 @@ class NewItemNotifcationModel extends HiveObject {
   String description;
   @HiveField(2)
   DateTime dateToShow;
-  @HiveField(3)
-  bool isIntervaled;
-  @HiveField(4)
-  double intervalDuration;
+  /// those ids are no longer valid (3, 4)
+  // @HiveField(3)
+  // bool isIntervaled;
+  // @HiveField(4)
+  // double intervalDuration;
+@HiveField(5)
+  bool isRepeated;
+  @HiveField(6)
+  bool isAlarmed;
+@HiveField(7)
+  bool? isFavorite;
 
   NewItemNotifcationModel(this.title, this.description, this.dateToShow,
-      this.isIntervaled, this.intervalDuration);
+      this.isRepeated, this.isAlarmed, this.isFavorite);
 }

@@ -11,6 +11,7 @@ import '../../../controllers/mainController.dart';
 import '../../../model/newItemNotificationModel.dart';
 import '../../../utils/AppColors.dart';
 import '../../general__widgets/action__button.dart';
+import '../../general__widgets/icon__button.dart';
 import 'add__new__item.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -93,8 +94,11 @@ class HomeScreen extends StatelessWidget {
                   return Column(
                     children: [
                       ...List.generate(box.values.length, (index) {
-                                                  NewItemNotifcationModel? currentNotification =
-                            box.getAt(index);
+                        // making the read of the iterable start from the end
+                        // ...length -1 get us to last element, since index start from 0, this will work as we want
+                        int reversedIndex = box.values.length - 1 - index;
+                        NewItemNotifcationModel? currentNotification =
+                            box.getAt(reversedIndex);
 
                         return Container(
                           width: double.infinity,
@@ -137,9 +141,7 @@ class HomeScreen extends StatelessWidget {
                                             flex: 2,
                                           ),
                                           AutoSizeText(
-                                            mainController
-                                                .allFirstWordLetterToUppercase(
-                                                    "Blade runner"),
+                                            "${currentNotification!.title}",
                                             style: TextStyle(
                                               color: AppColors.darkBlack,
                                               fontSize: 20,
@@ -152,9 +154,7 @@ class HomeScreen extends StatelessWidget {
                                             height: 5,
                                           ),
                                           AutoSizeText(
-                                            mainController
-                                                .allFirstWordLetterToUppercase(
-                                                    "this is a notification example, for testing purpose"),
+                                            "${currentNotification.description}",
                                             style: TextStyle(
                                                 color: AppColors.darkBlack
                                                     .withOpacity(.6),
@@ -167,22 +167,13 @@ class HomeScreen extends StatelessWidget {
                                       ),
                                     ),
                                     Positioned(
-                                        top: 00,
-                                        right: 00,
-                                        child: Theme(
-                                          data: ThemeData(
-                                            highlightColor: Colors.transparent,
-                                            splashColor: Colors.transparent,
-                                          ),
-                                          child: IconButton(
-                                            onPressed: () {},
-                                            icon: Icon(
-                                              Icons.star_border,
-                                              color: AppColors.darkBlack
-                                                  .withOpacity(.7),
-                                            ),
-                                          ),
-                                        )),
+                                      top: 5,
+                                      right: 5,
+                                      child: FavoriteIconButton(
+                                        isChecked: false,
+                                        passedIndex: reversedIndex,
+                                      ),
+                                    ),
                                   ],
                                 ),
                               ),

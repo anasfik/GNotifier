@@ -21,25 +21,28 @@ class NewItemNotifcationModelAdapter
       fields[0] as String,
       fields[1] as String,
       fields[2] as DateTime,
-      fields[3] as bool,
-      fields[4] as double,
+      fields[5] as bool,
+      fields[6] as bool,
+      fields[7] as bool?,
     );
   }
 
   @override
   void write(BinaryWriter writer, NewItemNotifcationModel obj) {
     writer
-      ..writeByte(5)
+      ..writeByte(6)
       ..writeByte(0)
       ..write(obj.title)
       ..writeByte(1)
       ..write(obj.description)
       ..writeByte(2)
       ..write(obj.dateToShow)
-      ..writeByte(3)
-      ..write(obj.isIntervaled)
-      ..writeByte(4)
-      ..write(obj.intervalDuration);
+      ..writeByte(5)
+      ..write(obj.isRepeated)
+      ..writeByte(6)
+      ..write(obj.isAlarmed)
+      ..writeByte(7)
+      ..write(obj.isFavorite);
   }
 
   @override
