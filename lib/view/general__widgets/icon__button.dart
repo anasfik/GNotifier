@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
-import 'package:watch_it_later/controllers/favoritesController.dart/favoritesController.dart';
 import 'package:watch_it_later/controllers/helpersControllers/dialogsController.dart';
 
+import '../../controllers/favorites__controller.dart/favorites__controller.dart';
 import '../../model/newItemNotificationModel.dart';
 import '../../utils/AppColors.dart';
 
 class FavoriteIconButton extends StatelessWidget {
   FavoriteIconButton({
     Key? key,
-    this.isChecked = false,
+    required this.isChecked,
     required this.passedIndex,
   }) : super(key: key);
   bool isChecked;

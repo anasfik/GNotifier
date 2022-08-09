@@ -8,10 +8,12 @@ class CustomTextField extends StatelessWidget {
       this.controller,
       this.hintText,
       this.suffixIcon = null,
+      this.onChanged,
       this.contentPadding = const EdgeInsets.all(15)})
       : assert(hintText != null, "hintText must not be null"),
         super(key: key);
 
+  void Function(String)? onChanged;
   String? hintText;
   Icon? suffixIcon;
   EdgeInsets contentPadding;
@@ -19,6 +21,7 @@ class CustomTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextField(
+      onChanged: onChanged,
       controller: controller,
       decoration: InputDecoration(
         alignLabelWithHint: false,

@@ -17,7 +17,7 @@ void main() async {
       NewItemNotifcationModelAdapter());
   Box newNotifications =
       await Hive.openBox<NewItemNotifcationModel>("newNotificationsBox");
-  newNotifications.clear();
+  // newNotifications.clear();
   runApp(WatchItLaterApp());
 }
 

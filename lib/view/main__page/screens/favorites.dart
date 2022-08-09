@@ -3,13 +3,18 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:watch_it_later/controllers/favorites__controller.dart/favorites__controller.dart';
+import 'package:watch_it_later/view/general__widgets/notification__card.dart';
 
 import '../../../controllers/mainController.dart';
 import '../../../utils/AppColors.dart';
 
 class FavoritesScreen extends StatelessWidget {
   FavoritesScreen({Key? key}) : super(key: key);
+
   final MainController mainController = Get.put(MainController());
+  final FavoritesController favoritesController =
+      Get.put(FavoritesController());
 
   @override
   Widget build(BuildContext context) {
@@ -34,102 +39,25 @@ class FavoritesScreen extends StatelessWidget {
             ),
             //
             SizedBox(height: 20),
-            ...List.generate(
-              10,
-              (index) => Container(
-                width: double.infinity,
-                margin: EdgeInsets.only(bottom: 20),
-                height: 120,
-                child: Row(
-                  children: [
-                    Container(
-                      width: 15,
-                      height: 15,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(50),
-                        border:
-                            Border.all(width: 3.5, color: AppColors.darkBlack),
-                      ),
-                    ),
-                    Container(
-                      width: 7,
-                      height: 2,
-                      color: AppColors.darkBlack,
-                    ),
-                    Expanded(
-                      child: Stack(
-                        children: [
-                          Container(
-                            padding: EdgeInsets.symmetric(horizontal: 10),
-                            decoration: BoxDecoration(
-                              color: AppColors.darkBlack.withOpacity(.03),
-                              borderRadius: BorderRadius.circular(20),
-                            ),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                Spacer(
-                                  flex: 2,
-                                ),
-                                AutoSizeText(
-                                  mainController.allFirstWordLetterToUppercase(
-                                      "Blade runner"),
-                                  style: TextStyle(
-                                    color: AppColors.darkBlack,
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.w500,
-                                  ),
-                                  maxFontSize: 20,
-                                  maxLines: 1,
-                                ),
-                                SizedBox(
-                                  height: 5,
-                                ),
-                                AutoSizeText(
-                                  mainController.allFirstWordLetterToUppercase(
-                                      "this is a notification example, for tzsting purpose"),
-                                  style: TextStyle(
-                                      color:
-                                          AppColors.darkBlack.withOpacity(.6),
-                                      fontSize: 15),
-                                  maxFontSize: 15,
-                                  maxLines: 2,
-                                ),
-                                Spacer(),
-                              ],
-                            ),
-                          ),
-                          Visibility(
-                            visible: false,
-                            child: Positioned(
-                                top: 00,
-                                right: 00,
-                                child: Theme(
-                                  data: ThemeData(
-                                    highlightColor: Colors.transparent,
-                                    splashColor: Colors.transparent,
-                                  ),
-                                  child: IconButton(
-                                    onPressed: () {},
-                                    icon: Icon(
-                                      Icons.star_border,
-                                    ),
-                                  ),
-                                )),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Container(
-                      width: 7 * 2,
-                      height: 2,
-                      color: AppColors.darkBlack,
-                    ),
-                  ],
-                ),
-              ),
-            ),
+            Column(
+              children: [
+                ...List.generate(
+                  favoritesController.favoritesItemsNotificationList.length,
+                  (index) => NotificationCard(
+                    reversedIndex: index,
+                    title: favoritesController
+                        .favoritesItemsNotificationList[favoritesController
+                                .favoritesItemsNotificationList.length -
+                            1 -
+                            index]
+                        .title,
+                    description: favoritesController
+                        .favoritesItemsNotificationList[index].description,
+                    isFavoriteButtonHidden: true,
+                  ),
+                )
+              ],
+            )
           ],
         ),
       ),

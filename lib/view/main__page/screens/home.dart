@@ -12,6 +12,7 @@ import '../../../model/newItemNotificationModel.dart';
 import '../../../utils/AppColors.dart';
 import '../../general__widgets/action__button.dart';
 import '../../general__widgets/icon__button.dart';
+import '../../general__widgets/notification__card.dart';
 import 'add__new__item.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -34,9 +35,19 @@ class HomeScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  CircleAvatar(
-                    radius: 25,
-                    backgroundImage: AssetImage("assets/images/avatar.png"),
+                  GestureDetector(
+                    onTap: () {
+                      Hive.box<NewItemNotifcationModel>("newNotificationsBox")
+                          .values
+                          .toList()
+                          .forEach((element) {
+                        print("${element.key}, ${element.isFavorite}");
+                      });
+                    },
+                    child: CircleAvatar(
+                      radius: 25,
+                      backgroundImage: AssetImage("assets/images/avatar.png"),
+                    ),
                   ),
                   OpenContainer(
                     closedElevation: 0,
@@ -100,90 +111,11 @@ class HomeScreen extends StatelessWidget {
                         NewItemNotifcationModel? currentNotification =
                             box.getAt(reversedIndex);
 
-                        return Container(
-                          width: double.infinity,
-                          margin: EdgeInsets.only(bottom: 20),
-                          height: 120,
-                          child: Row(
-                            children: [
-                              Container(
-                                width: 15,
-                                height: 15,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(50),
-                                  border: Border.all(
-                                      width: 3.5, color: AppColors.darkBlack),
-                                ),
-                              ),
-                              Container(
-                                width: 7,
-                                height: 2,
-                                color: AppColors.darkBlack,
-                              ),
-                              Expanded(
-                                child: Stack(
-                                  children: [
-                                    Container(
-                                      padding:
-                                          EdgeInsets.symmetric(horizontal: 10),
-                                      decoration: BoxDecoration(
-                                        color: AppColors.darkBlack
-                                            .withOpacity(.03),
-                                        borderRadius: BorderRadius.circular(20),
-                                      ),
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceEvenly,
-                                        children: [
-                                          Spacer(
-                                            flex: 2,
-                                          ),
-                                          AutoSizeText(
-                                            "${currentNotification!.title}",
-                                            style: TextStyle(
-                                              color: AppColors.darkBlack,
-                                              fontSize: 20,
-                                              fontWeight: FontWeight.w500,
-                                            ),
-                                            maxFontSize: 20,
-                                            maxLines: 1,
-                                          ),
-                                          SizedBox(
-                                            height: 5,
-                                          ),
-                                          AutoSizeText(
-                                            "${currentNotification.description}",
-                                            style: TextStyle(
-                                                color: AppColors.darkBlack
-                                                    .withOpacity(.6),
-                                                fontSize: 15),
-                                            maxFontSize: 15,
-                                            maxLines: 2,
-                                          ),
-                                          Spacer(),
-                                        ],
-                                      ),
-                                    ),
-                                    Positioned(
-                                      top: 5,
-                                      right: 5,
-                                      child: FavoriteIconButton(
-                                        isChecked: false,
-                                        passedIndex: reversedIndex,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              Container(
-                                width: 7 * 2,
-                                height: 2,
-                                color: AppColors.darkBlack,
-                              ),
-                            ],
-                          ),
+                        return NotificationCard(
+                          currentNotification: currentNotification,
+                          reversedIndex: reversedIndex,
+                          title: currentNotification!.title,
+                          description: currentNotification.description,
                         );
                       }),
                     ],
