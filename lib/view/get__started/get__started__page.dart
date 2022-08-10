@@ -1,5 +1,3 @@
-
-
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -79,7 +77,7 @@ class GetStartedPage extends StatelessWidget {
                             roundedBy: GetStartedDimensions
                                     .oneFaceRoundedBoxDim["borderRadiusValue"]
                                 as double,
-                            color: AppColors.lightGreen,
+                            color: AppColors.lightGrey,
                             width: GetStartedDimensions
                                 .oneFaceRoundedBoxDim['height'] as double,
                             height: 0,
@@ -105,6 +103,10 @@ class GetStartedPage extends StatelessWidget {
                         roundedBy: GetStartedDimensions
                                 .oneFaceRoundedBoxDim["borderRadiusValue"]
                             as double,
+                        child: Image.asset(
+                          "assets/images/scribble.png",
+                          fit: BoxFit.fitWidth,
+                        ),
                       ),
                     ),
                   ),
@@ -118,7 +120,7 @@ class GetStartedPage extends StatelessWidget {
                       child: OneFaceRoundedBox(
                         hasBottomLeftRounded: true,
                         hasTopLeftRounded: true,
-                        color: AppColors.lightGreen,
+                        color: AppColors.lightGrey,
                         width: double.infinity,
                         height: GetStartedDimensions
                             .oneFaceRoundedBoxDim['height'] as double,
@@ -170,6 +172,10 @@ class GetStartedPage extends StatelessWidget {
                     height: 30,
                   ),
                   CustomButton(
+                      shouldReverseColors: false,
+                      onPressed: () {
+                        Get.toNamed('/getUsernamePage');
+                      },
                       text: mainController
                           .allFirstWordLetterToUppercase("get started")),
                   const SizedBox(
