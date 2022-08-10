@@ -10,10 +10,10 @@ import 'package:watch_it_later/utils/AppColors.dart';
 import 'package:watch_it_later/view/general__widgets/button.dart';
 import 'package:watch_it_later/view/general__widgets/text__field.dart';
 
-import '../../../controllers/notificationsControllers/date__Controller.dart';
-import '../../../controllers/notificationsControllers/newItemNotificationController.dart';
-import '../../../model/newItemNotificationModel.dart';
-import '../../general__widgets/action__button.dart';
+import '../../controllers/notificationsControllers/date__Controller.dart';
+import '../../controllers/notificationsControllers/newItemNotificationController.dart';
+import '../../model/newItemNotificationModel.dart';
+import '../general__widgets/action__button.dart';
 
 class AddNewItemScreen extends StatelessWidget {
   AddNewItemScreen({Key? key}) : super(key: key);
@@ -64,17 +64,47 @@ class AddNewItemScreen extends StatelessWidget {
               maxLines: 3,
             ),
             Spacer(),
-            CustomTextField(
-              controller: newNotificationController.titleController,
-              hintText: mainController.allFirstWordLetterToUppercase("title"),
+            GetBuilder<NewNotificationController>(
+              init: NewNotificationController(),
+              builder: (newNotificationController) {
+                return CustomTextField(
+                  key: newNotificationController.titleTextFieldKey,
+                  showCounter: true,
+                  counterBoxScale: newNotificationController.titleCountBoxScale,
+                  titleWrittenLength:
+                      newNotificationController.titleWrittenLength,
+                  onChanged: (value) {
+                    newNotificationController.countTitleLength(value);
+                  },
+                  maxLength: newNotificationController.titleMaxLength,
+                  controller: newNotificationController.titleController,
+                  hintText:
+                      mainController.allFirstWordLetterToUppercase("title"),
+                );
+              },
             ),
             SizedBox(height: 20),
-            CustomTextField(
-              controller: newNotificationController.descriptionController,
-              hintText:
-                  mainController.allFirstWordLetterToUppercase("description"),
-              contentPadding:
-                  EdgeInsets.symmetric(vertical: 30, horizontal: 15),
+            GetBuilder<NewNotificationController>(
+              init: NewNotificationController(),
+              builder: (newNotificationController) {
+                return CustomTextField(
+                  key: newNotificationController.descriptionTextFieldKey,
+                  showCounter: true,
+                  counterBoxScale:
+                      newNotificationController.descriptionCountBoxScale,
+                  titleWrittenLength:
+                      newNotificationController.descriptionWrittenLength,
+                  onChanged: (value) {
+                    newNotificationController.countDescriptionLength(value);
+                  },
+                  maxLength: newNotificationController.descriptionMaxLength,
+                  controller: newNotificationController.descriptionController,
+                  hintText: mainController
+                      .allFirstWordLetterToUppercase("description"),
+                  contentPadding:
+                      EdgeInsets.symmetric(vertical: 30, horizontal: 15),
+                );
+              },
             ),
             Spacer(),
             GetBuilder<NewNotificationController>(
@@ -192,14 +222,13 @@ class AddNewItemScreen extends StatelessWidget {
                       Hive.box<NewItemNotifcationModel>("newNotificationsBox");
                   newNotificationsBox.add(
                     NewItemNotifcationModel(
-                      newNotificationController.titleController.text.trim(),
-                      newNotificationController.descriptionController.text
-                          .trim(),
-                      dateController.date as DateTime,
-                      newNotificationController.isRepeatedOptionEnabled,
-                      newNotificationController.isAlarmOptionEnabled,
-                      false
-                    ),
+                        newNotificationController.titleController.text.trim(),
+                        newNotificationController.descriptionController.text
+                            .trim(),
+                        dateController.date as DateTime,
+                        newNotificationController.isRepeatedOptionEnabled,
+                        newNotificationController.isAlarmOptionEnabled,
+                        false),
                   );
                   Get.back();
                 },

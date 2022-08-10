@@ -1,18 +1,7 @@
-
-
-import 'package:flutter/cupertino.dart';
-import 'package:get/state_manager.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class GetUsernameController extends GetxController {
-
-final TextEditingController usernameTextFieldController = TextEditingController();
-
-
-
-
-
-
-
-
-
+  final TextEditingController usernameTextFieldController =
+      TextEditingController();
 }

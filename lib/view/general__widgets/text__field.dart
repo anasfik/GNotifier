@@ -5,10 +5,15 @@ import '../../utils/AppColors.dart';
 class CustomTextField extends StatelessWidget {
   CustomTextField(
       {Key? key,
-      this.controller,
-      this.hintText,
-      this.suffixIcon = null,
+      required this.controller,
+      required this.hintText,
+      this.suffixIcon,
+      required this.maxLength,
       this.onChanged,
+      this.titleWrittenLength,
+      this.animationDuration = const Duration(milliseconds: 350),
+      this.counterBoxScale,
+      this.showCounter = false,
       this.contentPadding = const EdgeInsets.all(15)})
       : assert(hintText != null, "hintText must not be null"),
         super(key: key);
@@ -16,28 +21,62 @@ class CustomTextField extends StatelessWidget {
   void Function(String)? onChanged;
   String? hintText;
   Icon? suffixIcon;
+  bool showCounter;
   EdgeInsets contentPadding;
   TextEditingController? controller;
+  int? maxLength, titleWrittenLength;
+  double? counterBoxScale;
+  Duration animationDuration;
   @override
   Widget build(BuildContext context) {
-    return TextField(
-      onChanged: onChanged,
-      controller: controller,
-      decoration: InputDecoration(
-        alignLabelWithHint: false,
-        contentPadding: contentPadding,
-        suffixIcon: suffixIcon,
-        filled: true,
-        fillColor: AppColors.darkBlack.withOpacity(.05),
-        hintText: hintText,
-        focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(10),
-            borderSide: BorderSide.none),
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(10),
-          borderSide: BorderSide.none,
+    return Stack(
+      clipBehavior: Clip.none,
+      children: [
+        Visibility(
+          visible: showCounter,
+          child: Positioned(
+            bottom: -5,
+            right: 10,
+            child: AnimatedScale(
+              duration: animationDuration,
+              scale: counterBoxScale ?? 1,
+              child: Container(
+                padding: EdgeInsets.symmetric(horizontal: 5, vertical: 2),
+                decoration: BoxDecoration(
+                  color: AppColors.darkBlack,
+                  borderRadius: BorderRadius.circular(4),
+                ),
+                child: Text(
+                  "${titleWrittenLength} / ${maxLength}",
+                  style: TextStyle(color: AppColors.lightGrey, fontSize: 10),
+                ),
+              ),
+            ),
+          ),
         ),
-      ),
+        TextField(
+          maxLength: maxLength,
+          onChanged: onChanged,
+          controller: controller,
+          decoration: InputDecoration(
+            counterText: "",
+            counter: SizedBox.shrink(),
+            alignLabelWithHint: false,
+            contentPadding: contentPadding,
+            suffixIcon: suffixIcon,
+            filled: true,
+            fillColor: AppColors.darkBlack.withOpacity(.05),
+            hintText: hintText,
+            focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(10),
+                borderSide: BorderSide.none),
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10),
+              borderSide: BorderSide.none,
+            ),
+          ),
+        ),
+      ],
     );
   }
 }

@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:watch_it_later/controllers/notificationsControllers/newItemNotificationController.dart';
 
 import '../../../controllers/mainController.dart';
 import '../../../model/newItemNotificationModel.dart';
@@ -13,12 +14,13 @@ import '../../../utils/AppColors.dart';
 import '../../general__widgets/action__button.dart';
 import '../../general__widgets/icon__button.dart';
 import '../../general__widgets/notification__card.dart';
-import 'add__new__item.dart';
+import '../../add_new_item/add__new__item.dart';
 
 class HomeScreen extends StatelessWidget {
   HomeScreen({Key? key}) : super(key: key);
   final MainController mainController = Get.put(MainController());
-
+  final NewNotificationController newNotificationController =
+      Get.put(NewNotificationController());
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -59,6 +61,7 @@ class HomeScreen extends StatelessWidget {
                     openBuilder: (context, action) {
                       return AddNewItemScreen();
                     },
+                    
                   ),
                 ],
               ),

@@ -2,13 +2,9 @@
 import 'package:flutter_point_tab_bar/pointTabBar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:watch_it_later/view/main__page/screens/favorites.dart';
-import 'package:animations/animations.dart';
 import '../../controllers/home__page__tab__controller.dart/home__page__tab__controller.dart.dart';
 import '../../utils/AppColors.dart';
-import 'screens/home.dart';
-import 'screens/search.dart';
-import 'screens/settings.dart';
+
 
 class MainPage extends StatelessWidget {
   MainPage({Key? key}) : super(key: key);
@@ -55,10 +51,10 @@ class MainPage extends StatelessWidget {
         body: TabBarView(
           controller: bottomBarController.tabController,
           children: [
-            HomeScreen(),
-            SearchScreen(),
-            FavoritesScreen(),
-            SettingsScreen(),
+            ...List.generate(
+              bottomBarController.tabScreens.length,
+              (index) => bottomBarController.tabScreens[index],
+            )
           ],
         ),
       ),
