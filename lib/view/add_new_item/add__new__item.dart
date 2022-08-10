@@ -4,12 +4,10 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
-import 'package:watch_it_later/controllers/helpersControllers/dialogsController.dart';
 import 'package:watch_it_later/controllers/mainController.dart';
 import 'package:watch_it_later/utils/AppColors.dart';
 import 'package:watch_it_later/view/general__widgets/button.dart';
 import 'package:watch_it_later/view/general__widgets/text__field.dart';
-
 import '../../controllers/notificationsControllers/date__Controller.dart';
 import '../../controllers/notificationsControllers/newItemNotificationController.dart';
 import '../../model/newItemNotificationModel.dart';
@@ -17,9 +15,9 @@ import '../general__widgets/action__button.dart';
 
 class AddNewItemScreen extends StatelessWidget {
   AddNewItemScreen({Key? key}) : super(key: key);
-  MainController mainController = Get.put(MainController());
+  final MainController mainController = Get.put(MainController());
   final DateController dateController = Get.put(DateController());
-  NewNotificationController newNotificationController =
+  final NewNotificationController newNotificationController =
       Get.put(NewNotificationController());
   @override
   Widget build(BuildContext context) {

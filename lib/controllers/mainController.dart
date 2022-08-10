@@ -4,6 +4,7 @@ class MainController extends GetxController {
 
   // make all first letters of strings uppercase
   allFirstWordLetterToUppercase(String text) {
+    // in case of last word is " " it makes an error so first :
     if (text[text.length - 1] == " ") {
       return text.trim().split(' ').map((word) {
         return word[0].toUpperCase() + word.substring(1) + " ";

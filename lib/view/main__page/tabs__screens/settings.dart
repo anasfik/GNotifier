@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 
 import '../../../controllers/mainController.dart';
 import '../../../utils/AppColors.dart';
+import '../../../utils/themes.dart';
 
 class SettingsScreen extends StatelessWidget {
   SettingsScreen({Key? key}) : super(key: key);
@@ -45,9 +46,10 @@ class SettingsScreen extends StatelessWidget {
                 mainAxisSpacing: 15,
               ),
               children: [
-                ...List.generate(
-                  6,
-                  (index) => Container(
+                InkWell(
+                  onTap: () {
+                    },
+                  child: Container(
                     padding: EdgeInsets.all(15),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
@@ -79,7 +81,6 @@ class SettingsScreen extends StatelessWidget {
                             maxLines: 2,
                             style: TextStyle(
                               fontSize: 12,
-                              color: AppColors.darkBlack.withOpacity(.65),
                               fontWeight: FontWeight.w500,
                             )),
                       ],
@@ -94,22 +95,3 @@ class SettingsScreen extends StatelessWidget {
     );
   }
 }
-
-List settingsBoxContents = [
-  {
-    "title": "dark mode",
-    "icon": Icons.brightness_2,
-  },
-  {
-    "title": "delete notes",
-    "icon": Icons.notes,
-  },
-  {
-    "title": "about",
-    "icon": Icons.info,
-  },
-  {
-    "title": "logout",
-    "icon": Icons.exit_to_app,
-  }
-];
