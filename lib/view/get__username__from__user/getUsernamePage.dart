@@ -1,8 +1,6 @@
-// ignore_for_file: prefer_const_constructors
 
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:watch_it_later/view/general__widgets/button.dart';
 
@@ -19,26 +17,27 @@ class GetUsernamePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        margin: EdgeInsets.symmetric(vertical: 30, horizontal: 20),
+        margin: const EdgeInsets.symmetric(vertical: 30, horizontal: 20),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Spacer(),
-            FlutterLogo(size: 120),
-            Spacer(),
+            const Spacer(),
+            // this should change to own logo
+            const FlutterLogo(size: 120),
+            const Spacer(),
             Column(
               children: [
                 AutoSizeText(
                   mainController
                       .allFirstWordLetterToUppercase("what we can call you ?"),
                   maxLines: 2,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 30,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 CustomTextField(
                   controller:
                       getUsernameInputController.usernameTextFieldController,
@@ -47,7 +46,7 @@ class GetUsernamePage extends StatelessWidget {
                 ),
               ],
             ),
-            Spacer(
+            const Spacer(
               flex: 2,
             ),
             CustomButton(

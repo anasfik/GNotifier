@@ -1,4 +1,3 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 import 'package:flutter_point_tab_bar/pointTabBar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -14,14 +13,9 @@ class MainPage extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         extendBody: true,
-        // appBar: AppBar(
-        //   title: Text(mainController.allFirstWordLetterToUppercase("home page")),
-        //   toolbarHeight: 80,
-        //   backgroundColor: AppColors.darkBlack,
-        // ),
         bottomNavigationBar: Container(
           height: 60,
-          margin: EdgeInsets.symmetric(horizontal: 15, vertical: 20),
+          margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 20),
           clipBehavior: Clip.hardEdge,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(50),
@@ -34,12 +28,12 @@ class MainPage extends StatelessWidget {
                 splashColor: Colors.transparent,
               ),
               child: TabBar(
-                indicator: PointTabIndicator(
+                indicator: const PointTabIndicator(
                   position: PointTabIndicatorPosition.bottom,
                   color: Colors.white,
                   insets: EdgeInsets.only(bottom: 10),
                 ),
-                labelStyle: TextStyle(fontSize: 12),
+                labelStyle: const TextStyle(fontSize: 12),
                 controller: bottomBarController.tabController,
                 tabs: bottomBarController.tabs,
                 unselectedLabelColor: AppColors.white.withOpacity(.6),
@@ -53,7 +47,7 @@ class MainPage extends StatelessWidget {
             ...List.generate(
               bottomBarController.tabScreens.length,
               (index) => bottomBarController.tabScreens[index],
-            )
+            ),
           ],
         ),
       ),

@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
-
 import '../../utils/AppColors.dart';
 
 class CustomActionIconButton extends StatelessWidget {
-  CustomActionIconButton({
+  const CustomActionIconButton({
     Key? key,
     required this.icon,
     this.shouldReverseColors = false,
   }) : super(key: key);
-  IconData icon;
-  bool shouldReverseColors;
+  final IconData icon;
+  final bool shouldReverseColors;
   @override
   Widget build(BuildContext context) {
     return Container(

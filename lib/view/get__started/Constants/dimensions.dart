@@ -1,6 +1,3 @@
-import 'dart:math';
-
-import 'package:get/get.dart';
 
 class GetStartedDimensions {
   static Map<String, double> circleDim = {

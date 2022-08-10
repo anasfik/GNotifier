@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors
+
 
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
@@ -13,7 +13,7 @@ import 'widgets/graph__bars.dart';
 
 class GetStartedPage extends StatelessWidget {
   GetStartedPage({Key? key}) : super(key: key);
-  MainController mainController = Get.put(MainController());
+  final MainController mainController = Get.put(MainController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,7 +24,7 @@ class GetStartedPage extends StatelessWidget {
             Expanded(
               child: Column(
                 children: [
-                  Container(
+                  SizedBox(
                     width: double.infinity,
                     height: 180,
                     child: Stack(
@@ -33,6 +33,7 @@ class GetStartedPage extends StatelessWidget {
                         Positioned(
                           right: 0,
                           bottom: 0,
+                          // please don't ask why this, it's just a hack, I've used 1.2% of my brain to this
                           left: 27 + 100 + 8,
                           child: OneFaceRoundedBox(
                             width: 0,
@@ -87,13 +88,13 @@ class GetStartedPage extends StatelessWidget {
                       ],
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 8,
                   ),
                   Align(
                     alignment: Alignment.centerLeft,
                     child: Container(
-                      margin: EdgeInsets.only(right: 27),
+                      margin: const EdgeInsets.only(right: 27),
                       child: OneFaceRoundedBox(
                         hasBottomRightRounded: true,
                         hasTopRightRounded: true,
@@ -107,13 +108,13 @@ class GetStartedPage extends StatelessWidget {
                       ),
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 8,
                   ),
                   Align(
                     alignment: Alignment.centerRight,
                     child: Container(
-                      margin: EdgeInsets.only(left: 27),
+                      margin: const EdgeInsets.only(left: 27),
                       child: OneFaceRoundedBox(
                         hasBottomLeftRounded: true,
                         hasTopLeftRounded: true,
@@ -151,29 +152,27 @@ class GetStartedPage extends StatelessWidget {
               ),
             ),
             Container(
-              margin: EdgeInsets.symmetric(horizontal: 27),
+              margin: const EdgeInsets.symmetric(horizontal: 27),
               width: double.infinity,
               child: Column(
                 children: [
-                  Container(
-                    child: AutoSizeText(
-                      mainController.allFirstWordLetterToUppercase(
-                          "set what you want, we'll remind you"),
-                      maxLines: 2,
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                          color: AppColors.white,
-                          fontSize: 50,
-                          fontWeight: FontWeight.w500),
-                    ),
+                  AutoSizeText(
+                    mainController.allFirstWordLetterToUppercase(
+                        "set what you want, we'll remind you"),
+                    maxLines: 2,
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                        color: AppColors.white,
+                        fontSize: 50,
+                        fontWeight: FontWeight.w500),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 30,
                   ),
                   CustomButton(
                       text: mainController
                           .allFirstWordLetterToUppercase("get started")),
-                  SizedBox(
+                  const SizedBox(
                     height: 30,
                   ),
                 ],

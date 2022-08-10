@@ -6,7 +6,7 @@ import '../../utils/AppColors.dart';
 import 'icon__button.dart';
 
 class NotificationCard extends StatelessWidget {
-  NotificationCard({
+  const NotificationCard({
     Key? key,
     this.currentNotification,
     required this.reversedIndex,
@@ -15,11 +15,11 @@ class NotificationCard extends StatelessWidget {
     this.isFavoriteButtonHidden = false,
   }) : super(key: key);
 
-  NewItemNotifcationModel? currentNotification;
-  int reversedIndex;
+  final NewItemNotifcationModel? currentNotification;
+  final int reversedIndex;
 
-  String title, description;
-  bool isFavoriteButtonHidden;
+  final String title, description;
+  final bool isFavoriteButtonHidden;
   @override
   Widget build(BuildContext context) {
     return Container(

@@ -30,6 +30,7 @@ class CustomTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Stack(
+    
       clipBehavior: Clip.none,
       children: [
         Visibility(
@@ -41,13 +42,13 @@ class CustomTextField extends StatelessWidget {
               duration: animationDuration,
               scale: counterBoxScale ?? 1,
               child: Container(
-                padding: EdgeInsets.symmetric(horizontal: 5, vertical: 2),
+                padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 2),
                 decoration: BoxDecoration(
                   color: AppColors.darkBlack,
                   borderRadius: BorderRadius.circular(4),
                 ),
                 child: Text(
-                  "${titleWrittenLength} / ${maxLength}",
+                  "$titleWrittenLength / $maxLength",
                   style: TextStyle(color: AppColors.lightGrey, fontSize: 10),
                 ),
               ),
@@ -60,7 +61,8 @@ class CustomTextField extends StatelessWidget {
           controller: controller,
           decoration: InputDecoration(
             counterText: "",
-            counter: SizedBox.shrink(),
+            // shrink the default counter
+            counter: const SizedBox.shrink(),
             alignLabelWithHint: false,
             contentPadding: contentPadding,
             suffixIcon: suffixIcon,

@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:hive/hive.dart';
-import 'package:watch_it_later/controllers/helpersControllers/dialogsController.dart';
 
 import '../../controllers/favorites__controller.dart/favorites__controller.dart';
-import '../../model/newItemNotificationModel.dart';
 import '../../utils/AppColors.dart';
 
 class FavoriteIconButton extends StatelessWidget {
@@ -14,9 +11,9 @@ class FavoriteIconButton extends StatelessWidget {
     required this.passedIndex,
   }) : super(key: key);
   bool isChecked;
-  void Function()? onPressed;
-  int passedIndex;
-  FavoritesController favoritesController = Get.put(FavoritesController());
+  final int passedIndex;
+  final FavoritesController favoritesController =
+      Get.put(FavoritesController());
   @override
   Widget build(BuildContext context) {
     return Theme(
@@ -26,21 +23,22 @@ class FavoriteIconButton extends StatelessWidget {
         splashColor: Colors.transparent,
       ),
       child: GetBuilder<FavoritesController>(
-          init: FavoritesController(),
-          builder: (favoritesController) {
-            return IconButton(
-              onPressed: () {
-                isChecked = !isChecked;
+        init: FavoritesController(),
+        builder: (favoritesController) {
+          return IconButton(
+            onPressed: () {
+              isChecked = !isChecked;
 
-                Get.find<FavoritesController>().addToFavorites(passedIndex);
-                favoritesController.update();
-              },
-              icon: Icon(
-                isChecked ? Icons.favorite : Icons.favorite_outline,
-                color: AppColors.darkBlack.withOpacity(.7),
-              ),
-            );
-          }),
+              Get.find<FavoritesController>().addToFavorites(passedIndex);
+              favoritesController.update();
+            },
+            icon: Icon(
+              isChecked ? Icons.favorite : Icons.favorite_outline,
+              color: AppColors.darkBlack.withOpacity(.7),
+            ),
+          );
+        },
+      ),
     );
   }
 }

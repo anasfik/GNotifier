@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
+import 'package:hive/hive.dart';
+import '../../model/newItemNotificationModel.dart';
 import '../helpersControllers/dialogsController.dart';
 
 class NewNotificationController extends GetxController {
@@ -11,7 +13,7 @@ class NewNotificationController extends GetxController {
   late TextEditingController titleController;
   late TextEditingController descriptionController;
 
-//
+  // textFields keys
   final titleTextFieldKey = UniqueKey();
   final descriptionTextFieldKey = UniqueKey();
 
@@ -28,6 +30,34 @@ class NewNotificationController extends GetxController {
   int descriptionMaxLength = 40;
   int descriptionWrittenLength = 0;
   double descriptionCountBoxScale = 0;
+
+
+  // Add new item
+  addNewNotification(
+    String title,
+    String description,
+    DateTime date,
+    bool isRepeated,
+    bool isAlarm,
+  ) {
+    // init the hive box
+    Box<NewItemNotifcationModel> newNotificationsBox =
+        Hive.box<NewItemNotifcationModel>("newNotificationsBox");
+    // and add it to box
+    newNotificationsBox.add(
+      NewItemNotifcationModel(
+        title,
+        description,
+        date,
+        isRepeated,
+        isAlarm,
+
+        // isFavorite: false by default :
+        false,
+      ),
+    );
+    Get.back();
+  }
 
   // method handler for title text field
   countTitleLength(String title) async {
@@ -60,7 +90,7 @@ class NewNotificationController extends GetxController {
     update();
     if (description.length == descriptionMaxLength) {
       descriptionCountBoxScale = 1.5;
-      await Future.delayed(Duration(milliseconds: 40));
+      await Future.delayed(const Duration(milliseconds: 40));
       descriptionCountBoxScale = 1;
     }
 
@@ -81,7 +111,7 @@ class NewNotificationController extends GetxController {
 
   @override
   void onInit() {
-    titleController = TextEditingController(text: 'sfrfrsfrsfsrf');
+    titleController = TextEditingController();
     descriptionController = TextEditingController();
     super.onInit();
   }

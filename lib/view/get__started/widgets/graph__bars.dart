@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 
 class GraphBars extends StatelessWidget {
-  GraphBars(
+  const GraphBars(
       {Key? key,
       required this.colors,
       required this.values,
       required this.barsBoundedBy})
       : super(key: key);
-  List<double?> values;
-  List colors;
-  double barsBoundedBy;
+  final List<double?> values;
+  final List colors;
+  final double barsBoundedBy;
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -19,7 +19,7 @@ class GraphBars extends StatelessWidget {
         ...List.generate(
           values.length,
           (index) => Container(
-            margin: EdgeInsets.symmetric(
+            margin: const EdgeInsets.symmetric(
               horizontal: 5,
             ),
             decoration: BoxDecoration(

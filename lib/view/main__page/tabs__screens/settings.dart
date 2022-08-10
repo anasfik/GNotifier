@@ -1,4 +1,3 @@
-// ignore_for_file: prefer_const_constructors
 
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
@@ -6,7 +5,6 @@ import 'package:get/get.dart';
 
 import '../../../controllers/mainController.dart';
 import '../../../utils/AppColors.dart';
-import '../../../utils/themes.dart';
 
 class SettingsScreen extends StatelessWidget {
   SettingsScreen({Key? key}) : super(key: key);
@@ -16,18 +14,18 @@ class SettingsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      margin: EdgeInsets.symmetric(horizontal: 20),
+      margin: const EdgeInsets.symmetric(horizontal: 20),
       child: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
 
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             AutoSizeText(
               mainController.allFirstWordLetterToUppercase("settings"),
               maxLines: 2,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 25,
                 fontWeight: FontWeight.bold,
               ),
@@ -35,11 +33,11 @@ class SettingsScreen extends StatelessWidget {
             //
 
             //
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
 
             GridView(
               shrinkWrap: true,
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 childAspectRatio: 1,
                 crossAxisCount: 2,
                 crossAxisSpacing: 15,
@@ -50,7 +48,7 @@ class SettingsScreen extends StatelessWidget {
                   onTap: () {
                     },
                   child: Container(
-                    padding: EdgeInsets.all(15),
+                    padding: const EdgeInsets.all(15),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
                       color: AppColors.darkBlack.withOpacity(.05),
@@ -59,18 +57,18 @@ class SettingsScreen extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Spacer(),
+                        const Spacer(),
                         Icon(
                           Icons.brightness_2,
                           color: AppColors.darkBlack.withOpacity(.45),
                           size: 35,
                         ),
-                        Spacer(),
+                        const Spacer(),
                         AutoSizeText(
                           mainController
                               .allFirstWordLetterToUppercase("dark mode"),
                           maxLines: 1,
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
                           ),
@@ -79,7 +77,7 @@ class SettingsScreen extends StatelessWidget {
                             mainController.allFirstWordLetterToUppercase(
                                 "Switch app theme to dark / light mode"),
                             maxLines: 2,
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontSize: 12,
                               fontWeight: FontWeight.w500,
                             )),
