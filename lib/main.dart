@@ -11,6 +11,7 @@ import 'package:watch_it_later/view/get__started/get__started__page.dart';
 import 'package:watch_it_later/view/get__username__from__user/getUsernamePage.dart';
 import 'package:watch_it_later/view/notification__full__page/notification__full__page.dart';
 import 'model/newItemNotificationModel.dart';
+import 'services/local__notifications__service.dart';
 import 'view/main__page/main__page.dart';
 
 void main() async {
@@ -28,8 +29,11 @@ void main() async {
   await newNotifications.clear();
 
   // localBox.clear();
+
+  // init the local notifications service
+  NotificationService().initNotification();
+
   runApp(WatchItLaterApp());
-  
 }
 
 class WatchItLaterApp extends StatelessWidget {

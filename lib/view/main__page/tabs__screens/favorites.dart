@@ -55,8 +55,8 @@ class FavoritesScreen extends StatelessWidget {
                           int reversedIndex = box.values.length - 1 - index;
                           NewItemNotifcationModel? currentNotification =
                               box.getAt(reversedIndex);
-                         if(currentNotification!.isFavorite!) {
-                           return NotificationCard(
+                          if (currentNotification!.isFavorite!) {
+                            return NotificationCard(
                               currentNotification: currentNotification,
                               reversedIndex: index,
                               // "favoritesController.favoritesItemsNotificationList.length - 1" get us to lase item, with "- index", so like we say we should start from the end
@@ -64,8 +64,8 @@ class FavoritesScreen extends StatelessWidget {
                               description: currentNotification.description,
                               isFavoriteButtonHidden: true,
                             );
-                         }
-                         return Container();
+                          }
+                          return Container();
                         },
                       )
                     ],
