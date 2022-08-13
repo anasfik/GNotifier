@@ -41,30 +41,36 @@ class FavoritesScreen extends StatelessWidget {
             ),
             //
             const SizedBox(height: 20),
-            Column(
-              children: [
-                ...List.generate(
-                  favoritesController.favoritesItemsNotificationList.length,
-                  (index) {
-                    // our list
-                    List<NewItemNotifcationModel> favList =
-                        favoritesController.favoritesItemsNotificationList;
-
-                    // from end to start
-                    int reversedIndex = favList.length - 1 - index;
-                    return NotificationCard(
-                      currentNotification:
-                          favList[reversedIndex] as NewItemNotifcationModel,
-                      reversedIndex: index,
-                      // "favList.length - 1" get us to lase item, with "- index", so like we say we should start from the end
-                      title: favList[reversedIndex].title,
-                      description: favList[reversedIndex].description,
-                      isFavoriteButtonHidden: true,
-                    );
-                  },
-                ),
-              ],
-            )
+            ValueListenableBuilder(
+                valueListenable:
+                    Hive.box<NewItemNotifcationModel>("newNotificationsBox")
+                        .listenable(),
+                builder: (BuildContext context,
+                    Box<NewItemNotifcationModel> box, __) {
+                  return Column(
+                    children: [
+                      ...List.generate(
+                        box.values.length,
+                        (index) {
+                          int reversedIndex = box.values.length - 1 - index;
+                          NewItemNotifcationModel? currentNotification =
+                              box.getAt(reversedIndex);
+                         if(currentNotification!.isFavorite!) {
+                           return NotificationCard(
+                              currentNotification: currentNotification,
+                              reversedIndex: index,
+                              // "favoritesController.favoritesItemsNotificationList.length - 1" get us to lase item, with "- index", so like we say we should start from the end
+                              title: currentNotification.title,
+                              description: currentNotification.description,
+                              isFavoriteButtonHidden: true,
+                            );
+                         }
+                         return Container();
+                        },
+                      )
+                    ],
+                  );
+                })
           ],
         ),
       ),

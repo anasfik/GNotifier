@@ -93,14 +93,14 @@ class NewNotificationController extends GetxController {
     Box<NewItemNotifcationModel> newNotificationsBox =
         Hive.box<NewItemNotifcationModel>("newNotificationsBox");
 
-    // Remove it from the favorites
-    favoritesController.favoritesItemsNotificationList.removeWhere((element) =>
-        element.title == newNotificationsBox.getAt(index)!.title &&
-        element.description == newNotificationsBox.getAt(index)!.description &&
-        element.dateToShow == newNotificationsBox.getAt(index)!.dateToShow &&
-        element.isRepeated == newNotificationsBox.getAt(index)!.isRepeated &&
-        element.isAlarmed == newNotificationsBox.getAt(index)!.isAlarmed &&
-        element.isFavorite == newNotificationsBox.getAt(index)!.isFavorite);
+    // // Remove it from the favorites
+    // favoritesController.favoritesItemsNotificationList.removeWhere((element) =>
+    //     element.title == newNotificationsBox.getAt(index)!.title &&
+    //     element.description == newNotificationsBox.getAt(index)!.description &&
+    //     element.dateToShow == newNotificationsBox.getAt(index)!.dateToShow &&
+    //     element.isRepeated == newNotificationsBox.getAt(index)!.isRepeated &&
+    //     element.isAlarmed == newNotificationsBox.getAt(index)!.isAlarmed &&
+    //     element.isFavorite == newNotificationsBox.getAt(index)!.isFavorite);
 
     // And delete it from box
     newNotificationsBox.deleteAt(index);
@@ -215,28 +215,7 @@ class NewNotificationController extends GetxController {
     );
 
     // Edit it in favorites
-    if (favoritesController.favoritesItemsNotificationList
-        .contains(newNotificationsBox.getAt(index)!)) {
-      favoritesController.favoritesItemsNotificationList
-          .elementAt(index)
-          .title = title;
 
-      favoritesController.favoritesItemsNotificationList
-          .elementAt(index)
-          .description = description;
-      favoritesController.favoritesItemsNotificationList
-          .elementAt(index)
-          .dateToShow = date;
-      favoritesController.favoritesItemsNotificationList
-          .elementAt(index)
-          .isRepeated = isRepeated;
-      favoritesController.favoritesItemsNotificationList
-          .elementAt(index)
-          .isAlarmed = isAlarm;
-      favoritesController.favoritesItemsNotificationList
-          .elementAt(index)
-          .isFavorite = isFavorite;
-    }
 
     Get.back();
   }

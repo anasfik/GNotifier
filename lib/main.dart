@@ -10,7 +10,6 @@ import 'package:watch_it_later/utils/AppTexts.dart';
 import 'package:watch_it_later/view/get__started/get__started__page.dart';
 import 'package:watch_it_later/view/get__username__from__user/getUsernamePage.dart';
 import 'package:watch_it_later/view/notification__full__page/notification__full__page.dart';
-
 import 'model/newItemNotificationModel.dart';
 import 'view/main__page/main__page.dart';
 
@@ -26,7 +25,7 @@ void main() async {
   Box localBox = await Hive.openBox("locals");
 
   // this should be uncommented while debugging, so everytime the app opened it will clear the box, in production delete it so the app will only show the notifications that are saved in the box
-  // await newNotifications.clear();
+  await newNotifications.clear();
 
   // localBox.clear();
   runApp(WatchItLaterApp());
