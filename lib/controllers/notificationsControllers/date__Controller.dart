@@ -10,11 +10,11 @@ class DateController extends GetxController {
   DateTime? date;
 
 // get the just the date(years, months, days)
-  Future<DateTime?> _getDateFromUser() async {
+  Future<DateTime?> _getDateFromUser({DateTime? gettedDate}) async {
     // showing datePicker dialog
     DateTime? date = await showDatePicker(
       context: Get.overlayContext as BuildContext,
-      initialDate: DateTime.now(),
+      initialDate: gettedDate ?? DateTime.now(),
       firstDate: DateTime.now(),
       //giving the possibility for the user to choose time between now and the next 5 years
       lastDate: DateTime.now().add(
@@ -25,21 +25,23 @@ class DateController extends GetxController {
   }
 
 // get just the time (hours, minutes)
-  Future<TimeOfDay?> _getTimeFromUser() async {
+  Future<TimeOfDay?> _getTimeFromUser({DateTime? gettedDate}) async {
     // showing timePicker dialog
     TimeOfDay? time = await showTimePicker(
       context: Get.overlayContext as BuildContext,
-      initialTime:
-          TimeOfDay(hour: DateTime.now().hour, minute: DateTime.now().minute),
+      initialTime: gettedDate != null
+          ? TimeOfDay.fromDateTime(gettedDate)
+          : TimeOfDay.now(),
+      // TimeOfDay(hour: DateTime.now().hour, minute: DateTime.now().minute),
     );
     return time;
   }
 
 // get the full date with time (years, months, days, hours, minutes)
-  Future<DateTime?> getFullDateFromUser() async {
+  Future<DateTime?> getFullDateFromUser({DateTime? gettedDate}) async {
     //
-    DateTime? date = await _getDateFromUser();
-    TimeOfDay? time = await _getTimeFromUser();
+    DateTime? date = await _getDateFromUser(gettedDate: gettedDate);
+    TimeOfDay? time = await _getTimeFromUser(gettedDate: gettedDate);
 
     if (date != null && time != null) {
       return DateTime(date.year, date.month, date.day, time.hour, time.minute);
@@ -53,9 +55,11 @@ class DateController extends GetxController {
   setFullDate(DateTime? gettedDateFromFunction) {
     date = gettedDateFromFunction;
     update();
+
+    return date;
   }
 
-@override
+  @override
   void onReady() {
     // I don't see there is other handling for errors for this
 

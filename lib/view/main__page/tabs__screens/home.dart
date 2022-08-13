@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:watch_it_later/controllers/notificationsControllers/newItemNotificationController.dart';
+import '../../../controllers/home__controller/home__controller.dart';
 import '../../../controllers/mainController.dart';
 import '../../../model/newItemNotificationModel.dart';
 import '../../../utils/AppColors.dart';
@@ -16,6 +17,7 @@ class HomeScreen extends StatelessWidget {
   final MainController mainController = Get.put(MainController());
   final NewNotificationController newNotificationController =
       Get.put(NewNotificationController());
+  final HomeController homeController = Get.put(HomeController());
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -66,7 +68,8 @@ class HomeScreen extends StatelessWidget {
                 text: mainController.allFirstWordLetterToUppercase("Hey, "),
                 children: [
                   TextSpan(
-                    text: mainController.allFirstWordLetterToUppercase("anas"),
+                    text: mainController.allFirstWordLetterToUppercase(
+                        homeController.getUsername()),
                     style: const TextStyle(fontWeight: FontWeight.bold),
                   ),
                 ],
@@ -132,6 +135,7 @@ class HomeScreen extends StatelessWidget {
                               box.getAt(reversedIndex);
 
                           return NotificationCard(
+                            showDeleteButtonOnFullPage: true,
                             currentNotification: currentNotification,
                             reversedIndex: reversedIndex,
                             title: currentNotification!.title,

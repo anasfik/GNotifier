@@ -2,6 +2,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
+import 'package:watch_it_later/model/newItemNotificationModel.dart';
 import 'package:watch_it_later/view/general__widgets/notification__card.dart';
 import '../../../controllers/mainController.dart';
 import '../../../controllers/search__controller/search__controller.dart';
@@ -121,12 +122,18 @@ class SearchScreen extends StatelessWidget {
                             List filteredList = searchController.filterList(
                                 searchController.searchBarController.text);
                             int reversedIndex = filteredList.length - index - 1;
-                            return NotificationCard(
-                              title: filteredList[reversedIndex].title,
-                              description:
-                                  filteredList[reversedIndex].description,
-                              isFavoriteButtonHidden: true,
-                              reversedIndex: reversedIndex,
+                            return InkWell(
+                              onLongPress: () {},
+                              child: NotificationCard(
+                                
+                                currentNotification: filteredList[reversedIndex]
+                                    as NewItemNotifcationModel,
+                                title: filteredList[reversedIndex].title,
+                                description:
+                                    filteredList[reversedIndex].description,
+                                isFavoriteButtonHidden: true,
+                                reversedIndex: reversedIndex,
+                              ),
                             );
                           },
                         ),

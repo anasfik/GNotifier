@@ -76,8 +76,12 @@ class GetUsernamePage extends StatelessWidget {
                                   .length >
                               0
                           ? () {
-                              getUsernameController.saveUsernameInBox();
-                              
+                              getUsernameController.saveUsernameInBox(
+                                  getUsernameController
+                                      .usernameTextFieldController.text
+                                      .trim());
+
+                                      Get.offAllNamed('/mainPage');
                             }
                           : null,
                       shouldReverseColors: true,

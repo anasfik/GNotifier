@@ -11,7 +11,7 @@ class CustomTextField extends StatelessWidget {
       required this.maxLength,
       this.onChanged,
       this.titleWrittenLength,
-      this.animationDuration = const Duration(milliseconds: 350),
+      this.animationDuration = const Duration(milliseconds: 50),
       this.counterBoxScale,
       this.showCounter = false,
       this.contentPadding = const EdgeInsets.all(15)})
@@ -30,7 +30,6 @@ class CustomTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Stack(
-    
       clipBehavior: Clip.none,
       children: [
         Visibility(
@@ -56,10 +55,13 @@ class CustomTextField extends StatelessWidget {
           ),
         ),
         TextField(
+        
           maxLength: maxLength,
           onChanged: onChanged,
           controller: controller,
           decoration: InputDecoration(
+        
+        
             counterText: "",
             // shrink the default counter
             counter: const SizedBox.shrink(),
