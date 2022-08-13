@@ -45,15 +45,14 @@ class NewNotificationController extends GetxController {
   int descriptionWrittenLength = 0;
   double descriptionCountBoxScale = 0;
 
-
-// variables that will take the new data to update the notification
-String? newTitle;
+  // Variables that will take the new data to update the notification
+  String? newTitle;
   String? newDescription;
   bool? newIsAlarmed;
   bool? newIsRepeated;
   DateTime? newDate;
- 
-  // Add new item
+
+  // Add new item method
   addNewNotification(
     String title,
     String description,
@@ -77,19 +76,24 @@ String? newTitle;
         false,
       ),
     );
-// using openContainer from the ainmations package trait the AddNewNotificationPage as just a widget so open/close it doesn't affect the text editing controllers so we should re-init them after any add operations
 
+    ///
+    // using openContainer from the animations package trait the AddNewNotificationPage as just a widget so open/close it execute the dispose to text editing controllers so we should re-init them after any add operations
+    ///
     titleController.text = "";
     descriptionController.text = "";
+
+    // Going back
     Get.back();
   }
 
-// delete notification
+  // Delete notification
   deleteNotification(int index) {
-    // init the hive box
+    // Init the hive box
     Box<NewItemNotifcationModel> newNotificationsBox =
         Hive.box<NewItemNotifcationModel>("newNotificationsBox");
 
+    // Remove it from the favorites
     favoritesController.favoritesItemsNotificationList.removeWhere((element) =>
         element.title == newNotificationsBox.getAt(index)!.title &&
         element.description == newNotificationsBox.getAt(index)!.description &&
@@ -98,40 +102,39 @@ String? newTitle;
         element.isAlarmed == newNotificationsBox.getAt(index)!.isAlarmed &&
         element.isFavorite == newNotificationsBox.getAt(index)!.isFavorite);
 
-// and delete it from box
+    // And delete it from box
     newNotificationsBox.deleteAt(index);
+
+    // this is optional but there is a 1M case that need it so, it's important
     update();
-    Get.back();
-  }
-  
-  setNewTitle(String value) {
-    newTitle = value;
-    titleController.text = newTitle!;
-    update();
+
+    // Going back
     Get.back();
   }
 
-// set / change the description without update it in box
-  setNewDescription(String value) {
-    newDescription = value;
-    descriptionController.text = newDescription!;
-    update();
-    Get.back();
-  }
-
-  // this shows the bottom sheet for update title
+  // This shows the bottom sheet for update title
   showEditDialog(String hint, NewItemNotifcationModel gettedNotification,
       int reversedIndex) {
+    // First set an init value whenever we open the bottom sheet
     titleController.text = newTitle ?? gettedNotification.title;
+
+    // For first time it will for sure be the titleController.text so
     countTitleLength(titleController.text);
     update();
+
+    // Open the bottom sheet
     Get.bottomSheet(
       BottomSheetWidget(
+        // success method
         onSuccess: () {
           setNewTitle(titleController.text);
         },
+
+        // specify the type of the bottom sheet
         forTitle: true,
+
         hint: hint,
+
         gettedNotification: gettedNotification,
       ),
     );
@@ -143,28 +146,62 @@ String? newTitle;
     String hint,
     NewItemNotifcationModel gettedNotification,
   ) {
+    // First set an init value whenevr we open the bottom sheet
     descriptionController.text =
         newDescription ?? gettedNotification.description;
+        // for first time it will for sure be the descriptionController.text so
     countTitleLength(descriptionController.text);
-
     update();
+
+    // Open the bottom sheet
     Get.bottomSheet(BottomSheetWidget(
+      // Success method
       onSuccess: () {
         setNewDescription(descriptionController.text);
       },
+      // Specify the type of the bottom sheet
       forDescription: true,
       hint: hint,
       gettedNotification: gettedNotification,
     ));
   }
 
-// edit notification
+//
+
+  // Give the updated title to newTitle variable
+  setNewTitle(String value) {
+    // Store it
+    newTitle = value;
+    
+    // Now we change the textField value to the new value
+    titleController.text = newTitle!;
+    update();
+    
+
+    // Going back
+    Get.back();
+  }
+
+  // Give the updated deScription to newTitle variable
+  setNewDescription(String value) {
+    // Store it
+    newDescription = value;
+    
+    // Now we change the textField value to the new value
+    descriptionController.text = newDescription!;
+    update();
+
+    // Going back
+    Get.back();
+  }
+
+// Edit notification
   updateNotification(int index, String title, String description, DateTime date,
       bool isRepeated, bool isAlarm, bool isFavorite) {
-    // init the hive box
+    // Init the hive box
     Box<NewItemNotifcationModel> newNotificationsBox =
         Hive.box<NewItemNotifcationModel>("newNotificationsBox");
-    // and update it in box
+    // And update it in box
     newNotificationsBox.putAt(
       index,
       NewItemNotifcationModel(
@@ -177,7 +214,7 @@ String? newTitle;
       ),
     );
 
-    // edit it in favorites
+    // Edit it in favorites
     if (favoritesController.favoritesItemsNotificationList
         .contains(newNotificationsBox.getAt(index)!)) {
       favoritesController.favoritesItemsNotificationList
