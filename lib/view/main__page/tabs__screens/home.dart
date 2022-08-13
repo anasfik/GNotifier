@@ -7,6 +7,7 @@ import 'package:watch_it_later/controllers/notificationsControllers/newItemNotif
 import '../../../controllers/home__controller/home__controller.dart';
 import '../../../controllers/mainController.dart';
 import '../../../model/newItemNotificationModel.dart';
+import '../../../services/local__notifications__service.dart';
 import '../../../utils/AppColors.dart';
 import '../../general__widgets/action__button.dart';
 import '../../general__widgets/notification__card.dart';
@@ -36,13 +37,7 @@ class HomeScreen extends StatelessWidget {
                 children: [
                   GestureDetector(
                     onTap: () {
-                      Hive.box<NewItemNotifcationModel>("newNotificationsBox")
-                          .values
-                          .toList()
-                          .forEach((element) {
-                        // print("${element.key}, ${element.isFavorite}");
-                      });
-                    },
+                     },
                     child: const CircleAvatar(
                       radius: 25,
                       backgroundImage: AssetImage("assets/images/avatar.png"),

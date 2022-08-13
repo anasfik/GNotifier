@@ -30,8 +30,6 @@ void main() async {
 
   // localBox.clear();
 
-  // init the local notifications service
-  NotificationService().initNotification();
 
   runApp(WatchItLaterApp());
 }
