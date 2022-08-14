@@ -1,11 +1,14 @@
 // ignore_for_file: unused_field, unused_local_variable
 
 import 'dart:math';
-import 'dart:math';
 
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:get/get.dart';
 import 'package:timezone/data/latest.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
+import 'package:watch_it_later/view/main__page/main__page.dart';
 
 class NotificationService {
   // Getting instance of the notification plugin
@@ -27,7 +30,7 @@ class NotificationService {
     'NOTIFICATION',
     // Channel description
     channelDescription: 'Description',
-    // Notif. sound
+    // Notification sound
     playSound: true,
     // Priority level
     priority: Priority.high,
@@ -38,16 +41,21 @@ class NotificationService {
 // Init method
   Future<void> init() async {
     // Declaring the android settings with icon
-    final AndroidInitializationSettings initializationSettingsAndroid =
+    const AndroidInitializationSettings initializationSettingsAndroid =
         AndroidInitializationSettings('@drawable/app_icon');
 
     // Declaring the ios permission settings
-    const IOSInitializationSettings initializationSettingsIOS =
+   IOSInitializationSettings initializationSettingsIOS =
         IOSInitializationSettings(
+
       // settings to false, no request for now
       requestSoundPermission: false,
       requestBadgePermission: false,
       requestAlertPermission: false,
+
+      // settings to true, request for now
+      onDidReceiveLocalNotification: onDidReceiveLocalNotification,
+      
     );
 
 // Request now
@@ -56,10 +64,12 @@ class NotificationService {
     // Now, init them
     final InitializationSettings initializationSettings =
         InitializationSettings(
+      
       android: initializationSettingsAndroid,
       iOS: initializationSettingsIOS,
       // I don't target macOs for now
       macOS: null,
+      
     );
 
     // Init this, when I will understand this, i'll explain hah
@@ -71,7 +81,7 @@ class NotificationService {
     );
 
     /// only for tests, in production comment or delete it
-    //  Instant notif on app open
+    //  Instant notification on app open
     await createInstantNotification(
       Random().nextInt(1000),
       'test title',
@@ -90,6 +100,8 @@ class NotificationService {
     );
   }
 
+
+  //
   Future<void> requestIOSpermission() async {
     final bool? result = await flutterLocalNotificationsPlugin
         .resolvePlatformSpecificImplementation<
@@ -101,6 +113,7 @@ class NotificationService {
         );
   }
 
+  //
   Future<void> createInstantNotification(
     int id,
     String? title,
@@ -129,4 +142,34 @@ class NotificationService {
           UILocalNotificationDateInterpretation.absoluteTime,
     );
   }
+
+//
+void onDidReceiveLocalNotification(
+    int id, String? title, String? body, String? payload) async {
+  // Display a dialog with the notification details, tap ok to go to another page
+  showDialog(
+   context: Get.context as BuildContext,
+    builder: (BuildContext context) => CupertinoAlertDialog(
+      title: Text(title ?? "title error"),
+      content: Text(body ?? "title error"),
+      actions: [
+        CupertinoDialogAction(
+          isDefaultAction: true,
+          child: const Text('Ok'),
+          onPressed: () async {
+            Navigator.of(context, rootNavigator: true).pop();
+            await Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => MainPage(),
+              ),
+            );
+          },
+        )
+      ],
+    ),
+  );
+}
+  
+
 }
