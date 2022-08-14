@@ -11,7 +11,7 @@ class NewItemNotifcationModel extends HiveObject {
   @HiveField(2)
   DateTime dateToShow;
 
-  /// those ids are no longer valid (3, 4)
+  /// Those ids are no longer valid (3, 4)
   // @HiveField(3)
   // bool isIntervaled;
   // @HiveField(4)

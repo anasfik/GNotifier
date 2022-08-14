@@ -1,20 +1,28 @@
 // ignore_for_file: unused_field, unused_local_variable
 
-import 'dart:math';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:get/get.dart';
+import 'package:hive/hive.dart';
 import 'package:timezone/data/latest.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
+import 'package:flutter_native_timezone/flutter_native_timezone.dart';
+import 'package:watch_it_later/controllers/notificationsControllers/newItemNotificationController.dart';
+
 import 'package:watch_it_later/view/main__page/main__page.dart';
+
+import '../model/newItemNotificationModel.dart';
 
 /// PLEASE DONT'T RELY ON THIS IF YOUR NEW TO USING THOSE PACKAGE, CHECK THE DOCS FIRST, THEN TRY WORKINGWITH THIS .
 class NotificationService {
+  // we ne
   // Getting instance of the notification plugin
   final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
       FlutterLocalNotificationsPlugin();
+
+  final NewNotificationController newNotificationController =
+      Get.put(NewNotificationController());
 
   // Create the notification with the android settings
   NotificationDetails platformChannelSpecifics = const NotificationDetails(
@@ -83,6 +91,10 @@ class NotificationService {
 
     // Init this, when I will understand this, i'll explain hah
     tz.initializeTimeZones();
+    final String currentTimeZone =
+        await FlutterNativeTimezone.getLocalTimezone();
+
+    tz.setLocalLocation(tz.getLocation(currentTimeZone));
 
     // Init the big one
     await flutterLocalNotificationsPlugin.initialize(
@@ -100,16 +112,16 @@ class NotificationService {
     // );
 
     // schedule notification for the next 5 secondes
-    createScheduledNotification(
-      5,
-      'test title111111111222',
-      'test description',
-      // this will show it after 5 secondes from the current time
-      tz.TZDateTime.now(tz.local).add(
-        const Duration(seconds: 5),
-      ),
-      "payload text example for scheduled notification",
-    );
+    // createScheduledNotification(
+    //   Random().nextInt(1000),
+    //   'test title',
+    //   'test description',
+    //   // this will show it after 5 secondes from the current time
+    //   tz.TZDateTime.now(tz.local).add(
+    //     const Duration(seconds: 5),
+    //   ),
+    //   "payload text example for scheduled notification",
+    // );
   }
 
   // if you don't want to request the permission on the app open, you can use this method to request it whenever you want
@@ -188,12 +200,26 @@ class NotificationService {
   }
 
   void onSelectNotification(String? payload) async {
-    if (payload != null) {
-      debugPrint('notification payload: $payload');
-    }
+    // if (payload != null) {
+    //   debugPrint('notification payload: $payload');
+    // }
+    // declaring the boc
+    Box newNotificationsBox = Hive.box<NewItemNotifcationModel>('newNotificationsBox');
+
+    // actually it will cancel automatically because autoCancel is set to true in android details for notification
+    // await flutterLocalNotificationsPlugin.cancel(int.parse("$payload"));
+
+// remove it from the box (remove it's card)
+    var a = newNotificationsBox.values;
+    print(a);
+    var b = a.firstWhere((element) => element.id == int.parse("$payload"));
+    print(b);
+    newNotificationsBox.deleteAt(a.toList().indexOf(b));
+
     await Get.defaultDialog(
-      title: "$payload",
-      content: Text("payload"),
+      title:
+          "the mission of this notification is completed, so it's automatically deleted",
+      content: Text("$payload"),
     );
   }
 

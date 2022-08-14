@@ -19,6 +19,7 @@ import '../mainController.dart';
 
 import 'package:timezone/data/latest.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
+
 class NewNotificationController extends GetxController {
   // Dependency injection
   final DialogsController dialogsController = Get.put(DialogsController());
@@ -26,9 +27,11 @@ class NewNotificationController extends GetxController {
       Get.put(FavoritesController());
   final MainController mainController = Get.put(MainController());
 
- 
- // NotificationService instance
-  final NotificationService notificationService = NotificationService();
+
+
+  // NotificationService instance
+  // uncommenting this will cause a stack overflow
+  // final NotificationService notificationService = NotificationService();
 
   // New item  Text editing controllers
   late TextEditingController titleController;
@@ -71,6 +74,7 @@ class NewNotificationController extends GetxController {
     Box<NewItemNotifcationModel> newNotificationsBox =
         Hive.box<NewItemNotifcationModel>("newNotificationsBox");
     // and add it to box
+    int newId = Random().nextInt(1000000);
     newNotificationsBox.add(
       NewItemNotifcationModel(
         title,
@@ -80,7 +84,7 @@ class NewNotificationController extends GetxController {
         isAlarm,
         // isFavorite: false by default :
         false,
-        Random().nextInt(1000000),
+        newId,
       ),
     );
 
@@ -90,23 +94,27 @@ class NewNotificationController extends GetxController {
     titleController.text = "";
     descriptionController.text = "";
 
-    // Going back
-    Get.back();
-
     /// Pushing the notification
+    final NotificationService notificationService = NotificationService();
 
     // get differance between the current date and the notification date
     Duration difference = date.difference(DateTime.now());
+    print(difference.inSeconds);
 
     // create it
-    // notificationService.createScheduledNotification(
-    // id,
-    //   'test title',
-    //   'test description',
-    //   // this will show it after 5 secondes from the current time
-    //   tz.TZDateTime.now(tz.local).add(Duration(seconds: difference.inSeconds)),
-    //   "payload text example for scheduled notification",
-    // );
+    notificationService.createScheduledNotification(
+      newId,
+      title,
+      description,
+
+      // this will show it after 5 secondes from the current time
+      tz.TZDateTime.now(tz.local).add(Duration(seconds: 3)),
+      "$newId"
+      
+    );
+
+    // Going back
+    Get.back();
   }
 
   // Delete notification
@@ -114,6 +122,9 @@ class NewNotificationController extends GetxController {
     // Init the hive box
     Box<NewItemNotifcationModel> newNotificationsBox =
         Hive.box<NewItemNotifcationModel>("newNotificationsBox");
+
+
+    final NotificationService notificationService = NotificationService();
 
     // // Remove it from the favorites
     // favoritesController.favoritesItemsNotificationList.removeWhere((element) =>
@@ -124,10 +135,14 @@ class NewNotificationController extends GetxController {
     //     element.isAlarmed == newNotificationsBox.getAt(index)!.isAlarmed &&
     //     element.isFavorite == newNotificationsBox.getAt(index)!.isFavorite);
 
+    // cancel it's notification
+    // notificationService
+    //     .cancelNotificationWithId(newNotificationsBox.getAt(index)!.id);
+
     // And delete it from box
     newNotificationsBox.deleteAt(index);
 
-    // this is optional but there is a 1M case that need it so, it's important
+    // this is optional but there is a 1% case that need it so, it's important
     update();
 
     // Going back
@@ -171,7 +186,7 @@ class NewNotificationController extends GetxController {
     // First set an init value whenevr we open the bottom sheet
     descriptionController.text =
         newDescription ?? gettedNotification.description;
-        // for first time it will for sure be the descriptionController.text so
+    // for first time it will for sure be the descriptionController.text so
     countTitleLength(descriptionController.text);
     update();
 
@@ -194,11 +209,10 @@ class NewNotificationController extends GetxController {
   setNewTitle(String value) {
     // Store it
     newTitle = value;
-    
+
     // Now we change the textField value to the new value
     titleController.text = newTitle!;
     update();
-    
 
     // Going back
     Get.back();
@@ -208,7 +222,7 @@ class NewNotificationController extends GetxController {
   setNewDescription(String value) {
     // Store it
     newDescription = value;
-    
+
     // Now we change the textField value to the new value
     descriptionController.text = newDescription!;
     update();
@@ -236,7 +250,32 @@ class NewNotificationController extends GetxController {
         newNotificationsBox.getAt(index)!.id,
       ),
     );
-    
+    final NotificationService notificationService = NotificationService();
+
+
+
+// cancel the pending one
+    notificationService
+        .cancelNotificationWithId(newNotificationsBox.getAt(index)!.id);
+
+    //
+    Duration difference = date.difference(DateTime.now());
+
+    // Create a new one with the new data
+    notificationService.createScheduledNotification(
+      newNotificationsBox.getAt(index)!.id,
+      title,
+      description,
+      // this will show it after 5 secondes from the current time
+      tz.TZDateTime.now(tz.local).add(
+        Duration(
+          seconds: 3,
+        ),
+      ),
+            "${newNotificationsBox.getAt(index)!.id}"
+
+    );
+// Going back
     Get.back();
   }
 
