@@ -10,6 +10,7 @@ import 'package:timezone/data/latest.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
 import 'package:watch_it_later/view/main__page/main__page.dart';
 
+/// PLEASE DONT'T RELY ON THIS IF YOUR NEW TO USING THOSE PACKAGE, CHECK THE DOCS FIRST, THEN TRY WORKINGWITH THIS .
 class NotificationService {
   // Getting instance of the notification plugin
   final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
@@ -17,8 +18,11 @@ class NotificationService {
 
   // Create the notification with the android settings
   NotificationDetails platformChannelSpecifics = const NotificationDetails(
-    // you can add other platform but for now, I will use android
+    // you can add other platform but for now, I will use only android
     android: _androidNotificationDetails,
+
+    // to add ios, you  should create iosNotificationDetails and add it to the platformChannelSpecifics
+    // iOS: _iOSNotificationDetails,
   );
 
 // Specifying the android settings details
@@ -38,16 +42,19 @@ class NotificationService {
     importance: Importance.high,
   );
 
-// Init method
+  // ios notification details
+  static const IOSNotificationDetails _iOSNotificationDetails =
+      IOSNotificationDetails();
+
+  // Init method
   Future<void> init() async {
     // Declaring the android settings with icon
     const AndroidInitializationSettings initializationSettingsAndroid =
         AndroidInitializationSettings('@drawable/app_icon');
 
     // Declaring the ios permission settings
-   IOSInitializationSettings initializationSettingsIOS =
+    IOSInitializationSettings initializationSettingsIOS =
         IOSInitializationSettings(
-
       // settings to false, no request for now
       requestSoundPermission: false,
       requestBadgePermission: false,
@@ -55,7 +62,6 @@ class NotificationService {
 
       // settings to true, request for now
       onDidReceiveLocalNotification: onDidReceiveLocalNotification,
-      
     );
 
 // Request now
@@ -64,12 +70,10 @@ class NotificationService {
     // Now, init them
     final InitializationSettings initializationSettings =
         InitializationSettings(
-      
       android: initializationSettingsAndroid,
       iOS: initializationSettingsIOS,
       // I don't target macOs for now
       macOS: null,
-      
     );
 
     // Init this, when I will understand this, i'll explain hah
@@ -78,6 +82,7 @@ class NotificationService {
     // Init the big one
     await flutterLocalNotificationsPlugin.initialize(
       initializationSettings,
+      onSelectNotification: onSelectNotification,
     );
 
     /// only for tests, in production comment or delete it
@@ -86,6 +91,7 @@ class NotificationService {
       Random().nextInt(1000),
       'test title',
       'test description',
+      "payload text example for instant notification",
     );
 
     // schedule notification for the next 5 secondes
@@ -97,11 +103,12 @@ class NotificationService {
       tz.TZDateTime.now(tz.local).add(
         const Duration(seconds: 5),
       ),
+      "payload text example for scheduled notification",
     );
   }
 
+  // if you don't want to request the permission on the app open, you can use this method to request it whenever you want
 
-  //
   Future<void> requestIOSpermission() async {
     final bool? result = await flutterLocalNotificationsPlugin
         .resolvePlatformSpecificImplementation<
@@ -113,12 +120,11 @@ class NotificationService {
         );
   }
 
-  //
+// (there is another methods to do same things for MacOS on docs page)
+
+  // call the instant notification creating
   Future<void> createInstantNotification(
-    int id,
-    String? title,
-    String? description,
-  ) async {
+      int id, String? title, String? description, String? payload) async {
     // Create the notification
     await flutterLocalNotificationsPlugin.show(
       id,
@@ -126,11 +132,13 @@ class NotificationService {
       description,
       // this is from the service class(this class)
       platformChannelSpecifics,
+      payload: payload,
     );
   }
 
-  Future<void> createScheduledNotification(
-      int id, String? title, String? description, dynamic tzDateTime) async {
+// call the scheduled notification creating
+  Future<void> createScheduledNotification(int id, String? title,
+      String? description, dynamic tzDateTime, String? payload) async {
     await flutterLocalNotificationsPlugin.zonedSchedule(
       id,
       title,
@@ -140,36 +148,45 @@ class NotificationService {
       androidAllowWhileIdle: true,
       uiLocalNotificationDateInterpretation:
           UILocalNotificationDateInterpretation.absoluteTime,
+      payload: payload,
     );
   }
 
 //
-void onDidReceiveLocalNotification(
-    int id, String? title, String? body, String? payload) async {
-  // Display a dialog with the notification details, tap ok to go to another page
-  showDialog(
-   context: Get.context as BuildContext,
-    builder: (BuildContext context) => CupertinoAlertDialog(
-      title: Text(title ?? "title error"),
-      content: Text(body ?? "title error"),
-      actions: [
-        CupertinoDialogAction(
-          isDefaultAction: true,
-          child: const Text('Ok'),
-          onPressed: () async {
-            Navigator.of(context, rootNavigator: true).pop();
-            await Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => MainPage(),
-              ),
-            );
-          },
-        )
-      ],
-    ),
-  );
-}
-  
+  void onDidReceiveLocalNotification(
+      int id, String? title, String? body, String? payload) async {
+    // Display a dialog with the notification details, tap ok to go to another page
+    showDialog(
+      context: Get.context as BuildContext,
+      builder: (BuildContext context) => CupertinoAlertDialog(
+        title: Text(title ?? "title error"),
+        content: Text(body ?? "title error"),
+        actions: [
+          CupertinoDialogAction(
+            isDefaultAction: true,
+            child: const Text('Ok'),
+            onPressed: () async {
+              Navigator.of(context, rootNavigator: true).pop();
+              await Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => MainPage(),
+                ),
+              );
+            },
+          )
+        ],
+      ),
+    );
+  }
 
+  void onSelectNotification(String? payload) async {
+    if (payload != null) {
+      debugPrint('notification payload: $payload');
+    }
+    await Get.defaultDialog(
+      title: "$payload",
+      content: Text("payload"),
+    );
+  }
 }
