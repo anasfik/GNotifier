@@ -24,13 +24,14 @@ class NewItemNotifcationModelAdapter
       fields[5] as bool,
       fields[6] as bool,
       fields[7] as bool?,
+      fields[9] as int,
     );
   }
 
   @override
   void write(BinaryWriter writer, NewItemNotifcationModel obj) {
     writer
-      ..writeByte(6)
+      ..writeByte(7)
       ..writeByte(0)
       ..write(obj.title)
       ..writeByte(1)
@@ -42,7 +43,9 @@ class NewItemNotifcationModelAdapter
       ..writeByte(6)
       ..write(obj.isAlarmed)
       ..writeByte(7)
-      ..write(obj.isFavorite);
+      ..write(obj.isFavorite)
+      ..writeByte(9)
+      ..write(obj.id);
   }
 
   @override

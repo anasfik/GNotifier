@@ -37,9 +37,14 @@ class NotificationService {
     // Notification sound
     playSound: true,
     // Priority level
-    priority: Priority.high,
+    priority: Priority.max,
     // Importance level
-    importance: Importance.high,
+    importance: Importance.max,
+    ongoing: true,
+    autoCancel: true,
+//
+
+    visibility: NotificationVisibility.public,
   );
 
   // ios notification details
@@ -87,17 +92,17 @@ class NotificationService {
 
     /// only for tests, in production comment or delete it
     //  Instant notification on app open
-    await createInstantNotification(
-      Random().nextInt(1000),
-      'test title',
-      'test description',
-      "payload text example for instant notification",
-    );
+    // await createInstantNotification(
+    //   Random().nextInt(1000),
+    //   'test title',
+    //   'test description',
+    //   "payload text example for instant notification",
+    // );
 
     // schedule notification for the next 5 secondes
     createScheduledNotification(
-      Random().nextInt(1000),
-      'test title',
+      5,
+      'test title111111111222',
       'test description',
       // this will show it after 5 secondes from the current time
       tz.TZDateTime.now(tz.local).add(
@@ -144,11 +149,13 @@ class NotificationService {
       title,
       description,
       tzDateTime,
+      payload: payload,
       platformChannelSpecifics,
       androidAllowWhileIdle: true,
       uiLocalNotificationDateInterpretation:
           UILocalNotificationDateInterpretation.absoluteTime,
-      payload: payload,
+
+      // matchDateTimeComponents: DateTimeComponents.dateAndTime,
     );
   }
 
@@ -188,5 +195,35 @@ class NotificationService {
       title: "$payload",
       content: Text("payload"),
     );
+  }
+
+  //
+  Future<void> getPendingNotifications() async {
+    final List<PendingNotificationRequest> pendingNotificationRequests =
+        await flutterLocalNotificationsPlugin.pendingNotificationRequests();
+  }
+
+  // Specific for android,
+  Future<void> getActiveNotifications() async {
+    final List<ActiveNotification>? activeNotifications =
+        await flutterLocalNotificationsPlugin
+            .resolvePlatformSpecificImplementation<
+                AndroidFlutterLocalNotificationsPlugin>()
+            ?.getActiveNotifications();
+  }
+
+  Future<void> cancelNotificationWithId(int id) async {
+    await flutterLocalNotificationsPlugin.cancel(id);
+  }
+
+  Future<void> cancelAllNotifications() async {
+    await flutterLocalNotificationsPlugin.cancelAll();
+  }
+
+  get isAppOPenedViaNotification async {
+    NotificationAppLaunchDetails? notificationAppLaunchDetails =
+        await flutterLocalNotificationsPlugin.getNotificationAppLaunchDetails();
+
+    return notificationAppLaunchDetails;
   }
 }

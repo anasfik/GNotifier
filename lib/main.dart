@@ -30,13 +30,10 @@ void main() async {
 
   // localBox.clear();
 
+//
 
-
-// 
-
-NotificationService notificationService = NotificationService();
+  NotificationService notificationService = NotificationService();
   notificationService.init();
-  
 
   runApp(WatchItLaterApp());
 }

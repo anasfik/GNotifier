@@ -1,5 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
@@ -10,10 +12,13 @@ import 'package:watch_it_later/view/general__widgets/button.dart';
 import 'package:watch_it_later/view/general__widgets/text__field.dart';
 import 'package:watch_it_later/view/notification__full__page/widgets/bottom__sheet_widget.dart';
 import '../../model/newItemNotificationModel.dart';
+import '../../services/local__notifications__service.dart';
 import '../favorites__controller.dart/favorites__controller.dart';
 import '../helpersControllers/dialogsController.dart';
 import '../mainController.dart';
 
+import 'package:timezone/data/latest.dart' as tz;
+import 'package:timezone/timezone.dart' as tz;
 class NewNotificationController extends GetxController {
   // Dependency injection
   final DialogsController dialogsController = Get.put(DialogsController());
@@ -21,7 +26,9 @@ class NewNotificationController extends GetxController {
       Get.put(FavoritesController());
   final MainController mainController = Get.put(MainController());
 
-  /// textEditingControllers
+ 
+ // NotificationService instance
+  final NotificationService notificationService = NotificationService();
 
   // New item  Text editing controllers
   late TextEditingController titleController;
@@ -71,9 +78,9 @@ class NewNotificationController extends GetxController {
         date,
         isRepeated,
         isAlarm,
-
         // isFavorite: false by default :
         false,
+        Random().nextInt(1000000),
       ),
     );
 
@@ -85,6 +92,21 @@ class NewNotificationController extends GetxController {
 
     // Going back
     Get.back();
+
+    /// Pushing the notification
+
+    // get differance between the current date and the notification date
+    Duration difference = date.difference(DateTime.now());
+
+    // create it
+    // notificationService.createScheduledNotification(
+    // id,
+    //   'test title',
+    //   'test description',
+    //   // this will show it after 5 secondes from the current time
+    //   tz.TZDateTime.now(tz.local).add(Duration(seconds: difference.inSeconds)),
+    //   "payload text example for scheduled notification",
+    // );
   }
 
   // Delete notification
@@ -211,12 +233,10 @@ class NewNotificationController extends GetxController {
         isRepeated,
         isAlarm,
         isFavorite,
+        newNotificationsBox.getAt(index)!.id,
       ),
     );
-
-    // Edit it in favorites
-
-
+    
     Get.back();
   }
 
