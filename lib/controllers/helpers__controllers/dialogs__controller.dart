@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../utils/AppColors.dart';
@@ -30,7 +31,7 @@ class DialogsController extends GetxController {
           SizedBox(
             width: 200,
             child: Text(
-              infoText,
+              mainController.allFirstWordLetterToUppercase(infoText),
               style: TextStyle(
                 color: AppColors.darkBlack,
                 fontSize: 17,
@@ -61,41 +62,50 @@ class DialogsController extends GetxController {
   }
 
   //
-  showInfo(String infoText) {
+  showInfo(String infoTitle, String infoText) {
     Get.defaultDialog(
       title: "",
       backgroundColor: AppColors.lightGrey,
       radius: 5,
-      content: Column(
-        children: [
-          Icon(
-            Icons.info,
-            color: AppColors.darkBlack,
-            size: 60,
-          ),
-          const SizedBox(height: 15),
-          SizedBox(
-            width: 200,
-            child: Text(
-              infoText,
+      contentPadding: EdgeInsets.only(right: 20),
+      content: Container(
+        padding: const EdgeInsets.only(left: 20, right: 20),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            AutoSizeText(
+              mainController.allFirstWordLetterToUppercase(infoTitle),
+              style: TextStyle(
+                color: AppColors.darkBlack,
+                fontSize: 22,
+                fontWeight: FontWeight.bold,
+              ),
+              maxLines: 2,
+            ),
+            const SizedBox(height: 10),
+            AutoSizeText(
+              mainController.allFirstWordLetterToUppercase(infoText),
               style: TextStyle(
                 color: AppColors.darkBlack,
                 fontSize: 17,
-                fontWeight: FontWeight.bold,
+                fontWeight: FontWeight.w500,
               ),
-              textAlign: TextAlign.center,
+              maxLines: 2,
             ),
-          ),
-        ],
+          ],
+        ),
       ),
       actions: [
-        DialogTextButton(
-          hasBackground: false,
-          mainController: mainController,
-          text: "ok",
-          onPressed: () {
-            Get.back();
-          },
+        Align(
+          alignment: Alignment.centerRight,
+          child: DialogTextButton(
+            hasBackground: false,
+            mainController: mainController,
+            text: "ok",
+            onPressed: () {
+              Get.back();
+            },
+          ),
         ),
       ],
     );

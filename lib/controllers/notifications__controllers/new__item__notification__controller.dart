@@ -39,12 +39,12 @@ class NewNotificationController extends GetxController {
   bool isAlarmOptionEnabled = false;
 
   // Title variables
-  int titleMaxLength = 10;
+  int titleMaxLength = 20;
   int titleWrittenLength = 0;
   double titleCountBoxScale = 0;
 
   // Description variables
-  int descriptionMaxLength = 40;
+  int descriptionMaxLength = 120;
   int descriptionWrittenLength = 0;
   double descriptionCountBoxScale = 0;
 
@@ -59,7 +59,7 @@ class NewNotificationController extends GetxController {
   addNewNotification(
     String title,
     String description,
-    DateTime date,
+    DateTime? date,
     bool isRepeated,
     bool isAlarm,
   ) {
@@ -68,14 +68,42 @@ class NewNotificationController extends GetxController {
         Hive.box<NewItemNotifcationModel>("newNotificationsBox");
     // and add it to box
     int newId = Random().nextInt(1000000);
-  
-  
+
+    //
+    if (title.isEmpty) {
+      dialogsController.showInfo(
+          "Title is empty", "please, set a title for your notification");
+      return;
+    }
+
+//
+    if (description.isEmpty) {
+      dialogsController.showInfo("description is empty",
+          "please, set a description for your notification");
+      return;
+    }
+
+    //
+    if (date?.year == null && date?.month == null && date?.day == null) {
+      dialogsController.showInfo("no date selected",
+          "please, choose the schedule date for your notification");
+      return;
+    }
+
+    //
+    if (date?.hour == null && date?.minute == null) {
+      dialogsController.showInfo("no hours / minutes selected",
+          "please, set a specific time for scheduling your notification");
+      return;
+    }
+
+    //
 
     newNotificationsBox.add(
       NewItemNotifcationModel(
         title,
         description,
-        date,
+        date!,
         isRepeated,
         isAlarm,
         // isFavorite: false by default :
@@ -84,6 +112,7 @@ class NewNotificationController extends GetxController {
         newId,
       ),
     );
+
     ///
     // Using openContainer from the animations package trait the AddNewNotificationPage as just a widget so open/close it execute the dispose to text editing controllers so we should re-init them after any add operations
     titleController.text = "";

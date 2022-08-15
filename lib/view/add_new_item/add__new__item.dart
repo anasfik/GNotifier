@@ -185,7 +185,7 @@ class AddNewItemScreen extends StatelessWidget {
                         newNotificationController.titleController.text.trim(),
                         newNotificationController.descriptionController.text
                             .trim(),
-                        dateController.date as DateTime,
+                        dateController.date ,
                         newNotificationController.isRepeatedOptionEnabled,
                         newNotificationController.isAlarmOptionEnabled,
                       );
