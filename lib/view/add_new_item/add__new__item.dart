@@ -13,11 +13,13 @@ import 'widgets/new__title.dart';
 
 class AddNewItemScreen extends StatelessWidget {
   AddNewItemScreen({Key? key}) : super(key: key);
+
   // Dependencies injection
   final MainController mainController = Get.put(MainController());
   final DateController dateController = Get.put(DateController());
   final NewNotificationController newNotificationController =
       Get.put(NewNotificationController());
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -172,8 +174,7 @@ class AddNewItemScreen extends StatelessWidget {
                       ],
                     );
                   },
-                
-              ),
+                ),
                 const Spacer(),
                 SizedBox(
                   width: double.infinity,

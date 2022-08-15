@@ -1,5 +1,3 @@
-// ignore_for_file: prefer_const_constructors
-
 import 'dart:math';
 
 import 'package:flutter/material.dart';
@@ -7,10 +5,6 @@ import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
 
-import 'package:watch_it_later/utils/AppColors.dart';
-import 'package:watch_it_later/view/general__widgets/action__button.dart';
-import 'package:watch_it_later/view/general__widgets/button.dart';
-import 'package:watch_it_later/view/general__widgets/text__field.dart';
 import 'package:watch_it_later/view/notification__full__page/widgets/bottom__sheet_widget.dart';
 import '../../model/newItemNotificationModel.dart';
 import '../../services/local__notifications__service.dart';
@@ -18,7 +12,6 @@ import '../favorites__controller.dart/favorites__controller.dart';
 import '../helpersControllers/dialogsController.dart';
 import '../mainController.dart';
 
-import 'package:timezone/data/latest.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
 
 class NewNotificationController extends GetxController {
@@ -28,19 +21,17 @@ class NewNotificationController extends GetxController {
       Get.put(FavoritesController());
   final MainController mainController = Get.put(MainController());
 
-
-
-
-
+  ///
   // NotificationService instance
   // uncommenting this will cause a stack overflow
   // final NotificationService notificationService = NotificationService();
+  ///
 
   // New item  Text editing controllers
   late TextEditingController titleController;
   late TextEditingController descriptionController;
 
-  // textFields keys
+  // TextFields keys
   final titleTextFieldKey = UniqueKey();
   final descriptionTextFieldKey = UniqueKey();
 
@@ -87,33 +78,34 @@ class NewNotificationController extends GetxController {
         isAlarm,
         // isFavorite: false by default :
         false,
+        // id
         newId,
       ),
     );
 
     ///
-    // using openContainer from the animations package trait the AddNewNotificationPage as just a widget so open/close it execute the dispose to text editing controllers so we should re-init them after any add operations
-    ///
+    // Using openContainer from the animations package trait the AddNewNotificationPage as just a widget so open/close it execute the dispose to text editing controllers so we should re-init them after any add operations
     titleController.text = "";
     descriptionController.text = "";
 
     /// Pushing the notification
+    // Instance of service
     final NotificationService notificationService = NotificationService();
 
-    // get differance between the current date and the notification date
+    // Get difference between the current date and the notification date
     Duration difference = date.difference(DateTime.now());
-    print(difference.inSeconds);
 
-    // create it
+    // Create it
     notificationService.createScheduledNotification(
       newId,
       title,
       description,
-
-      // this will show it after 5 secondes from the current time
-      tz.TZDateTime.now(tz.local).add(Duration(seconds: 3)),
-      "$newId"
-      
+      tz.TZDateTime.now(tz.local).add(
+        Duration(
+          seconds: difference.inSeconds,
+        ),
+      ),
+      "$newId",
     );
 
     // Going back
@@ -126,23 +118,7 @@ class NewNotificationController extends GetxController {
     Box<NewItemNotifcationModel> newNotificationsBox =
         Hive.box<NewItemNotifcationModel>("newNotificationsBox");
 
-
-    final NotificationService notificationService = NotificationService();
-
-    // // Remove it from the favorites
-    // favoritesController.favoritesItemsNotificationList.removeWhere((element) =>
-    //     element.title == newNotificationsBox.getAt(index)!.title &&
-    //     element.description == newNotificationsBox.getAt(index)!.description &&
-    //     element.dateToShow == newNotificationsBox.getAt(index)!.dateToShow &&
-    //     element.isRepeated == newNotificationsBox.getAt(index)!.isRepeated &&
-    //     element.isAlarmed == newNotificationsBox.getAt(index)!.isAlarmed &&
-    //     element.isFavorite == newNotificationsBox.getAt(index)!.isFavorite);
-
-    // cancel it's notification
-    // notificationService
-    //     .cancelNotificationWithId(newNotificationsBox.getAt(index)!.id);
-
-    // And delete it from box
+    // delete it from box
     newNotificationsBox.deleteAt(index);
 
     // this is optional but there is a 1% case that need it so, it's important
@@ -165,12 +141,12 @@ class NewNotificationController extends GetxController {
     // Open the bottom sheet
     Get.bottomSheet(
       BottomSheetWidget(
-        // success method
+        // Success method
         onSuccess: () {
           setNewTitle(titleController.text);
         },
 
-        // specify the type of the bottom sheet
+        // Specify the type of the bottom sheet
         forTitle: true,
 
         hint: hint,
@@ -180,16 +156,16 @@ class NewNotificationController extends GetxController {
     );
   }
 
-// this shows the bottom sheet for update description
-
+  // This shows the bottom sheet for update description
   showEditDescriptionDialog(
     String hint,
     NewItemNotifcationModel gettedNotification,
   ) {
-    // First set an init value whenevr we open the bottom sheet
+    // First set an init value whenever we open the bottom sheet
     descriptionController.text =
         newDescription ?? gettedNotification.description;
-    // for first time it will for sure be the descriptionController.text so
+
+    // For first time it will for sure be the descriptionController.text so
     countTitleLength(descriptionController.text);
     update();
 
@@ -208,7 +184,7 @@ class NewNotificationController extends GetxController {
 
 //
 
-  // Give the updated title to newTitle variable
+  // Set the updated title to newTitle variable
   setNewTitle(String value) {
     // Store it
     newTitle = value;
@@ -221,7 +197,7 @@ class NewNotificationController extends GetxController {
     Get.back();
   }
 
-  // Give the updated deScription to newTitle variable
+  // Give the updated description to newTitle variable
   setNewDescription(String value) {
     // Store it
     newDescription = value;
@@ -234,7 +210,7 @@ class NewNotificationController extends GetxController {
     Get.back();
   }
 
-// Edit notification
+  // Edit notification
   updateNotification(int index, String title, String description, DateTime date,
       bool isRepeated, bool isAlarm, bool isFavorite) {
     // Init the hive box
@@ -253,36 +229,35 @@ class NewNotificationController extends GetxController {
         newNotificationsBox.getAt(index)!.id,
       ),
     );
+
+    ///
+    // Instance of service
     final NotificationService notificationService = NotificationService();
-
-
-
-// cancel the pending one
+    // cancel the pending one
     notificationService
         .cancelNotificationWithId(newNotificationsBox.getAt(index)!.id);
 
-    //
+    // Get difference
     Duration difference = date.difference(DateTime.now());
 
     // Create a new one with the new data
     notificationService.createScheduledNotification(
-      newNotificationsBox.getAt(index)!.id,
-      title,
-      description,
-      // this will show it after 5 secondes from the current time
-      tz.TZDateTime.now(tz.local).add(
-        Duration(
-          seconds: 3,
+        newNotificationsBox.getAt(index)!.id,
+        title,
+        description,
+        // This will show it after 5 secondes from the current time
+        tz.TZDateTime.now(tz.local).add(
+          Duration(
+            seconds: difference.inSeconds,
+          ),
         ),
-      ),
-            "${newNotificationsBox.getAt(index)!.id}"
+        "${newNotificationsBox.getAt(index)!.id}");
 
-    );
-// Going back
+    // Going back
     Get.back();
   }
 
-  // method handler for title text field
+  // Method handler for title text field
   countTitleLength(String title) async {
     if (title.isEmpty) {
       titleWrittenLength = 0;
@@ -301,8 +276,7 @@ class NewNotificationController extends GetxController {
     update();
   }
 
-//
-  // method handler for description text field
+  // Method handler for description text field
   countDescriptionLength(String description) async {
     if (description.isEmpty) {
       descriptionWrittenLength = 0;
@@ -321,14 +295,14 @@ class NewNotificationController extends GetxController {
     update();
   }
 
-  // toggle isRepeatedOptionEnabled
+  // Toggle isRepeatedOptionEnabled
   toggleRepeatedOptionBoolean() {
     isRepeatedOptionEnabled = !isRepeatedOptionEnabled;
     update();
     return isRepeatedOptionEnabled;
   }
 
-  // toggle isAlarmOptionEnabled
+  // Toggle isAlarmOptionEnabled
   toggleAlarmOptionBoolean() {
     isAlarmOptionEnabled = !isAlarmOptionEnabled;
     update();
