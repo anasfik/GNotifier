@@ -69,28 +69,23 @@ class SearchScreen extends StatelessWidget {
                     const SizedBox(height: 100),
                     Center(
                       child: Container(
-                        margin: const EdgeInsets.only(right: 20),
                         width: double.infinity,
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.start,
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             Container(
+                              margin: const EdgeInsets.only(right: 20),
                               child: Lottie.asset(
                                 "assets/lottie/not_found.json",
                                 width: 120,
                               ),
                             ),
-                            AutoSizeText(
-                                mainController.allFirstWordLetterToUppercase(
-                                    "no items found"),
-                                style: TextStyle(
-                                  color: AppColors.darkBlack.withOpacity(.6),
-                                  fontSize: 25,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                                maxLines: 1,
-                                textAlign: TextAlign.center),
+                            NothingToShow(
+                              margin: const EdgeInsets.only(right: 20, top: 20),
+                              text: "no items found",
+                              mainController: mainController,
+                            )
                           ],
                         ),
                       ),
@@ -102,27 +97,29 @@ class SearchScreen extends StatelessWidget {
                           .isNotEmpty) ...[
                     Column(
                       children: [
-                        const SizedBox(height: 30),
+                        const SizedBox(height: 10),
+                        Divider(),
+                        const SizedBox(height: 20),
                         ...List.generate(
                           searchController
                               .filterList(
                                   searchController.searchBarController.text)
                               .length,
                           (index) {
+                            //
                             List filteredList = searchController.filterList(
                                 searchController.searchBarController.text);
+
+                            //
                             int reversedIndex = filteredList.length - index - 1;
-                            return InkWell(
-                              onLongPress: () {},
-                              child: NotificationCard(
-                                currentNotification: filteredList[reversedIndex]
-                                    as NewItemNotifcationModel,
-                                title: filteredList[reversedIndex].title,
-                                description:
-                                    filteredList[reversedIndex].description,
-                                isFavoriteButtonHidden: true,
-                                reversedIndex: reversedIndex,
-                              ),
+                            return NotificationCard(
+                              currentNotification: filteredList[reversedIndex]
+                                  as NewItemNotifcationModel,
+                              title: filteredList[reversedIndex].title,
+                              description:
+                                  filteredList[reversedIndex].description,
+                              isFavoriteButtonHidden: true,
+                              reversedIndex: reversedIndex,
                             );
                           },
                         ),
