@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
-import 'package:watch_it_later/controllers/notifications__controllers/new__item__notification__error__controller.dart';
 import 'package:watch_it_later/view/notification__full__page/widgets/bottom__sheet_widget.dart';
 import '../../model/newItemNotificationModel.dart';
 import '../../services/local__notifications__service.dart';
@@ -14,13 +13,14 @@ import '../main__controller.dart';
 
 import 'package:timezone/timezone.dart' as tz;
 
+import 'new__item__notification__error__controller.dart';
+
 class NewNotificationController extends GetxController {
   // Dependency injection
+  final DialogsController dialogsController = Get.put(DialogsController());
   final FavoritesController favoritesController =
       Get.put(FavoritesController());
   final MainController mainController = Get.put(MainController());
-  final NewNotificationExceptionsHandler exceptionHandler =
-      Get.put(NewNotificationExceptionsHandler());
 
   ///
   // NotificationService instance
@@ -65,18 +65,41 @@ class NewNotificationController extends GetxController {
     bool isRepeated,
     bool isAlarm,
   ) {
-    // Init the hive box
+    // init the hive box
     Box<NewItemNotifcationModel> newNotificationsBox =
         Hive.box<NewItemNotifcationModel>("newNotificationsBox");
-    // And add it to box
+    // and add it to box
     int newId = Random().nextInt(1000000);
 
-    // Exceptions handler
-    exceptionHandler.checkDateTimeValidity(date);
-    exceptionHandler.checkTitleValidity(title);
-    exceptionHandler.checkDescriptionValidity(description);
-    exceptionHandler.checkTimeDateValidity(date);
-    exceptionHandler.checkFullTimeValidity(date);
+    // Check title
+    if (checkTitleValidity(title)) {
+      checkTitleValidityDialog();
+      return;
+    }
+
+    // Check description
+    if (checkDescriptionValidity(description)) {
+      checkDescriptionValidityDialog();
+      return;
+    }
+
+    // Check date (years, months, days)
+    if (checkDateTimeValidity(date)) {
+      checkDateTimeValidityDialog();
+      return;
+    }
+
+    // Check date (hours, minutes)
+    if (checkTimeOfDayValidity(date)) {
+      checkTimeOfDayValidityDialog();
+      return;
+    }
+
+    // get back if in somehow the user choosed a date in the past
+    if (checkFullTimeValidity(date)) {
+      checkFullTimeValidityDialog();
+      return;
+    }
 
     newNotificationsBox.add(
       NewItemNotifcationModel(
