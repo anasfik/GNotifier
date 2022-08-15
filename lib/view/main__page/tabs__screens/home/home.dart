@@ -4,21 +4,24 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:watch_it_later/controllers/notificationsControllers/newItemNotificationController.dart';
-import '../../../controllers/home__controller/home__controller.dart';
-import '../../../controllers/mainController.dart';
-import '../../../model/newItemNotificationModel.dart';
-import '../../../services/local__notifications__service.dart';
-import '../../../utils/AppColors.dart';
-import '../../general__widgets/action__button.dart';
-import '../../general__widgets/notification__card.dart';
-import '../../add_new_item/add__new__item.dart';
+import 'package:watch_it_later/view/main__page/tabs__screens/home/widgets/open__Container__button.dart';
+import '../../../../controllers/get__username__controller/get__username__controller.dart';
+import '../../../../controllers/mainController.dart';
+import '../../../../model/newItemNotificationModel.dart';
+import '../../../../utils/AppColors.dart';
+import '../../../general__widgets/action__button.dart';
+import '../../../general__widgets/notification__card.dart';
+import '../../../add_new_item/add__new__item.dart';
 
 class HomeScreen extends StatelessWidget {
   HomeScreen({Key? key}) : super(key: key);
+  // Dependency injection
   final MainController mainController = Get.put(MainController());
   final NewNotificationController newNotificationController =
       Get.put(NewNotificationController());
-  final HomeController homeController = Get.put(HomeController());
+  final GetUsernameController getUsernameController =
+      Get.put(GetUsernameController());
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -31,33 +34,23 @@ class HomeScreen extends StatelessWidget {
             const SizedBox(height: 20),
             Container(
               margin: const EdgeInsets.only(right: 20),
-               
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    GestureDetector(
-                      onTap: () {
-                       },
-                      child: const CircleAvatar(
-                        radius: 25,
-                        backgroundImage: AssetImage("assets/images/avatar.png"),
-                      ),
-                    ),
-                    OpenContainer(
-                      closedElevation: 0,
-                      closedBuilder: (context, action) {
-                        return const CustomActionIconButton(
-                          icon: Icons.add,
-                        );
-                      },
-                      openBuilder: (context, action) {
-                        return AddNewItemScreen();
-                      },
-                    ),
-                  ],
-                ),
-              
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  // Avatar
+                  const CircleAvatar(
+                    radius: 25,
+                    backgroundImage: AssetImage("assets/images/avatar.png"),
+                  ),
+
+                  // Add button
+                  OpenContainerButton(
+                    screenToOpen: AddNewItemScreen(),
+                    icon: Icons.add,
+                  )
+                ],
+              ),
             ),
             const SizedBox(height: 20),
             AutoSizeText.rich(
@@ -66,7 +59,7 @@ class HomeScreen extends StatelessWidget {
                 children: [
                   TextSpan(
                     text: mainController.allFirstWordLetterToUppercase(
-                        homeController.getUsername()),
+                        getUsernameController.getUsername()),
                     style: const TextStyle(fontWeight: FontWeight.bold),
                   ),
                 ],

@@ -32,11 +32,11 @@ class GetUsernameController extends GetxController {
 
     update();
   }
-
-  saveUsernameInBox(String textFieldValue) async {
+  // set a new Username to the box
+  setUserName(String textFieldValue) async {
+  
+  
     // Opening the other box
-    
-    
     Box localBox = await Hive.openBox('locals');
     
     
@@ -50,5 +50,25 @@ class GetUsernameController extends GetxController {
 
     // when this is done we need to set that this is an old user so he will be redirected to mainPage
     localBox.put("isNewUsingApp", false);
+  }
+
+
+  // get username from the box
+    String getUsername() {
+    // Like we see we opened the box directly cause, it's already open from the getUsernameController
+    // Getting the box
+    Box localBox = Hive.box('locals');
+
+    // Getting the username from the box
+    String usernameToShow = localBox.get("username");
+
+    ///
+    // since we didn't save the username value in some variables, we will let the box open, yes, this is fine (from the official hive docs)
+    // if you think that will cause performance problem, save the value we got into a variable and return it and close the box
+    // localBox.close();
+    ///
+
+    // Got it
+    return usernameToShow;
   }
 }

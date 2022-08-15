@@ -77,7 +77,7 @@ class GetUsernamePage extends StatelessWidget {
                               .trim()
                               .isNotEmpty
                           ? () {
-                              getUsernameController.saveUsernameInBox(
+                              getUsernameController.setUserName(
                                 getUsernameController
                                     .usernameTextFieldController.text
                                     .trim(),
