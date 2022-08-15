@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
+
 import 'package:watch_it_later/utils/AppColors.dart';
 import 'package:watch_it_later/view/general__widgets/action__button.dart';
 import 'package:watch_it_later/view/general__widgets/button.dart';
@@ -26,6 +27,8 @@ class NewNotificationController extends GetxController {
   final FavoritesController favoritesController =
       Get.put(FavoritesController());
   final MainController mainController = Get.put(MainController());
+
+
 
 
 

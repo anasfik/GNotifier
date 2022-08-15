@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 import 'package:watch_it_later/model/newItemNotificationModel.dart';
+import 'package:watch_it_later/view/general__widgets/nothing__to__show__text.dart';
 import 'package:watch_it_later/view/general__widgets/notification__card.dart';
+import 'package:watch_it_later/view/general__widgets/screen__title.dart';
 import '../../../controllers/mainController.dart';
 import '../../../controllers/search__controller/search__controller.dart';
 import '../../../utils/AppColors.dart';
@@ -11,8 +13,11 @@ import '../../general__widgets/text__field.dart';
 
 class SearchScreen extends StatelessWidget {
   SearchScreen({Key? key}) : super(key: key);
+  // Dependency injection
   final MainController mainController = Get.put(MainController());
   final searchController = Get.lazyPut(() => SearchController());
+
+  //
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -25,18 +30,14 @@ class SearchScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const SizedBox(height: 20),
+                  const SizedBox(height: 40),
 
-                  const SizedBox(height: 20),
-                  AutoSizeText(
-                    mainController
-                        .allFirstWordLetterToUppercase("search by title"),
-                    maxLines: 2,
-                    style: const TextStyle(
-                      fontSize: 25,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
+                  //
+                  ScreenTitle(
+                    title: "search by title",
+                    mainController: mainController,
+                  ), //
+
                   //
                   const SizedBox(height: 30),
 
@@ -55,21 +56,10 @@ class SearchScreen extends StatelessWidget {
                   ),
                   //
                   if (searchController.searchBarController.text.isEmpty) ...[
-                    const SizedBox(height: 100),
-                    Center(
-                      child: Container(
-                        margin: const EdgeInsets.only(right: 40, left: 20),
-                        child: AutoSizeText(
-                            mainController.allFirstWordLetterToUppercase(
-                                "search for anything of your notifications"),
-                            style: TextStyle(
-                                fontSize: 25,
-                                fontWeight: FontWeight.bold,
-                                color: AppColors.darkBlack.withOpacity(.6)),
-                            maxLines: 2,
-                            textAlign: TextAlign.center),
-                      ),
-                    ),
+                    NothingToShow(
+                      text: "search for anything of your notifications",
+                      mainController: mainController,
+                    )
                   ],
 
                   if (searchController.searchBarController.text.isNotEmpty &&
@@ -125,7 +115,6 @@ class SearchScreen extends StatelessWidget {
                             return InkWell(
                               onLongPress: () {},
                               child: NotificationCard(
-                                
                                 currentNotification: filteredList[reversedIndex]
                                     as NewItemNotifcationModel,
                                 title: filteredList[reversedIndex].title,

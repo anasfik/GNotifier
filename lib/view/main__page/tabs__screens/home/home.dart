@@ -1,17 +1,16 @@
-import 'package:animations/animations.dart';
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:watch_it_later/controllers/notificationsControllers/newItemNotificationController.dart';
+import 'package:watch_it_later/view/general__widgets/nothing__to__show__text.dart';
 import 'package:watch_it_later/view/main__page/tabs__screens/home/widgets/open__Container__button.dart';
 import '../../../../controllers/get__username__controller/get__username__controller.dart';
 import '../../../../controllers/mainController.dart';
 import '../../../../model/newItemNotificationModel.dart';
-import '../../../../utils/AppColors.dart';
-import '../../../general__widgets/action__button.dart';
 import '../../../general__widgets/notification__card.dart';
 import '../../../add_new_item/add__new__item.dart';
+import '../../../general__widgets/screen__title.dart';
+import 'widgets/username__welcome.dart';
 
 class HomeScreen extends StatelessWidget {
   HomeScreen({Key? key}) : super(key: key);
@@ -22,6 +21,7 @@ class HomeScreen extends StatelessWidget {
   final GetUsernameController getUsernameController =
       Get.put(GetUsernameController());
 
+  //
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -53,42 +53,24 @@ class HomeScreen extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 20),
-            AutoSizeText.rich(
-              TextSpan(
-                text: mainController.allFirstWordLetterToUppercase("Hey, "),
-                children: [
-                  TextSpan(
-                    text: mainController.allFirstWordLetterToUppercase(
-                        getUsernameController.getUsername()),
-                    style: const TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                ],
-              ),
-              textAlign: TextAlign.left,
-              style: const TextStyle(
-                fontSize: 30,
-              ),
+
+            // Username welcome
+            UsernameWelcome(
+              textToShowBeforeUsername: "hey, ",
+              mainController: mainController,
+              getUsernameController: getUsernameController,
             ),
+
             const Divider(),
-            const SizedBox(height: 20),
-            Visibility(
-              // hide when there is nothing to show
-              visible: Hive.box<NewItemNotifcationModel>("newNotificationsBox")
-                  .values
-                  .toList()
-                  .isNotEmpty,
-              child: AutoSizeText(
-                mainController
-                    .allFirstWordLetterToUppercase("latest added notification"),
-                maxLines: 2,
-                style: const TextStyle(
-                  fontSize: 25,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
+            const SizedBox(height: 40),
+
             //
-            const SizedBox(height: 20),
+            ScreenTitle(
+              mainController: mainController,
+              title: "latest added notification",
+            ),
+
+            // Items list
             ValueListenableBuilder(
                 valueListenable:
                     Hive.box<NewItemNotifcationModel>("newNotificationsBox")
@@ -96,21 +78,9 @@ class HomeScreen extends StatelessWidget {
                 builder: (BuildContext context,
                     Box<NewItemNotifcationModel> box, __) {
                   if (box.values.isEmpty) {
-                    return Center(
-                      child: Container(
-                        margin: const EdgeInsets.only(right: 20, top: 150),
-                        child: AutoSizeText(
-                          mainController.allFirstWordLetterToUppercase(
-                              "no items added yet"),
-                          style: TextStyle(
-                            color: AppColors.darkBlack.withOpacity(.3),
-                            fontSize: 25,
-                            fontWeight: FontWeight.bold,
-                          ),
-                          maxLines: 2,
-                          textAlign: TextAlign.center,
-                        ),
-                      ),
+                    return NothingToShow(
+                      text: "no items added yet",
+                      mainController: mainController,
                     );
                   }
                   return Column(
