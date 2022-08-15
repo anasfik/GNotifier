@@ -6,27 +6,34 @@ import 'package:get/get.dart';
 import 'package:watch_it_later/controllers/helpers__controllers/dialogs__controller.dart';
 import 'package:watch_it_later/controllers/main__controller.dart';
 import 'package:watch_it_later/utils/AppColors.dart';
-import 'package:watch_it_later/view/general__widgets/action__button.dart';
+import 'package:watch_it_later/view/add_new_item/widgets/option.dart';
 import 'package:watch_it_later/view/general__widgets/button.dart';
+import 'package:watch_it_later/view/notification__full__page/widgets/dashed__lines__decoration.dart';
 
 import '../../controllers/notifications__controllers/date__Controller.dart';
 import '../../controllers/notifications__controllers/new__item__notification__controller.dart';
 import '../../model/newItemNotificationModel.dart';
 import '../general__widgets/edit__icon__button.dart';
 import '../general__widgets/favorite_icon__button.dart';
+import 'widgets/full__screen__notification__description.dart';
+import 'widgets/full__screen__notification__title.dart';
 
 class NotificationFullPage extends StatelessWidget {
   NotificationFullPage({Key? key}) : super(key: key);
 
+  // Dependency injection
   final MainController mainController = Get.put(MainController());
   final NewNotificationController newNotificationController =
       Get.put(NewNotificationController());
   DateController dateController = Get.put(DateController());
   final DialogsController dialogsController = Get.put(DialogsController());
+
+  ///
   // we got those with Get.arguments from previous page
   // it's weird but I see it best solution to pass arguments to a page
   NewItemNotifcationModel gettedNotification = Get.arguments[0];
   int reversedIndex = Get.arguments[1];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -60,15 +67,10 @@ class NotificationFullPage extends StatelessWidget {
                   child: GetBuilder<NewNotificationController>(
                     init: NewNotificationController(),
                     builder: (newNotificationController) {
-                      return AutoSizeText(
-                        mainController.allFirstWordLetterToUppercase(
-                            newNotificationController.newTitle ??
-                                gettedNotification.title),
-                        maxLines: 2,
-                        style: const TextStyle(
-                          fontSize: 35,
-                          fontWeight: FontWeight.bold,
-                        ),
+                      return FullScreenNotificationTitle(
+                        text: newNotificationController.newTitle ??
+                            gettedNotification.title,
+                        mainController: mainController,
                       );
                     },
                   ),
@@ -87,40 +89,10 @@ class NotificationFullPage extends StatelessWidget {
             SizedBox(
               height: 5,
             ),
-            Row(
-              children: [
-                Container(
-                  decoration: BoxDecoration(
-                    color: AppColors.darkBlack.withOpacity(.8),
-                    borderRadius: BorderRadius.circular(100),
-                  ),
-                  width: 60,
-                  height: 4,
-                ),
-                SizedBox(
-                  width: 10,
-                ),
-                Container(
-                  decoration: BoxDecoration(
-                    color: AppColors.darkBlack,
-                    borderRadius: BorderRadius.circular(100),
-                  ),
-                  width: 5,
-                  height: 5,
-                ),
-                SizedBox(
-                  width: 10,
-                ),
-                Container(
-                  decoration: BoxDecoration(
-                    color: AppColors.darkBlack,
-                    borderRadius: BorderRadius.circular(100),
-                  ),
-                  width: 5,
-                  height: 5,
-                ),
-              ],
-            ),
+            //
+            DashedLinesDecoration(),
+
+            //
             SizedBox(
               height: 50,
             ),
@@ -132,17 +104,10 @@ class NotificationFullPage extends StatelessWidget {
                   child: GetBuilder<NewNotificationController>(
                     // we don't have really to re init this controller every time
                     builder: (newNotificationController) {
-                      return AutoSizeText(
-                        mainController.allFirstWordLetterToUppercase(
-                          newNotificationController.newDescription ??
-                              gettedNotification.description,
-                        ),
-                        maxLines: 5,
-                        style: TextStyle(
-                          color: AppColors.darkBlack.withOpacity(.7),
-                          fontSize: 25,
-                          fontWeight: FontWeight.bold,
-                        ),
+                      return FullScreenNotificationDescription(
+                        mainController: mainController,
+                        text: newNotificationController.newDescription ??
+                            gettedNotification.description,
                       );
                     },
                   ),
@@ -169,118 +134,108 @@ class NotificationFullPage extends StatelessWidget {
                     Expanded(
                       child: GestureDetector(
                         onTap: () async {
-                          print(newNotificationController.newDate ??
-                              gettedNotification.dateToShow);
-                          //
                           newNotificationController.newDate =
                               dateController.setFullDate(
-                                  await dateController.getFullDateFromUser(
-                                      gettedDate:
-                                          gettedNotification.dateToShow));
-                          //
-                          print(newNotificationController.newDate ??
-                              gettedNotification.dateToShow);
+                            await dateController.getFullDateFromUser(
+                                gettedDate: gettedNotification.dateToShow),
+                          );
                         },
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            const Icon(
-                              Icons.calendar_month_outlined,
-                              size: 35,
-                            ),
-                            AutoSizeText(
-                              mainController
-                                  .allFirstWordLetterToUppercase("date"),
-                              style: TextStyle(
-                                fontSize: 18,
-                                color: AppColors.darkBlack,
-                              ),
-                              maxLines: 1,
-                            ),
-                          ],
-                        ),
+                        child: Option(
+                            mainController: mainController,
+                            text: "date",
+                            icon: Icons.calendar_month_outlined),
+                        // Column(
+                        //   mainAxisAlignment: MainAxisAlignment.center,
+                        //   crossAxisAlignment: CrossAxisAlignment.center,
+                        //   children: [
+                        //     const Icon(
+                        //       Icons.calendar_month_outlined,
+                        //       size: 35,
+                        //     ),
+                        //     AutoSizeText(
+                        //       mainController
+                        //           .allFirstWordLetterToUppercase("date"),
+                        //       style: TextStyle(
+                        //         fontSize: 18,
+                        //         color: AppColors.darkBlack,
+                        //       ),
+                        //       maxLines: 1,
+                        //     ),
+                        //   ],
+                        // ),
                       ),
                     ),
                     Expanded(
                       child: GestureDetector(
                         onTap: () {
-                          // print(
-                          //     "${newNotificationController.isRepeatedOptionEnabled}, ${newNotificationController.isAlarmOptionEnabled}");
-                          print(newNotificationController.newIsRepeated ??
-                              gettedNotification.isRepeated);
-                          //
                           newNotificationController.newIsRepeated =
                               newNotificationController
                                   .toggleRepeatedOptionBoolean();
-                          //
-                          print(newNotificationController.newIsRepeated ??
-                              gettedNotification.isRepeated);
                         },
                         child: Opacity(
                           opacity:
                               newNotificationController.isRepeatedOptionEnabled
                                   ? 1
                                   : .55,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              const Icon(
-                                Icons.repeat,
-                                size: 35,
-                              ),
-                              AutoSizeText(
-                                mainController
-                                    .allFirstWordLetterToUppercase("repeated"),
-                                style: TextStyle(
-                                  fontSize: 18,
-                                  color: AppColors.darkBlack,
-                                ),
-                                maxLines: 1,
-                              ),
-                            ],
-                          ),
+                          child: 
+                          Option(mainController: mainController, text: "repeated", icon: Icons.repeat),
+                          // Column(
+                          //   mainAxisAlignment: MainAxisAlignment.center,
+                          //   crossAxisAlignment: CrossAxisAlignment.center,
+                          //   children: [
+                          //     const Icon(
+                          //       Icons.repeat,
+                          //       size: 35,
+                          //     ),
+                          //     AutoSizeText(
+                          //       mainController
+                          //           .allFirstWordLetterToUppercase("repeated"),
+                          //       style: TextStyle(
+                          //         fontSize: 18,
+                          //         color: AppColors.darkBlack,
+                          //       ),
+                          //       maxLines: 1,
+                          //     ),
+                          //   ],
+                          // ),
                         ),
                       ),
                     ),
                     Expanded(
                       child: GestureDetector(
                         onTap: () {
-                          print(newNotificationController.newIsAlarmed ??
-                              gettedNotification.isAlarmed);
-                          //
+                     
                           newNotificationController.newIsAlarmed =
                               newNotificationController
                                   .toggleAlarmOptionBoolean();
-                          //
-                          print(newNotificationController.newIsAlarmed ??
-                              gettedNotification.isAlarmed);
+                       
                         },
                         child: Opacity(
                           opacity:
                               newNotificationController.isAlarmOptionEnabled
                                   ? 1
                                   : .55,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              const Icon(
-                                Icons.alarm,
-                                size: 35,
-                              ),
-                              AutoSizeText(
-                                mainController
-                                    .allFirstWordLetterToUppercase("alarm"),
-                                style: TextStyle(
-                                  fontSize: 18,
-                                  color: AppColors.darkBlack,
-                                ),
-                                maxLines: 1,
-                              ),
-                            ],
-                          ),
+                          child: 
+                          Option(mainController: mainController, text: "alarm", icon: Icons.alarm),
+                          // Column(
+                          //   mainAxisAlignment: MainAxisAlignment.center,
+                          //   crossAxisAlignment: CrossAxisAlignment.center,
+                          //   children: [
+                          //     const Icon(
+                          //       Icons.alarm,
+                          //       size: 35,
+                          //     ),
+                          //     AutoSizeText(
+                          //       mainController
+                          //           .allFirstWordLetterToUppercase("alarm"),
+                          //       style: TextStyle(
+                          //         fontSize: 18,
+                          //         color: AppColors.darkBlack,
+                          //       ),
+                          //       maxLines: 1,
+                          //     ),
+                          //   ],
+                          // ),
                         ),
                       ),
                     ),

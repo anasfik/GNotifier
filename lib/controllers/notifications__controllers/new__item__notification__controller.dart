@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
+import 'package:watch_it_later/controllers/notifications__controllers/new__item__notification__error__controller.dart';
 import 'package:watch_it_later/view/notification__full__page/widgets/bottom__sheet_widget.dart';
 import '../../model/newItemNotificationModel.dart';
 import '../../services/local__notifications__service.dart';
@@ -15,10 +16,11 @@ import 'package:timezone/timezone.dart' as tz;
 
 class NewNotificationController extends GetxController {
   // Dependency injection
-  final DialogsController dialogsController = Get.put(DialogsController());
   final FavoritesController favoritesController =
       Get.put(FavoritesController());
   final MainController mainController = Get.put(MainController());
+  final NewNotificationExceptionsHandler exceptionHandler =
+      Get.put(NewNotificationExceptionsHandler());
 
   ///
   // NotificationService instance
@@ -63,41 +65,18 @@ class NewNotificationController extends GetxController {
     bool isRepeated,
     bool isAlarm,
   ) {
-    // init the hive box
+    // Init the hive box
     Box<NewItemNotifcationModel> newNotificationsBox =
         Hive.box<NewItemNotifcationModel>("newNotificationsBox");
-    // and add it to box
+    // And add it to box
     int newId = Random().nextInt(1000000);
 
-    //
-    if (title.isEmpty) {
-      dialogsController.showInfo(
-          "Title is empty", "please, set a title for your notification");
-      return;
-    }
-
-//
-    if (description.isEmpty) {
-      dialogsController.showInfo("description is empty",
-          "please, set a description for your notification");
-      return;
-    }
-
-    //
-    if (date?.year == null && date?.month == null && date?.day == null) {
-      dialogsController.showInfo("no date selected",
-          "please, choose the schedule date for your notification");
-      return;
-    }
-
-    //
-    if (date?.hour == null && date?.minute == null) {
-      dialogsController.showInfo("no hours / minutes selected",
-          "please, set a specific time for scheduling your notification");
-      return;
-    }
-
-    //
+    // Exceptions handler
+    exceptionHandler.checkDateTimeValidity(date);
+    exceptionHandler.checkTitleValidity(title);
+    exceptionHandler.checkDescriptionValidity(description);
+    exceptionHandler.checkTimeDateValidity(date);
+    exceptionHandler.checkFullTimeValidity(date);
 
     newNotificationsBox.add(
       NewItemNotifcationModel(

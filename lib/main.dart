@@ -25,7 +25,7 @@ void main() async {
       await Hive.openBox<NewItemNotifcationModel>("newNotificationsBox");
   Box localBox = await Hive.openBox("locals");
 
-  // this should be uncommented while debugging, so everytime the app opened it will clear the box, in production delete it so the app will only show the notifications that are saved in the box
+  // this should be uncommented while debugging, so every time the app opened it will clear the box, in production delete it so the app will only show the notifications that are saved in the box
   await newNotifications.clear();
 
   // localBox.clear();
