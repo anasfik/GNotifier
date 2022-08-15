@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:watch_it_later/controllers/mainController.dart';
+import 'package:watch_it_later/controllers/main__controller.dart';
 
 import 'options__title.dart';
 

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../utils/AppColors.dart';
 import '../../view/general__widgets/dialog__text__button.dart';
-import '../mainController.dart';
+import '../main__controller.dart';
 
 class DialogsController extends GetxController {
   // Dependencies injection

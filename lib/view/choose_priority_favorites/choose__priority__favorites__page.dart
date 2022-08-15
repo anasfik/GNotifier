@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:watch_it_later/view/general__widgets/button.dart';
 
-import '../../controllers/mainController.dart';
+import '../../controllers/main__controller.dart';
 import '../../utils/AppColors.dart';
 import '../../utils/allFavoritesList.dart';
 import 'widgets/favorite.dart';

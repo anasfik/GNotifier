@@ -4,13 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
-
 import 'package:watch_it_later/view/notification__full__page/widgets/bottom__sheet_widget.dart';
 import '../../model/newItemNotificationModel.dart';
 import '../../services/local__notifications__service.dart';
 import '../favorites__controller.dart/favorites__controller.dart';
-import '../helpersControllers/dialogsController.dart';
-import '../mainController.dart';
+import '../helpers__controllers/dialogs__controller.dart';
+import '../main__controller.dart';
 
 import 'package:timezone/timezone.dart' as tz;
 
@@ -69,6 +68,9 @@ class NewNotificationController extends GetxController {
         Hive.box<NewItemNotifcationModel>("newNotificationsBox");
     // and add it to box
     int newId = Random().nextInt(1000000);
+  
+  
+
     newNotificationsBox.add(
       NewItemNotifcationModel(
         title,
@@ -82,7 +84,6 @@ class NewNotificationController extends GetxController {
         newId,
       ),
     );
-
     ///
     // Using openContainer from the animations package trait the AddNewNotificationPage as just a widget so open/close it execute the dispose to text editing controllers so we should re-init them after any add operations
     titleController.text = "";

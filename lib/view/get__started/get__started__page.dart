@@ -1,7 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:watch_it_later/controllers/mainController.dart';
+import 'package:watch_it_later/controllers/main__controller.dart';
 import 'package:watch_it_later/utils/AppColors.dart';
 import 'package:watch_it_later/view/get__started/Constants/dimensions.dart';
 import 'package:watch_it_later/view/get__started/widgets/one_face_rounded_box.dart';

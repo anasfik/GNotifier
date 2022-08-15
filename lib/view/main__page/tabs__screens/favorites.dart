@@ -6,7 +6,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:watch_it_later/controllers/favorites__controller.dart/favorites__controller.dart';
 import 'package:watch_it_later/model/newItemNotificationModel.dart';
 import 'package:watch_it_later/view/general__widgets/notification__card.dart';
-import '../../../controllers/mainController.dart';
+import '../../../controllers/main__controller.dart';
 
 class FavoritesScreen extends StatelessWidget {
   FavoritesScreen({Key? key}) : super(key: key);

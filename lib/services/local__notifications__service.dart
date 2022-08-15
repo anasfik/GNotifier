@@ -8,7 +8,7 @@ import 'package:hive/hive.dart';
 import 'package:timezone/data/latest.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
 import 'package:flutter_native_timezone/flutter_native_timezone.dart';
-import 'package:watch_it_later/controllers/notificationsControllers/newItemNotificationController.dart';
+import 'package:watch_it_later/controllers/notifications__controllers/new__item__notification__controller.dart';
 
 import 'package:watch_it_later/view/main__page/main__page.dart';
 

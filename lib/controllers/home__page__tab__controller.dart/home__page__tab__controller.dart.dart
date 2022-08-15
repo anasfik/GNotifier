@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:watch_it_later/controllers/mainController.dart';
+import 'package:watch_it_later/controllers/main__controller.dart';
 import '../../utils/strict__mode__for production.dart';
 import '../../view/main__page/tabs__screens/favorites.dart';
 import '../../view/main__page/tabs__screens/home/home.dart';

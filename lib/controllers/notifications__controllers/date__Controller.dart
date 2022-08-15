@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../helpersControllers/dialogsController.dart';
+import '../helpers__controllers/dialogs__controller.dart';
 
 class DateController extends GetxController {
   //dependency injection

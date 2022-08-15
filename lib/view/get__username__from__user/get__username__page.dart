@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:watch_it_later/controllers/get__username__controller/get__username__controller.dart';
 import 'package:watch_it_later/view/general__widgets/button.dart';
 
-import '../../controllers/mainController.dart';
+import '../../controllers/main__controller.dart';
 import '../general__widgets/text__field.dart';
 
 class GetUsernamePage extends StatelessWidget {

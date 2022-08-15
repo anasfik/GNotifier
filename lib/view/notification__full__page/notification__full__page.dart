@@ -3,14 +3,14 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:watch_it_later/controllers/helpersControllers/dialogsController.dart';
-import 'package:watch_it_later/controllers/mainController.dart';
+import 'package:watch_it_later/controllers/helpers__controllers/dialogs__controller.dart';
+import 'package:watch_it_later/controllers/main__controller.dart';
 import 'package:watch_it_later/utils/AppColors.dart';
 import 'package:watch_it_later/view/general__widgets/action__button.dart';
 import 'package:watch_it_later/view/general__widgets/button.dart';
 
-import '../../controllers/notificationsControllers/date__Controller.dart';
-import '../../controllers/notificationsControllers/newItemNotificationController.dart';
+import '../../controllers/notifications__controllers/date__Controller.dart';
+import '../../controllers/notifications__controllers/new__item__notification__controller.dart';
 import '../../model/newItemNotificationModel.dart';
 import '../general__widgets/edit__icon__button.dart';
 import '../general__widgets/favorite_icon__button.dart';

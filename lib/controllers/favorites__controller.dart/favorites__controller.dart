@@ -3,7 +3,7 @@ import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
 import 'package:watch_it_later/model/newItemNotificationModel.dart';
-import '../helpersControllers/dialogsController.dart';
+import '../helpers__controllers/dialogs__controller.dart';
 
 class FavoritesController extends GetxController
     with GetTickerProviderStateMixin {
