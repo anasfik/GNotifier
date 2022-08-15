@@ -204,17 +204,22 @@ class NotificationService {
     //   debugPrint('notification payload: $payload');
     // }
     // declaring the boc
-    Box newNotificationsBox = Hive.box<NewItemNotifcationModel>('newNotificationsBox');
+    Box newNotificationsBox =
+        Hive.box<NewItemNotifcationModel>('newNotificationsBox');
 
     // actually it will cancel automatically because autoCancel is set to true in android details for notification
     // await flutterLocalNotificationsPlugin.cancel(int.parse("$payload"));
 
-// remove it from the box (remove it's card)
-    var a = newNotificationsBox.values;
-    print(a);
-    var b = a.firstWhere((element) => element.id == int.parse("$payload"));
-    print(b);
-    newNotificationsBox.deleteAt(a.toList().indexOf(b));
+    // Setting value
+    Iterable newNotificationsBoxValues = newNotificationsBox.values;
+
+    // Get matchingElement
+    NewItemNotifcationModel matchingItem = newNotificationsBoxValues
+        .firstWhere((element) => element.id == int.parse("$payload"));
+
+    // Remove it from the box (remove it's card)
+    newNotificationsBox
+        .deleteAt(newNotificationsBoxValues.toList().indexOf(matchingItem));
 
     await Get.defaultDialog(
       title:

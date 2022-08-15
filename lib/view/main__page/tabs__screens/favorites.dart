@@ -6,18 +6,16 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:watch_it_later/controllers/favorites__controller.dart/favorites__controller.dart';
 import 'package:watch_it_later/model/newItemNotificationModel.dart';
 import 'package:watch_it_later/view/general__widgets/notification__card.dart';
-
 import '../../../controllers/mainController.dart';
-import '../../../controllers/test.dart';
 
 class FavoritesScreen extends StatelessWidget {
   FavoritesScreen({Key? key}) : super(key: key);
 
+  // Dependencies injection
   final MainController mainController = Get.put(MainController());
   final FavoritesController favoritesController =
       Get.put(FavoritesController());
 
-  final test = Get.lazyPut(() => Test());
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -27,9 +25,9 @@ class FavoritesScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const SizedBox(height: 20),
+            const SizedBox(height: 40),
 
-            const SizedBox(height: 20),
+            // Page title
             AutoSizeText(
               mainController
                   .allFirstWordLetterToUppercase("Saved notifications"),
@@ -39,8 +37,11 @@ class FavoritesScreen extends StatelessWidget {
                 fontWeight: FontWeight.bold,
               ),
             ),
+
             //
             const SizedBox(height: 20),
+
+            // Favorite notifications list
             ValueListenableBuilder(
                 valueListenable:
                     Hive.box<NewItemNotifcationModel>("newNotificationsBox")
@@ -52,9 +53,14 @@ class FavoritesScreen extends StatelessWidget {
                       ...List.generate(
                         box.values.length,
                         (index) {
+                          // reversedIndex
                           int reversedIndex = box.values.length - 1 - index;
+
+                          // currentNotification
                           NewItemNotifcationModel? currentNotification =
                               box.getAt(reversedIndex);
+
+                          // isFavorite condition
                           if (currentNotification!.isFavorite!) {
                             return NotificationCard(
                               currentNotification: currentNotification,
@@ -65,6 +71,8 @@ class FavoritesScreen extends StatelessWidget {
                               isFavoriteButtonHidden: true,
                             );
                           }
+
+                          // work like nothing
                           return Container();
                         },
                       )

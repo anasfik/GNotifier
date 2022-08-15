@@ -31,31 +31,33 @@ class HomeScreen extends StatelessWidget {
             const SizedBox(height: 20),
             Container(
               margin: const EdgeInsets.only(right: 20),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  GestureDetector(
-                    onTap: () {
-                     },
-                    child: const CircleAvatar(
-                      radius: 25,
-                      backgroundImage: AssetImage("assets/images/avatar.png"),
+               
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    GestureDetector(
+                      onTap: () {
+                       },
+                      child: const CircleAvatar(
+                        radius: 25,
+                        backgroundImage: AssetImage("assets/images/avatar.png"),
+                      ),
                     ),
-                  ),
-                  OpenContainer(
-                    closedElevation: 0,
-                    closedBuilder: (context, action) {
-                      return const CustomActionIconButton(
-                        icon: Icons.add,
-                      );
-                    },
-                    openBuilder: (context, action) {
-                      return AddNewItemScreen();
-                    },
-                  ),
-                ],
-              ),
+                    OpenContainer(
+                      closedElevation: 0,
+                      closedBuilder: (context, action) {
+                        return const CustomActionIconButton(
+                          icon: Icons.add,
+                        );
+                      },
+                      openBuilder: (context, action) {
+                        return AddNewItemScreen();
+                      },
+                    ),
+                  ],
+                ),
+              
             ),
             const SizedBox(height: 20),
             AutoSizeText.rich(

@@ -9,15 +9,19 @@ import '../general__widgets/text__field.dart';
 
 class GetUsernamePage extends StatelessWidget {
   GetUsernamePage({Key? key}) : super(key: key);
+  // Dependency injection
   final MainController mainController = Get.put(MainController());
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
+        // Constrain all page to the screen size
         child: ConstrainedBox(
-          constraints:
-              BoxConstraints(maxHeight: Get.height, maxWidth: Get.width),
+          constraints: BoxConstraints(
+            maxHeight: Get.height,
+            maxWidth: Get.width,
+          ),
           child: Container(
             margin: const EdgeInsets.symmetric(vertical: 30, horizontal: 20),
             child: Column(
@@ -66,23 +70,22 @@ class GetUsernamePage extends StatelessWidget {
                   flex: 2,
                 ),
                 GetBuilder<GetUsernameController>(
-                  init: GetUsernameController(),
-                  initState: (_) {},
                   builder: (getUsernameController) {
                     return CustomButton(
                       onPressed: getUsernameController
-                                  .usernameTextFieldController.text
-                                  .trim()
-                                  .length >
-                              0
+                              .usernameTextFieldController.text
+                              .trim()
+                              .isNotEmpty
                           ? () {
                               getUsernameController.saveUsernameInBox(
-                                  getUsernameController
-                                      .usernameTextFieldController.text
-                                      .trim());
+                                getUsernameController
+                                    .usernameTextFieldController.text
+                                    .trim(),
+                              );
 
-                                      Get.offAllNamed('/mainPage');
+                              Get.offAllNamed('/mainPage');
                             }
+                          
                           : null,
                       shouldReverseColors: true,
                       text:

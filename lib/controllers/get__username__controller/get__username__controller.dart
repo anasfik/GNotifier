@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:hive/hive.dart';
 
 class GetUsernameController extends GetxController {
+
   // Text editing controller
   final TextEditingController usernameTextFieldController =
       TextEditingController();
@@ -13,7 +14,7 @@ class GetUsernameController extends GetxController {
   int usernameWrittenLength = 0;
   double usernameCountBoxScale = 0;
 
-  // method handler for username text field
+  // Method handler for username text field
   countUsernameLength(String username) async {
     if (username.isEmpty) {
       usernameWrittenLength = 0;
@@ -24,7 +25,7 @@ class GetUsernameController extends GetxController {
     }
     update();
     if (username.length == usernameMaxLength) {
-      usernameCountBoxScale = 1.5;
+      usernameCountBoxScale = 1.25;
       await Future.delayed(const Duration(milliseconds: 30));
       usernameCountBoxScale = 1;
     }
@@ -33,14 +34,19 @@ class GetUsernameController extends GetxController {
   }
 
   saveUsernameInBox(String textFieldValue) async {
-    // opening the other box
+    // Opening the other box
+    
+    
     Box localBox = await Hive.openBox('locals');
-    // saving the username in the box
+    
+    
+    // Saving the username in the box
     localBox.put("username", textFieldValue);
-    // setting the new username value (for the first time, but it's optional)
+    
+    
+    // Setting the new username value (for the first time, but it's optional)
     username = textFieldValue;
-    // we will need the box for a while so we will not close it yet
-    // localBox.close();
+
 
     // when this is done we need to set that this is an old user so he will be redirected to mainPage
     localBox.put("isNewUsingApp", false);
