@@ -2,8 +2,8 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../../controllers/helpers__controllers/theme__controller.dart';
 import '../../../../controllers/main__controller.dart';
-import '../../../../utils/AppColors.dart';
 import 'widgets/setting__card.dart';
 
 class SettingsScreen extends StatelessWidget {
@@ -44,12 +44,19 @@ class SettingsScreen extends StatelessWidget {
                 mainAxisSpacing: 15,
               ),
               children: [
-                SettingCard(
-                  icon: Icons.brightness_2,
-                  mainController: mainController,
-                  description: "Switch app theme to dark / light mode",
-                  title: "dark mode",
-                  onTap: () {},
+                GetBuilder<ThemeController>(
+                  init: ThemeController(),
+                  builder: (themeController) {
+                    return SettingCard(
+                      icon: Icons.brightness_2,
+                      mainController: mainController,
+                      description: "Switch app theme to dark / light mode",
+                      title: "dark mode",
+                      onTap: () {
+                        themeController.toggleDarkMode();
+                      },
+                    );
+                  },
                 ),
                 SettingCard(
                   icon: Icons.color_lens,

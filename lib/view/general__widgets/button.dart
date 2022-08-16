@@ -42,7 +42,7 @@ class CustomButton extends StatelessWidget {
           text,
           style: TextStyle(
             color: shouldReverseColors
-                ? AppColors.white
+                ? Theme.of(context).backgroundColor
                 : isDelete
                     ? Colors.red
                     : Theme.of(context).primaryColor,

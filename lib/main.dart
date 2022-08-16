@@ -54,9 +54,9 @@ class WatchItLaterApp extends StatelessWidget {
       ],
       debugShowCheckedModeBanner: false,
       title: AppTexts.mainTitle,
-      theme: AppThemes(context: context).lightMode,
-      darkTheme: AppThemes(context: context).darkMode,
-      themeMode: ThemeMode.system,
+      theme: AppThemes(context: context).lightTheme,
+      darkTheme: AppThemes(context: context).darkTheme,
+      themeMode: ThemeMode.dark,
       home: mainController.getUserStatus() ? GetStartedPage() : MainPage(),
     );
   }

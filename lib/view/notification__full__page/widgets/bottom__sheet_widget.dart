@@ -34,7 +34,7 @@ class BottomSheetWidget extends StatelessWidget {
         horizontal: 20,
         vertical: 30,
       ),
-      color: AppColors.lightGrey,
+      color: Theme.of(context).backgroundColor,
       child: GetBuilder<NewNotificationController>(
         init: NewNotificationController(),
         builder: (newNotificationController) => Column(

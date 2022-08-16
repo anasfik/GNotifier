@@ -12,6 +12,7 @@ class MainPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        backgroundColor: Theme.of(context).backgroundColor,
         extendBody: true,
         bottomNavigationBar: Container(
           height: 60,
@@ -28,15 +29,18 @@ class MainPage extends StatelessWidget {
                 splashColor: Colors.transparent,
               ),
               child: TabBar(
-                indicator: const PointTabIndicator(
+                automaticIndicatorColorAdjustment: true,
+                indicator: PointTabIndicator(
                   position: PointTabIndicatorPosition.bottom,
-                  color: Colors.white,
-                  insets: EdgeInsets.only(bottom: 10),
+                  color: Theme.of(context).indicatorColor,
+                  insets: const EdgeInsets.only(bottom: 10),
                 ),
                 labelStyle: const TextStyle(fontSize: 12),
                 controller: bottomBarController.tabController,
                 tabs: bottomBarController.tabs,
-                unselectedLabelColor: AppColors.white.withOpacity(.6),
+                unselectedLabelColor:
+                    Theme.of(context).indicatorColor.withOpacity(.6),
+                labelColor: Theme.of(context).indicatorColor,
               ),
             ),
           ),

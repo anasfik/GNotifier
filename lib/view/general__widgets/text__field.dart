@@ -48,13 +48,19 @@ class CustomTextField extends StatelessWidget {
                 ),
                 child: Text(
                   "$titleWrittenLength / $maxLength",
-                  style: TextStyle(color: AppColors.lightGrey, fontSize: 10),
+                  style: TextStyle(
+                      color: Theme.of(context).backgroundColor,
+                      fontSize: 10,
+                      fontWeight: FontWeight.bold),
                 ),
               ),
             ),
           ),
         ),
         TextField(
+          style: TextStyle(
+            color: Theme.of(context).primaryColor,
+          ),
           maxLength: maxLength,
           onChanged: onChanged,
           controller: controller,

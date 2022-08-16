@@ -15,7 +15,9 @@ class BottomBarController extends GetxController
     tabs = tabsIcons
         .map(
           (icon) => Tab(
-            icon: Icon(icon,),
+            icon: Icon(
+              icon,
+            ),
           ),
         )
         .toList();

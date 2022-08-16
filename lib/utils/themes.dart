@@ -4,60 +4,62 @@ import 'package:watch_it_later/utils/AppColors.dart';
 
 class AppThemes {
   AppThemes({required this.context}) {
-    lightMode = ThemeData.light().copyWith(
-      colorScheme: const ColorScheme.light(
-        primary: Colors.deepPurple,
+    lightTheme = ThemeData.light().copyWith(
+      colorScheme: ColorScheme.light(
+        primary: AppColors.darkBlack,
       ),
-      primaryColor: Colors.deepPurple,
+      primaryColor: AppColors.darkBlack,
       backgroundColor: AppColors.white,
-      hintColor: Colors.deepPurple,
+      hintColor: AppColors.darkBlack,
       textTheme: GoogleFonts.nunitoTextTheme(
         Theme.of(context).textTheme.copyWith(
-              bodyText2: const TextStyle(color: Colors.deepPurple),
+              bodyText2: TextStyle(color: AppColors.darkBlack),
             ),
       ),
-      primaryIconTheme: const IconThemeData(
-        color: Colors.deepPurple,
+      primaryIconTheme: IconThemeData(
+        color: AppColors.darkBlack,
       ),
-      iconTheme: const IconThemeData(
-        color: Colors.deepPurple,
+      iconTheme: IconThemeData(
+        color: AppColors.darkBlack,
       ),
       textSelectionTheme: TextSelectionThemeData(
-        cursorColor: Colors.deepPurple,
-        selectionColor: Colors.deepPurple.withOpacity(.5),
-        selectionHandleColor: Colors.deepPurple,
+        cursorColor: AppColors.darkBlack,
+        selectionColor: AppColors.darkBlack.withOpacity(.5),
+        selectionHandleColor: AppColors.darkBlack,
       ),
       visualDensity: VisualDensity.adaptivePlatformDensity,
+      indicatorColor: AppColors.white,
     );
-    darkMode = ThemeData.light().copyWith(
-      colorScheme: const ColorScheme.light(
-        primary: Colors.deepPurple,
+    darkTheme = ThemeData.light().copyWith(
+      colorScheme: ColorScheme.light(
+        primary: AppColors.darkBlack,
       ),
-      primaryColor: Colors.deepPurple,
-      backgroundColor: AppColors.white,
-      hintColor: Colors.deepPurple,
+      primaryColor: AppColors.white,
+      backgroundColor: AppColors.darkBlack,
+      hintColor: AppColors.white,
       textTheme: GoogleFonts.nunitoTextTheme(
         Theme.of(context).textTheme.copyWith(
-              bodyText2: const TextStyle(color: Colors.deepPurple),
+              bodyText2: TextStyle(color: AppColors.white),
             ),
       ),
-      primaryIconTheme: const IconThemeData(
-        color: Colors.deepPurple,
+      primaryIconTheme: IconThemeData(
+        color: AppColors.white,
       ),
-      iconTheme: const IconThemeData(
-        color: Colors.deepPurple,
+      iconTheme: IconThemeData(
+        color: AppColors.white,
       ),
       textSelectionTheme: TextSelectionThemeData(
-        cursorColor: Colors.deepPurple,
-        selectionColor: Colors.deepPurple.withOpacity(.5),
-        selectionHandleColor: Colors.deepPurple,
+        cursorColor: AppColors.white,
+        selectionColor: AppColors.white.withOpacity(.5),
+        selectionHandleColor: AppColors.white,
       ),
       visualDensity: VisualDensity.adaptivePlatformDensity,
+      indicatorColor: AppColors.darkBlack,
     );
   }
 
   late BuildContext context;
 
-  late ThemeData lightMode;
-  late ThemeData darkMode;
+  late ThemeData lightTheme;
+  late ThemeData darkTheme;
 }

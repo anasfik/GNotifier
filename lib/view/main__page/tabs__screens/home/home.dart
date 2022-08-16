@@ -41,13 +41,7 @@ class HomeScreen extends StatelessWidget {
                 children: [
                   // Avatar
                   GestureDetector(
-                    onTap: () {
-                      Get.changeTheme(
-                        Get.isDarkMode
-                            ? AppThemes(context: context).lightMode
-                            : AppThemes(context: context).darkMode,
-                      );
-                    },
+                    onTap: () {},
                     child: const CircleAvatar(
                       radius: 25,
                       backgroundImage: AssetImage("assets/images/avatar.png"),
@@ -72,7 +66,7 @@ class HomeScreen extends StatelessWidget {
             ),
 
             const Divider(),
-            const SizedBox(height: 40),
+            const SizedBox(height: 20),
 
             //
             ScreenTitle(
@@ -80,6 +74,7 @@ class HomeScreen extends StatelessWidget {
               title: "latest added notification",
             ),
 
+            const SizedBox(height: 20),
             // Items list
             ValueListenableBuilder(
                 valueListenable:

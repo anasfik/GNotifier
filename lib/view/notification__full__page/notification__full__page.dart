@@ -38,11 +38,11 @@ class NotificationFullPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.lightGrey,
+      backgroundColor: Theme.of(context).backgroundColor,
       appBar: AppBar(
         toolbarHeight: 80,
         iconTheme: IconThemeData(color: Theme.of(context).primaryColor),
-        backgroundColor: AppColors.lightGrey,
+        backgroundColor: Theme.of(context).backgroundColor,
         elevation: 0,
         actions: [
           FavoriteIconButton(

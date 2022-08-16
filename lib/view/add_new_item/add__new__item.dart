@@ -14,7 +14,6 @@ import 'widgets/new__title.dart';
 class AddNewItemScreen extends StatelessWidget {
   AddNewItemScreen({Key? key}) : super(key: key);
 
-  
   // Dependencies injection
   final MainController mainController = Get.put(MainController());
   final DateController dateController = Get.put(DateController());
@@ -23,7 +22,7 @@ class AddNewItemScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.lightGrey,
+      backgroundColor: Theme.of(context).backgroundColor,
       // The column should be scrollable so :
       body: SingleChildScrollView(
         // But in this case it will be scrollable to infinity, so we need to set constraints so:
@@ -174,8 +173,7 @@ class AddNewItemScreen extends StatelessWidget {
                       ],
                     );
                   },
-                
-              ),
+                ),
                 const Spacer(),
                 SizedBox(
                   width: double.infinity,
@@ -185,7 +183,7 @@ class AddNewItemScreen extends StatelessWidget {
                         newNotificationController.titleController.text.trim(),
                         newNotificationController.descriptionController.text
                             .trim(),
-                        dateController.date ,
+                        dateController.date,
                         newNotificationController.isRepeatedOptionEnabled,
                         newNotificationController.isAlarmOptionEnabled,
                       );
