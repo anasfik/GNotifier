@@ -20,7 +20,7 @@ class Description extends StatelessWidget {
       ),
       style: TextStyle(
         fontSize: 20,
-        color: AppColors.darkBlack.withOpacity(.55),
+        color: Theme.of(context).primaryColor.withOpacity(.55),
       ),
       maxLines: 3,
     );

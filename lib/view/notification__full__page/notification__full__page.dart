@@ -15,6 +15,7 @@ import '../../controllers/notifications__controllers/new__item__notification__co
 import '../../model/newItemNotificationModel.dart';
 import '../general__widgets/edit__icon__button.dart';
 import '../general__widgets/favorite_icon__button.dart';
+import 'delete__button.dart';
 import 'widgets/full__screen__notification__description.dart';
 import 'widgets/full__screen__notification__title.dart';
 
@@ -40,7 +41,7 @@ class NotificationFullPage extends StatelessWidget {
       backgroundColor: AppColors.lightGrey,
       appBar: AppBar(
         toolbarHeight: 80,
-        iconTheme: IconThemeData(color: AppColors.darkBlack),
+        iconTheme: IconThemeData(color: Theme.of(context).primaryColor),
         backgroundColor: AppColors.lightGrey,
         elevation: 0,
         actions: [
@@ -144,25 +145,6 @@ class NotificationFullPage extends StatelessWidget {
                             mainController: mainController,
                             text: "date",
                             icon: Icons.calendar_month_outlined),
-                        // Column(
-                        //   mainAxisAlignment: MainAxisAlignment.center,
-                        //   crossAxisAlignment: CrossAxisAlignment.center,
-                        //   children: [
-                        //     const Icon(
-                        //       Icons.calendar_month_outlined,
-                        //       size: 35,
-                        //     ),
-                        //     AutoSizeText(
-                        //       mainController
-                        //           .allFirstWordLetterToUppercase("date"),
-                        //       style: TextStyle(
-                        //         fontSize: 18,
-                        //         color: AppColors.darkBlack,
-                        //       ),
-                        //       maxLines: 1,
-                        //     ),
-                        //   ],
-                        // ),
                       ),
                     ),
                     Expanded(
@@ -177,65 +159,29 @@ class NotificationFullPage extends StatelessWidget {
                               newNotificationController.isRepeatedOptionEnabled
                                   ? 1
                                   : .55,
-                          child: 
-                          Option(mainController: mainController, text: "repeated", icon: Icons.repeat),
-                          // Column(
-                          //   mainAxisAlignment: MainAxisAlignment.center,
-                          //   crossAxisAlignment: CrossAxisAlignment.center,
-                          //   children: [
-                          //     const Icon(
-                          //       Icons.repeat,
-                          //       size: 35,
-                          //     ),
-                          //     AutoSizeText(
-                          //       mainController
-                          //           .allFirstWordLetterToUppercase("repeated"),
-                          //       style: TextStyle(
-                          //         fontSize: 18,
-                          //         color: AppColors.darkBlack,
-                          //       ),
-                          //       maxLines: 1,
-                          //     ),
-                          //   ],
-                          // ),
+                          child: Option(
+                              mainController: mainController,
+                              text: "repeated",
+                              icon: Icons.repeat),
                         ),
                       ),
                     ),
                     Expanded(
                       child: GestureDetector(
                         onTap: () {
-                     
                           newNotificationController.newIsAlarmed =
                               newNotificationController
                                   .toggleAlarmOptionBoolean();
-                       
                         },
                         child: Opacity(
                           opacity:
                               newNotificationController.isAlarmOptionEnabled
                                   ? 1
                                   : .55,
-                          child: 
-                          Option(mainController: mainController, text: "alarm", icon: Icons.alarm),
-                          // Column(
-                          //   mainAxisAlignment: MainAxisAlignment.center,
-                          //   crossAxisAlignment: CrossAxisAlignment.center,
-                          //   children: [
-                          //     const Icon(
-                          //       Icons.alarm,
-                          //       size: 35,
-                          //     ),
-                          //     AutoSizeText(
-                          //       mainController
-                          //           .allFirstWordLetterToUppercase("alarm"),
-                          //       style: TextStyle(
-                          //         fontSize: 18,
-                          //         color: AppColors.darkBlack,
-                          //       ),
-                          //       maxLines: 1,
-                          //     ),
-                          //   ],
-                          // ),
+                          child: Option(
+                              mainController: mainController,
+                              text: "alarm",
+                              icon: Icons.alarm),
                         ),
                       ),
                     ),
@@ -246,7 +192,7 @@ class NotificationFullPage extends StatelessWidget {
             SizedBox(
               height: 40,
             ),
-            Container(
+            SizedBox(
               height: 55,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -259,8 +205,7 @@ class NotificationFullPage extends StatelessWidget {
                       shouldReverseColors: true,
                       onPressed: () {
                         dialogsController.showConfirmWithActions(
-                          mainController.allFirstWordLetterToUppercase(
-                              "are you sure you want to update it ?"),
+                          "are you sure you want to update it ?",
                           mainController.allFirstWordLetterToUppercase("yes"),
                           () {
                             newNotificationController.updateNotification(
@@ -277,8 +222,6 @@ class NotificationFullPage extends StatelessWidget {
                                   gettedNotification.isAlarmed,
                               gettedNotification.isFavorite as bool,
                             );
-
-                            Get.back();
                           },
                         );
                       },
@@ -291,25 +234,17 @@ class NotificationFullPage extends StatelessWidget {
                       flex: 1,
                       child: SizedBox(),
                     ),
-                    Expanded(
-                      flex: 2,
-                      child: Container(
-                        height: 50,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          color: Colors.red.withOpacity(.15),
-                        ),
-                        child: IconButton(
-                          onPressed: () {
-                            newNotificationController
-                                .deleteNotification(reversedIndex);
-                          },
-                          icon: Icon(
-                            Icons.delete,
-                            color: Colors.red,
-                          ),
-                        ),
-                      ),
+                    DeleteButton(
+                      newNotificationController: newNotificationController,
+                      reversedIndex: reversedIndex,
+                      onPressed: () {
+                        dialogsController.showConfirmWithActions(
+                            "are you sure to delete this ?", "delete", () {
+                          newNotificationController
+                              .deleteNotification(reversedIndex);
+                          Get.back();
+                        }, forDelete: true);
+                      },
                     ),
                   ]
                 ],

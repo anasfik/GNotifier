@@ -1,4 +1,4 @@
-// ignore_for_file: unused_field, unused_local_variable
+// ignore_for_file: unused_field, unused_local_variable, depend_on_referenced_packages
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -16,7 +16,10 @@ import '../model/newItemNotificationModel.dart';
 
 /// PLEASE DONT'T RELY ON THIS IF YOUR NEW TO USING THOSE PACKAGE, CHECK THE DOCS FIRST, THEN TRY WORKINGWITH THIS .
 class NotificationService {
-  // we ne
+
+  // Variables to rely on
+// var vivibility
+  
   // Getting instance of the notification plugin
   final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
       FlutterLocalNotificationsPlugin();
@@ -37,22 +40,24 @@ class NotificationService {
   static const AndroidNotificationDetails _androidNotificationDetails =
       AndroidNotificationDetails(
     // Channel id
-    'MYID',
+    'Notification',
     // Channel name
     'NOTIFICATION',
     // Channel description
-    channelDescription: 'Description',
+    channelDescription: 'responsible for showing notifications',
     // Notification sound
     playSound: true,
     // Priority level
     priority: Priority.max,
     // Importance level
     importance: Importance.max,
+    //
     ongoing: true,
     autoCancel: true,
-//
 
     visibility: NotificationVisibility.public,
+
+    showWhen: true,
   );
 
   // ios notification details

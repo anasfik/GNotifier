@@ -7,6 +7,8 @@ import '../helpers__controllers/dialogs__controller.dart';
 
 class FavoritesController extends GetxController
     with GetTickerProviderStateMixin {
+
+
   // Dependencies injection
   DialogsController dialogsController = Get.put(DialogsController());
 

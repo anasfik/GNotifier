@@ -21,7 +21,7 @@ class MainPage extends StatelessWidget {
             borderRadius: BorderRadius.circular(50),
           ),
           child: BottomAppBar(
-            color: AppColors.darkBlack,
+            color: Theme.of(context).primaryColor,
             child: Theme(
               data: ThemeData(
                 highlightColor: Colors.transparent,

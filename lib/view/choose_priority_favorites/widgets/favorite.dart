@@ -27,11 +27,11 @@ class FavoriteBox extends StatelessWidget {
           Image.asset(dataList[indexPass]["image"], fit: BoxFit.cover),
           Material(
             animationDuration: Duration(milliseconds: 400),
-            color: AppColors.darkBlack.withOpacity(.55),
+            color: Theme.of(context).primaryColor.withOpacity(.55),
             child: InkWell(
               onTap: () {},
               highlightColor: Colors.transparent,
-              splashColor: AppColors.darkBlack.withOpacity(.5),
+              splashColor: Theme.of(context).primaryColor.withOpacity(.5),
               child: Container(
                 width: double.infinity,
               ),

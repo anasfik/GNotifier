@@ -101,6 +101,7 @@ class NewNotificationController extends GetxController {
       return;
     }
 
+    // add to box then
     newNotificationsBox.add(
       NewItemNotifcationModel(
         title,
@@ -243,12 +244,52 @@ class NewNotificationController extends GetxController {
   }
 
   // Edit notification
-  updateNotification(int index, String title, String description, DateTime date,
-      bool isRepeated, bool isAlarm, bool isFavorite) {
+  updateNotification(
+    int index,
+    String title,
+    String description,
+    DateTime date,
+    bool isRepeated,
+    bool isAlarm,
+    bool isFavorite,
+  ) {
     // Init the hive box
     Box<NewItemNotifcationModel> newNotificationsBox =
         Hive.box<NewItemNotifcationModel>("newNotificationsBox");
-    // And update it in box
+
+    Get.back();
+
+    // Check title
+    if (checkTitleValidity(title)) {
+      checkTitleValidityDialog();
+      return;
+    }
+
+    // Check description
+    if (checkDescriptionValidity(description)) {
+      checkDescriptionValidityDialog();
+      return;
+    }
+
+    // Check date (years, months, days)
+    if (checkDateTimeValidity(date)) {
+      checkDateTimeValidityDialog();
+      return;
+    }
+
+    // Check date (hours, minutes)
+    if (checkTimeOfDayValidity(date)) {
+      checkTimeOfDayValidityDialog();
+      return;
+    }
+
+    // get back if in somehow the user choosed a date in the past
+    if (checkFullTimeValidity(date)) {
+      checkFullTimeValidityDialog();
+      return;
+    }
+
+    // update it in box
     newNotificationsBox.putAt(
       index,
       NewItemNotifcationModel(

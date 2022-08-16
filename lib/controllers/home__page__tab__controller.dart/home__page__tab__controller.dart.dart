@@ -5,7 +5,7 @@ import '../../utils/strict__mode__for production.dart';
 import '../../view/main__page/tabs__screens/favorites.dart';
 import '../../view/main__page/tabs__screens/home/home.dart';
 import '../../view/main__page/tabs__screens/search.dart';
-import '../../view/main__page/tabs__screens/settings.dart';
+import '../../view/main__page/tabs__screens/settings/settings.dart';
 import 'home__page__tab__errors_controller.dart';
 
 // TickerProvider help us listen to changes at 60fps or higher

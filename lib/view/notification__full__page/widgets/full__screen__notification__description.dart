@@ -20,7 +20,7 @@ class FullScreenNotificationDescription extends StatelessWidget {
       ),
       maxLines: 5,
       style: TextStyle(
-        color: AppColors.darkBlack.withOpacity(.7),
+        color: Theme.of(context).primaryColor.withOpacity(.7),
         fontSize: 25,
         fontWeight: FontWeight.bold,
       ),

@@ -44,13 +44,14 @@ class NotificationCard extends StatelessWidget {
               height: 15,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(50),
-                border: Border.all(width: 3.5, color: AppColors.darkBlack),
+                border: Border.all(
+                    width: 3.5, color: Theme.of(context).primaryColor),
               ),
             ),
             Container(
               width: 7,
               height: 2,
-              color: AppColors.darkBlack,
+              color: Theme.of(context).primaryColor,
             ),
             Expanded(
               child: Stack(
@@ -59,7 +60,7 @@ class NotificationCard extends StatelessWidget {
                   Container(
                     padding: const EdgeInsets.symmetric(horizontal: 10),
                     decoration: BoxDecoration(
-                      color: AppColors.darkBlack.withOpacity(.03),
+                      color: Theme.of(context).primaryColor.withOpacity(.04),
                       borderRadius: BorderRadius.circular(20),
                     ),
                     child: Column(
@@ -72,7 +73,7 @@ class NotificationCard extends StatelessWidget {
                         AutoSizeText(
                           title,
                           style: TextStyle(
-                            color: AppColors.darkBlack,
+                            color: Theme.of(context).primaryColor,
                             fontSize: 20,
                             fontWeight: FontWeight.w500,
                           ),
@@ -85,7 +86,9 @@ class NotificationCard extends StatelessWidget {
                         AutoSizeText(
                           description,
                           style: TextStyle(
-                              color: AppColors.darkBlack.withOpacity(.6),
+                              color: Theme.of(context)
+                                  .primaryColor
+                                  .withOpacity(.6),
                               fontSize: 15),
                           maxFontSize: 15,
                           maxLines: 2,
@@ -111,7 +114,7 @@ class NotificationCard extends StatelessWidget {
             Container(
               width: 7 * 2,
               height: 2,
-              color: AppColors.darkBlack,
+              color: Theme.of(context).primaryColor,
             ),
           ],
         ),

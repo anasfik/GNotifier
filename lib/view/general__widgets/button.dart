@@ -30,12 +30,13 @@ class CustomButton extends StatelessWidget {
         onPressed: onPressed,
         style: ElevatedButton.styleFrom(
           primary: shouldReverseColors
-              ? AppColors.darkBlack
+              ? Theme.of(context).primaryColor
               : isDelete
                   ? Color.fromARGB(255, 255, 190, 184)
                   : AppColors.lightGrey,
-          onPrimary:
-              shouldReverseColors ? AppColors.white : AppColors.darkBlack,
+          onPrimary: shouldReverseColors
+              ? AppColors.white
+              : Theme.of(context).primaryColor,
         ),
         child: AutoSizeText(
           text,
@@ -44,7 +45,7 @@ class CustomButton extends StatelessWidget {
                 ? AppColors.white
                 : isDelete
                     ? Colors.red
-                    : AppColors.darkBlack,
+                    : Theme.of(context).primaryColor,
             fontSize: 20,
             fontWeight: FontWeight.bold,
           ),

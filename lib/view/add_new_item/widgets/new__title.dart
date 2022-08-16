@@ -18,7 +18,7 @@ class NewTitle extends StatelessWidget {
       style: TextStyle(
         fontSize: 40,
         fontWeight: FontWeight.bold,
-        color: AppColors.darkBlack,
+        color: Theme.of(context).primaryColor,
       ),
     );
   }

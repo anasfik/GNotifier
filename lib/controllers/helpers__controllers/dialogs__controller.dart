@@ -6,15 +6,16 @@ import '../../view/general__widgets/dialog__text__button.dart';
 import '../main__controller.dart';
 
 class DialogsController extends GetxController {
+
+
   // Dependencies injection
   final MainController mainController = Get.put(MainController());
 
-  //
+
+ 
   showConfirmWithActions(
-    String infoText,
-    String actionButtonText,
-    void Function()? function,
-  ) {
+      String infoText, String actionButtonText, void Function()? function,
+      {forDelete = false}) {
     Get.defaultDialog(
       title: "",
       backgroundColor: AppColors.lightGrey,
@@ -23,8 +24,8 @@ class DialogsController extends GetxController {
       content: Column(
         children: [
           Icon(
-            Icons.check,
-            color: AppColors.darkBlack,
+            forDelete ? Icons.delete : Icons.check,
+            color: forDelete ? Colors.red : Theme.of(Get.context!).primaryColor,
             size: 60,
           ),
           const SizedBox(height: 15),
@@ -33,7 +34,7 @@ class DialogsController extends GetxController {
             child: Text(
               mainController.allFirstWordLetterToUppercase(infoText),
               style: TextStyle(
-                color: AppColors.darkBlack,
+                color: Theme.of(Get.context!).primaryColor,
                 fontSize: 17,
                 fontWeight: FontWeight.bold,
               ),
@@ -52,6 +53,7 @@ class DialogsController extends GetxController {
           },
         ),
         DialogTextButton(
+          forDelete: true,
           mainController: mainController,
           onPressed: function,
           text: actionButtonText,
@@ -76,7 +78,7 @@ class DialogsController extends GetxController {
             AutoSizeText(
               mainController.allFirstWordLetterToUppercase(infoTitle),
               style: TextStyle(
-                color: AppColors.darkBlack,
+                color: Theme.of(Get.context!).primaryColor,
                 fontSize: 22,
                 fontWeight: FontWeight.bold,
               ),
@@ -86,7 +88,7 @@ class DialogsController extends GetxController {
             AutoSizeText(
               mainController.allFirstWordLetterToUppercase(infoText),
               style: TextStyle(
-                color: AppColors.darkBlack,
+                color: Theme.of(Get.context!).primaryColor,
                 fontSize: 17,
                 fontWeight: FontWeight.w500,
               ),

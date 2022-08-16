@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:watch_it_later/utils/AppColors.dart';
 
@@ -20,12 +19,12 @@ class CustomTextField extends StatelessWidget {
         errorBorder: const OutlineInputBorder(borderSide: BorderSide.none),
         focusedBorder: OutlineInputBorder(
             borderSide: BorderSide(
-          color: AppColors.darkBlack,
+          color: Theme.of(context).primaryColor,
           width: 2,
         )),
         border: OutlineInputBorder(
             borderSide: BorderSide(
-          color: AppColors.darkBlack,
+          color: Theme.of(context).primaryColor,
           width: 2,
         )),
       ),

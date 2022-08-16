@@ -27,13 +27,13 @@ class ChooseFavoritesPage extends StatelessWidget {
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       appBar: AppBar(
-        iconTheme: IconThemeData(color: AppColors.darkBlack),
+        iconTheme: IconThemeData(color: Theme.of(context).primaryColor),
         elevation: 0,
         backgroundColor: Colors.transparent,
         centerTitle: true,
         title: Text(
           mainController.allFirstWordLetterToUppercase("Choose your favorites"),
-          style: TextStyle(color: AppColors.darkBlack),
+          style: TextStyle(color: Theme.of(context).primaryColor),
         ),
       ),
       body: Container(

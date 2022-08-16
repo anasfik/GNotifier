@@ -1,4 +1,4 @@
-// ignore_for_file: unused_local_variable   
+// ignore_for_file: unused_local_variable
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -12,6 +12,7 @@ import 'package:watch_it_later/view/get__username__from__user/get__username__pag
 import 'package:watch_it_later/view/notification__full__page/notification__full__page.dart';
 import 'model/newItemNotificationModel.dart';
 import 'services/local__notifications__service.dart';
+import 'utils/themes.dart';
 import 'view/main__page/main__page.dart';
 
 void main() async {
@@ -53,13 +54,9 @@ class WatchItLaterApp extends StatelessWidget {
       ],
       debugShowCheckedModeBanner: false,
       title: AppTexts.mainTitle,
-      theme: ThemeData(
-        textTheme: GoogleFonts.nunitoTextTheme(
-          Theme.of(context).textTheme,
-        ),
-        primarySwatch: AppColors.materialDarkBlack,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-      ),
+      theme: AppThemes(context: context).lightMode,
+      darkTheme: AppThemes(context: context).darkMode,
+      themeMode: ThemeMode.system,
       home: mainController.getUserStatus() ? GetStartedPage() : MainPage(),
     );
   }

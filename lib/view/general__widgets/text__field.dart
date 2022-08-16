@@ -43,7 +43,7 @@ class CustomTextField extends StatelessWidget {
               child: Container(
                 padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 2),
                 decoration: BoxDecoration(
-                  color: AppColors.darkBlack,
+                  color: Theme.of(context).primaryColor,
                   borderRadius: BorderRadius.circular(4),
                 ),
                 child: Text(
@@ -55,13 +55,10 @@ class CustomTextField extends StatelessWidget {
           ),
         ),
         TextField(
-        
           maxLength: maxLength,
           onChanged: onChanged,
           controller: controller,
           decoration: InputDecoration(
-        
-        
             counterText: "",
             // shrink the default counter
             counter: const SizedBox.shrink(),
@@ -69,7 +66,7 @@ class CustomTextField extends StatelessWidget {
             contentPadding: contentPadding,
             suffixIcon: suffixIcon,
             filled: true,
-            fillColor: AppColors.darkBlack.withOpacity(.05),
+            fillColor: Theme.of(context).primaryColor.withOpacity(.05),
             hintText: hintText,
             focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(10),

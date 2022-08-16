@@ -14,12 +14,15 @@ class CustomActionIconButton extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(15),
-        color: shouldReverseColors ? AppColors.darkBlack : AppColors.lightGrey,
+        color: shouldReverseColors
+            ? Theme.of(context).primaryColor
+            : AppColors.lightGrey,
       ),
       padding: const EdgeInsets.all(15),
       child: Icon(icon,
-          color:
-              shouldReverseColors ? AppColors.lightGrey : AppColors.darkBlack),
+          color: shouldReverseColors
+              ? AppColors.lightGrey
+              : Theme.of(context).primaryColor),
     );
   }
 }

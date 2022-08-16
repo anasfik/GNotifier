@@ -4,8 +4,6 @@ import 'package:flutter/painting.dart';
 class AppColors {
   static Color white = Color(0xFFFFFFFF);
   static Color darkBlack = const Color(0xff161616);
-  static Color lightTextColor = const Color(0xffffffff);
-  static Color lightGreen = Color.fromARGB(255, 243, 255, 244);
   static Color lightGrey = const Color(0xffededed);
 
 

@@ -5,19 +5,20 @@ import 'package:flutter/material.dart';
 import '../../utils/AppColors.dart';
 
 class DialogTextButton extends StatelessWidget {
-  const DialogTextButton(
-      {Key? key,
-      required this.mainController,
-      required this.onPressed,
-      required this.text,
-      required this.hasBackground})
-      : super(key: key);
-  
+  const DialogTextButton({
+    Key? key,
+    required this.mainController,
+    required this.onPressed,
+    required this.text,
+    required this.hasBackground,
+    this.forDelete = false,
+  }) : super(key: key);
+
   // Variables
   final mainController;
   final String text;
   final void Function()? onPressed;
-  final bool hasBackground;
+  final bool hasBackground, forDelete;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -27,17 +28,26 @@ class DialogTextButton extends StatelessWidget {
       ),
       child: TextButton(
         style: TextButton.styleFrom(
-          backgroundColor:
-              hasBackground ? AppColors.darkBlack : Colors.transparent,
-          primary: hasBackground ? AppColors.lightGrey : AppColors.darkBlack,
+          backgroundColor: hasBackground
+              ? forDelete
+                  ? Colors.red.withOpacity(.15)
+                  : Theme.of(context).primaryColor
+              : Colors.transparent,
+          primary: hasBackground
+              ? forDelete
+                  ? Colors.red
+                  : AppColors.lightGrey
+              : Theme.of(context).primaryColor,
         ),
         onPressed: onPressed,
         child: Text(
           mainController.allFirstWordLetterToUppercase(text),
           style: TextStyle(
             color: hasBackground
-                ? AppColors.white
-                : AppColors.darkBlack.withOpacity(.6),
+                ? forDelete
+                    ? Colors.red
+                    : AppColors.white
+                : Theme.of(context).primaryColor.withOpacity(.6),
             fontWeight: FontWeight.bold,
           ),
         ),

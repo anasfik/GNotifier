@@ -18,7 +18,7 @@ class OptionTitle extends StatelessWidget {
       mainController.allFirstWordLetterToUppercase(text),
       style: TextStyle(
         fontSize: 18,
-        color: AppColors.darkBlack,
+        color: Theme.of(context).primaryColor,
       ),
       maxLines: 1,
     );

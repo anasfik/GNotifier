@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../controllers/favorites__controller.dart/favorites__controller.dart';
-import '../../utils/AppColors.dart';
 
 class FavoriteIconButton extends StatelessWidget {
   FavoriteIconButton({
@@ -42,7 +41,7 @@ class FavoriteIconButton extends StatelessWidget {
                     },
                     icon: Icon(
                       isChecked ? Icons.favorite : Icons.favorite_outline,
-                      color: AppColors.darkBlack.withOpacity(.7),
+                      color: Colors.red[800],
                       size: size,
                     ),
                   ),

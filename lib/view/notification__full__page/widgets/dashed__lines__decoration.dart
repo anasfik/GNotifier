@@ -11,7 +11,7 @@ class DashedLinesDecoration extends StatelessWidget {
       children: [
         Container(
           decoration: BoxDecoration(
-            color: AppColors.darkBlack.withOpacity(.8),
+            color: Theme.of(context).primaryColor.withOpacity(.8),
             borderRadius: BorderRadius.circular(100),
           ),
           width: 60,
@@ -22,7 +22,7 @@ class DashedLinesDecoration extends StatelessWidget {
         ),
         Container(
           decoration: BoxDecoration(
-            color: AppColors.darkBlack,
+            color: Theme.of(context).primaryColor,
             borderRadius: BorderRadius.circular(100),
           ),
           width: 5,
@@ -33,7 +33,7 @@ class DashedLinesDecoration extends StatelessWidget {
         ),
         Container(
           decoration: BoxDecoration(
-            color: AppColors.darkBlack,
+            color: Theme.of(context).primaryColor,
             borderRadius: BorderRadius.circular(100),
           ),
           width: 5,

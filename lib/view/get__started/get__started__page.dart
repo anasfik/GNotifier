@@ -15,7 +15,7 @@ class GetStartedPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: AppColors.darkBlack,
+        backgroundColor: Theme.of(context).primaryColor,
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
@@ -56,7 +56,7 @@ class GetStartedPage extends StatelessWidget {
                                     aspectRatio: 1,
                                     child: Container(
                                       decoration: BoxDecoration(
-                                        color: AppColors.darkBlack,
+                                        color: Theme.of(context).primaryColor,
                                         borderRadius:
                                             BorderRadius.circular(100),
                                       ),
@@ -133,7 +133,7 @@ class GetStartedPage extends StatelessWidget {
                           child: GraphBars(
                             barsBoundedBy: 5,
                             colors: [
-                              AppColors.darkBlack,
+                              Theme.of(context).primaryColor,
                               AppColors.lightGrey,
                             ],
                             values: const [
