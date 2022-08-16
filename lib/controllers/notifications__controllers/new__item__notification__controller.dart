@@ -135,7 +135,7 @@ class NewNotificationController extends GetxController {
       description,
       tz.TZDateTime.now(tz.local).add(
         Duration(
-          seconds: difference.inSeconds,
+          seconds: 3,
         ),
       ),
       "$newId",
@@ -321,7 +321,7 @@ class NewNotificationController extends GetxController {
         // This will show it after 5 secondes from the current time
         tz.TZDateTime.now(tz.local).add(
           Duration(
-            seconds: difference.inSeconds,
+            seconds: 3,
           ),
         ),
         "${newNotificationsBox.getAt(index)!.id}");

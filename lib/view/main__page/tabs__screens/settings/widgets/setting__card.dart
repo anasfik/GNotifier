@@ -11,13 +11,19 @@ class SettingCard extends StatelessWidget {
     required this.title,
     required this.description,
     this.hasSwitch = false,
+    this.onSwitchChanged,
+    this.switchValue,
     this.onTap,
-  }) : super(key: key);
+  })  : assert(hasSwitch == (onSwitchChanged != null && switchValue != null),
+            " hasSwitch presence require onSwitchChanged presence"),
+        super(key: key);
 
   final mainController;
   final IconData icon;
   final String title, description;
   final bool hasSwitch;
+  final bool? switchValue;
+  final void Function(bool)? onSwitchChanged;
 
   final void Function()? onTap;
   @override
@@ -49,12 +55,11 @@ class SettingCard extends StatelessWidget {
                   ),
                   if (hasSwitch) ...[
                     Switch(
-                      value: false,
-                      onChanged: (value) {},
-                      inactiveThumbColor: Theme.of(context).primaryColor,
-                      inactiveTrackColor:
-                          Theme.of(context).primaryColor.withOpacity(.5),
-                      activeColor: Theme.of(context).backgroundColor,
+                      value: switchValue ?? false,
+                      onChanged: onSwitchChanged,
+                      inactiveThumbColor: Colors.grey,
+                      inactiveTrackColor: Colors.grey.withOpacity(.8),
+                      activeColor: AppColors.darkBlack,
                     ),
                   ]
                 ],

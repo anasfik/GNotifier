@@ -9,26 +9,36 @@ import 'package:timezone/data/latest.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
 import 'package:flutter_native_timezone/flutter_native_timezone.dart';
 import 'package:watch_it_later/controllers/notifications__controllers/new__item__notification__controller.dart';
+import 'package:watch_it_later/controllers/settings__controller/show__on__lock__screen__setting.dart';
 
 import 'package:watch_it_later/view/main__page/main__page.dart';
 
+import '../controllers/settings__controller/enable__ongoing__setting.dart';
+import '../controllers/settings__controller/enable__sound.dart';
+import '../controllers/settings__controller/enable__vibration.dart';
 import '../model/newItemNotificationModel.dart';
 
 /// PLEASE DONT'T RELY ON THIS IF YOUR NEW TO USING THOSE PACKAGE, CHECK THE DOCS FIRST, THEN TRY WORKINGWITH THIS .
 class NotificationService {
+  static ShowOnLockScreenSetting showOnLockScreenSetting =
+      Get.put(ShowOnLockScreenSetting());
 
-  // Variables to rely on
-// var vivibility
-  
+  static EnableSoundSetting enableSoundSetting = Get.put(EnableSoundSetting());
+  static EnableVibrationSetting enableVibrationSetting =
+      Get.put(EnableVibrationSetting());
+  static final EnableOngoingSetting enableOngoingSetting =
+      Get.put(EnableOngoingSetting());
+
+  final NewNotificationController newNotificationController =
+      Get.put(NewNotificationController());
+// setters
+
   // Getting instance of the notification plugin
   final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
       FlutterLocalNotificationsPlugin();
 
-  final NewNotificationController newNotificationController =
-      Get.put(NewNotificationController());
-
   // Create the notification with the android settings
-  NotificationDetails platformChannelSpecifics = const NotificationDetails(
+  NotificationDetails platformChannelSpecifics = NotificationDetails(
     // you can add other platform but for now, I will use only android
     android: _androidNotificationDetails,
 
@@ -37,7 +47,7 @@ class NotificationService {
   );
 
 // Specifying the android settings details
-  static const AndroidNotificationDetails _androidNotificationDetails =
+  static final AndroidNotificationDetails _androidNotificationDetails =
       AndroidNotificationDetails(
     // Channel id
     'Notification',
@@ -46,18 +56,23 @@ class NotificationService {
     // Channel description
     channelDescription: 'responsible for showing notifications',
     // Notification sound
-    playSound: true,
+    playSound: enableSoundSetting.getEnabledSoundBool(),
+
+    enableVibration: enableVibrationSetting.getEnabledVibration(),
     // Priority level
     priority: Priority.max,
     // Importance level
     importance: Importance.max,
     //
-    ongoing: true,
+    ongoing: enableOngoingSetting.getEnabledOngoing(),
     autoCancel: true,
 
-    visibility: NotificationVisibility.public,
+    visibility: showOnLockScreenSetting.getNotificationVisibilityOnLockScreen(),
 
     showWhen: true,
+
+    ticker: "ticker",
+    
   );
 
   // ios notification details

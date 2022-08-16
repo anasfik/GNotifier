@@ -2,11 +2,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:watch_it_later/controllers/helpers__controllers/theme__controller.dart';
+import 'package:watch_it_later/controllers/settings__controller/dark__mode_setting.dart';
 import 'package:watch_it_later/controllers/main__controller.dart';
-import 'package:watch_it_later/utils/AppColors.dart';
 import 'package:watch_it_later/utils/AppTexts.dart';
 import 'package:watch_it_later/view/get__started/get__started__page.dart';
 import 'package:watch_it_later/view/get__username__from__user/get__username__page.dart';
@@ -17,6 +15,7 @@ import 'utils/themes.dart';
 import 'view/main__page/main__page.dart';
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   // init hive
   await Hive.initFlutter();
   // register model generated with hive generator
@@ -34,8 +33,7 @@ void main() async {
 
 //
 
-  NotificationService notificationService = NotificationService();
-  notificationService.init();
+  NotificationService().init();
 
   runApp(WatchItLaterApp());
 }
@@ -44,7 +42,7 @@ class WatchItLaterApp extends StatelessWidget {
   WatchItLaterApp({Key? key}) : super(key: key);
   final MainController mainController = Get.put(MainController());
   final ThemeController themeController = Get.put(ThemeController());
-    Box localBox = Hive.box("locals");
+  Box localBox = Hive.box("locals");
 
   @override
   Widget build(BuildContext context) {
