@@ -1,19 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
-import 'package:watch_it_later/utils/themes.dart';
+import 'package:hive/hive.dart';
 
 class ThemeController extends GetxController {
-  bool isDarkMode = true;
+  bool isDarkMode = Hive.box('locals').get("isDarkMode") ?? false;
+
+  // get it from box
+  ThemeMode getPreviousTheme() {
+    if (isDarkMode) {
+      return ThemeMode.dark;
+    } else {
+      return ThemeMode.light;
+    }
+  }
 
   void toggleDarkMode() {
     isDarkMode = !isDarkMode;
-    print("$isDarkMode ${Get.context}");
     if (isDarkMode) {
-      Get.changeThemeMode(ThemeMode.light);
-    } else {
       Get.changeThemeMode(ThemeMode.dark);
+    } else {
+      Get.changeThemeMode(ThemeMode.light);
     }
+    // Set new bool to box
+    Hive.box('locals').put("isDarkMode", isDarkMode);
     update();
   }
 }

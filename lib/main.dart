@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:watch_it_later/controllers/helpers__controllers/theme__controller.dart';
 import 'package:watch_it_later/controllers/main__controller.dart';
 import 'package:watch_it_later/utils/AppColors.dart';
 import 'package:watch_it_later/utils/AppTexts.dart';
@@ -42,6 +43,7 @@ void main() async {
 class WatchItLaterApp extends StatelessWidget {
   WatchItLaterApp({Key? key}) : super(key: key);
   final MainController mainController = Get.put(MainController());
+  final ThemeController themeController = Get.put(ThemeController());
     Box localBox = Hive.box("locals");
 
   @override
@@ -58,7 +60,7 @@ class WatchItLaterApp extends StatelessWidget {
       title: AppTexts.mainTitle,
       theme: AppThemes(context: context).lightTheme,
       darkTheme: AppThemes(context: context).darkTheme,
-      themeMode: localBox.get(activeTheme) ??  ThemeMode.light,
+      themeMode: themeController.getPreviousTheme(),
       home: mainController.getUserStatus() ? GetStartedPage() : MainPage(),
     );
   }
