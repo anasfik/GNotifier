@@ -10,12 +10,14 @@ class SettingCard extends StatelessWidget {
     required this.icon,
     required this.title,
     required this.description,
+    this.hasSwitch = false,
     this.onTap,
   }) : super(key: key);
 
   final mainController;
   final IconData icon;
   final String title, description;
+  final bool hasSwitch;
 
   final void Function()? onTap;
   @override
@@ -37,10 +39,25 @@ class SettingCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               const Spacer(),
-              Icon(
-                icon,
-                color: Theme.of(context).primaryColor.withOpacity(.45),
-                size: 35,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Icon(
+                    icon,
+                    color: Theme.of(context).primaryColor.withOpacity(.45),
+                    size: 35,
+                  ),
+                  if (hasSwitch) ...[
+                    Switch(
+                      value: false,
+                      onChanged: (value) {},
+                      inactiveThumbColor: Theme.of(context).primaryColor,
+                      inactiveTrackColor:
+                          Theme.of(context).primaryColor.withOpacity(.5),
+                      activeColor: Theme.of(context).backgroundColor,
+                    ),
+                  ]
+                ],
               ),
               const Spacer(),
               AutoSizeText(

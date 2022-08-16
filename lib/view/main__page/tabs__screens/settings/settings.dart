@@ -58,19 +58,20 @@ class SettingsScreen extends StatelessWidget {
                     );
                   },
                 ),
-                SettingCard(
-                  icon: Icons.color_lens,
-                  mainController: mainController,
-                  description: "change your app theme",
-                  title: "themes",
-                  onTap: () {},
-                ),
+                // SettingCard(
+                //   icon: Icons.color_lens,
+                //   mainController: mainController,
+                //   description: "change your app theme",
+                //   title: "themes",
+                //   onTap: () {},
+                // ),
                 SettingCard(
                   icon: Icons.screen_lock_portrait,
                   mainController: mainController,
                   description: "show notifications in the lock screen",
                   title: "screen lock",
                   onTap: () {},
+                  hasSwitch: true,
                 ),
                 SettingCard(
                   icon: Icons.access_time_filled,
