@@ -5,6 +5,7 @@ import 'package:watch_it_later/controllers/get__username__controller/get__userna
 import 'package:watch_it_later/view/general__widgets/button.dart';
 
 import '../../controllers/main__controller.dart';
+import '../../utils/AppColors.dart';
 import '../general__widgets/text__field.dart';
 
 class GetUsernamePage extends StatelessWidget {
@@ -38,9 +39,10 @@ class GetUsernamePage extends StatelessWidget {
                       mainController.allFirstWordLetterToUppercase(
                           "what we can call you ?"),
                       maxLines: 2,
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontSize: 30,
                         fontWeight: FontWeight.bold,
+                        color: AppColors.darkBlack,
                       ),
                     ),
                     const SizedBox(height: 20),
@@ -48,6 +50,11 @@ class GetUsernamePage extends StatelessWidget {
                       init: GetUsernameController(),
                       builder: (getUsernameController) {
                         return CustomTextField(
+                          counterTextColor: Theme.of(context).primaryColor,
+                          counterBpxColor: Theme.of(context).backgroundColor,
+                          textColor: Theme.of(context).backgroundColor,
+                          backgroundColor:
+                              Theme.of(context).backgroundColor.withOpacity(.2),
                           counterBoxScale:
                               getUsernameController.usernameCountBoxScale,
                           titleWrittenLength:
@@ -72,6 +79,7 @@ class GetUsernamePage extends StatelessWidget {
                 GetBuilder<GetUsernameController>(
                   builder: (getUsernameController) {
                     return CustomButton(
+                      isBtnColorForGetStarted: true,
                       onPressed: getUsernameController
                               .usernameTextFieldController.text
                               .trim()
@@ -85,7 +93,6 @@ class GetUsernamePage extends StatelessWidget {
 
                               Get.offAllNamed('/mainPage');
                             }
-                          
                           : null,
                       shouldReverseColors: true,
                       text:

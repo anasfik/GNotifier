@@ -25,7 +25,7 @@ class DialogsController extends GetxController {
         children: [
           Icon(
             forDelete ? Icons.delete : Icons.check,
-            color: forDelete ? Colors.red : Theme.of(Get.context!).primaryColor,
+            color: forDelete ? Colors.red : AppColors.darkBlack,
             size: 60,
           ),
           const SizedBox(height: 15),
@@ -34,7 +34,7 @@ class DialogsController extends GetxController {
             child: Text(
               mainController.allFirstWordLetterToUppercase(infoText),
               style: TextStyle(
-                color: Theme.of(Get.context!).primaryColor,
+                color: AppColors.darkBlack,
                 fontSize: 17,
                 fontWeight: FontWeight.bold,
               ),
@@ -78,7 +78,7 @@ class DialogsController extends GetxController {
             AutoSizeText(
               mainController.allFirstWordLetterToUppercase(infoTitle),
               style: TextStyle(
-                color: Theme.of(Get.context!).primaryColor,
+                color: AppColors.darkBlack,
                 fontSize: 22,
                 fontWeight: FontWeight.bold,
               ),
@@ -88,7 +88,7 @@ class DialogsController extends GetxController {
             AutoSizeText(
               mainController.allFirstWordLetterToUppercase(infoText),
               style: TextStyle(
-                color: Theme.of(Get.context!).primaryColor,
+                color: AppColors.darkBlack,
                 fontSize: 17,
                 fontWeight: FontWeight.w500,
               ),

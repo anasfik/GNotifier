@@ -42,6 +42,8 @@ void main() async {
 class WatchItLaterApp extends StatelessWidget {
   WatchItLaterApp({Key? key}) : super(key: key);
   final MainController mainController = Get.put(MainController());
+    Box localBox = Hive.box("locals");
+
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
@@ -56,7 +58,7 @@ class WatchItLaterApp extends StatelessWidget {
       title: AppTexts.mainTitle,
       theme: AppThemes(context: context).lightTheme,
       darkTheme: AppThemes(context: context).darkTheme,
-      themeMode: ThemeMode.dark,
+      themeMode: localBox.get(activeTheme) ??  ThemeMode.light,
       home: mainController.getUserStatus() ? GetStartedPage() : MainPage(),
     );
   }

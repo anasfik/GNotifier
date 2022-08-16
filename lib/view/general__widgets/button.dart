@@ -10,12 +10,14 @@ class CustomButton extends StatelessWidget {
     this.onPressed,
     this.radiusValue = 20,
     this.isDelete = false,
+    this.isBtnColorForGetStarted = false,
   }) : super(key: key);
 
   final bool shouldReverseColors, isDelete;
   final void Function()? onPressed;
   final String text;
   final double radiusValue;
+  final bool isBtnColorForGetStarted;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -30,7 +32,9 @@ class CustomButton extends StatelessWidget {
         onPressed: onPressed,
         style: ElevatedButton.styleFrom(
           primary: shouldReverseColors
-              ? Theme.of(context).primaryColor
+              ? isBtnColorForGetStarted
+                  ? AppColors.darkBlack
+                  : Theme.of(context).primaryColor
               : isDelete
                   ? Color.fromARGB(255, 255, 190, 184)
                   : AppColors.lightGrey,
@@ -42,10 +46,12 @@ class CustomButton extends StatelessWidget {
           text,
           style: TextStyle(
             color: shouldReverseColors
-                ? Theme.of(context).backgroundColor
+                ? isBtnColorForGetStarted
+                    ? AppColors.white
+                    : Theme.of(context).backgroundColor
                 : isDelete
                     ? Colors.red
-                    : Theme.of(context).primaryColor,
+                    : Theme.of(context).backgroundColor,
             fontSize: 20,
             fontWeight: FontWeight.bold,
           ),

@@ -1,4 +1,3 @@
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
@@ -8,7 +7,6 @@ import 'package:watch_it_later/view/general__widgets/notification__card.dart';
 import 'package:watch_it_later/view/general__widgets/screen__title.dart';
 import '../../../controllers/main__controller.dart';
 import '../../../controllers/search__controller/search__controller.dart';
-import '../../../utils/AppColors.dart';
 import '../../general__widgets/text__field.dart';
 
 class SearchScreen extends StatelessWidget {
@@ -44,6 +42,11 @@ class SearchScreen extends StatelessWidget {
                   Container(
                     margin: const EdgeInsets.only(right: 20),
                     child: CustomTextField(
+                          counterTextColor: Theme.of(context).primaryColor,
+                      counterBpxColor: Theme.of(context).backgroundColor,
+                      textColor: Theme.of(context).primaryColor,
+                      backgroundColor:
+                          Theme.of(context).primaryColor.withOpacity(.2),
                       maxLength: 50,
                       onChanged: (value) {
                         searchController.filterList(value);

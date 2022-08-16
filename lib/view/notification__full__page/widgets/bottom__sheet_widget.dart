@@ -46,6 +46,11 @@ class BottomSheetWidget extends StatelessWidget {
                 init: NewNotificationController(),
                 builder: (newNotificationController) {
                   return CustomTextField(
+                    textColor: Theme.of(context).primaryColor,
+                    counterBpxColor: Theme.of(context).backgroundColor,
+                    counterTextColor: Theme.of(context).backgroundColor,
+                    backgroundColor:
+                        Theme.of(context).primaryColor.withOpacity(.2),
                     showCounter: true,
                     counterBoxScale:
                         newNotificationController.titleCountBoxScale,
@@ -66,6 +71,11 @@ class BottomSheetWidget extends StatelessWidget {
               GetBuilder<NewNotificationController>(
                 builder: (newNotificationController) {
                   return CustomTextField(
+                    textColor: Theme.of(context).primaryColor,
+                    counterTextColor: Theme.of(context).backgroundColor,
+                    counterBpxColor: Theme.of(context).backgroundColor,
+                    backgroundColor:
+                        Theme.of(context).primaryColor.withOpacity(.2),
                     key: newNotificationController.descriptionTextFieldKey,
                     showCounter: true,
                     counterBoxScale:

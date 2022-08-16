@@ -1,13 +1,14 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:watch_it_later/controllers/main__controller.dart';
 
 import '../../model/newItemNotificationModel.dart';
 import '../../utils/AppColors.dart';
 import 'favorite_icon__button.dart';
 
 class NotificationCard extends StatelessWidget {
-  const NotificationCard({
+  NotificationCard({
     Key? key,
     this.showDeleteButtonOnFullPage = false,
     required this.currentNotification,
@@ -22,7 +23,7 @@ class NotificationCard extends StatelessWidget {
 
   final String title, description;
   final bool isFavoriteButtonHidden, showDeleteButtonOnFullPage;
-
+  MainController mainController = Get.put(MainController());
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -58,7 +59,7 @@ class NotificationCard extends StatelessWidget {
                 fit: StackFit.expand,
                 children: [
                   Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    padding: const EdgeInsets.symmetric(horizontal: 15),
                     decoration: BoxDecoration(
                       color: Theme.of(context).primaryColor.withOpacity(.04),
                       borderRadius: BorderRadius.circular(20),
@@ -71,7 +72,7 @@ class NotificationCard extends StatelessWidget {
                           flex: 2,
                         ),
                         AutoSizeText(
-                          title,
+                          mainController.allFirstWordLetterToUppercase(title),
                           style: TextStyle(
                             color: Theme.of(context).primaryColor,
                             fontSize: 20,
@@ -98,14 +99,42 @@ class NotificationCard extends StatelessWidget {
                     ),
                   ),
                   Positioned(
-                    top: 5,
-                    right: 5,
+                    top: 4,
+                    right: 4,
                     child: Transform.scale(
                       scale: isFavoriteButtonHidden ? 0 : 1,
                       child: FavoriteIconButton(
+                        size: 23,
                         isChecked: currentNotification?.isFavorite ?? false,
                         passedIndex: reversedIndex,
                       ),
+                    ),
+                  ),
+                  Positioned(
+                    right: 10,
+                    bottom: 3,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Icon(
+                          Icons.schedule,
+                          size: 11,
+                          color: Theme.of(context).primaryColor.withOpacity(.3),
+                        ),
+                        SizedBox(
+                          width: 5,
+                        ),
+                        AutoSizeText(
+                          "${setDateShow(currentNotification!.dateToShow)}",
+                          style: TextStyle(
+                            color:
+                                Theme.of(context).primaryColor.withOpacity(.3),
+                            fontSize: 8,
+                          ),
+                          maxLines: 1,
+                        ),
+                      ],
                     ),
                   ),
                 ],
@@ -120,5 +149,17 @@ class NotificationCard extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  String setDateShow(DateTime dateToShow) {
+// write date properly
+
+    int years = dateToShow.year;
+    int months = dateToShow.month;
+    int days = dateToShow.day;
+    int hours = dateToShow.hour;
+    int minutes = dateToShow.minute;
+    String date = "$years-$months-$days  $hours:$minutes";
+    return date;
   }
 }

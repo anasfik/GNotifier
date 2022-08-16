@@ -10,7 +10,7 @@ class AppThemes {
       ),
       primaryColor: AppColors.darkBlack,
       backgroundColor: AppColors.white,
-      hintColor: AppColors.darkBlack,
+      hintColor: AppColors.darkBlack.withOpacity(.7),
       textTheme: GoogleFonts.nunitoTextTheme(
         Theme.of(context).textTheme.copyWith(
               bodyText2: TextStyle(color: AppColors.darkBlack),
@@ -36,7 +36,7 @@ class AppThemes {
       ),
       primaryColor: AppColors.white,
       backgroundColor: AppColors.darkBlack,
-      hintColor: AppColors.white,
+      hintColor: AppColors.white.withOpacity(.7),
       textTheme: GoogleFonts.nunitoTextTheme(
         Theme.of(context).textTheme.copyWith(
               bodyText2: TextStyle(color: AppColors.white),

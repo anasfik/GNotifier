@@ -326,6 +326,10 @@ class NewNotificationController extends GetxController {
         ),
         "${newNotificationsBox.getAt(index)!.id}");
 
+// Re init inputs
+    titleController.text = "";
+    descriptionController.text = "";
+
     // Going back
     Get.back();
   }

@@ -1,21 +1,28 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 
 import '../../utils/AppColors.dart';
 
 class CustomTextField extends StatelessWidget {
-  CustomTextField(
-      {Key? key,
-      required this.controller,
-      required this.hintText,
-      this.suffixIcon,
-      required this.maxLength,
-      this.onChanged,
-      this.titleWrittenLength,
-      this.animationDuration = const Duration(milliseconds: 50),
-      this.counterBoxScale,
-      this.showCounter = false,
-      this.contentPadding = const EdgeInsets.all(15)})
-      : assert(hintText != null, "hintText must not be null"),
+  CustomTextField({
+    Key? key,
+    required this.controller,
+    required this.hintText,
+    this.suffixIcon,
+    required this.maxLength,
+    this.onChanged,
+    this.titleWrittenLength,
+    this.animationDuration = const Duration(milliseconds: 50),
+    this.counterBoxScale,
+    this.showCounter = false,
+    required this.textColor,
+    required this.backgroundColor,
+    required this.counterBpxColor,
+    required this.counterTextColor,
+    this.hintColor = Colors.grey,
+    this.contentPadding = const EdgeInsets.all(15),
+  })  : assert(hintText != null, "hintText must not be null"),
         super(key: key);
 
   void Function(String)? onChanged;
@@ -27,6 +34,11 @@ class CustomTextField extends StatelessWidget {
   int? maxLength, titleWrittenLength;
   double? counterBoxScale;
   Duration animationDuration;
+  Color textColor,
+      backgroundColor,
+      counterBpxColor,
+      counterTextColor,
+      hintColor;
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -43,13 +55,13 @@ class CustomTextField extends StatelessWidget {
               child: Container(
                 padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 2),
                 decoration: BoxDecoration(
-                  color: Theme.of(context).primaryColor,
+                  color: counterBpxColor,
                   borderRadius: BorderRadius.circular(4),
                 ),
                 child: Text(
                   "$titleWrittenLength / $maxLength",
                   style: TextStyle(
-                      color: Theme.of(context).backgroundColor,
+                      color: counterTextColor,
                       fontSize: 10,
                       fontWeight: FontWeight.bold),
                 ),
@@ -59,7 +71,7 @@ class CustomTextField extends StatelessWidget {
         ),
         TextField(
           style: TextStyle(
-            color: Theme.of(context).primaryColor,
+            color: textColor,
           ),
           maxLength: maxLength,
           onChanged: onChanged,
@@ -71,9 +83,14 @@ class CustomTextField extends StatelessWidget {
             alignLabelWithHint: false,
             contentPadding: contentPadding,
             suffixIcon: suffixIcon,
+            suffixIconColor: Theme.of(context).primaryColor,
+
             filled: true,
-            fillColor: Theme.of(context).primaryColor.withOpacity(.05),
+            fillColor: backgroundColor.withOpacity(.05),
             hintText: hintText,
+            hintStyle: TextStyle(
+              color: hintColor,
+            ),
             focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(10),
                 borderSide: BorderSide.none),

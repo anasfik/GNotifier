@@ -70,6 +70,11 @@ class AddNewItemScreen extends StatelessWidget {
                   init: NewNotificationController(),
                   builder: (newNotificationController) {
                     return CustomTextField(
+                          counterTextColor: Theme.of(context).backgroundColor,
+                      counterBpxColor: Theme.of(context).backgroundColor,
+                      textColor: Theme.of(context).primaryColor,
+                      backgroundColor:
+                          Theme.of(context).primaryColor.withOpacity(.2),
                       key: newNotificationController.titleTextFieldKey,
                       showCounter: true,
                       counterBoxScale:
@@ -90,6 +95,11 @@ class AddNewItemScreen extends StatelessWidget {
                 GetBuilder<NewNotificationController>(
                   builder: (newNotificationController) {
                     return CustomTextField(
+                          counterBpxColor: Theme.of(context).backgroundColor,
+                          counterTextColor: Theme.of(context).backgroundColor,
+                      textColor: Theme.of(context).primaryColor,
+                      backgroundColor:
+                          Theme.of(context).primaryColor.withOpacity(.2),
                       key: newNotificationController.descriptionTextFieldKey,
                       showCounter: true,
                       counterBoxScale:
