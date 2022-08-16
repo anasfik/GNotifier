@@ -72,7 +72,7 @@ class NotificationService {
     showWhen: true,
 
     ticker: "ticker",
-    
+
   );
 
   // ios notification details
@@ -184,6 +184,7 @@ class NotificationService {
       payload: payload,
       platformChannelSpecifics,
       androidAllowWhileIdle: true,
+      
       uiLocalNotificationDateInterpretation:
           UILocalNotificationDateInterpretation.absoluteTime,
 

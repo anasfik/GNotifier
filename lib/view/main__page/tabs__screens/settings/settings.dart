@@ -9,12 +9,14 @@ import '../../../../controllers/main__controller.dart';
 import '../../../../controllers/settings__controller/delete__all__setting.dart';
 import '../../../../controllers/settings__controller/enable__ongoing__setting.dart';
 import '../../../../controllers/settings__controller/enable__vibration.dart';
+import '../../../../controllers/settings__controller/reset__all__settings.dart';
 import 'widgets/setting__card.dart';
 
 class SettingsScreen extends StatelessWidget {
   SettingsScreen({Key? key}) : super(key: key);
   final MainController mainController = Get.put(MainController());
   final DeleteAllSetting deleteAllSetting = Get.put(DeleteAllSetting());
+  final ResetAllSettings resetAllSettings = Get.put(ResetAllSettings());
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -80,6 +82,25 @@ class SettingsScreen extends StatelessWidget {
                   description: "change username and profile image",
                   title: "username",
                   onTap: () {},
+                ),
+                GetBuilder<EnableSoundSetting>(
+                  init: EnableSoundSetting(),
+                  builder: (enableSoundSetting) {
+                    return SettingCard(
+                      switchValue: enableSoundSetting.isSoundEnabled,
+                      hasSwitch: true,
+                      onSwitchChanged: (boolValue) {
+                        enableSoundSetting.isSoundEnabled = boolValue;
+                        enableSoundSetting.setEnabledSoundBool(
+                            enableSoundSetting.isSoundEnabled);
+                      },
+                      icon: Icons.delete_forever,
+                      mainController: mainController,
+                      description: "hide delete button for favorites",
+                      title: "delete button",
+                      onTap: () {},
+                    );
+                  },
                 ),
               ],
             ),
@@ -196,6 +217,15 @@ class SettingsScreen extends StatelessWidget {
                     );
                   },
                 ),
+                SettingCard(
+                  icon: Icons.restart_alt,
+                  mainController: mainController,
+                  description: "reset all settings to default",
+                  title: "reset ",
+                  onTap: () {
+                    resetAllSettings.reset();
+                  },
+                ),
               ],
             ),
             SizedBox(
@@ -226,17 +256,9 @@ class SettingsScreen extends StatelessWidget {
                 SettingCard(
                   icon: Icons.delete,
                   mainController: mainController,
-                  description: "this will delete all you notifications at once",
+                  description:
+                      "this will delete all your notifications at once",
                   title: "Delete all",
-                  onTap: () {
-                    deleteAllSetting.deleteAll();
-                  },
-                ),
-                SettingCard(
-                  icon: Icons.restart_alt,
-                  mainController: mainController,
-                  description: "reset all settings to default",
-                  title: "reset settings",
                   onTap: () {
                     deleteAllSetting.deleteAll();
                   },
