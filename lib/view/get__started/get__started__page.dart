@@ -161,18 +161,19 @@ class GetStartedPage extends StatelessWidget {
                 children: [
                   AutoSizeText(
                     mainController.allFirstWordLetterToUppercase(
-                        "set what you want, we'll remind you"),
+                        "never forget \n anymore"),
                     maxLines: 2,
                     textAlign: TextAlign.center,
                     style: TextStyle(
                         color: AppColors.white,
-                        fontSize: 50,
+                        fontSize: 40,
                         fontWeight: FontWeight.w500),
                   ),
                   const SizedBox(
-                    height: 30,
+                    height: 40,
                   ),
                   CustomButton(
+                      radiusValue: 10,
                       shouldReverseColors: false,
                       onPressed: () {
                         Get.toNamed('/getUsernamePage');
@@ -180,7 +181,7 @@ class GetStartedPage extends StatelessWidget {
                       text: mainController
                           .allFirstWordLetterToUppercase("get started")),
                   const SizedBox(
-                    height: 30,
+                    height: 15,
                   ),
                 ],
               ),

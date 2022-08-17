@@ -1,5 +1,4 @@
 // ignore_for_file: unused_local_variable
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -13,6 +12,7 @@ import 'model/newItemNotificationModel.dart';
 import 'services/local__notifications__service.dart';
 import 'utils/themes.dart';
 import 'view/main__page/main__page.dart';
+
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -35,7 +35,12 @@ void main() async {
 
   NotificationService().init();
 
+
+
+
   runApp(WatchItLaterApp());
+
+
 }
 
 class WatchItLaterApp extends StatelessWidget {

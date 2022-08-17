@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:watch_it_later/controllers/main__controller.dart';
@@ -70,7 +71,7 @@ class AddNewItemScreen extends StatelessWidget {
                   init: NewNotificationController(),
                   builder: (newNotificationController) {
                     return CustomTextField(
-                          counterTextColor: Theme.of(context).backgroundColor,
+                      counterTextColor: Theme.of(context).backgroundColor,
                       counterBpxColor: Theme.of(context).backgroundColor,
                       textColor: Theme.of(context).primaryColor,
                       backgroundColor:
@@ -95,8 +96,8 @@ class AddNewItemScreen extends StatelessWidget {
                 GetBuilder<NewNotificationController>(
                   builder: (newNotificationController) {
                     return CustomTextField(
-                          counterBpxColor: Theme.of(context).backgroundColor,
-                          counterTextColor: Theme.of(context).backgroundColor,
+                      counterBpxColor: Theme.of(context).backgroundColor,
+                      counterTextColor: Theme.of(context).backgroundColor,
                       textColor: Theme.of(context).primaryColor,
                       backgroundColor:
                           Theme.of(context).primaryColor.withOpacity(.2),
@@ -155,7 +156,7 @@ class AddNewItemScreen extends StatelessWidget {
                                   : .55,
                               child: Option(
                                 mainController: mainController,
-                                text: "repeated",
+                                text: "repeat",
                                 icon: Icons.repeat,
                               ),
                             ),
@@ -169,13 +170,13 @@ class AddNewItemScreen extends StatelessWidget {
                             },
                             child: Opacity(
                               opacity:
-                                  newNotificationController.isAlarmOptionEnabled
+                                  newNotificationController.hasAutoDeleteEnabled
                                       ? 1
                                       : .55,
                               child: Option(
                                 mainController: mainController,
-                                text: "alarm",
-                                icon: Icons.alarm,
+                                text: "auto delete",
+                                icon: Icons.auto_delete,
                               ),
                             ),
                           ),
@@ -184,6 +185,7 @@ class AddNewItemScreen extends StatelessWidget {
                     );
                   },
                 ),
+                AutoSizeText("other settings are set globally from setting page"),
                 const Spacer(),
                 SizedBox(
                   width: double.infinity,
@@ -195,7 +197,7 @@ class AddNewItemScreen extends StatelessWidget {
                             .trim(),
                         dateController.date,
                         newNotificationController.isRepeatedOptionEnabled,
-                        newNotificationController.isAlarmOptionEnabled,
+                        newNotificationController.hasAutoDeleteEnabled,
                       );
                     },
                     text:

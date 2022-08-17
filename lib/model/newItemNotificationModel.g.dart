@@ -22,7 +22,7 @@ class NewItemNotifcationModelAdapter
       fields[1] as String,
       fields[2] as DateTime,
       fields[5] as bool,
-      fields[6] as bool,
+      fields[11] as bool,
       fields[7] as bool?,
       fields[9] as int,
     );
@@ -40,8 +40,8 @@ class NewItemNotifcationModelAdapter
       ..write(obj.dateToShow)
       ..writeByte(5)
       ..write(obj.isRepeated)
-      ..writeByte(6)
-      ..write(obj.isAlarmed)
+      ..writeByte(11)
+      ..write(obj.hasAutoDelete)
       ..writeByte(7)
       ..write(obj.isFavorite)
       ..writeByte(9)

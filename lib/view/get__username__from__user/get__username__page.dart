@@ -50,11 +50,10 @@ class GetUsernamePage extends StatelessWidget {
                       init: GetUsernameController(),
                       builder: (getUsernameController) {
                         return CustomTextField(
-                          counterTextColor: Theme.of(context).primaryColor,
-                          counterBpxColor: Theme.of(context).backgroundColor,
-                          textColor: Theme.of(context).backgroundColor,
-                          backgroundColor:
-                              Theme.of(context).backgroundColor.withOpacity(.2),
+                          counterTextColor: AppColors.white,
+                          counterBpxColor: AppColors.darkBlack,
+                          textColor: AppColors.darkBlack,
+                          backgroundColor: AppColors.darkBlack.withOpacity(.4),
                           counterBoxScale:
                               getUsernameController.usernameCountBoxScale,
                           titleWrittenLength:

@@ -51,7 +51,7 @@ class CustomButton extends StatelessWidget {
                     : Theme.of(context).backgroundColor
                 : isDelete
                     ? Colors.red
-                    : Theme.of(context).backgroundColor,
+                    : AppColors.darkBlack,
             fontSize: 20,
             fontWeight: FontWeight.bold,
           ),

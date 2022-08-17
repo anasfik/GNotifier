@@ -72,7 +72,7 @@ class NotificationService {
     showWhen: true,
 
     ticker: "ticker",
-
+    colorized: true, color: Colors.red,
   );
 
   // ios notification details
@@ -174,8 +174,13 @@ class NotificationService {
   }
 
 // call the scheduled notification creating
-  Future<void> createScheduledNotification(int id, String? title,
-      String? description, dynamic tzDateTime, String? payload) async {
+  Future<void> createScheduledNotification(
+    int id,
+    String? title,
+    String? description,
+    dynamic tzDateTime,
+    String? payload,
+  ) async {
     await flutterLocalNotificationsPlugin.zonedSchedule(
       id,
       title,
@@ -184,11 +189,27 @@ class NotificationService {
       payload: payload,
       platformChannelSpecifics,
       androidAllowWhileIdle: true,
-      
+
       uiLocalNotificationDateInterpretation:
           UILocalNotificationDateInterpretation.absoluteTime,
 
       // matchDateTimeComponents: DateTimeComponents.dateAndTime,
+    );
+  }
+
+  void setPeriodically(
+    int id,
+    String? title,
+    String? description,
+    String? payload,
+  ) {
+    flutterLocalNotificationsPlugin.periodicallyShow(
+      id,
+      title,
+      description,
+      RepeatInterval.daily,
+      platformChannelSpecifics,
+      payload: payload,
     );
   }
 
@@ -237,9 +258,10 @@ class NotificationService {
     // Get matchingElement
     NewItemNotifcationModel matchingItem = newNotificationsBoxValues
         .firstWhere((element) => element.id == int.parse("$payload"));
+    if(matchingItem.hasAutoDelete) {
 
     // Remove it from the box (remove it's card)
-    newNotificationsBox
+      newNotificationsBox
         .deleteAt(newNotificationsBoxValues.toList().indexOf(matchingItem));
 
     await Get.defaultDialog(
@@ -247,6 +269,7 @@ class NotificationService {
           "the mission of this notification is completed, so it's automatically deleted",
       content: Text("$payload"),
     );
+    }
   }
 
   //

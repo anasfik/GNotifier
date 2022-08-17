@@ -37,8 +37,8 @@ class NewNotificationController extends GetxController {
   final descriptionTextFieldKey = UniqueKey();
 
   // Options variables
-  bool isRepeatedOptionEnabled = true;
-  bool isAlarmOptionEnabled = false;
+  bool isRepeatedOptionEnabled = false;
+  bool hasAutoDeleteEnabled = false;
 
   // Title variables
   int titleMaxLength = 20;
@@ -63,7 +63,7 @@ class NewNotificationController extends GetxController {
     String description,
     DateTime? date,
     bool isRepeated,
-    bool isAlarm,
+    bool autoDeleteEnabled,
   ) {
     // init the hive box
     Box<NewItemNotifcationModel> newNotificationsBox =
@@ -108,9 +108,9 @@ class NewNotificationController extends GetxController {
         description,
         date!,
         isRepeated,
-        isAlarm,
+        autoDeleteEnabled,
         // isFavorite: false by default :
-        false,
+        true,
         // id
         newId,
       ),
@@ -129,19 +129,26 @@ class NewNotificationController extends GetxController {
     Duration difference = date.difference(DateTime.now());
 
     // Create it
-    notificationService.createScheduledNotification(
-      newId,
-      title,
-      description,
-      tz.TZDateTime.now(tz.local).add(
-        Duration(
-          seconds: 3,
+    if (isRepeated == false) {
+      notificationService.createScheduledNotification(
+        newId,
+        title,
+        description,
+        tz.TZDateTime.now(tz.local).add(
+          Duration(
+            seconds: 3,
+          ),
         ),
-      ),
-      "$newId",
-    );
+        "$newId",
+      );
+    }
 
-    // Going back
+//
+
+    if (isRepeated) {
+      notificationService.setPeriodically(newId, title, description, "$newId");
+      // Going back
+    }
     Get.back();
   }
 
@@ -290,6 +297,7 @@ class NewNotificationController extends GetxController {
     }
 
     // update it in box
+
     newNotificationsBox.putAt(
       index,
       NewItemNotifcationModel(
@@ -314,7 +322,8 @@ class NewNotificationController extends GetxController {
     Duration difference = date.difference(DateTime.now());
 
     // Create a new one with the new data
-    notificationService.createScheduledNotification(
+    if (isRepeated == false) {
+      notificationService.createScheduledNotification(
         newNotificationsBox.getAt(index)!.id,
         title,
         description,
@@ -324,8 +333,19 @@ class NewNotificationController extends GetxController {
             seconds: 3,
           ),
         ),
-        "${newNotificationsBox.getAt(index)!.id}");
+        "${newNotificationsBox.getAt(index)!.id}",
+      );
+    }
 
+    if (isRepeated) {
+      notificationService.setPeriodically(
+        newNotificationsBox.getAt(index)!.id,
+        title,
+        description,
+        "${newNotificationsBox.getAt(index)!.id}",
+      );
+      // Going back
+    }
 // Re init inputs
     titleController.text = "";
     descriptionController.text = "";
@@ -379,11 +399,11 @@ class NewNotificationController extends GetxController {
     return isRepeatedOptionEnabled;
   }
 
-  // Toggle isAlarmOptionEnabled
+  // Toggle hasAutoDelete
   toggleAlarmOptionBoolean() {
-    isAlarmOptionEnabled = !isAlarmOptionEnabled;
+    hasAutoDeleteEnabled = !hasAutoDeleteEnabled;
     update();
-    return isAlarmOptionEnabled;
+    return hasAutoDeleteEnabled;
   }
 
   @override

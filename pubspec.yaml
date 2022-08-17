@@ -27,6 +27,7 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
+  android_alarm_manager_plus: ^2.0.6+1
   animations: ^2.0.3
   auto_size_text: ^3.0.0
   build_runner: ^2.2.0

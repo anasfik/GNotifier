@@ -164,30 +164,29 @@ class NotificationFullPage extends StatelessWidget {
                                   : .55,
                           child: Option(
                               mainController: mainController,
-                              text: "repeated",
+                              text: "repeat",
                               icon: Icons.repeat),
                         ),
                       ),
                     ),
-                    Expanded(
-                      child: GestureDetector(
-                        onTap: () {
-                          newNotificationController.newIsAlarmed =
-                              newNotificationController
-                                  .toggleAlarmOptionBoolean();
-                        },
-                        child: Opacity(
-                          opacity:
-                              newNotificationController.isAlarmOptionEnabled
-                                  ? 1
-                                  : .55,
-                          child: Option(
-                              mainController: mainController,
-                              text: "alarm",
-                              icon: Icons.alarm),
-                        ),
-                      ),
-                    ),
+                    // Expanded(
+                    //   child: GestureDetector(
+                    //     onTap: () {
+                    //       newNotificationController.toggleAlarmOptionBoolean();
+                    //     },
+                    //     child: Opacity(
+                    //       opacity:
+                    //           newNotificationController.hasAutoDeleteEnabled
+                    //               ? 1
+                    //               : .55,
+                    //       child: Option(
+                    //         mainController: mainController,
+                    //         text: "auto delete",
+                    //         icon: Icons.low_priority,
+                    //       ),
+                    //     ),
+                    //   ),
+                    // ),
                   ],
                 );
               },
@@ -222,7 +221,7 @@ class NotificationFullPage extends StatelessWidget {
                               newNotificationController.newIsRepeated ??
                                   gettedNotification.isRepeated,
                               newNotificationController.newIsAlarmed ??
-                                  gettedNotification.isAlarmed,
+                                  gettedNotification.hasAutoDelete,
                               gettedNotification.isFavorite as bool,
                             );
                           },

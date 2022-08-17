@@ -18,13 +18,13 @@ class NewItemNotifcationModel extends HiveObject {
   // double intervalDuration;
   @HiveField(5)
   bool isRepeated;
-  @HiveField(6)
-  bool isAlarmed;
+  @HiveField(11)
+  bool hasAutoDelete;
   @HiveField(7)
   bool? isFavorite;
 
   @HiveField(9)
   int id;
   NewItemNotifcationModel(this.title, this.description, this.dateToShow,
-      this.isRepeated, this.isAlarmed, this.isFavorite, this.id);
+      this.isRepeated, this.hasAutoDelete, this.isFavorite, this.id);
 }
