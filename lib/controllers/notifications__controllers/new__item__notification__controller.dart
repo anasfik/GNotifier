@@ -118,8 +118,6 @@ class NewNotificationController extends GetxController {
 
     ///
     // Using openContainer from the animations package trait the AddNewNotificationPage as just a widget so open/close it execute the dispose to text editing controllers so we should re-init them after any add operations
-    titleController.text = "";
-    descriptionController.text = "";
 
     /// Pushing the notification
     // Instance of service
@@ -149,6 +147,7 @@ class NewNotificationController extends GetxController {
       notificationService.setPeriodically(newId, title, description, "$newId");
       // Going back
     }
+    clearTextController();
     Get.back();
   }
 
@@ -347,8 +346,8 @@ class NewNotificationController extends GetxController {
       // Going back
     }
 // Re init inputs
-    titleController.text = "";
-    descriptionController.text = "";
+
+    clearTextController();
 
     // Going back
     Get.back();
@@ -419,5 +418,16 @@ class NewNotificationController extends GetxController {
     titleController.dispose();
     descriptionController.dispose();
     super.onClose();
+  }
+
+  clearTextController() {
+    titleController.text = "";
+    descriptionController.text = "";
+    titleWrittenLength = 0;
+    descriptionWrittenLength = 0;
+    titleCountBoxScale = 0;
+    descriptionCountBoxScale = 0;
+    hasAutoDeleteEnabled = false;
+    isRepeatedOptionEnabled = false;
   }
 }

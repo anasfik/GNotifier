@@ -7,6 +7,7 @@ import 'package:watch_it_later/view/add_new_item/widgets/description.dart';
 import 'package:watch_it_later/view/add_new_item/widgets/option.dart';
 import 'package:watch_it_later/view/general__widgets/button.dart';
 import 'package:watch_it_later/view/general__widgets/text__field.dart';
+import '../../controllers/helpers__controllers/TextEditingsClearController.dart';
 import '../../controllers/notifications__controllers/date__Controller.dart';
 import '../../controllers/notifications__controllers/new__item__notification__controller.dart';
 import '../general__widgets/action__button.dart';
@@ -20,6 +21,7 @@ class AddNewItemScreen extends StatelessWidget {
   final DateController dateController = Get.put(DateController());
   final NewNotificationController newNotificationController =
       Get.put(NewNotificationController());
+ 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
