@@ -2,20 +2,20 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
 
-class EnableOngoingSetting extends GetxController {
+class HideDeleteButtonForFavoritesSetting extends GetxController {
   // bool
   static Box localBox = Hive.box("locals");
 
-  bool isOngoingEnabled = localBox.get("isOngoingEnabled") ?? true;
+  bool isDeleteButtonHidden = localBox.get("isDeleteButtonHidden") ?? true;
 
   //toggle method
-  setEnabledOngoing(boolValue) {
-    isOngoingEnabled = boolValue;
+  setToHideDeleteButton(boolValue) {
+    isDeleteButtonHidden = boolValue;
     update();
-    localBox.put("isOngoingEnabled", isOngoingEnabled);
+    localBox.put("isDeleteButtonHidden", isDeleteButtonHidden);
   }
 
-  getEnabledOngoing() {
-    return isOngoingEnabled;
+  getIsHideDeleteButton() {
+    return isDeleteButtonHidden;
   }
 }

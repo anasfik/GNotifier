@@ -9,6 +9,7 @@ import '../../../../controllers/main__controller.dart';
 import '../../../../controllers/settings__controller/delete__all__setting.dart';
 import '../../../../controllers/settings__controller/enable__ongoing__setting.dart';
 import '../../../../controllers/settings__controller/enable__vibration.dart';
+import '../../../../controllers/settings__controller/hide__delete__button__for__favorites.dart';
 import '../../../../controllers/settings__controller/reset__all__settings.dart';
 import 'widgets/setting__card.dart';
 
@@ -83,16 +84,16 @@ class SettingsScreen extends StatelessWidget {
                   title: "username",
                   onTap: () {},
                 ),
-                GetBuilder<EnableSoundSetting>(
-                  init: EnableSoundSetting(),
-                  builder: (enableSoundSetting) {
+                GetBuilder<HideDeleteButtonForFavoritesSetting>(
+                  init: HideDeleteButtonForFavoritesSetting(),
+                  builder: (hidedeleteButtonForFavoritesSetting) {
                     return SettingCard(
-                      switchValue: enableSoundSetting.isSoundEnabled,
+                      switchValue: hidedeleteButtonForFavoritesSetting.isDeleteButtonHidden,
                       hasSwitch: true,
                       onSwitchChanged: (boolValue) {
-                        enableSoundSetting.isSoundEnabled = boolValue;
-                        enableSoundSetting.setEnabledSoundBool(
-                            enableSoundSetting.isSoundEnabled);
+                        hidedeleteButtonForFavoritesSetting.isDeleteButtonHidden = boolValue;
+                        hidedeleteButtonForFavoritesSetting.setToHideDeleteButton(
+                            hidedeleteButtonForFavoritesSetting.isDeleteButtonHidden);
                       },
                       icon: Icons.delete_forever,
                       mainController: mainController,

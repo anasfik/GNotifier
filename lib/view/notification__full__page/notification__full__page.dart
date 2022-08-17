@@ -5,13 +5,13 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:watch_it_later/controllers/helpers__controllers/dialogs__controller.dart';
 import 'package:watch_it_later/controllers/main__controller.dart';
-import 'package:watch_it_later/utils/AppColors.dart';
 import 'package:watch_it_later/view/add_new_item/widgets/option.dart';
 import 'package:watch_it_later/view/general__widgets/button.dart';
 import 'package:watch_it_later/view/notification__full__page/widgets/dashed__lines__decoration.dart';
 
 import '../../controllers/notifications__controllers/date__Controller.dart';
 import '../../controllers/notifications__controllers/new__item__notification__controller.dart';
+import '../../controllers/settings__controller/hide__delete__button__for__favorites.dart';
 import '../../model/newItemNotificationModel.dart';
 import '../general__widgets/edit__icon__button.dart';
 import '../general__widgets/favorite_icon__button.dart';
@@ -28,6 +28,9 @@ class NotificationFullPage extends StatelessWidget {
       Get.put(NewNotificationController());
   DateController dateController = Get.put(DateController());
   final DialogsController dialogsController = Get.put(DialogsController());
+  final HideDeleteButtonForFavoritesSetting
+      hidedeleteButtonForFavoritesSetting =
+      Get.put(HideDeleteButtonForFavoritesSetting());
 
   ///
   // we got those with Get.arguments from previous page
@@ -229,7 +232,9 @@ class NotificationFullPage extends StatelessWidget {
                           .allFirstWordLetterToUppercase("update"),
                     ),
                   ),
-                  if (Get.arguments[2] == true) ...[
+                  if (Get.arguments[2] == true ||
+                      hidedeleteButtonForFavoritesSetting
+                          .getIsHideDeleteButton()) ...[
                     Expanded(
                       flex: 1,
                       child: SizedBox(),
