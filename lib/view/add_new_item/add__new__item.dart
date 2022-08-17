@@ -21,7 +21,7 @@ class AddNewItemScreen extends StatelessWidget {
   final DateController dateController = Get.put(DateController());
   final NewNotificationController newNotificationController =
       Get.put(NewNotificationController());
- 
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -45,32 +45,6 @@ class AddNewItemScreen extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    // Row(
-                    //   children: [
-                    //     Icon(
-                    //       Icons.info,
-                    //       color: Theme.of(context).primaryColor.withOpacity(.4),
-                    //     ),
-                    //     SizedBox(
-                    //       width: 10,
-                    //     ),
-                    //     Align(
-                    //       alignment: Alignment.center,
-                    //       child: AutoSizeText(
-                    //         mainController.allFirstWordLetterToUppercase(
-                    //             "check settings page for \nGlobal customize"),
-                    //         textAlign: TextAlign.left,
-                    //         style: TextStyle(
-                    //           fontSize: 10,
-                    //           color: Theme.of(context)
-                    //               .primaryColor
-                    //               .withOpacity(.4),
-                    //         ),
-                    //         maxLines: 2,
-                    //       ),
-                    //     ),
-                    //   ],
-                    // ),
                     GestureDetector(
                       onTap: () {
                         Get.back();
@@ -163,8 +137,9 @@ class AddNewItemScreen extends StatelessWidget {
                         Expanded(
                           child: GestureDetector(
                             onTap: () async {
-                              dateController.setFullDate(
-                                  await dateController.getFullDateFromUser());
+                              var gettedDate =
+                                  await dateController.getFullDateFromUser();
+                              dateController.setFullDate(gettedDate);
                             },
                             child: Option(
                               mainController: mainController,

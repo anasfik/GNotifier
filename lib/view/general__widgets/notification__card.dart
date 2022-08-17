@@ -1,4 +1,5 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:delayed_display/delayed_display.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:watch_it_later/controllers/main__controller.dart';
@@ -117,16 +118,38 @@ class NotificationCard extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
+                        if (currentNotification!.isRepeated) ...[
+                          Icon(
+                            Icons.repeat,
+                            size: 12,
+                            color:
+                                Theme.of(context).primaryColor.withOpacity(.3),
+                          ),
+                          const SizedBox(
+                            width: 7,
+                          ),
+                        ],
+                        if (currentNotification!.hasAutoDelete) ...[
+                          Icon(
+                            Icons.auto_delete,
+                            size: 12,
+                            color:
+                                Theme.of(context).primaryColor.withOpacity(.3),
+                          ),
+                          const SizedBox(
+                            width: 7,
+                          ),
+                        ],
                         Icon(
                           Icons.schedule,
-                          size: 11,
+                          size: 12,
                           color: Theme.of(context).primaryColor.withOpacity(.3),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           width: 5,
                         ),
                         AutoSizeText(
-                          "${setDateShow(currentNotification!.dateToShow)}",
+                          setDateShow(currentNotification!.dateToShow),
                           style: TextStyle(
                             color:
                                 Theme.of(context).primaryColor.withOpacity(.3),
@@ -159,7 +182,8 @@ class NotificationCard extends StatelessWidget {
     int days = dateToShow.day;
     int hours = dateToShow.hour;
     int minutes = dateToShow.minute;
-    String date = "$years-$months-$days  $hours:$minutes";
+    String date =
+        "$years-$months-$days  $hours:${minutes.toString().padLeft(2, '0')}";
     return date;
   }
 }

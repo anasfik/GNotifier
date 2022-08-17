@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../controllers/favorites__controller.dart/favorites__controller.dart';
 
-class FavoriteIconButton extends StatelessWidget {
+class FavoriteIconButton extends StatefulWidget {
   FavoriteIconButton({
     Key? key,
     required this.isChecked,
@@ -12,8 +12,44 @@ class FavoriteIconButton extends StatelessWidget {
   bool isChecked;
   double size;
   final int passedIndex;
-  final FavoritesController favoritesController =
+  static FavoritesController favoritesController =
       Get.put(FavoritesController());
+
+  @override
+  State<FavoriteIconButton> createState() => _FavoriteIconButtonState();
+}
+
+class _FavoriteIconButtonState extends State<FavoriteIconButton>
+    with SingleTickerProviderStateMixin {
+  late AnimationController favIconController;
+  late Animation<double> scale;
+
+  animate(bool isChecked) {
+    // card icon animation
+    isChecked == true
+        ? favIconController.forward()
+        : favIconController.reverse();
+  }
+
+  @override
+  void initState() {
+    favIconController = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 50),
+    );
+
+    scale = Tween(begin: 1.0, end: 1.25)
+        .chain(CurveTween(curve: Curves.easeInOutBack))
+        .animate(favIconController);
+    favIconController.addStatusListener((status) {
+      if (status == AnimationStatus.completed) {
+        favIconController.reverse();
+      }
+    });
+
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Theme(
@@ -26,23 +62,25 @@ class FavoriteIconButton extends StatelessWidget {
         init: FavoritesController(),
         builder: (favoritesController) {
           return AnimatedBuilder(
-              animation: favoritesController.scale,
+              animation: scale,
               builder: (context, __) {
                 return Transform.scale(
-                  scale: favoritesController.scale.value,
+                  scale: scale.value,
                   child: IconButton(
                     onPressed: () {
-                      isChecked = !isChecked;
+                      widget.isChecked = !widget.isChecked;
 
-                      favoritesController.addToFavorites(passedIndex);
+                      favoritesController.addToFavorites(widget.passedIndex);
 
-                      favoritesController.animate(isChecked);
-                      favoritesController.update();
+                      animate(widget.isChecked);
+                      // favoritesController.update();
                     },
                     icon: Icon(
-                      isChecked ? Icons.favorite : Icons.favorite_outline,
+                      widget.isChecked
+                          ? Icons.favorite
+                          : Icons.favorite_outline,
                       color: Colors.red[800],
-                      size: size,
+                      size: widget.size,
                     ),
                   ),
                 );

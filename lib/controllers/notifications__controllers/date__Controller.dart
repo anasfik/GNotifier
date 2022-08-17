@@ -8,13 +8,13 @@ class DateController extends GetxController {
 
   // Variables
   DateTime? date;
-
-// get the just the date(years, months, days)
+  DateTime? selecteDate;
+  // get the just the date(years, months, days)
   Future<DateTime?> _getDateFromUser({DateTime? gettedDate}) async {
     // showing datePicker dialog
     DateTime? date = await showDatePicker(
       context: Get.overlayContext as BuildContext,
-      initialDate: gettedDate ?? DateTime.now(),
+      initialDate: gettedDate ?? selecteDate ?? DateTime.now(),
       firstDate: DateTime.now(),
       //giving the possibility for the user to choose time between now and the next 5 years
       lastDate: DateTime.now().add(
@@ -31,7 +31,9 @@ class DateController extends GetxController {
       context: Get.overlayContext as BuildContext,
       initialTime: gettedDate != null
           ? TimeOfDay.fromDateTime(gettedDate)
-          : TimeOfDay.now(),
+          : selecteDate != null
+              ? TimeOfDay.fromDateTime(selecteDate!)
+              : TimeOfDay.now(),
       // TimeOfDay(hour: DateTime.now().hour, minute: DateTime.now().minute),
     );
     return time;
@@ -54,6 +56,7 @@ class DateController extends GetxController {
 // set it
   setFullDate(DateTime? gettedDateFromFunction) {
     date = gettedDateFromFunction;
+    selecteDate = gettedDateFromFunction;
     update();
 
     return date;

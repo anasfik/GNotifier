@@ -5,16 +5,11 @@ import 'package:hive/hive.dart';
 import 'package:watch_it_later/model/newItemNotificationModel.dart';
 import '../helpers__controllers/dialogs__controller.dart';
 
-class FavoritesController extends GetxController
-    with GetTickerProviderStateMixin {
-
-
+class FavoritesController extends GetxController {
   // Dependencies injection
   DialogsController dialogsController = Get.put(DialogsController());
 
   // Favorite icon animation
-  late AnimationController favIconController;
-  late Animation scale;
 
   // Initializing the fav. list always to get it from the box by filtering it with where method, in first start of the app it will be just empty list so there is no need to null check for it
   /// ignore_if_you_know_where_method_very_well: the where return is iterable, so toList() make it list
@@ -37,30 +32,6 @@ class FavoritesController extends GetxController
     newNotificationsBox.putAt(passedIndex, currentNotification);
   }
 
-  animate(bool isChecked) {
-    // card icon animation
-    isChecked == true
-        ? favIconController.forward()
-        : favIconController.reverse();
-  }
-
-  @override
-  void onInit() {
-    
-    favIconController = AnimationController(
-      vsync: this,
-      duration: const Duration(milliseconds: 40),
-    );
-
-    scale = Tween(begin: 1.0, end: 1.2).animate(favIconController);
-    favIconController.addStatusListener((status) {
-      if (status == AnimationStatus.completed) {
-        favIconController.reverse();
-      }
-    });
-
-    super.onInit();
-  }
 
   // To-do: handle exceptions
 }
