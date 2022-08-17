@@ -40,17 +40,48 @@ class AddNewItemScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const SizedBox(height: 20),
-                GestureDetector(
-                  onTap: () {
-                    Get.back();
-                  },
-                  child: const Align(
-                    alignment: Alignment.centerRight,
-                    child: CustomActionIconButton(
-                      shouldReverseColors: true,
-                      icon: Icons.close,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    // Row(
+                    //   children: [
+                    //     Icon(
+                    //       Icons.info,
+                    //       color: Theme.of(context).primaryColor.withOpacity(.4),
+                    //     ),
+                    //     SizedBox(
+                    //       width: 10,
+                    //     ),
+                    //     Align(
+                    //       alignment: Alignment.center,
+                    //       child: AutoSizeText(
+                    //         mainController.allFirstWordLetterToUppercase(
+                    //             "check settings page for \nGlobal customize"),
+                    //         textAlign: TextAlign.left,
+                    //         style: TextStyle(
+                    //           fontSize: 10,
+                    //           color: Theme.of(context)
+                    //               .primaryColor
+                    //               .withOpacity(.4),
+                    //         ),
+                    //         maxLines: 2,
+                    //       ),
+                    //     ),
+                    //   ],
+                    // ),
+                    GestureDetector(
+                      onTap: () {
+                        Get.back();
+                      },
+                      child: const Align(
+                        alignment: Alignment.centerRight,
+                        child: CustomActionIconButton(
+                          shouldReverseColors: true,
+                          icon: Icons.close,
+                        ),
+                      ),
                     ),
-                  ),
+                  ],
                 ),
                 NewTitle(
                   mainController: mainController,
@@ -72,7 +103,7 @@ class AddNewItemScreen extends StatelessWidget {
                   builder: (newNotificationController) {
                     return CustomTextField(
                       counterTextColor: Theme.of(context).backgroundColor,
-                      counterBpxColor: Theme.of(context).backgroundColor,
+                      counterBpxColor: Theme.of(context).primaryColor,
                       textColor: Theme.of(context).primaryColor,
                       backgroundColor:
                           Theme.of(context).primaryColor.withOpacity(.2),
@@ -96,7 +127,7 @@ class AddNewItemScreen extends StatelessWidget {
                 GetBuilder<NewNotificationController>(
                   builder: (newNotificationController) {
                     return CustomTextField(
-                      counterBpxColor: Theme.of(context).backgroundColor,
+                      counterBpxColor: Theme.of(context).primaryColor,
                       counterTextColor: Theme.of(context).backgroundColor,
                       textColor: Theme.of(context).primaryColor,
                       backgroundColor:
@@ -185,7 +216,7 @@ class AddNewItemScreen extends StatelessWidget {
                     );
                   },
                 ),
-                AutoSizeText("other settings are set globally from setting page"),
+
                 const Spacer(),
                 SizedBox(
                   width: double.infinity,

@@ -6,13 +6,9 @@ import '../../view/general__widgets/dialog__text__button.dart';
 import '../main__controller.dart';
 
 class DialogsController extends GetxController {
-
-
   // Dependencies injection
   final MainController mainController = Get.put(MainController());
 
-
- 
   showConfirmWithActions(
       String infoText, String actionButtonText, void Function()? function,
       {forDelete = false}) {
@@ -25,7 +21,7 @@ class DialogsController extends GetxController {
         children: [
           Icon(
             forDelete ? Icons.delete : Icons.check,
-            color: forDelete ? Colors.red : AppColors.darkBlack,
+            color: forDelete ? Colors.red[800] : AppColors.darkBlack,
             size: 60,
           ),
           const SizedBox(height: 15),
@@ -53,7 +49,7 @@ class DialogsController extends GetxController {
           },
         ),
         DialogTextButton(
-          forDelete: true,
+          forDelete: forDelete,
           mainController: mainController,
           onPressed: function,
           text: actionButtonText,

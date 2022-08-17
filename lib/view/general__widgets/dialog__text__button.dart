@@ -30,12 +30,12 @@ class DialogTextButton extends StatelessWidget {
         style: TextButton.styleFrom(
           backgroundColor: hasBackground
               ? forDelete
-                  ? Colors.red.withOpacity(.15)
-                  : Theme.of(context).primaryColor
+                  ? Colors.red[800]!.withOpacity(.15)
+                  : AppColors.darkBlack
               : Colors.transparent,
           primary: hasBackground
               ? forDelete
-                  ? Colors.red
+                  ? Colors.red[800]
                   : AppColors.lightGrey
               : Theme.of(context).primaryColor,
         ),
@@ -45,9 +45,9 @@ class DialogTextButton extends StatelessWidget {
           style: TextStyle(
             color: hasBackground
                 ? forDelete
-                    ? Colors.red
+                    ? Colors.red[800]
                     : AppColors.white
-                : Theme.of(context).primaryColor.withOpacity(.6),
+                : AppColors.darkBlack.withOpacity(.6),
             fontWeight: FontWeight.bold,
           ),
         ),

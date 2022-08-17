@@ -84,7 +84,8 @@ class HomeScreen extends StatelessWidget {
                     Box<NewItemNotifcationModel> box, __) {
                   if (box.values.isEmpty) {
                     return NothingToShow(
-                      text: "no items added yet",
+                      text:
+                          "press ' + ' to create your first schedule notification",
                       mainController: mainController,
                     );
                   }

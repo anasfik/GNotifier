@@ -47,7 +47,7 @@ class BottomSheetWidget extends StatelessWidget {
                 builder: (newNotificationController) {
                   return CustomTextField(
                     textColor: Theme.of(context).primaryColor,
-                    counterBpxColor: Theme.of(context).backgroundColor,
+                    counterBpxColor: Theme.of(context).primaryColor,
                     counterTextColor: Theme.of(context).backgroundColor,
                     backgroundColor:
                         Theme.of(context).primaryColor.withOpacity(.2),
@@ -73,7 +73,7 @@ class BottomSheetWidget extends StatelessWidget {
                   return CustomTextField(
                     textColor: Theme.of(context).primaryColor,
                     counterTextColor: Theme.of(context).backgroundColor,
-                    counterBpxColor: Theme.of(context).backgroundColor,
+                    counterBpxColor: Theme.of(context).primaryColor,
                     backgroundColor:
                         Theme.of(context).primaryColor.withOpacity(.2),
                     key: newNotificationController.descriptionTextFieldKey,

@@ -18,15 +18,19 @@ class DeleteButton extends StatelessWidget {
       child: Container(
         height: 55,
         width: 55,
+        clipBehavior: Clip.hardEdge,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
           color: Colors.red.withOpacity(.15),
         ),
         child: IconButton(
+          
+          splashColor: Colors.transparent,
+          highlightColor: Colors.transparent,
           onPressed: onPressed,
-          icon: const Icon(
+          icon: Icon(
             Icons.delete,
-            color: Colors.red,
+            color: Colors.red[800],
           ),
         ),
       ),

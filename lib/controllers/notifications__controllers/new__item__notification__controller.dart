@@ -110,7 +110,7 @@ class NewNotificationController extends GetxController {
         isRepeated,
         autoDeleteEnabled,
         // isFavorite: false by default :
-        true,
+        false,
         // id
         newId,
       ),
@@ -365,7 +365,7 @@ class NewNotificationController extends GetxController {
     }
     update();
     if (title.length == titleMaxLength) {
-      titleCountBoxScale = 1.5;
+      titleCountBoxScale = 1.25;
       await Future.delayed(const Duration(milliseconds: 30));
       titleCountBoxScale = 1;
     }
@@ -384,7 +384,7 @@ class NewNotificationController extends GetxController {
     }
     update();
     if (description.length == descriptionMaxLength) {
-      descriptionCountBoxScale = 1.5;
+      descriptionCountBoxScale = 1.25;
       await Future.delayed(const Duration(milliseconds: 30));
       descriptionCountBoxScale = 1;
     }

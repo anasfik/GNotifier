@@ -72,7 +72,7 @@ class NotificationService {
     showWhen: true,
 
     ticker: "ticker",
-    colorized: true, color: Colors.red,
+    colorized: true, color: Colors.red[800],
   );
 
   // ios notification details
@@ -258,17 +258,16 @@ class NotificationService {
     // Get matchingElement
     NewItemNotifcationModel matchingItem = newNotificationsBoxValues
         .firstWhere((element) => element.id == int.parse("$payload"));
-    if(matchingItem.hasAutoDelete) {
-
-    // Remove it from the box (remove it's card)
+    if (matchingItem.hasAutoDelete) {
+      // Remove it from the box (remove it's card)
       newNotificationsBox
-        .deleteAt(newNotificationsBoxValues.toList().indexOf(matchingItem));
+          .deleteAt(newNotificationsBoxValues.toList().indexOf(matchingItem));
 
-    await Get.defaultDialog(
-      title:
-          "the mission of this notification is completed, so it's automatically deleted",
-      content: Text("$payload"),
-    );
+      await Get.defaultDialog(
+        title:
+            "the mission of this notification is completed, so it's automatically deleted",
+        content: Text("$payload"),
+      );
     }
   }
 

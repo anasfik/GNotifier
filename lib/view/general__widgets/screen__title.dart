@@ -2,7 +2,8 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 
 class ScreenTitle extends StatelessWidget {
-  ScreenTitle({Key? key, required this.title, required this.mainController}) : super(key: key);
+  ScreenTitle({Key? key, required this.title, required this.mainController})
+      : super(key: key);
   final mainController;
   String title;
   @override
@@ -11,7 +12,7 @@ class ScreenTitle extends StatelessWidget {
       mainController.allFirstWordLetterToUppercase(title),
       maxLines: 2,
       style: const TextStyle(
-        fontSize: 25,
+        fontSize: 22,
         fontWeight: FontWeight.bold,
       ),
     );
