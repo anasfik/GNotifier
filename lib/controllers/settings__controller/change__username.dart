@@ -6,9 +6,9 @@ import '../../view/main__page/tabs__screens/settings/widgets/change__username__b
 
 class ChangeUsernameSetting extends GetxController {
   ChangeUsernameSetting({required this.context});
-  final DialogsController dialogsController = Get.put(DialogsController());
 
   late BuildContext context;
+  final DialogsController dialogsController = Get.put(DialogsController());
 
   // username variables
   int usernameMaxLength = 10;

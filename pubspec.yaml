@@ -40,6 +40,7 @@ dependencies:
   flutter_local_notifications: ^9.7.0
   flutter_native_timezone: ^2.0.0
   flutter_point_tab_bar: ^0.2.0
+  fluttertoast: ^8.0.9
   get: ^4.6.5
   google_fonts: ^3.0.1
   hive: ^2.2.3

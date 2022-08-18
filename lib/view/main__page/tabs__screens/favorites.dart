@@ -7,6 +7,7 @@ import 'package:watch_it_later/controllers/favorites__controller.dart/favorites_
 import 'package:watch_it_later/model/newItemNotificationModel.dart';
 import 'package:watch_it_later/view/general__widgets/notification__card.dart';
 import '../../../controllers/main__controller.dart';
+import '../../general__widgets/nothing__to__show__text.dart';
 
 class FavoritesScreen extends StatelessWidget {
   FavoritesScreen({Key? key}) : super(key: key);
@@ -48,6 +49,12 @@ class FavoritesScreen extends StatelessWidget {
                         .listenable(),
                 builder: (BuildContext context,
                     Box<NewItemNotifcationModel> box, __) {
+                  if (box.values.isEmpty) {
+                    return NothingToShow(
+                      text: "no favorites",
+                      mainController: mainController,
+                    );
+                  }
                   return Column(
                     children: [
                       ...List.generate(
