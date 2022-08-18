@@ -38,8 +38,14 @@ class ChangeUsernameSetting extends GetxController {
       return;
     }
 
+    // Set new username to box
     localBox.put("username", newUsername);
+
+    // Going back
     Get.back();
+
+    // Showing snackbar
+    dialogsController.showSnackbar("done", "username modified successfully");
   }
 
   // Method handler for username text field

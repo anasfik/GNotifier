@@ -147,8 +147,12 @@ class NewNotificationController extends GetxController {
       notificationService.setPeriodically(newId, title, description, "$newId");
       // Going back
     }
+
     clear();
+    // going back
     Get.back();
+    // show snackbar
+    dialogsController.showSnackbar("done", "notification created successfully");
   }
 
   // Delete notification
@@ -165,6 +169,9 @@ class NewNotificationController extends GetxController {
 
     // Going back
     Get.back();
+
+    // showing snackbar
+    dialogsController.showSnackbar("done", "notification deleted successfully");
   }
 
   // This shows the bottom sheet for update title
@@ -351,6 +358,10 @@ class NewNotificationController extends GetxController {
 
     // Going back
     Get.back();
+
+    
+    // Showing snackbar
+    dialogsController.showSnackbar("done", "notification updated successfully");
   }
 
   // Method handler for title text field
