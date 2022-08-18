@@ -6,10 +6,10 @@ import '../../utils/AppColors.dart';
 
 class MainPage extends StatelessWidget {
   MainPage({Key? key}) : super(key: key);
-  final BottomBarController bottomBarController =
-      Get.put(BottomBarController());
   @override
   Widget build(BuildContext context) {
+  final BottomBarController bottomBarController =
+      Get.put(BottomBarController(context: context));
     return SafeArea(
       child: Scaffold(
         backgroundColor: Theme.of(context).backgroundColor,

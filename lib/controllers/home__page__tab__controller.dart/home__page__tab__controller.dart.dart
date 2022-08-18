@@ -11,12 +11,26 @@ import 'home__page__tab__errors_controller.dart';
 // TickerProvider help us listen to changes at 60fps or higher
 class BottomBarController extends GetxController
     with GetSingleTickerProviderStateMixin {
-  BottomBarController() {
+  late BuildContext context;
+  BottomBarController({required this.context}) {
     tabs = tabsIcons
         .map(
-          (icon) => Tab(
-            icon: Icon(
-              icon,
+          (item) => Tooltip(
+            message: item["tooltip"],
+            decoration: BoxDecoration(
+              color: Theme.of(context).primaryColor,
+              borderRadius: BorderRadius.circular(3),
+            ),
+            textStyle:  TextStyle(
+              color: Theme.of(context).backgroundColor,
+              fontSize: 12,
+            ),
+            margin: const EdgeInsets.only(bottom: 10),
+            padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 7),
+            child: Tab(
+              icon: Icon(
+                item["icon"],
+              ),
             ),
           ),
         )
@@ -32,11 +46,23 @@ class BottomBarController extends GetxController
   /// note: the number of tabIcons, tabScreens should be equal, otherwise the framework will throw error
   // and for production, no icon should not be repeated(why do you need duplicated icons in tabBar)
   // icons
-  List<IconData> tabsIcons = [
-    Icons.home,
-    Icons.search,
-    Icons.favorite,
-    Icons.settings,
+  List<Map<String, dynamic>> tabsIcons = [
+    {
+      "icon": Icons.home,
+      "tooltip": "Home",
+    },
+    {
+      "icon": Icons.search,
+      "tooltip": "Search",
+    },
+    {
+      "icon": Icons.favorite,
+      "tooltip": "Favorites",
+    },
+    {
+      "icon": Icons.settings,
+      "tooltip": "Settings",
+    },
   ];
 
   // screens
@@ -48,8 +74,8 @@ class BottomBarController extends GetxController
     SettingsScreen(),
   ];
 
-  //tabs to show, it's value is in the constructor block
-  late List<Tab> tabs;
+  //tabs wrapped with tooltip to show, it's value is in the constructor block
+  late List<Tooltip> tabs;
 ///////////////////////////////
 
   @override

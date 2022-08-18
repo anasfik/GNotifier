@@ -147,7 +147,7 @@ class NewNotificationController extends GetxController {
       notificationService.setPeriodically(newId, title, description, "$newId");
       // Going back
     }
-    clearTextController();
+    clear();
     Get.back();
   }
 
@@ -347,7 +347,7 @@ class NewNotificationController extends GetxController {
     }
 // Re init inputs
 
-    clearTextController();
+    clear();
 
     // Going back
     Get.back();
@@ -420,7 +420,7 @@ class NewNotificationController extends GetxController {
     super.onClose();
   }
 
-  clearTextController() {
+  clear() {
     titleController.text = "";
     descriptionController.text = "";
     titleWrittenLength = 0;

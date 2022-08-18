@@ -38,7 +38,7 @@ class BottomSheetWidget extends StatelessWidget {
       child: GetBuilder<NewNotificationController>(
         init: NewNotificationController(),
         builder: (newNotificationController) => Column(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           mainAxisSize: MainAxisSize.min,
           children: [
             if (forTitle) ...[
@@ -98,6 +98,7 @@ class BottomSheetWidget extends StatelessWidget {
             SizedBox(
               height: 20,
             ),
+            // ignore: avoid_unnecessary_containers
             Container(
               // this is for that the counter box will be aligned with success button
               // margin: EdgeInsets.only(right: 5),

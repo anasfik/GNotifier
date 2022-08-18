@@ -1,6 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:watch_it_later/controllers/settings__controller/change__username.dart';
 import 'package:watch_it_later/controllers/settings__controller/enable__sound.dart';
 import 'package:watch_it_later/controllers/settings__controller/show__on__lock__screen__setting.dart';
 
@@ -20,6 +21,8 @@ class SettingsScreen extends StatelessWidget {
   final ResetAllSettings resetAllSettings = Get.put(ResetAllSettings());
   @override
   Widget build(BuildContext context) {
+    final ChangeUsernameSetting changeUsernameSetting =
+        Get.put(ChangeUsernameSetting(context: context));
     return Container(
       width: double.infinity,
       margin: const EdgeInsets.symmetric(horizontal: 20),
@@ -82,18 +85,24 @@ class SettingsScreen extends StatelessWidget {
                   mainController: mainController,
                   description: "change username and profile image",
                   title: "username",
-                  onTap: () {},
+                  onTap: () {
+                    changeUsernameSetting.showEditUsernameBottomSheet();
+                  },
                 ),
                 GetBuilder<HideDeleteButtonForFavoritesSetting>(
                   init: HideDeleteButtonForFavoritesSetting(),
                   builder: (hidedeleteButtonForFavoritesSetting) {
                     return SettingCard(
-                      switchValue: hidedeleteButtonForFavoritesSetting.isDeleteButtonHidden,
+                      switchValue: hidedeleteButtonForFavoritesSetting
+                          .isDeleteButtonHidden,
                       hasSwitch: true,
                       onSwitchChanged: (boolValue) {
-                        hidedeleteButtonForFavoritesSetting.isDeleteButtonHidden = boolValue;
-                        hidedeleteButtonForFavoritesSetting.setToHideDeleteButton(
-                            hidedeleteButtonForFavoritesSetting.isDeleteButtonHidden);
+                        hidedeleteButtonForFavoritesSetting
+                            .isDeleteButtonHidden = boolValue;
+                        hidedeleteButtonForFavoritesSetting
+                            .setToHideDeleteButton(
+                                hidedeleteButtonForFavoritesSetting
+                                    .isDeleteButtonHidden);
                       },
                       icon: Icons.delete_forever,
                       mainController: mainController,
