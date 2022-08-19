@@ -29,6 +29,7 @@ class MainPage extends StatelessWidget {
                 splashColor: Colors.transparent,
               ),
               child: TabBar(
+                key: Key("tabBar"),
                 automaticIndicatorColorAdjustment: true,
                 indicator: PointTabIndicator(
                   position: PointTabIndicatorPosition.bottom,

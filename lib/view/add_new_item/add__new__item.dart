@@ -78,12 +78,13 @@ class AddNewItemScreen extends StatelessWidget {
                   init: NewNotificationController(),
                   builder: (newNotificationController) {
                     return CustomTextField(
+                      key: const Key("title field"),
                       counterTextColor: Theme.of(context).backgroundColor,
                       counterBpxColor: Theme.of(context).primaryColor,
                       textColor: Theme.of(context).primaryColor,
                       backgroundColor:
                           Theme.of(context).primaryColor.withOpacity(.2),
-                      key: newNotificationController.titleTextFieldKey,
+                      // key: newNotificationController.titleTextFieldKey,
                       showCounter: true,
                       counterBoxScale:
                           newNotificationController.titleCountBoxScale,
@@ -103,12 +104,13 @@ class AddNewItemScreen extends StatelessWidget {
                 GetBuilder<NewNotificationController>(
                   builder: (newNotificationController) {
                     return CustomTextField(
+                      key: const Key("description field"),
                       counterBpxColor: Theme.of(context).primaryColor,
                       counterTextColor: Theme.of(context).backgroundColor,
                       textColor: Theme.of(context).primaryColor,
                       backgroundColor:
                           Theme.of(context).primaryColor.withOpacity(.2),
-                      key: newNotificationController.descriptionTextFieldKey,
+                      // key: newNotificationController.descriptionTextFieldKey,
                       showCounter: true,
                       counterBoxScale:
                           newNotificationController.descriptionCountBoxScale,
@@ -135,6 +137,7 @@ class AddNewItemScreen extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Expanded(
+                          key: const Key("date icon"),
                           child: GestureDetector(
                             onTap: () async {
                               var gettedDate =
@@ -149,8 +152,11 @@ class AddNewItemScreen extends StatelessWidget {
                           ),
                         ),
                         Expanded(
+                                key: const Key("daily icon"),
+                          
                           child: GestureDetector(
                             onTap: () {
+                              
                               newNotificationController
                                   .toggleRepeatedOptionBoolean();
 
@@ -171,6 +177,8 @@ class AddNewItemScreen extends StatelessWidget {
                           ),
                         ),
                         Expanded(
+                                                          key: const Key("auto delete icon"),
+
                           child: GestureDetector(
                             onTap: () {
                               newNotificationController
@@ -198,6 +206,7 @@ class AddNewItemScreen extends StatelessWidget {
                 SizedBox(
                   width: double.infinity,
                   child: CustomButton(
+                    key: const Key("create button"),
                     onPressed: () {
                       newNotificationController.addNewNotification(
                         newNotificationController.titleController.text.trim(),

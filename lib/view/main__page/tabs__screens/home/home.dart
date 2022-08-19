@@ -49,6 +49,7 @@ class HomeScreen extends StatelessWidget {
 
                   // Add button
                   OpenContainerButton(
+                    key: const Key("create notification button"),
                     screenToOpen: AddNewItemScreen(),
                     icon: Icons.add,
                   )
