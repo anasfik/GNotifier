@@ -173,6 +173,7 @@ class GetStartedPage extends StatelessWidget {
                     height: 40,
                   ),
                   CustomButton(
+                      key: const Key("getStartedButton"),
                       radiusValue: 10,
                       shouldReverseColors: false,
                       onPressed: () {

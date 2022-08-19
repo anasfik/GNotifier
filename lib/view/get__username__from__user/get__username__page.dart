@@ -31,11 +31,14 @@ class GetUsernamePage extends StatelessWidget {
               children: [
                 const Spacer(),
                 // this should change to own logo
-                const FlutterLogo(size: 120),
+                const FlutterLogo(
+                  key: Key("app logo"),
+                  size: 120),
                 const Spacer(),
                 Column(
                   children: [
                     AutoSizeText(
+                      
                       mainController.allFirstWordLetterToUppercase(
                           "what we can call you ?"),
                       maxLines: 2,
@@ -50,6 +53,7 @@ class GetUsernamePage extends StatelessWidget {
                       init: GetUsernameController(),
                       builder: (getUsernameController) {
                         return CustomTextField(
+                          key: Key("get username text field"),
                           counterTextColor: AppColors.white,
                           counterBpxColor: AppColors.darkBlack,
                           textColor: AppColors.darkBlack,
@@ -78,6 +82,7 @@ class GetUsernamePage extends StatelessWidget {
                 GetBuilder<GetUsernameController>(
                   builder: (getUsernameController) {
                     return CustomButton(
+                      key: Key("get username button"),
                       isBtnColorForGetStarted: true,
                       onPressed: getUsernameController
                               .usernameTextFieldController.text
