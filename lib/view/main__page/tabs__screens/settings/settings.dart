@@ -231,7 +231,7 @@ class SettingsScreen extends StatelessWidget {
                   icon: Icons.restart_alt,
                   mainController: mainController,
                   description: "reset all settings to default",
-                  title: "reset ",
+                  title: "reset ",  
                   onTap: () {
                     resetAllSettings.reset();
                   },

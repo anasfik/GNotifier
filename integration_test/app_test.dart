@@ -9,6 +9,8 @@ import 'package:watch_it_later/view/general__widgets/button.dart';
 import 'package:watch_it_later/view/general__widgets/favorite_icon__button.dart';
 import 'package:watch_it_later/view/general__widgets/notification__card.dart';
 import 'package:watch_it_later/view/get__started/widgets/one_face_rounded_box.dart';
+import 'package:watch_it_later/view/main__page/tabs__screens/settings/widgets/setting__card.dart';
+import 'package:watch_it_later/view/notification__full__page/delete__button.dart';
 
 main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
@@ -42,7 +44,7 @@ main() {
     final Finder createButton = find.byKey(Key("create button"));
     final Finder notificationCard = find.byType(NotificationCard);
     final Finder searchTab = find.byIcon(Icons.search);
-    final Finder favoritesTab = find.byIcon(Icons.favorite);
+    final Finder favoritesTab = find.byTooltip("Favorites");
     final Finder settingsTab = find.byIcon(Icons.settings);
     final Finder homeTab = find.byIcon(Icons.home);
     final Finder searchField = find.byKey(Key("search field"));
@@ -53,6 +55,12 @@ main() {
         (widget) => widget is FavoriteIconButton && widget.isChecked == false);
     final Finder checkedFavoriteButton = find.byWidgetPredicate(
         (widget) => widget is FavoriteIconButton && widget.isChecked == true);
+    final Finder hideFavButtonSwitch = find.descendant(
+        of: find.byWidgetPredicate((widget) =>
+            widget is SettingCard && widget.icon == Icons.delete_forever),
+        matching: find.byType(Switch));
+    final Finder deleteButton = find.byType(DeleteButton);
+
     // check for the 4 decoration boxes
     expect(decorationBoxes, findsNWidgets(4));
     tester.printToConsole("found the 4 decoration boxes");
@@ -277,6 +285,7 @@ main() {
     expect(favoriteButton, findsWidgets);
     tester.printToConsole("found favorite button in the card");
 
+    await Future.delayed(Duration(seconds: 3));
     // click the favorite button
     await tester.tap(favoriteButton);
     await tester.pumpAndSettle();
@@ -292,11 +301,71 @@ main() {
     tester.printToConsole("found checked favorite button");
 
     // go now to favorites page
+
+    await tester.pumpAndSettle();
     await tester.tap(favoritesTab);
     await tester.pumpAndSettle();
 
     // check if there is a notification card in the favorites page
     expect(notificationCard, findsOneWidget);
     tester.printToConsole("found notification card in the favorites page");
+
+    // check if there is no favorite icon in the cards of favprites page
+    expect(favoriteButton, findsNothing);
+    tester.printToConsole(
+        "found no favorite button in the cards of favorites page");
+
+    // enter to the full page
+    await tester.tap(notificationCard);
+    await tester.pumpAndSettle();
+    tester.printToConsole("tapped notification card");
+
+    // check if there is a delete button
+    expect(deleteButton, findsNothing);
+    tester.printToConsole("not found delete button");
+    await Future.delayed(Duration(seconds: 3));
+
+    // go back
+    navigator.pop();
+    await tester.pump();
+    await tester.pumpAndSettle();
+    tester.printToConsole("popped");
+
+    // and now let's make it shown from settings
+    await tester.tap(settingsTab);
+    await tester.pumpAndSettle();
+    tester.printToConsole("tapped settings tab");
+
+    // click on the hide fav button settings card switch
+    await tester.tap(hideFavButtonSwitch);
+    await tester.pumpAndSettle();
+    tester.printToConsole("tapped hide fav button switch");
+
+    // go back to favorites page
+    await tester.tap(favoritesTab);
+    await tester.pumpAndSettle();
+    tester.printToConsole("tapped favorites tab");
+    await tester.pumpAndSettle();
+
+    // enter to the card
+    await tester.tap(notificationCard);
+    await tester.pumpAndSettle();
+    tester.printToConsole("tapped notification card");
+
+    // check if there is a delete button
+    expect(deleteButton, findsOneWidget);
+    tester.printToConsole(" found delete button");
+
+    // go now to homepage
+    await tester.tap(homeTab);
+    await tester.pumpAndSettle();
+    tester.printToConsole("tapped home tab");
+    await tester.pumpAndSettle();
+    await Future.delayed(Duration(seconds: 3));
+    // and click the card to enter to detail
+    await tester.tap(notificationCard);
+    await tester.pumpAndSettle();
+    tester.printToConsole("tapped notification card");
+    await Future.delayed(Duration(seconds: 3));
   });
 }

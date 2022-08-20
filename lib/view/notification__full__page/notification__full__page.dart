@@ -37,7 +37,7 @@ class NotificationFullPage extends StatelessWidget {
   // it's weird but I see it best solution to pass arguments to a page
   NewItemNotifcationModel gettedNotification = Get.arguments[0];
   int reversedIndex = Get.arguments[1];
-
+  bool showDeleteButtonOnFullPage = Get.arguments[2];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -231,9 +231,7 @@ class NotificationFullPage extends StatelessWidget {
                           .allFirstWordLetterToUppercase("update"),
                     ),
                   ),
-                  if (Get.arguments[2] == true ||
-                      hidedeleteButtonForFavoritesSetting
-                          .getIsHideDeleteButton()) ...[
+                  if (showDeleteButtonOnFullPage == true) ...[
                     Expanded(
                       flex: 1,
                       child: SizedBox(),
