@@ -12,7 +12,7 @@ class FavoriteIconButton extends StatefulWidget {
   bool isChecked;
   double size;
   final int passedIndex;
-  static FavoritesController favoritesController =
+  static final  FavoritesController favoritesController =
       Get.put(FavoritesController());
 
   @override
@@ -48,6 +48,13 @@ class _FavoriteIconButtonState extends State<FavoriteIconButton>
     });
 
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    favIconController.dispose();
+
+    super.dispose();
   }
 
   @override

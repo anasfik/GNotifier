@@ -6,6 +6,7 @@ import 'package:integration_test/integration_test.dart';
 
 import 'package:watch_it_later/main.dart' as app;
 import 'package:watch_it_later/view/general__widgets/button.dart';
+import 'package:watch_it_later/view/general__widgets/notification__card.dart';
 import 'package:watch_it_later/view/get__started/widgets/one_face_rounded_box.dart';
 
 main() {
@@ -27,7 +28,7 @@ main() {
     final Finder getUsernameButtonWithNonNullOnPressed = find.byWidgetPredicate(
         (widget) => widget is CustomButton && widget.onPressed != null);
     final Finder tabBar = find.byKey(Key("tabBar"));
-    final Finder textToCreateFirstNorification =
+    final Finder textToCreateFirstNotification =
         find.text("Press ' + ' To Create Your First Schedule Notification");
     final Finder addButton = find.byKey(Key("create notification button"));
 
@@ -38,6 +39,7 @@ main() {
     final Finder autoDeleteButton = find.byKey(Key("auto delete icon"));
     final Finder dateButton = find.byKey(Key("date icon"));
     final Finder createButton = find.byKey(Key("create button"));
+    final Finder notificationCard = find.byType(NotificationCard);
     // check for the 4 decoration boxes
     expect(decorationBoxes, findsNWidgets(4));
     tester.printToConsole("found the 4 decoration boxes");
@@ -91,7 +93,7 @@ main() {
     tester.printToConsole("found tab bar");
 
     // check if those texts are there
-    expect(textToCreateFirstNorification, findsOneWidget);
+    expect(textToCreateFirstNotification, findsOneWidget);
     tester.printToConsole("found text to create first notification");
     expect(find.text("Hey, Gwhyyy"), findsOneWidget);
     tester.printToConsole("found text \"Hey, Gwhyyy\"");
@@ -127,11 +129,16 @@ main() {
     await tester.pumpAndSettle();
     tester.printToConsole("typed in the description field");
 
+    // check if there is date, daily, auto delete widgets
+    expect(dailyButton, findsOneWidget);
+    expect(dateButton, findsOneWidget);
+    expect(autoDeleteButton, findsOneWidget);
+    tester.printToConsole("found the three, daily, auto delete, date");
+
     // tap date button date and time
     await tester.tap(dateButton);
     await tester.pumpAndSettle();
     await tester.pump();
-
     tester.printToConsole("tapped date button");
 
     // choose date
@@ -140,6 +147,7 @@ main() {
     await tester.pumpAndSettle();
     tester.printToConsole("entered date");
 
+    /// to do
     // choose time
     // await tester.tap(find.textContaining("2"));
     // await tester.pump();
@@ -163,10 +171,17 @@ main() {
 
     // click create button to create a new notification
     await tester.tap(createButton);
-    await tester.pumpAndSettle();
     tester.printToConsole("tapped create button");
+    await tester.pumpAndSettle();
 
-    // check if it go back to the home page
+    // check if it go back to the home page and created the notifications Card
+    expect(
+      notificationCard,
+      findsNWidgets(1),
+    );
+
+    // check if  is no longer in the ui because we have now somthing in the list
+    expect(textToCreateFirstNotification, findsNothing);
 
     await Future.delayed(Duration(seconds: 5));
   });
