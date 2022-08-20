@@ -231,7 +231,9 @@ class NotificationFullPage extends StatelessWidget {
                           .allFirstWordLetterToUppercase("update"),
                     ),
                   ),
-                  if (showDeleteButtonOnFullPage == true) ...[
+                  if (showDeleteButtonOnFullPage == true &&
+                      hidedeleteButtonForFavoritesSetting
+                          .getIsHideDeleteButton()) ...[
                     Expanded(
                       flex: 1,
                       child: SizedBox(),

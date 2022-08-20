@@ -76,7 +76,7 @@ class FavoritesScreen extends StatelessWidget {
                               title: currentNotification.title,
                               description: currentNotification.description,
                               isFavoriteButtonHidden: true,
-                              showDeleteButtonOnFullPage: false,
+                              showDeleteButtonOnFullPage: true,
                             );
                           }
 

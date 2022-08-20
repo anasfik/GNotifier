@@ -5,7 +5,7 @@ class HideDeleteButtonForFavoritesSetting extends GetxController {
   // bool
   static Box localBox = Hive.box("locals");
 
-  bool isDeleteButtonHidden = localBox.get("isDeleteButtonHidden") ?? true;
+  bool isDeleteButtonHidden = localBox.get("isDeleteButtonHidden") ?? false;
 
   //toggle method
   setToHideDeleteButton(boolValue) {

@@ -55,7 +55,7 @@ main() {
         (widget) => widget is FavoriteIconButton && widget.isChecked == false);
     final Finder checkedFavoriteButton = find.byWidgetPredicate(
         (widget) => widget is FavoriteIconButton && widget.isChecked == true);
-    final Finder hideFavButtonSwitch = find.descendant(
+    final Finder hideDeleteButtonForFavoritesSwitch = find.descendant(
         of: find.byWidgetPredicate((widget) =>
             widget is SettingCard && widget.icon == Icons.delete_forever),
         matching: find.byType(Switch));
@@ -337,9 +337,9 @@ main() {
     tester.printToConsole("tapped settings tab");
 
     // click on the hide fav button settings card switch
-    await tester.tap(hideFavButtonSwitch);
+    await tester.tap(hideDeleteButtonForFavoritesSwitch);
     await tester.pumpAndSettle();
-    tester.printToConsole("tapped hide fav button switch");
+    tester.printToConsole("tapped hide delete for fav button switch");
 
     // go back to favorites page
     await tester.tap(favoritesTab);
@@ -354,14 +354,22 @@ main() {
 
     // check if there is a delete button
     expect(deleteButton, findsOneWidget);
-    tester.printToConsole(" found delete button");
+    tester.printToConsole("found delete button");
+
+
+    // go back
+    navigator.pop();
+    await tester.pump();
+    await tester.pumpAndSettle();
+    tester.printToConsole("popped");
 
     // go now to homepage
     await tester.tap(homeTab);
     await tester.pumpAndSettle();
     tester.printToConsole("tapped home tab");
     await tester.pumpAndSettle();
-    await Future.delayed(Duration(seconds: 3));
+    
+    
     // and click the card to enter to detail
     await tester.tap(notificationCard);
     await tester.pumpAndSettle();
