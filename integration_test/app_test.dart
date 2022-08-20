@@ -6,6 +6,7 @@ import 'package:integration_test/integration_test.dart';
 
 import 'package:watch_it_later/main.dart' as app;
 import 'package:watch_it_later/view/general__widgets/button.dart';
+import 'package:watch_it_later/view/general__widgets/favorite_icon__button.dart';
 import 'package:watch_it_later/view/general__widgets/notification__card.dart';
 import 'package:watch_it_later/view/get__started/widgets/one_face_rounded_box.dart';
 
@@ -40,6 +41,18 @@ main() {
     final Finder dateButton = find.byKey(Key("date icon"));
     final Finder createButton = find.byKey(Key("create button"));
     final Finder notificationCard = find.byType(NotificationCard);
+    final Finder searchTab = find.byIcon(Icons.search);
+    final Finder favoritesTab = find.byIcon(Icons.favorite);
+    final Finder settingsTab = find.byIcon(Icons.settings);
+    final Finder homeTab = find.byIcon(Icons.home);
+    final Finder searchField = find.byKey(Key("search field"));
+    final Finder searchFieldHint = find.text("Search");
+    final Finder noSearchText = find.byKey(Key("nothing to show"));
+    final Finder lottieWidget = find.byKey(Key("lottie"));
+    final Finder favoriteButton = find.byWidgetPredicate(
+        (widget) => widget is FavoriteIconButton && widget.isChecked == false);
+    final Finder checkedFavoriteButton = find.byWidgetPredicate(
+        (widget) => widget is FavoriteIconButton && widget.isChecked == true);
     // check for the 4 decoration boxes
     expect(decorationBoxes, findsNWidgets(4));
     tester.printToConsole("found the 4 decoration boxes");
@@ -143,6 +156,7 @@ main() {
 
     // choose date
     await tester.tap(find.text((DateTime.now().day + 2).toString()));
+    print((DateTime.now().day + 2).toString());
     await tester.tap(find.text("OK"));
     await tester.pumpAndSettle();
     tester.printToConsole("entered date");
@@ -177,12 +191,112 @@ main() {
     // check if it go back to the home page and created the notifications Card
     expect(
       notificationCard,
-      findsNWidgets(1),
+      findsWidgets,
     );
 
-    // check if  is no longer in the ui because we have now somthing in the list
+    // check if  is no longer in the ui because we have now something in the list
     expect(textToCreateFirstNotification, findsNothing);
 
-    await Future.delayed(Duration(seconds: 5));
+    // check if title is correct
+    expect(find.text("We Will"), findsOneWidget);
+    // check if description is correct
+    expect(find.text("just a, exmaple test here"), findsOneWidget);
+    tester.printToConsole("found title and description");
+
+    // check if the date is correct
+    expect(find.textContaining("${DateTime.now().day + 2}"), findsOneWidget);
+    expect(find.textContaining("${DateTime.now().hour}"), findsOneWidget);
+    expect(find.textContaining("${DateTime.now().minute}"), findsOneWidget);
+    tester.printToConsole("found date");
+
+    // navigate between the tabs
+// search tab
+    await tester.tap(searchTab);
+    await tester.pumpAndSettle();
+
+// favorites tab
+    await tester.tap(favoritesTab);
+    await tester.pumpAndSettle();
+
+// settings tab
+
+    await tester.tap(settingsTab);
+    await tester.pumpAndSettle();
+
+// back to home tab
+    await tester.tap(homeTab);
+    await tester.pumpAndSettle();
+
+// navigate to search tab
+    await tester.tap(searchTab);
+    await tester.pumpAndSettle();
+
+// check if there is a searchField
+    expect(searchField, findsOneWidget);
+    tester.printToConsole("found search field");
+
+// check it's hint
+    expect(searchFieldHint, findsWidgets);
+    tester.printToConsole("found search field hint");
+
+    // check if nothing is there to show before we enter something
+    expect(noSearchText, findsOneWidget);
+    tester.printToConsole("found no search text");
+
+    // enter something in the search field
+    await tester.enterText(searchField, "we");
+    await tester.testTextInput.receiveAction(TextInputAction.done);
+    await tester.pump();
+    await tester.pumpAndSettle();
+    tester.printToConsole("entered text in the search field");
+
+    // check if there is a search result
+    expect(notificationCard, findsOneWidget);
+
+    // check if the no results text is hidden
+    expect(noSearchText, findsNothing);
+    tester.printToConsole("no search text gone");
+
+    // enter extra text in search bar to what we'll show
+    await tester.tap(searchField);
+    await tester.enterText(searchField, "xxxxxxxxxxxxxx");
+    await tester.testTextInput.receiveAction(TextInputAction.done);
+    await tester.pump();
+    tester.printToConsole("entered more text in the search field");
+
+    // check if there is no results text and no card and the result will be the lottie
+    expect(noSearchText, findsNothing);
+    expect(notificationCard, findsNothing);
+    expect(lottieWidget, findsOneWidget);
+
+    // go back to the home page
+    await tester.tap(homeTab);
+    await tester.pumpAndSettle();
+
+    // check if there is a favorite button in the card
+    expect(favoriteButton, findsWidgets);
+    tester.printToConsole("found favorite button in the card");
+
+    // click the favorite button
+    await tester.tap(favoriteButton);
+    await tester.pumpAndSettle();
+    tester.printToConsole("tapped favorite button");
+    await Future.delayed(Duration(seconds: 3));
+    await tester.pump();
+    await tester.pumpAndSettle();
+
+    tester.printToConsole("clicked the fav button");
+
+    // check if the isChecked changed ( the icon changed to fill )
+    expect(checkedFavoriteButton, findsOneWidget);
+    tester.printToConsole("found checked favorite button");
+
+    // go now to favorites page
+    await tester.tap(favoritesTab);
+    await tester.pumpAndSettle();
+
+    // check if there is a notification card in the favorites page
+    expect(notificationCard, findsOneWidget);
+    tester.printToConsole("found notification card in the favorites page");
   });
 }
