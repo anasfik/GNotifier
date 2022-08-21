@@ -5,11 +5,12 @@ import '../../controllers/home__page__tab__controller.dart/home__page__tab__cont
 import '../../utils/AppColors.dart';
 
 class MainPage extends StatelessWidget {
-  MainPage({Key? key}) : super(key: key);
+  MainPage({Key? key,}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
-  final BottomBarController bottomBarController =
-      Get.put(BottomBarController(context: context));
+    final BottomBarController bottomBarController =
+        Get.put(BottomBarController(context: context));
     return SafeArea(
       child: Scaffold(
         backgroundColor: Theme.of(context).backgroundColor,

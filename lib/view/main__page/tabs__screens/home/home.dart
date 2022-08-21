@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:watch_it_later/controllers/notifications__controllers/new__item__notification__controller.dart';
+import 'package:watch_it_later/controllers/notifications__controllers/new__item__notification__error__controller.dart';
 import 'package:watch_it_later/view/general__widgets/nothing__to__show__text.dart';
 import 'package:watch_it_later/view/main__page/tabs__screens/home/widgets/open__Container__button.dart';
 import '../../../../controllers/get__username__controller/get__username__controller.dart';
@@ -14,8 +15,13 @@ import 'widgets/username__welcome.dart';
 
 class HomeScreen extends StatelessWidget {
   HomeScreen({Key? key}) : super(key: key);
+
+  // notification payload
+  static dynamic payloadFromOpenedNotification = Get.arguments;
+
   // Dependency injection
-  final MainController mainController = Get.put(MainController());
+  final MainController mainController =
+      Get.put(MainController(payload: payloadFromOpenedNotification));
   final NewNotificationController newNotificationController =
       Get.put(NewNotificationController());
   final GetUsernameController getUsernameController =
@@ -40,7 +46,6 @@ class HomeScreen extends StatelessWidget {
                 children: [
                   // Avatar
                   GestureDetector(
-                    onTap: () {},
                     child: const CircleAvatar(
                       radius: 25,
                       backgroundImage: AssetImage("assets/images/avatar.png"),

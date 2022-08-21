@@ -45,7 +45,7 @@ class ChangeUsernameSetting extends GetxController {
     Get.back();
 
     // Showing snackbar
-    dialogsController.showSnackbar("done", "username modified successfully");
+    dialogsController.showSnackbar( "username modified successfully");
   }
 
   // Method handler for username text field

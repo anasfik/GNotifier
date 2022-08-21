@@ -300,4 +300,9 @@ class NotificationService {
 
     return notificationAppLaunchDetails;
   }
+
+  Future<dynamic> getNotificationAppLaunchDetails() async {
+    return await flutterLocalNotificationsPlugin
+        .getNotificationAppLaunchDetails();
+  }
 }

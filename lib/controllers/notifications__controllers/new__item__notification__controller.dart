@@ -95,13 +95,13 @@ class NewNotificationController extends GetxController {
       return;
     }
 
-    // get back if in somehow the user choosed a date in the past
+    // Get back if in somehow the user choosed a date in the past
     if (checkFullTimeValidity(date)) {
       checkFullTimeValidityDialog();
       return;
     }
 
-    // add to box then
+    // Add to box then
     newNotificationsBox.add(
       NewItemNotifcationModel(
         title,
@@ -152,7 +152,7 @@ class NewNotificationController extends GetxController {
     // going back
     Get.back();
     // show snackbar
-    dialogsController.showSnackbar("done", "notification created successfully");
+    dialogsController.showSnackbar("created successfully");
   }
 
   // Delete notification
@@ -171,7 +171,7 @@ class NewNotificationController extends GetxController {
     Get.back();
 
     // showing snackbar
-    dialogsController.showSnackbar("done", "notification deleted successfully");
+    dialogsController.showSnackbar("deleted successfully");
   }
 
   // This shows the bottom sheet for update title
@@ -359,9 +359,8 @@ class NewNotificationController extends GetxController {
     // Going back
     Get.back();
 
-    
     // Showing snackbar
-    dialogsController.showSnackbar("done", "notification updated successfully");
+    dialogsController.showSnackbar("updated successfully");
   }
 
   // Method handler for title text field

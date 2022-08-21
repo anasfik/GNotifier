@@ -30,8 +30,11 @@ class FavoritesController extends GetxController {
     // after the toggle we need to put it in the context of the box so it change in the db also so if we kill the app it still in the box
     // putAt method is like it update the box NewItemNotifcationModel
     newNotificationsBox.putAt(passedIndex, currentNotification);
-  }
 
+    if (currentNotification.isFavorite!) {
+      dialogsController.showSnackbar("added to favorites");
+    }
+  }
 
   // To-do: handle exceptions
 }

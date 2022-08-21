@@ -1,14 +1,28 @@
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
+import 'package:watch_it_later/controllers/notifications__controllers/new__item__notification__error__controller.dart';
 
 class MainController extends GetxController {
-// getting the locals Box
+  MainController({this.payload});
 
   // Variables
+  String? payload;
   late bool isNewUsingApp;
 
+  @override
+  void onReady() {
+    if (payload != null) {
+      dialogsController.showInfo(
+        "well sone",
+        "the notification has completed it's mission, so it's deleted",
+      );
+    }
+    super.onReady();
+  }
+
+  // Watch user status
   bool getUserStatus() {
-    // getting the opened boc
+// getting the locals Box
 
     Box localBox = Hive.box("locals");
     // getting the value from the box if it's not null(if the user is old one), if it's null, the user is new one

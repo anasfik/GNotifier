@@ -16,6 +16,6 @@ class DeleteAllSetting extends GetxController {
 
     
     // showing snackbar
-    dialogsController.showSnackbar("done", "all notifications deleted successfully");
+    dialogsController.showSnackbar("all notifications deleted successfully");
   }
 }

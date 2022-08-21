@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import '../../utils/AppColors.dart';
 import '../../view/general__widgets/dialog__text__button.dart';
 import '../main__controller.dart';
-import 'package:fluttertoast/fluttertoast.dart';
+import 'package:oktoast/oktoast.dart';
 
 class DialogsController extends GetxController {
   // Dependencies injection
@@ -110,43 +110,52 @@ class DialogsController extends GetxController {
     );
   }
 
-  showSnackbar(String title, String message) {
-    // Get.snackbar(
-    //   "",
-    //   "",
-    //   titleText: Text(
-    //     mainController.allFirstWordLetterToUppercase(title),
-    //     style: TextStyle(
-    //       color: Theme.of(Get.overlayContext!).backgroundColor,
-    //       fontSize: 18,
-    //       fontWeight: FontWeight.bold,
-    //     ),
-    //   ),
-    //   messageText: Text(
-    //     mainController.allFirstWordLetterToUppercase(message),
-    //     style: TextStyle(
-    //       color: Theme.of(Get.overlayContext!).backgroundColor.withOpacity(.8),
-    //     ),
-    //   ),
-    //   backgroundColor: Theme.of(Get.overlayContext!).primaryColor,
-    //   barBlur: 0,
-    //   animationDuration: const Duration(milliseconds: 500),
-    //   duration: const Duration(milliseconds: 3500),
-    //   isDismissible: true,
-    //   borderRadius: 100,
-    //   colorText: Theme.of(Get.overlayContext!).backgroundColor,
-    //   forwardAnimationCurve: Curves.easeInOutBack,
-    //   icon: Icon(
-    //     Icons.check,
-    //     color: Theme.of(Get.overlayContext!).backgroundColor,
-    //     size: 18,
-    //   ),
-    //   reverseAnimationCurve: Curves.easeInOutBack,
-    //   margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-    //   padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 5),
-    //   overlayBlur: 0,
-    //   dismissDirection: DismissDirection.horizontal,
-    //   shouldIconPulse: false,
-    // );
+  showSnackbar(String title) {
+    showToastWidget(
+      Container(
+        padding: const EdgeInsets.only(
+          top: 14,
+          bottom: 14,
+          left: 20,
+          right: 10,
+        ),
+        margin: const EdgeInsets.symmetric(horizontal: 30),
+        decoration: BoxDecoration(
+          color: Theme.of(Get.overlayContext!).primaryColor,
+          borderRadius: BorderRadius.circular(50),
+        ),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Icon(
+              Icons.check,
+              color: Theme.of(Get.overlayContext!).backgroundColor,
+            ),
+            const Spacer(),
+            Text(
+              mainController.allFirstWordLetterToUppercase(title),
+              style: TextStyle(
+                fontWeight: FontWeight.w400,
+                color: Theme.of(Get.overlayContext!).backgroundColor,
+                fontSize: 14,
+              ),
+              textAlign: TextAlign.left,
+              maxLines: 2,
+            ),
+            const Spacer(
+              flex: 3,
+            ),
+            const Spacer(
+              flex: 2,
+            ),
+          ],
+        ),
+      ),
+      duration: const Duration(seconds: 2),
+      textDirection: TextDirection.ltr,
+      position: ToastPosition.top,
+    );
   }
 }

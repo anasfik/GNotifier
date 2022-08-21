@@ -9,7 +9,7 @@ class ResetAllSettings extends GetxController {
     bool isNewUsingApp = localBox.get('isNewUsingApp');
     await localBox.clear();
     if (localBox.isEmpty) {
-      dialogsController.showSnackbar("done", "settings reset successfully");
+      dialogsController.showSnackbar("settings reset successfully");
     }
     localBox.put("username", username);
     localBox.put("isNewUsingApp", isNewUsingApp);

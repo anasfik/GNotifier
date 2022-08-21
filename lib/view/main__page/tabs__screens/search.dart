@@ -43,7 +43,7 @@ class SearchScreen extends StatelessWidget {
                     margin: const EdgeInsets.only(right: 20),
                     child: CustomTextField(
                       key: const Key("search field"),
-                          counterTextColor: Theme.of(context).primaryColor,
+                      counterTextColor: Theme.of(context).primaryColor,
                       counterBpxColor: Theme.of(context).backgroundColor,
                       textColor: Theme.of(context).primaryColor,
                       backgroundColor:
@@ -61,7 +61,7 @@ class SearchScreen extends StatelessWidget {
                   //
                   if (searchController.searchBarController.text.isEmpty) ...[
                     NothingToShow(
-                      key: const  Key("nothing to show"),
+                      key: const Key("nothing to show"),
                       text: "search for anything of your notifications",
                       mainController: mainController,
                     )
@@ -119,6 +119,7 @@ class SearchScreen extends StatelessWidget {
                             //
                             int reversedIndex = filteredList.length - index - 1;
                             return NotificationCard(
+                              showDeleteButtonOnFullPage: true,
                               currentNotification: filteredList[reversedIndex]
                                   as NewItemNotifcationModel,
                               title: filteredList[reversedIndex].title,

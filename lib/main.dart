@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:oktoast/oktoast.dart';
 import 'package:watch_it_later/controllers/settings__controller/dark__mode_setting.dart';
 import 'package:watch_it_later/controllers/main__controller.dart';
 import 'package:watch_it_later/utils/AppTexts.dart';
@@ -51,20 +52,22 @@ class WatchItLaterApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(
-      defaultTransition: Transition.native,
-      getPages: [
-        GetPage(name: '/getUsernamePage', page: () => GetUsernamePage()),
-        GetPage(name: ('/mainPage'), page: () => MainPage()),
-        GetPage(
-            name: '/notificationFullPage', page: () => NotificationFullPage()),
-      ],
-      debugShowCheckedModeBanner: false,
-      title: AppTexts.mainTitle,
-      theme: AppThemes(context: context).lightTheme,
-      darkTheme: AppThemes(context: context).darkTheme,
-      themeMode: themeController.getPreviousTheme(),
-      home: mainController.getUserStatus() ? GetStartedPage() : MainPage(),
+    return OKToast(
+      child: GetMaterialApp(
+        defaultTransition: Transition.native,
+        getPages: [
+          GetPage(name: '/getUsernamePage', page: () => GetUsernamePage()),
+          GetPage(name: ('/mainPage'), page: () => MainPage()),
+          GetPage(
+              name: '/notificationFullPage', page: () => NotificationFullPage()),
+        ],
+        debugShowCheckedModeBanner: false,
+        title: AppTexts.mainTitle,
+        theme: AppThemes(context: context).lightTheme,
+        darkTheme: AppThemes(context: context).darkTheme,
+        themeMode: themeController.getPreviousTheme(),
+        home: mainController.getUserStatus() ? GetStartedPage() : MainPage(),
+      ),
     );
   }
 }
