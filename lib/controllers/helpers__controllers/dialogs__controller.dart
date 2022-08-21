@@ -67,31 +67,33 @@ class DialogsController extends GetxController {
       backgroundColor: AppColors.lightGrey,
       radius: 5,
       contentPadding: const EdgeInsets.only(right: 20),
-      content: Container(
-        padding: const EdgeInsets.only(left: 20, right: 20),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            AutoSizeText(
-              mainController.allFirstWordLetterToUppercase(infoTitle),
-              style: TextStyle(
-                color: AppColors.darkBlack,
-                fontSize: 22,
-                fontWeight: FontWeight.bold,
+      content: RepaintBoundary(
+        child: Container(
+          padding: const EdgeInsets.only(left: 20, right: 20),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              AutoSizeText(
+                mainController.allFirstWordLetterToUppercase(infoTitle),
+                style: TextStyle(
+                  color: AppColors.darkBlack,
+                  fontSize: 22,
+                  fontWeight: FontWeight.bold,
+                ),
+                maxLines: 2,
               ),
-              maxLines: 2,
-            ),
-            const SizedBox(height: 10),
-            AutoSizeText(
-              mainController.allFirstWordLetterToUppercase(infoText),
-              style: TextStyle(
-                color: AppColors.darkBlack,
-                fontSize: 17,
-                fontWeight: FontWeight.w500,
+              const SizedBox(height: 10),
+              AutoSizeText(
+                mainController.allFirstWordLetterToUppercase(infoText),
+                style: TextStyle(
+                  color: AppColors.darkBlack,
+                  fontSize: 17,
+                  fontWeight: FontWeight.w500,
+                ),
+                maxLines: 3,
               ),
-              maxLines: 3,
-            ),
-          ],
+            ],
+          ),
         ),
       ),
       actions: [

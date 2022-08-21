@@ -36,7 +36,7 @@ class CustomButton extends StatelessWidget {
                   ? AppColors.darkBlack
                   : Theme.of(context).primaryColor
               : isDelete
-                  ? Color.fromARGB(255, 255, 190, 184)
+                  ? const Color.fromARGB(255, 255, 190, 184)
                   : AppColors.lightGrey,
           onPrimary: shouldReverseColors
               ? AppColors.white

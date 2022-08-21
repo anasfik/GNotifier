@@ -73,7 +73,7 @@ class SearchScreen extends StatelessWidget {
                           .isEmpty) ...[
                     const SizedBox(height: 100),
                     Center(
-                      child: Container(
+                      child: SizedBox(
                         width: double.infinity,
                         child: Column(
                           key: const Key("lottie"),
@@ -104,7 +104,7 @@ class SearchScreen extends StatelessWidget {
                     Column(
                       children: [
                         const SizedBox(height: 10),
-                        Divider(),
+                        const Divider(),
                         const SizedBox(height: 20),
                         ...List.generate(
                           searchController

@@ -54,12 +54,14 @@ class SettingCard extends StatelessWidget {
                     size: 35,
                   ),
                   if (hasSwitch) ...[
-                    Switch(
-                      value: switchValue ?? false,
-                      onChanged: onSwitchChanged,
-                      inactiveThumbColor: Colors.grey,
-                      inactiveTrackColor: Colors.grey.withOpacity(.8),
-                      activeColor: AppColors.darkBlack,
+                    RepaintBoundary(
+                      child: Switch(
+                        value: switchValue ?? false,
+                        onChanged: onSwitchChanged,
+                        inactiveThumbColor: Colors.grey,
+                        inactiveTrackColor: Colors.grey.withOpacity(.8),
+                        activeColor: AppColors.darkBlack,
+                      ),
                     ),
                   ]
                 ],

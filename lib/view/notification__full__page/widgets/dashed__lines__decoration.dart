@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../../../utils/AppColors.dart';
 
 class DashedLinesDecoration extends StatelessWidget {
   const DashedLinesDecoration({Key? key}) : super(key: key);

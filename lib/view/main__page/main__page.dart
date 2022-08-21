@@ -3,16 +3,18 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../controllers/helpers__controllers/on__notification__click.dart';
 import '../../controllers/home__page__tab__controller.dart/home__page__tab__controller.dart.dart';
-import '../../utils/AppColors.dart';
 
 class MainPage extends StatelessWidget {
-  MainPage({Key? key,}) : super(key: key);
+  MainPage({
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final BottomBarController bottomBarController =
         Get.put(BottomBarController(context: context));
-        final OnNotificationClick onNotificationClick = Get.put(OnNotificationClick(payload: Get.arguments));
+    final OnNotificationClick onNotificationClick =
+        Get.put(OnNotificationClick(payload: Get.arguments));
     return SafeArea(
       child: Scaffold(
         backgroundColor: Theme.of(context).backgroundColor,
@@ -31,20 +33,22 @@ class MainPage extends StatelessWidget {
                 highlightColor: Colors.transparent,
                 splashColor: Colors.transparent,
               ),
-              child: TabBar(
-                key: Key("tabBar"),
-                automaticIndicatorColorAdjustment: true,
-                indicator: PointTabIndicator(
-                  position: PointTabIndicatorPosition.bottom,
-                  color: Theme.of(context).indicatorColor,
-                  insets: const EdgeInsets.only(bottom: 10),
+              child: RepaintBoundary(
+                child: TabBar(
+                  key: const Key("tabBar"),
+                  automaticIndicatorColorAdjustment: true,
+                  indicator: PointTabIndicator(
+                    position: PointTabIndicatorPosition.bottom,
+                    color: Theme.of(context).indicatorColor,
+                    insets: const EdgeInsets.only(bottom: 10),
+                  ),
+                  labelStyle: const TextStyle(fontSize: 12),
+                  controller: bottomBarController.tabController,
+                  tabs: bottomBarController.tabs,
+                  unselectedLabelColor:
+                      Theme.of(context).indicatorColor.withOpacity(.6),
+                  labelColor: Theme.of(context).indicatorColor,
                 ),
-                labelStyle: const TextStyle(fontSize: 12),
-                controller: bottomBarController.tabController,
-                tabs: bottomBarController.tabs,
-                unselectedLabelColor:
-                    Theme.of(context).indicatorColor.withOpacity(.6),
-                labelColor: Theme.of(context).indicatorColor,
               ),
             ),
           ),

@@ -24,6 +24,14 @@ class OpenContainerButton extends StatelessWidget {
         openBuilder: (context, action) {
           return screenToOpen;
         },
+        closedColor: Theme.of(context).backgroundColor,
+        closedShape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(15),
+        ),
+        openColor: Theme.of(context).backgroundColor,
+        transitionDuration: const Duration(milliseconds: 400),
+        transitionType: ContainerTransitionType.fadeThrough,
+        
       ),
     );
   }

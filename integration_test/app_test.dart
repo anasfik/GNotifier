@@ -164,7 +164,6 @@ main() {
 
     // choose date
     await tester.tap(find.text((DateTime.now().day + 2).toString()));
-    print((DateTime.now().day + 2).toString());
     await tester.tap(find.text("OK"));
     await tester.pumpAndSettle();
     tester.printToConsole("entered date");
@@ -310,7 +309,7 @@ main() {
     expect(notificationCard, findsOneWidget);
     tester.printToConsole("found notification card in the favorites page");
 
-    // check if there is no favorite icon in the cards of favprites page
+    // check if there is no favorite icon in the cards of favorites page
     expect(favoriteButton, findsNothing);
     tester.printToConsole(
         "found no favorite button in the cards of favorites page");

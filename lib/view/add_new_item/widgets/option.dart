@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:watch_it_later/controllers/main__controller.dart';
 
 import 'options__title.dart';
 
@@ -16,19 +15,21 @@ class Option extends StatelessWidget {
   final String text;
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        Icon(
-          icon,
-          size: 35,
-        ),
-        OptionTitle(
-          mainController: mainController,
-          text: text,
-        )
-      ],
+    return RepaintBoundary(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Icon(
+            icon,
+            size: 35,
+          ),
+          OptionTitle(
+            mainController: mainController,
+            text: text,
+          )
+        ],
+      ),
     );
   }
 }

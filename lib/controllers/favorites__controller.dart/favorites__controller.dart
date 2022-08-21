@@ -1,5 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
 import 'package:watch_it_later/model/newItemNotificationModel.dart';

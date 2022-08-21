@@ -1,13 +1,11 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
 import 'package:watch_it_later/controllers/main__controller.dart';
 
 import '../../../controllers/notifications__controllers/new__item__notification__controller.dart';
 import '../../../model/newItemNotificationModel.dart';
-import '../../../utils/AppColors.dart';
 import '../../general__widgets/action__button.dart';
 import '../../general__widgets/text__field.dart';
 

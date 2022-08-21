@@ -1,13 +1,10 @@
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:watch_it_later/controllers/main__controller.dart';
-import 'package:watch_it_later/utils/AppColors.dart';
 import 'package:watch_it_later/view/add_new_item/widgets/description.dart';
 import 'package:watch_it_later/view/add_new_item/widgets/option.dart';
 import 'package:watch_it_later/view/general__widgets/button.dart';
 import 'package:watch_it_later/view/general__widgets/text__field.dart';
-import '../../controllers/helpers__controllers/TextEditingsClearController.dart';
 import '../../controllers/notifications__controllers/date__Controller.dart';
 import '../../controllers/notifications__controllers/new__item__notification__controller.dart';
 import '../general__widgets/action__button.dart';
@@ -152,11 +149,9 @@ class AddNewItemScreen extends StatelessWidget {
                           ),
                         ),
                         Expanded(
-                                key: const Key("daily icon"),
-                          
+                          key: const Key("daily icon"),
                           child: GestureDetector(
                             onTap: () {
-                              
                               newNotificationController
                                   .toggleRepeatedOptionBoolean();
 
@@ -177,8 +172,7 @@ class AddNewItemScreen extends StatelessWidget {
                           ),
                         ),
                         Expanded(
-                                                          key: const Key("auto delete icon"),
-
+                          key: const Key("auto delete icon"),
                           child: GestureDetector(
                             onTap: () {
                               newNotificationController

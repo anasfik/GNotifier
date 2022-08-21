@@ -53,7 +53,7 @@ class GetUsernamePage extends StatelessWidget {
                       init: GetUsernameController(),
                       builder: (getUsernameController) {
                         return CustomTextField(
-                          key: Key("get username text field"),
+                          key: const Key("get username text field"),
                           counterTextColor: AppColors.white,
                           counterBpxColor: AppColors.darkBlack,
                           textColor: AppColors.darkBlack,
@@ -82,7 +82,7 @@ class GetUsernamePage extends StatelessWidget {
                 GetBuilder<GetUsernameController>(
                   builder: (getUsernameController) {
                     return CustomButton(
-                      key: Key("get username button"),
+                      key: const Key("get username button"),
                       isBtnColorForGetStarted: true,
                       onPressed: getUsernameController
                               .usernameTextFieldController.text

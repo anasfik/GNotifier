@@ -26,7 +26,7 @@ class FavoriteBox extends StatelessWidget {
         children: [
           Image.asset(dataList[indexPass]["image"], fit: BoxFit.cover),
           Material(
-            animationDuration: Duration(milliseconds: 400),
+            animationDuration: const Duration(milliseconds: 400),
             color: Theme.of(context).primaryColor.withOpacity(.55),
             child: InkWell(
               onTap: () {},

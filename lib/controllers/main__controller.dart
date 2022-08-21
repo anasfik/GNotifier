@@ -1,6 +1,5 @@
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
-import 'package:watch_it_later/controllers/notifications__controllers/new__item__notification__error__controller.dart';
 
 class MainController extends GetxController {
   MainController({this.payload});
@@ -31,7 +30,7 @@ class MainController extends GetxController {
     // in case of last word is " " it makes an error so first :
     if (text[text.length - 1] == " ") {
       return text.trim().split(' ').map((word) {
-        return word[0].toUpperCase() + word.substring(1) + " ";
+        return "${word[0].toUpperCase()}${word.substring(1)} ";
       }).join(' ');
     } else {
       return text.split(' ').map((word) {

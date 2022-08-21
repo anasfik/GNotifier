@@ -1,11 +1,7 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 
-import '../../utils/AppColors.dart';
-
 class CustomTextField extends StatelessWidget {
-  CustomTextField({
+  const CustomTextField({
     Key? key,
     required this.controller,
     required this.hintText,
@@ -25,16 +21,16 @@ class CustomTextField extends StatelessWidget {
   })  : assert(hintText != null, "hintText must not be null"),
         super(key: key);
 
-  void Function(String)? onChanged;
-  String? hintText;
-  Icon? suffixIcon;
-  bool showCounter;
-  EdgeInsets contentPadding;
-  TextEditingController? controller;
-  int? maxLength, titleWrittenLength;
-  double? counterBoxScale;
-  Duration animationDuration;
-  Color textColor,
+  final void Function(String)? onChanged;
+  final String? hintText;
+  final Icon? suffixIcon;
+  final bool showCounter;
+  final EdgeInsets contentPadding;
+  final TextEditingController? controller;
+  final int? maxLength, titleWrittenLength;
+  final double? counterBoxScale;
+  final Duration animationDuration;
+  final Color textColor,
       backgroundColor,
       counterBpxColor,
       counterTextColor,

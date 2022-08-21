@@ -9,7 +9,6 @@ import 'package:timezone/data/latest.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
 import 'package:flutter_native_timezone/flutter_native_timezone.dart';
 import 'package:watch_it_later/controllers/notifications__controllers/new__item__notification__controller.dart';
-import 'package:watch_it_later/controllers/notifications__controllers/new__item__notification__error__controller.dart';
 import 'package:watch_it_later/controllers/settings__controller/show__on__lock__screen__setting.dart';
 
 import 'package:watch_it_later/view/main__page/main__page.dart';
@@ -19,7 +18,7 @@ import '../controllers/settings__controller/enable__sound.dart';
 import '../controllers/settings__controller/enable__vibration.dart';
 import '../model/newItemNotificationModel.dart';
 
-/// PLEASE DONT'T RELY ON THIS IF YOUR NEW TO USING THOSE PACKAGE, CHECK THE DOCS FIRST, THEN TRY WORKINGWITH THIS .
+/// PLEASE DON'T RELY ON THIS IF YOUR NEW TO USING THOSE PACKAGE, CHECK THE DOCS FIRST, THEN TRY WORKING WITH THIS .
 class NotificationService {
   static ShowOnLockScreenSetting showOnLockScreenSetting =
       Get.put(ShowOnLockScreenSetting());
