@@ -1,6 +1,7 @@
 import 'package:flutter_point_tab_bar/pointTabBar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../../controllers/helpers__controllers/on__notification__click.dart';
 import '../../controllers/home__page__tab__controller.dart/home__page__tab__controller.dart.dart';
 import '../../utils/AppColors.dart';
 
@@ -11,6 +12,7 @@ class MainPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final BottomBarController bottomBarController =
         Get.put(BottomBarController(context: context));
+        final OnNotificationClick onNotificationClick = Get.put(OnNotificationClick(payload: Get.arguments));
     return SafeArea(
       child: Scaffold(
         backgroundColor: Theme.of(context).backgroundColor,

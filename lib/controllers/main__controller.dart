@@ -9,16 +9,6 @@ class MainController extends GetxController {
   String? payload;
   late bool isNewUsingApp;
 
-  @override
-  void onReady() {
-    if (payload != null) {
-      dialogsController.showInfo(
-        "well sone",
-        "the notification has completed it's mission, so it's deleted",
-      );
-    }
-    super.onReady();
-  }
 
   // Watch user status
   bool getUserStatus() {

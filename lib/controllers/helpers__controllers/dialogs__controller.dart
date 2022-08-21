@@ -89,7 +89,7 @@ class DialogsController extends GetxController {
                 fontSize: 17,
                 fontWeight: FontWeight.w500,
               ),
-              maxLines: 2,
+              maxLines: 3,
             ),
           ],
         ),
@@ -122,7 +122,7 @@ class DialogsController extends GetxController {
         margin: const EdgeInsets.symmetric(horizontal: 30),
         decoration: BoxDecoration(
           color: Theme.of(Get.overlayContext!).primaryColor,
-          borderRadius: BorderRadius.circular(50),
+          borderRadius: BorderRadius.circular(40),
         ),
         child: Row(
           mainAxisSize: MainAxisSize.min,

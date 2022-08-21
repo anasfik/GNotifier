@@ -9,6 +9,7 @@ import 'package:timezone/data/latest.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
 import 'package:flutter_native_timezone/flutter_native_timezone.dart';
 import 'package:watch_it_later/controllers/notifications__controllers/new__item__notification__controller.dart';
+import 'package:watch_it_later/controllers/notifications__controllers/new__item__notification__error__controller.dart';
 import 'package:watch_it_later/controllers/settings__controller/show__on__lock__screen__setting.dart';
 
 import 'package:watch_it_later/view/main__page/main__page.dart';
@@ -263,11 +264,7 @@ class NotificationService {
       newNotificationsBox
           .deleteAt(newNotificationsBoxValues.toList().indexOf(matchingItem));
 
-      await Get.defaultDialog(
-        title:
-            "the mission of this notification is completed, so it's automatically deleted",
-        content: Text("$payload"),
-      );
+      Get.offNamed("mainPage", arguments: payload);
     }
   }
 
@@ -301,8 +298,9 @@ class NotificationService {
     return notificationAppLaunchDetails;
   }
 
-  Future<dynamic> getNotificationAppLaunchDetails() async {
-    return await flutterLocalNotificationsPlugin
-        .getNotificationAppLaunchDetails();
+  checkIfNotificationOpenedTheApp() async {
+    final NotificationAppLaunchDetails? details =
+        await flutterLocalNotificationsPlugin.getNotificationAppLaunchDetails();
+    return details!.didNotificationLaunchApp;
   }
 }
