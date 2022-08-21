@@ -127,26 +127,20 @@ class NewNotificationController extends GetxController {
     Duration difference = date.difference(DateTime.now());
 
     // Create it
-    if (isRepeated == false) {
-      notificationService.createScheduledNotification(
-        newId,
-        title,
-        description,
-        tz.TZDateTime.now(tz.local).add(
-          Duration(
-            seconds: 3,
-          ),
-        ),
-        "$newId",
-      );
-    }
-
 //
 
-    if (isRepeated) {
-      notificationService.setPeriodically(newId, title, description, "$newId");
-      // Going back
-    }
+    notificationService.createScheduledNotification(
+      newId,
+      title,
+      description,
+      tz.TZDateTime.now(tz.local).add(
+        const Duration(
+          seconds: 3,
+        ),
+      ),
+      "$newId",
+      isRepeated,
+    );
 
     clear();
     // going back
@@ -340,6 +334,7 @@ class NewNotificationController extends GetxController {
           ),
         ),
         "${newNotificationsBox.getAt(index)!.id}",
+        isRepeated,
       );
     }
 
