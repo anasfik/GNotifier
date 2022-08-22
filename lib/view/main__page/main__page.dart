@@ -5,19 +5,23 @@ import '../../controllers/helpers__controllers/on__notification__click.dart';
 import '../../controllers/home__page__tab__controller.dart/home__page__tab__controller.dart.dart';
 
 class MainPage extends StatelessWidget {
-  MainPage({
+  const MainPage({
     Key? key,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    // should be here
+    ThemeData theme = Theme.of(context);
+
     final BottomBarController bottomBarController =
         Get.put(BottomBarController(context: context));
-    final OnNotificationClick onNotificationClick =
-        Get.put(OnNotificationClick(payload: Get.arguments));
+    // even this is marked unused, it's not
+    final onNotificationClick =
+        Get.lazyPut(() => OnNotificationClick(payload: Get.arguments));
     return SafeArea(
       child: Scaffold(
-        backgroundColor: Theme.of(context).backgroundColor,
+        backgroundColor: theme.backgroundColor,
         extendBody: true,
         bottomNavigationBar: Container(
           height: 60,
@@ -27,7 +31,7 @@ class MainPage extends StatelessWidget {
             borderRadius: BorderRadius.circular(50),
           ),
           child: BottomAppBar(
-            color: Theme.of(context).primaryColor,
+            color: theme.primaryColor,
             child: Theme(
               data: ThemeData(
                 highlightColor: Colors.transparent,
@@ -39,15 +43,14 @@ class MainPage extends StatelessWidget {
                   automaticIndicatorColorAdjustment: true,
                   indicator: PointTabIndicator(
                     position: PointTabIndicatorPosition.bottom,
-                    color: Theme.of(context).indicatorColor,
+                    color: theme.indicatorColor,
                     insets: const EdgeInsets.only(bottom: 10),
                   ),
                   labelStyle: const TextStyle(fontSize: 12),
                   controller: bottomBarController.tabController,
                   tabs: bottomBarController.tabs,
-                  unselectedLabelColor:
-                      Theme.of(context).indicatorColor.withOpacity(.6),
-                  labelColor: Theme.of(context).indicatorColor,
+                  unselectedLabelColor: theme.indicatorColor.withOpacity(.6),
+                  labelColor: theme.indicatorColor,
                 ),
               ),
             ),

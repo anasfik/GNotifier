@@ -10,8 +10,8 @@ import '../general__widgets/button.dart';
 import 'widgets/graph__bars.dart';
 
 class GetStartedPage extends StatelessWidget {
-  GetStartedPage({Key? key}) : super(key: key);
-  final MainController mainController = Get.put(MainController());
+  const GetStartedPage({Key? key}) : super(key: key);
+  static final MainController mainController = Get.put(MainController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(

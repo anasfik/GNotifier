@@ -15,7 +15,7 @@ import 'widgets/username__welcome.dart';
 class HomeScreen extends StatelessWidget {
   HomeScreen({Key? key}) : super(key: key);
 
-  // notification payload
+  // Notification payload
   static dynamic payloadFromOpenedNotification = Get.arguments;
 
   // Dependency injection
@@ -38,6 +38,7 @@ class HomeScreen extends StatelessWidget {
           children: [
             const SizedBox(height: 20),
             Container(
+              height: 60,
               margin: const EdgeInsets.only(right: 20),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -56,7 +57,6 @@ class HomeScreen extends StatelessWidget {
                     key: const Key("create notification button"),
                     screenToOpen: AddNewItemScreen(),
                     icon: Icons.add,
-                    
                   )
                 ],
               ),
@@ -89,8 +89,7 @@ class HomeScreen extends StatelessWidget {
                     Box<NewItemNotifcationModel> box, __) {
                   if (box.values.isEmpty) {
                     return NothingToShow(
-                      text:
-                          "press ' + ' to create your first schedule notification",
+                      text: "press ' + ' to begin",
                       mainController: mainController,
                     );
                   }

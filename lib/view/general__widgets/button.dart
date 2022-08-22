@@ -20,42 +20,43 @@ class CustomButton extends StatelessWidget {
   final bool isBtnColorForGetStarted;
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      // like overflow: hidden
-      clipBehavior: Clip.hardEdge,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(radiusValue),
-      ),
-      height: 60,
-      child: ElevatedButton(
-        onPressed: onPressed,
-        style: ElevatedButton.styleFrom(
-          primary: shouldReverseColors
-              ? isBtnColorForGetStarted
-                  ? AppColors.darkBlack
-                  : Theme.of(context).primaryColor
-              : isDelete
-                  ? const Color.fromARGB(255, 255, 190, 184)
-                  : AppColors.lightGrey,
-          onPrimary: shouldReverseColors
-              ? AppColors.white
-              : Theme.of(context).primaryColor,
+    return RepaintBoundary(
+      child: Container(
+        width: double.infinity,
+        clipBehavior: Clip.hardEdge,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(radiusValue),
         ),
-        child: AutoSizeText(
-          text,
-          style: TextStyle(
-            color: shouldReverseColors
+        height: 60,
+        child: ElevatedButton(
+          onPressed: onPressed,
+          style: ElevatedButton.styleFrom(
+            primary: shouldReverseColors
                 ? isBtnColorForGetStarted
-                    ? AppColors.white
-                    : Theme.of(context).backgroundColor
+                    ? AppColors.darkBlack
+                    : Theme.of(context).primaryColor
                 : isDelete
-                    ? Colors.red
-                    : AppColors.darkBlack,
-            fontSize: 20,
-            fontWeight: FontWeight.bold,
+                    ? const Color.fromARGB(255, 255, 190, 184)
+                    : AppColors.lightGrey,
+            onPrimary: shouldReverseColors
+                ? AppColors.white
+                : Theme.of(context).primaryColor,
           ),
-          maxLines: 1,
+          child: AutoSizeText(
+            text,
+            style: TextStyle(
+              color: shouldReverseColors
+                  ? isBtnColorForGetStarted
+                      ? AppColors.white
+                      : Theme.of(context).backgroundColor
+                  : isDelete
+                      ? Colors.red
+                      : AppColors.darkBlack,
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+            ),
+            maxLines: 1,
+          ),
         ),
       ),
     );

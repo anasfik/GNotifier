@@ -9,15 +9,15 @@ import '../../utils/AppColors.dart';
 import '../general__widgets/text__field.dart';
 
 class GetUsernamePage extends StatelessWidget {
-  GetUsernamePage({Key? key}) : super(key: key);
+  const GetUsernamePage({Key? key}) : super(key: key);
+
   // Dependency injection
-  final MainController mainController = Get.put(MainController());
+  static final MainController mainController = Get.find<MainController>();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
-        // Constrain all page to the screen size
         child: ConstrainedBox(
           constraints: BoxConstraints(
             maxHeight: Get.height,
@@ -30,15 +30,12 @@ class GetUsernamePage extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 const Spacer(),
-                // this should change to own logo
-                const FlutterLogo(
-                  key: Key("app logo"),
-                  size: 120),
+                // This should change to own logo
+                const FlutterLogo(key: Key("app logo"), size: 120),
                 const Spacer(),
                 Column(
                   children: [
                     AutoSizeText(
-                      
                       mainController.allFirstWordLetterToUppercase(
                           "what we can call you ?"),
                       maxLines: 2,

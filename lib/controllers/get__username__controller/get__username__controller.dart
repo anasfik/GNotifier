@@ -4,11 +4,10 @@ import 'package:hive/hive.dart';
 
 class GetUsernameController extends GetxController {
   // Text editing controller
-  final TextEditingController usernameTextFieldController =
-      TextEditingController();
+  TextEditingController usernameTextFieldController = TextEditingController();
 
   // Username variables
-  String username = "anonymous user";
+  String? username;
   int usernameMaxLength = 10;
   int usernameWrittenLength = 0;
   double usernameCountBoxScale = 0;
@@ -22,7 +21,6 @@ class GetUsernameController extends GetxController {
       usernameWrittenLength = username.length;
       usernameCountBoxScale = 1;
     }
-    update();
     if (username.length == usernameMaxLength) {
       usernameCountBoxScale = 1.25;
       await Future.delayed(const Duration(milliseconds: 30));
@@ -32,10 +30,10 @@ class GetUsernameController extends GetxController {
     update();
   }
 
-  // set a new Username to the box
-  setUserName(String textFieldValue) async {
+  // Set a new Username to the box
+  setUserName(String textFieldValue) {
     // Opening the other box
-    Box localBox = await Hive.openBox('locals');
+    Box localBox = Hive.box('locals');
 
     // Saving the username in the box
     localBox.put("username", textFieldValue);
@@ -43,11 +41,11 @@ class GetUsernameController extends GetxController {
     // Setting the new username value (for the first time, but it's optional)
     username = textFieldValue;
 
-    // when this is done we need to set that this is an old user so he will be redirected to mainPage
+    // When this is done we need to set that this is an old user so he will be redirected to mainPage
     localBox.put("isNewUsingApp", false);
   }
 
-  // get username from the box
+  // Get username from the box
   String getUsername() {
     // Like we see we opened the box directly cause, it's already open from the getUsernameController
     // Getting the box

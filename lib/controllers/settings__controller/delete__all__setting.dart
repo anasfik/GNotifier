@@ -8,9 +8,9 @@ import '../helpers__controllers/dialogs__controller.dart';
 class DeleteAllSetting extends GetxController {
   
   final DialogsController dialogsController = Get.put(DialogsController());
+  deleteAll() {
   Box newNotificationsBox =
       Hive.box<NewItemNotifcationModel>('newNotificationsBox');
-  deleteAll() {
     newNotificationsBox.clear();
     NotificationService().cancelAllNotifications();
 

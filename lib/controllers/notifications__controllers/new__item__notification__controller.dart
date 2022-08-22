@@ -16,6 +16,17 @@ import 'package:timezone/timezone.dart' as tz;
 import 'new__item__notification__error__controller.dart';
 
 class NewNotificationController extends GetxController {
+  @override
+  void onReady() async {
+    // initialize the notifications service
+    NotificationService().init();
+    // opening the hive box now when the get username page is opened
+    Box newNotifications =
+        await Hive.openBox<NewItemNotifcationModel>("newNotificationsBox");
+
+    super.onReady();
+  }
+
   // Dependency injection
   final DialogsController dialogsController = Get.put(DialogsController());
   final FavoritesController favoritesController =
