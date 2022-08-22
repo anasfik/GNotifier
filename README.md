@@ -1,5 +1,5 @@
 # watch_it_later
-
+![GitHub commit activity](https://img.shields.io/github/commit-activity/y/anasfik/I-will-watch-later)
 set what you want to watch later, the app will remind you whenever you want
 
 ## Getting Started
