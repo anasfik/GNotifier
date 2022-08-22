@@ -62,7 +62,7 @@ class SearchScreen extends StatelessWidget {
                   if (searchController.searchBarController.text.isEmpty) ...[
                     NothingToShow(
                       key: const Key("nothing to show"),
-                      text: "search for anything of your notifications",
+                      text: "search in your notifications",
                       mainController: mainController,
                     )
                   ],
