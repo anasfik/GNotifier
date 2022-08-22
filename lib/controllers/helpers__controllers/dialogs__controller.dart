@@ -135,22 +135,23 @@ class DialogsController extends GetxController {
               Icons.check,
               color: Theme.of(Get.overlayContext!).backgroundColor,
             ),
-            const Spacer(),
-            Text(
-              mainController.allFirstWordLetterToUppercase(title),
-              style: TextStyle(
-                fontWeight: FontWeight.w400,
-                color: Theme.of(Get.overlayContext!).backgroundColor,
-                fontSize: 14,
+            const SizedBox(
+              width: 15,
+            ),
+            Expanded(
+              child: Text(
+                mainController.allFirstWordLetterToUppercase(title),
+                style: TextStyle(
+                  fontWeight: FontWeight.w400,
+                  color: Theme.of(Get.overlayContext!).backgroundColor,
+                  fontSize: 14,
+                ),
+                textAlign: TextAlign.left,
+                maxLines: 2,
               ),
-              textAlign: TextAlign.left,
-              maxLines: 2,
             ),
-            const Spacer(
-              flex: 3,
-            ),
-            const Spacer(
-              flex: 2,
+            const SizedBox(
+              width: 15,
             ),
           ],
         ),

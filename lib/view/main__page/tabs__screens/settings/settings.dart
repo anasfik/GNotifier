@@ -129,7 +129,7 @@ class SettingsScreen extends StatelessWidget {
               opacity: .65,
               child: AutoSizeText(
                 mainController.allFirstWordLetterToUppercase(
-                    "( will be applied after app restart )"),
+                    "( those changes will be applied after app restart )"),
                 maxLines: 2,
                 style: const TextStyle(
                   fontSize: 12,
@@ -231,7 +231,7 @@ class SettingsScreen extends StatelessWidget {
                   icon: Icons.restart_alt,
                   mainController: mainController,
                   description: "reset all settings to default",
-                  title: "reset ",  
+                  title: "reset ",
                   onTap: () {
                     resetAllSettings.reset();
                   },

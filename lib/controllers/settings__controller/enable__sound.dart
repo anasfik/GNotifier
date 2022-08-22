@@ -4,7 +4,7 @@ import 'package:hive/hive.dart';
 import '../helpers__controllers/dialogs__controller.dart';
 
 class EnableSoundSetting extends GetxController {
-      final DialogsController dialogsController = Get.put(DialogsController());
+  final DialogsController dialogsController = Get.put(DialogsController());
 
   // bool
   static Box localBox = Hive.box("locals");
@@ -16,8 +16,8 @@ class EnableSoundSetting extends GetxController {
     isSoundEnabled = boolValue;
     update();
     localBox.put("isSoundEnabled", isSoundEnabled);
-    dialogsController.showSnackbar("will be applied after app restart");
-
+    dialogsController
+        .showSnackbar("those changes will be applied after app restart");
   }
 
   getEnabledSoundBool() {

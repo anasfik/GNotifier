@@ -4,8 +4,7 @@ import 'package:hive/hive.dart';
 import '../helpers__controllers/dialogs__controller.dart';
 
 class HideDeleteButtonForFavoritesSetting extends GetxController {
-  
-      final DialogsController dialogsController = Get.put(DialogsController());
+  final DialogsController dialogsController = Get.put(DialogsController());
 
   // bool
   static Box localBox = Hive.box("locals");
@@ -17,8 +16,8 @@ class HideDeleteButtonForFavoritesSetting extends GetxController {
     isDeleteButtonHidden = boolValue;
     update();
     localBox.put("isDeleteButtonHidden", isDeleteButtonHidden);
-    dialogsController.showSnackbar("will be applied after app restart");
-
+    dialogsController
+        .showSnackbar("those changes will be applied after app restart");
   }
 
   getIsHideDeleteButton() {
