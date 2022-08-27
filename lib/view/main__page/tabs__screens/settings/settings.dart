@@ -10,7 +10,7 @@ import '../../../../controllers/main__controller.dart';
 import '../../../../controllers/settings__controller/delete__all__setting.dart';
 import '../../../../controllers/settings__controller/enable__ongoing__setting.dart';
 import '../../../../controllers/settings__controller/enable__vibration.dart';
-import '../../../../controllers/settings__controller/hide__delete__button__for__favorites.dart';
+import '../../../../controllers/settings__controller/show__delete__button__for__favorites.dart';
 import '../../../../controllers/settings__controller/reset__all__settings.dart';
 import 'widgets/setting__card.dart';
 
@@ -89,8 +89,8 @@ class SettingsScreen extends StatelessWidget {
                     changeUsernameSetting.showEditUsernameBottomSheet();
                   },
                 ),
-                GetBuilder<HideDeleteButtonForFavoritesSetting>(
-                  init: HideDeleteButtonForFavoritesSetting(),
+                GetBuilder<ShowDeleteButtonForFavoritesSetting>(
+                  init: ShowDeleteButtonForFavoritesSetting(),
                   builder: (hidedeleteButtonForFavoritesSetting) {
                     return SettingCard(
                       switchValue: hidedeleteButtonForFavoritesSetting

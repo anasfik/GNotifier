@@ -48,7 +48,10 @@ class FavoritesScreen extends StatelessWidget {
                         .listenable(),
                 builder: (BuildContext context,
                     Box<NewItemNotifcationModel> box, __) {
-                  if (box.values.isEmpty) {
+                  if (box.values
+                      .toList()
+                      .where((element) => element.isFavorite!)
+                      .isEmpty) {
                     return NothingToShow(
                       text: "no favorites",
                       mainController: mainController,

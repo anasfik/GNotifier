@@ -12,38 +12,34 @@ class SearchController extends GetxController {
       Hive.box<NewItemNotifcationModel>("newNotificationsBox").values.toList();
 
   // Filter method
-  List filterList(String textToFilterWith) {
-    // given the ability to search with title and description
-    List processedList = boxAsList.where(
-      (element) {
+  dynamic filterElement(String textToFilterWith, dynamic element) {
+    // Given the ability to search with title and description
+    // Filter with anything from the model (except booleans ofc)
 
-        // Filter with anything from the model (except booleans ofc)
-        return (element.title.toLowerCase().contains(
-                  textToFilterWith.toLowerCase(),
-                )) ||
-            (element.description.toLowerCase().contains(
-                  textToFilterWith.toLowerCase(),
-                )) ||
-            element.dateToShow.day.toString().toLowerCase().contains(
-                  textToFilterWith.toLowerCase(),
-                  
-                )  ||
-            element.dateToShow.year.toString().toLowerCase().contains(
-                  textToFilterWith.toLowerCase(),
-                )  ||
-            element.dateToShow.month.toString().toLowerCase().contains(
-                  textToFilterWith.toLowerCase(),
-                );
-      },
-
-      // Note: where return an iterable, we should convert it to list as well
-    ).toList();
+    return (element.title.toLowerCase().contains(
+              textToFilterWith.toLowerCase(),
+            )) ||
+        (element.description.toLowerCase().contains(
+              textToFilterWith.toLowerCase(),
+            )) ||
+        element.dateToShow.day.toString().toLowerCase().contains(
+              textToFilterWith.toLowerCase(),
+            ) ||
+        element.dateToShow.year.toString().toLowerCase().contains(
+              textToFilterWith.toLowerCase(),
+            ) ||
+        element.dateToShow.month.toString().toLowerCase().contains(
+              textToFilterWith.toLowerCase(),
+            );
 
     //
-    update();
+  }
 
-    //
-    return processedList;
+  filterList(List listToFilter, String textToFilterWith) {
+    // Filter the list with the given text
+    return listToFilter
+        .where((element) => filterElement(textToFilterWith, element))
+        .toList();
   }
 
   @override

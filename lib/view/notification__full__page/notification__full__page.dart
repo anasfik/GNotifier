@@ -10,7 +10,7 @@ import 'package:watch_it_later/view/notification__full__page/widgets/dashed__lin
 
 import '../../controllers/notifications__controllers/date__Controller.dart';
 import '../../controllers/notifications__controllers/new__item__notification__controller.dart';
-import '../../controllers/settings__controller/hide__delete__button__for__favorites.dart';
+import '../../controllers/settings__controller/show__delete__button__for__favorites.dart';
 import '../../model/newItemNotificationModel.dart';
 import '../general__widgets/edit__icon__button.dart';
 import '../general__widgets/favorite_icon__button.dart';
@@ -27,9 +27,9 @@ class NotificationFullPage extends StatelessWidget {
       Get.put(NewNotificationController());
   DateController dateController = Get.put(DateController());
   final DialogsController dialogsController = Get.put(DialogsController());
-  final HideDeleteButtonForFavoritesSetting
-      hidedeleteButtonForFavoritesSetting =
-      Get.put(HideDeleteButtonForFavoritesSetting());
+  final ShowDeleteButtonForFavoritesSetting
+      showdeleteButtonForFavoritesSetting =
+      Get.put(ShowDeleteButtonForFavoritesSetting());
 
   ///
   // we got those with Get.arguments from previous page
@@ -230,7 +230,7 @@ class NotificationFullPage extends StatelessWidget {
                           .allFirstWordLetterToUppercase("update"),
                     ),
                   ),
-                  if ((hidedeleteButtonForFavoritesSetting
+                  if ((showdeleteButtonForFavoritesSetting
                           .getIsHideDeleteButton()) ||
                       showDeleteButtonOnFullPage) ...[
                     Expanded(

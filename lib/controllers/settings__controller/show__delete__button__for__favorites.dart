@@ -3,7 +3,7 @@ import 'package:hive/hive.dart';
 
 import '../helpers__controllers/dialogs__controller.dart';
 
-class HideDeleteButtonForFavoritesSetting extends GetxController {
+class ShowDeleteButtonForFavoritesSetting extends GetxController {
   final DialogsController dialogsController = Get.put(DialogsController());
 
   // bool

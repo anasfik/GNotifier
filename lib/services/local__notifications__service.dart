@@ -181,7 +181,6 @@ class NotificationService {
     dynamic tzDateTime,
     String? payload,
     bool isRepeated,
-
   ) async {
     await flutterLocalNotificationsPlugin.zonedSchedule(
       id,
@@ -191,10 +190,8 @@ class NotificationService {
       payload: payload,
       platformChannelSpecifics,
       androidAllowWhileIdle: true,
-
       uiLocalNotificationDateInterpretation:
           UILocalNotificationDateInterpretation.absoluteTime,
-
       matchDateTimeComponents: isRepeated ? DateTimeComponents.time : null,
     );
   }
@@ -233,7 +230,7 @@ class NotificationService {
               await Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => MainPage(),
+                  builder: (context) => const MainPage(),
                 ),
               );
             },

@@ -88,11 +88,11 @@ class NewNotificationController extends GetxController {
       return;
     }
 
-    // Check description
-    if (checkDescriptionValidity(description)) {
-      checkDescriptionValidityDialog();
-      return;
-    }
+    // // Check description
+    // if (checkDescriptionValidity(description)) {
+    //   checkDescriptionValidityDialog();
+    //   return;
+    // }
 
     // Check date (years, months, days)
     if (checkDateTimeValidity(date)) {

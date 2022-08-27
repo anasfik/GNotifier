@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:hive/hive.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:lottie/lottie.dart';
 import 'package:watch_it_later/model/newItemNotificationModel.dart';
 import 'package:watch_it_later/view/general__widgets/nothing__to__show__text.dart';
@@ -26,115 +28,137 @@ class SearchScreen extends StatelessWidget {
           builder: (searchController) {
             return SingleChildScrollView(
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const SizedBox(height: 40),
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const SizedBox(height: 40),
 
-                  //
-                  ScreenTitle(
-                    title: "search by title",
-                    mainController: mainController,
-                  ), //
-
-                  //
-                  const SizedBox(height: 30),
-
-                  Container(
-                    margin: const EdgeInsets.only(right: 20),
-                    child: CustomTextField(
-                      key: const Key("search field"),
-                      counterTextColor: Theme.of(context).primaryColor,
-                      counterBpxColor: Theme.of(context).backgroundColor,
-                      textColor: Theme.of(context).primaryColor,
-                      backgroundColor:
-                          Theme.of(context).primaryColor.withOpacity(.2),
-                      maxLength: 50,
-                      onChanged: (value) {
-                        searchController.filterList(value);
-                      },
-                      controller: searchController.searchBarController,
-                      hintText: mainController
-                          .allFirstWordLetterToUppercase("search"),
-                      suffixIcon: const Icon(Icons.search),
-                    ),
-                  ),
-                  //
-                  if (searchController.searchBarController.text.isEmpty) ...[
-                    NothingToShow(
-                      key: const Key("nothing to show"),
-                      text: "search in your notifications",
+                    //
+                    ScreenTitle(
+                      title: "search by title",
                       mainController: mainController,
-                    )
-                  ],
+                    ), //
 
-                  if (searchController.searchBarController.text.isNotEmpty &&
-                      searchController
-                          .filterList(searchController.searchBarController.text)
-                          .isEmpty) ...[
-                    const SizedBox(height: 100),
-                    Center(
-                      child: SizedBox(
-                        width: double.infinity,
-                        child: Column(
-                          key: const Key("lottie"),
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Container(
-                              margin: const EdgeInsets.only(right: 20),
-                              child: Lottie.asset(
-                                "assets/lottie/not_found.json",
-                                width: 120,
-                              ),
-                            ),
-                            NothingToShow(
-                              margin: const EdgeInsets.only(right: 20, top: 20),
-                              text: "no items found",
-                              mainController: mainController,
-                            )
-                          ],
-                        ),
+                    //
+                    const SizedBox(height: 30),
+
+                    Container(
+                      margin: const EdgeInsets.only(right: 20),
+                      child: CustomTextField(
+                        key: const Key("search field"),
+                        counterTextColor: Theme.of(context).primaryColor,
+                        counterBpxColor: Theme.of(context).backgroundColor,
+                        textColor: Theme.of(context).primaryColor,
+                        backgroundColor:
+                            Theme.of(context).primaryColor.withOpacity(.2),
+                        maxLength: 50,
+                        onChanged: (value) {
+                          searchController.update();
+                        },
+                        controller: searchController.searchBarController,
+                        hintText: mainController
+                            .allFirstWordLetterToUppercase("search"),
+                        suffixIcon: const Icon(Icons.search),
                       ),
                     ),
-                  ],
-                  if (searchController.searchBarController.text.isNotEmpty &&
-                      searchController
-                          .filterList(searchController.searchBarController.text)
-                          .isNotEmpty) ...[
-                    Column(
-                      children: [
-                        const SizedBox(height: 10),
-                        const Divider(),
-                        const SizedBox(height: 20),
-                        ...List.generate(
-                          searchController
-                              .filterList(
-                                  searchController.searchBarController.text)
-                              .length,
-                          (index) {
-                            //
-                            List filteredList = searchController.filterList(
-                                searchController.searchBarController.text);
+                    //
 
-                            //
-                            int reversedIndex = filteredList.length - index - 1;
-                            return NotificationCard(
-                              showDeleteButtonOnFullPage: true,
-                              currentNotification: filteredList[reversedIndex]
-                                  as NewItemNotifcationModel,
-                              title: filteredList[reversedIndex].title,
-                              description:
-                                  filteredList[reversedIndex].description,
-                              isFavoriteButtonHidden: true,
-                              reversedIndex: reversedIndex,
-                            );
-                          },
-                        ),
-                      ],
-                    ),
-                  ],
-                ],
-              ),
+                    ValueListenableBuilder(
+                        valueListenable: Hive.box<NewItemNotifcationModel>(
+                                "newNotificationsBox")
+                            .listenable(),
+                        builder: (BuildContext context,
+                            Box<NewItemNotifcationModel> box, __) {
+                          return Column(
+                            children: [
+                              if (searchController
+                                  .searchBarController.text.isEmpty) ...[
+                                NothingToShow(
+                                  key: const Key("nothing to show"),
+                                  text: "search\nin your notifications",
+                                  mainController: mainController,
+                                )
+                              ],
+                              // const SizedBox(height: 100),
+                              if (searchController
+                                      .searchBarController.text.isNotEmpty &&
+                                  searchController
+                                      .filterList(
+                                        box.values.toList(),
+                                        searchController
+                                            .searchBarController.text,
+                                      )
+                                      .isEmpty) ...[
+                                const SizedBox(height: 50),
+                                Center(
+                                  child: SizedBox(
+                                    width: double.infinity,
+                                    child: Column(
+                                      key: const Key("lottie"),
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        Container(
+                                          margin:
+                                              const EdgeInsets.only(right: 20),
+                                          child: Lottie.asset(
+                                            "assets/lottie/not_found.json",
+                                            width: 120,
+                                          ),
+                                        ),
+                                        NothingToShow(
+                                          margin: const EdgeInsets.only(
+                                              right: 20, top: 20),
+                                          text: "no notifications\nfound",
+                                          mainController: mainController,
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ],
+                              if (searchController
+                                  .searchBarController.text.isNotEmpty) ...[
+                                const SizedBox(height: 50),
+                                ...List.generate(
+                                  box.values.length,
+                                  (index) {
+                                    // reversedIndex
+                                    int reversedIndex =
+                                        box.values.length - 1 - index;
+
+                                    // currentNotification
+                                    NewItemNotifcationModel?
+                                        currentNotification =
+                                        box.getAt(reversedIndex);
+
+                                    // *** condition
+                                    if (searchController.filterElement(
+                                      searchController.searchBarController.text,
+                                      currentNotification!,
+                                    )) {
+                                      return NotificationCard(
+                                        currentNotification:
+                                            currentNotification,
+                                        reversedIndex: index,
+                                        // "favoritesController.favoritesItemsNotificationList.length - 1" get us to lase item, with "- index", so like we say we should start from the end
+                                        title: currentNotification.title,
+                                        description:
+                                            currentNotification.description,
+                                        isFavoriteButtonHidden: true,
+                                        showDeleteButtonOnFullPage: false,
+                                      );
+                                    }
+
+                                    // work like nothing
+                                    return Container();
+                                  },
+                                )
+                              ]
+                            ],
+                          );
+                        })
+                  ]),
             );
           }),
     );
