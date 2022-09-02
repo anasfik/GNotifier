@@ -38,9 +38,9 @@ class ChooseFavoritesPage extends StatelessWidget {
       body: Container(
         margin: EdgeInsets.symmetric(vertical: 30, horizontal: 20),
         child: ListView(
-          children: [
+          children: <Widget>[
             Column(
-              children: [
+              children: <Widget>[
                 AutoSizeText(
                   mainController.allFirstWordLetterToUppercase(
                       "what we should consider as priority for you ?"),

@@ -36,7 +36,7 @@ class HomeScreen extends StatelessWidget {
       child: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
+          children: <Widget>[
             const SizedBox(height: 20),
             Container(
               height: 60,
@@ -44,7 +44,7 @@ class HomeScreen extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
+                children: <Widget>[
                   // Avatar
                   GetBuilder<ThemeController>(
                     init: ThemeController(),
@@ -52,7 +52,7 @@ class HomeScreen extends StatelessWidget {
                       backgroundColor: Colors.transparent,
                       radius: 27,
                       backgroundImage: AssetImage(
-                      themeController.logoBasedOnTheme,
+                        themeController.logoBasedOnTheme,
                       ),
                     ),
                   ),
@@ -99,7 +99,7 @@ class HomeScreen extends StatelessWidget {
                     );
                   }
                   return Column(
-                    children: [
+                    children: <Widget>[
                       ...List.generate(
                         box.values.length,
                         (index) {

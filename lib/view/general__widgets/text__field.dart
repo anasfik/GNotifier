@@ -39,7 +39,7 @@ class CustomTextField extends StatelessWidget {
   Widget build(BuildContext context) {
     return Stack(
       clipBehavior: Clip.none,
-      children: [
+      children: <Widget>[
         Visibility(
           visible: showCounter,
           child: Positioned(

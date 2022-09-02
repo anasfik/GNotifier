@@ -29,7 +29,7 @@ class SearchScreen extends StatelessWidget {
             return SingleChildScrollView(
               child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
+                  children: <Widget>[
                     const SizedBox(height: 40),
 
                     //
@@ -69,7 +69,7 @@ class SearchScreen extends StatelessWidget {
                         builder: (BuildContext context,
                             Box<NewItemNotifcationModel> box, __) {
                           return Column(
-                            children: [
+                            children: <Widget>[
                               if (searchController
                                   .searchBarController.text.isEmpty) ...[
                                 NothingToShow(
@@ -97,7 +97,7 @@ class SearchScreen extends StatelessWidget {
                                       mainAxisAlignment:
                                           MainAxisAlignment.start,
                                       mainAxisSize: MainAxisSize.min,
-                                      children: [
+                                      children: <Widget>[
                                         Container(
                                           margin:
                                               const EdgeInsets.only(right: 20),

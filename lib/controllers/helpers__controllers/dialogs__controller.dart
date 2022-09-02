@@ -19,7 +19,7 @@ class DialogsController extends GetxController {
       radius: 5,
       barrierDismissible: false,
       content: Column(
-        children: [
+        children: <Widget>[
           Icon(
             forDelete ? Icons.delete : Icons.check,
             color: forDelete ? Colors.red[800] : AppColors.darkBlack,
@@ -72,7 +72,7 @@ class DialogsController extends GetxController {
           padding: const EdgeInsets.only(left: 20, right: 20),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
+            children: <Widget>[
               AutoSizeText(
                 mainController.allFirstWordLetterToUppercase(infoTitle),
                 style: TextStyle(
@@ -130,7 +130,7 @@ class DialogsController extends GetxController {
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
+          children: <Widget>[
             Icon(
               Icons.check,
               color: Theme.of(Get.overlayContext!).backgroundColor,

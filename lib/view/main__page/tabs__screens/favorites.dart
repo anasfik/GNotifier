@@ -24,7 +24,7 @@ class FavoritesScreen extends StatelessWidget {
       child: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
+          children: <Widget>[
             const SizedBox(height: 40),
 
             // Page title
@@ -58,7 +58,7 @@ class FavoritesScreen extends StatelessWidget {
                     );
                   }
                   return Column(
-                    children: [
+                    children: <Widget>[
                       ...List.generate(
                         box.values.length,
                         (index) {

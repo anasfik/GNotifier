@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:watch_it_later/controllers/settings__controller/change__username.dart';
 import 'package:watch_it_later/controllers/settings__controller/enable__sound.dart';
 import 'package:watch_it_later/controllers/settings__controller/show__on__lock__screen__setting.dart';
+import 'package:watch_it_later/controllers/settings__controller/source_code_link_launcher.dart';
 
 import '../../../../controllers/settings__controller/dark__mode_setting.dart';
 import '../../../../controllers/main__controller.dart';
@@ -12,6 +13,7 @@ import '../../../../controllers/settings__controller/enable__ongoing__setting.da
 import '../../../../controllers/settings__controller/enable__vibration.dart';
 import '../../../../controllers/settings__controller/show__delete__button__for__favorites.dart';
 import '../../../../controllers/settings__controller/reset__all__settings.dart';
+import '../../../privacy/privacy.dart';
 import 'widgets/setting__card.dart';
 
 class SettingsScreen extends StatelessWidget {
@@ -19,6 +21,8 @@ class SettingsScreen extends StatelessWidget {
   final MainController mainController = Get.put(MainController());
   final DeleteAllSetting deleteAllSetting = Get.put(DeleteAllSetting());
   final ResetAllSettings resetAllSettings = Get.put(ResetAllSettings());
+  final SourceCodeLinkLaunched sourceCodeLinkLaunched =
+      Get.put(SourceCodeLinkLaunched());
   @override
   Widget build(BuildContext context) {
     final ChangeUsernameSetting changeUsernameSetting =
@@ -30,7 +34,7 @@ class SettingsScreen extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
+          children: <Widget>[
             const SizedBox(height: 40),
 
             AutoSizeText(
@@ -65,7 +69,7 @@ class SettingsScreen extends StatelessWidget {
                 crossAxisSpacing: 15,
                 mainAxisSpacing: 15,
               ),
-              children: [
+              children: <Widget>[
                 GetBuilder<ThemeController>(
                   init: ThemeController(),
                   builder: (themeController) {
@@ -147,7 +151,7 @@ class SettingsScreen extends StatelessWidget {
                 crossAxisSpacing: 15,
                 mainAxisSpacing: 15,
               ),
-              children: [
+              children: <Widget>[
                 GetBuilder<EnableOngoingSetting>(
                   init: EnableOngoingSetting(),
                   builder: (enableOngoingSetting) {
@@ -262,7 +266,7 @@ class SettingsScreen extends StatelessWidget {
                 crossAxisSpacing: 15,
                 mainAxisSpacing: 15,
               ),
-              children: [
+              children: <Widget>[
                 SettingCard(
                   icon: Icons.delete,
                   mainController: mainController,
@@ -300,14 +304,14 @@ class SettingsScreen extends StatelessWidget {
                 crossAxisSpacing: 15,
                 mainAxisSpacing: 15,
               ),
-              children: [
+              children: <Widget>[
                 SettingCard(
                   icon: Icons.code,
                   mainController: mainController,
                   description: "check source code of this app on github",
                   title: "source code",
-                  onTap: () {
-                    deleteAllSetting.deleteAll();
+                  onTap: () async {
+                    await sourceCodeLinkLaunched.openGithubRepositoryURL();
                   },
                 ),
                 SettingCard(
@@ -316,7 +320,7 @@ class SettingsScreen extends StatelessWidget {
                   description: "read about the privacy policy",
                   title: "Privacy",
                   onTap: () {
-                    deleteAllSetting.deleteAll();
+                    Get.to(PrivacyPage());
                   },
                 ),
               ],

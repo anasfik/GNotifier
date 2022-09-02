@@ -18,16 +18,16 @@ class GetStartedPage extends StatelessWidget {
         backgroundColor: AppColors.darkBlack,
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
+          children: <Widget>[
             Expanded(
               child: Column(
-                children: [
+                children: <Widget>[
                   SizedBox(
                     width: double.infinity,
                     height: 180,
                     child: Stack(
                       clipBehavior: Clip.antiAlias,
-                      children: [
+                      children: <Widget>[
                         Positioned(
                           right: 0,
                           bottom: 0,
@@ -47,7 +47,7 @@ class GetStartedPage extends StatelessWidget {
                             hasTopLeftRounded: true,
                             hasBottomLeftRounded: true,
                             child: Stack(
-                              children: [
+                              children: <Widget>[
                                 Positioned(
                                   left: 10,
                                   bottom: 10,
@@ -158,7 +158,7 @@ class GetStartedPage extends StatelessWidget {
               margin: const EdgeInsets.symmetric(horizontal: 27),
               width: double.infinity,
               child: Column(
-                children: [
+                children: <Widget>[
                   AutoSizeText(
                     mainController.allFirstWordLetterToUppercase(
                         "never forget \n anymore"),

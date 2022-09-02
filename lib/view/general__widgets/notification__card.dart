@@ -38,7 +38,7 @@ class NotificationCard extends StatelessWidget {
         margin: const EdgeInsets.only(bottom: 20),
         height: 120,
         child: Row(
-          children: [
+          children: <Widget>[
             Container(
               width: 15,
               height: 15,
@@ -56,7 +56,7 @@ class NotificationCard extends StatelessWidget {
             Expanded(
               child: Stack(
                 fit: StackFit.expand,
-                children: [
+                children: <Widget>[
                   Container(
                     padding: const EdgeInsets.symmetric(horizontal: 15),
                     decoration: BoxDecoration(
@@ -66,7 +66,7 @@ class NotificationCard extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
+                      children: <Widget>[
                         const Spacer(
                           flex: 2,
                         ),
@@ -115,7 +115,7 @@ class NotificationCard extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
+                      children: <Widget>[
                         if (currentNotification!.isRepeated) ...[
                           Icon(
                             Icons.repeat,

@@ -61,11 +61,11 @@ class NotificationFullPage extends StatelessWidget {
         margin: EdgeInsets.all(20),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
+          children: <Widget>[
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
+              children: <Widget>[
                 Expanded(
                   child: GetBuilder<NewNotificationController>(
                     init: NewNotificationController(),
@@ -102,7 +102,7 @@ class NotificationFullPage extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
+              children: <Widget>[
                 Expanded(
                   child: GetBuilder<NewNotificationController>(
                     // we don't have really to re init this controller every time
@@ -133,7 +133,7 @@ class NotificationFullPage extends StatelessWidget {
                 return Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
+                  children: <Widget>[
                     Expanded(
                       child: GestureDetector(
                         onTap: () async {
@@ -198,7 +198,7 @@ class NotificationFullPage extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
+                children: <Widget>[
                   Expanded(
                     flex: 10,
                     child: CustomButton(

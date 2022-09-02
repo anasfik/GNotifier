@@ -33,7 +33,7 @@ class ChangeUsernameBottomSheetWidget extends StatelessWidget {
           return Column(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             mainAxisSize: MainAxisSize.min,
-            children: [
+            children: <Widget>[
               GetBuilder<ChangeUsernameSetting>(
                 builder: (changeUsernameSetting) {
                   return CustomTextField(
@@ -61,7 +61,7 @@ class ChangeUsernameBottomSheetWidget extends StatelessWidget {
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
+                children: <Widget>[
                   GetBuilder<ChangeUsernameSetting>(
                     builder: (newNotificationController) {
                       return GestureDetector(

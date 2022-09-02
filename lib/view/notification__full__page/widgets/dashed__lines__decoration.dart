@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 
-
 class DashedLinesDecoration extends StatelessWidget {
   const DashedLinesDecoration({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Row(
-      children: [
+      children: <Widget>[
         Container(
           decoration: BoxDecoration(
             color: Theme.of(context).primaryColor.withOpacity(.8),

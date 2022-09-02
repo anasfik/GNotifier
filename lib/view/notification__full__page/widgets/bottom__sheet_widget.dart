@@ -38,7 +38,7 @@ class BottomSheetWidget extends StatelessWidget {
         builder: (newNotificationController) => Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           mainAxisSize: MainAxisSize.min,
-          children: [
+          children: <Widget>[
             if (forTitle) ...[
               GetBuilder<NewNotificationController>(
                 init: NewNotificationController(),
@@ -102,7 +102,7 @@ class BottomSheetWidget extends StatelessWidget {
               // margin: EdgeInsets.only(right: 5),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
+                children: <Widget>[
                   GetBuilder<NewNotificationController>(
                     init: NewNotificationController(),
                     builder: (newNotificationController) {

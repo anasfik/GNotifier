@@ -21,7 +21,7 @@ class UsernameWelcome extends StatelessWidget {
       TextSpan(
         text: mainController
             .allFirstWordLetterToUppercase(textToShowBeforeUsername),
-        children: [
+        children: <TextSpan>[
           TextSpan(
             text: mainController.allFirstWordLetterToUppercase(
               getUsernameController.getUsername(),

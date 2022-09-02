@@ -28,13 +28,13 @@ class GetUsernamePage extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
+              children: <Widget>[
                 const Spacer(),
                 // This should change to own logo
                 const FlutterLogo(key: Key("app logo"), size: 120),
                 const Spacer(),
                 Column(
-                  children: [
+                  children: <Widget>[
                     AutoSizeText(
                       mainController.allFirstWordLetterToUppercase(
                           "what we can call you ?"),

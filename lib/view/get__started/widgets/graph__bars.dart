@@ -15,7 +15,7 @@ class GraphBars extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.end,
-      children: [
+      children: <Widget>[
         ...List.generate(
           values.length,
           (index) => Container(

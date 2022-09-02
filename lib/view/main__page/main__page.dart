@@ -58,7 +58,7 @@ class MainPage extends StatelessWidget {
         ),
         body: TabBarView(
           controller: bottomBarController.tabController,
-          children: [
+          children: <Widget>[
             ...List.generate(
               bottomBarController.tabScreens.length,
               (index) => bottomBarController.tabScreens[index],

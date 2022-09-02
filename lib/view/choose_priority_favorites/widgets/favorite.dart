@@ -23,7 +23,7 @@ class FavoriteBox extends StatelessWidget {
       child: Stack(
         fit: StackFit.expand,
         clipBehavior: Clip.hardEdge,
-        children: [
+        children: <Widget>[
           Image.asset(dataList[indexPass]["image"], fit: BoxFit.cover),
           Material(
             animationDuration: const Duration(milliseconds: 400),
