@@ -13,6 +13,7 @@ import '../../../../controllers/settings__controller/enable__ongoing__setting.da
 import '../../../../controllers/settings__controller/enable__vibration.dart';
 import '../../../../controllers/settings__controller/show__delete__button__for__favorites.dart';
 import '../../../../controllers/settings__controller/reset__all__settings.dart';
+import '../../../contact/contact.dart';
 import '../../../privacy/privacy.dart';
 import 'widgets/setting__card.dart';
 
@@ -320,7 +321,7 @@ class SettingsScreen extends StatelessWidget {
                   description: "contact the dev or report bugs",
                   title: "Contact",
                   onTap: () {
-                    Get.to(const PrivacyPage());
+                    Get.to(const ContactPage());
                   },
                 ),
                 SettingCard(

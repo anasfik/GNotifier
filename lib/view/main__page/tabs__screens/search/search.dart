@@ -7,9 +7,9 @@ import 'package:watch_it_later/model/newItemNotificationModel.dart';
 import 'package:watch_it_later/view/general__widgets/nothing__to__show__text.dart';
 import 'package:watch_it_later/view/general__widgets/notification__card.dart';
 import 'package:watch_it_later/view/general__widgets/screen__title.dart';
-import '../../../controllers/main__controller.dart';
-import '../../../controllers/search__controller/search__controller.dart';
-import '../../general__widgets/text__field.dart';
+import '../../../../controllers/main__controller.dart';
+import '../../../../controllers/search__controller/search__controller.dart';
+import '../../../general__widgets/text__field.dart';
 
 class SearchScreen extends StatelessWidget {
   SearchScreen({Key? key}) : super(key: key);
