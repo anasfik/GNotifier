@@ -242,7 +242,7 @@ class SettingsScreen extends StatelessWidget {
               height: 40,
             ),
             AutoSizeText(
-              mainController.allFirstWordLetterToUppercase("others"),
+              mainController.allFirstWordLetterToUppercase("delete all"),
               maxLines: 2,
               style: const TextStyle(
                 fontSize: 18,
@@ -275,6 +275,53 @@ class SettingsScreen extends StatelessWidget {
                 ),
               ],
             ),
+
+            const SizedBox(
+              height: 40,
+            ),
+            AutoSizeText(
+              mainController.allFirstWordLetterToUppercase("about"),
+              maxLines: 2,
+              style: const TextStyle(
+                fontSize: 18,
+              ),
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+
+            GridView(
+              padding: EdgeInsets.zero,
+              physics: const NeverScrollableScrollPhysics(),
+              shrinkWrap: true,
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                childAspectRatio: 1,
+                crossAxisCount: 2,
+                crossAxisSpacing: 15,
+                mainAxisSpacing: 15,
+              ),
+              children: [
+                SettingCard(
+                  icon: Icons.code,
+                  mainController: mainController,
+                  description: "check source code of this app on github",
+                  title: "source code",
+                  onTap: () {
+                    deleteAllSetting.deleteAll();
+                  },
+                ),
+                SettingCard(
+                  icon: Icons.shield,
+                  mainController: mainController,
+                  description: "read about the privacy policy",
+                  title: "Privacy",
+                  onTap: () {
+                    deleteAllSetting.deleteAll();
+                  },
+                ),
+              ],
+            ),
+
             const SizedBox(
               height: 100,
             ),

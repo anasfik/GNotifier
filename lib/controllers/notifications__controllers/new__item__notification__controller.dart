@@ -52,12 +52,12 @@ class NewNotificationController extends GetxController {
   bool hasAutoDeleteEnabled = false;
 
   // Title variables
-  int titleMaxLength = 20;
+  int titleMaxLength = 40;
   int titleWrittenLength = 0;
   double titleCountBoxScale = 0;
 
   // Description variables
-  int descriptionMaxLength = 120;
+  int descriptionMaxLength = 125;
   int descriptionWrittenLength = 0;
   double descriptionCountBoxScale = 0;
 

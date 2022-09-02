@@ -7,6 +7,7 @@ class AppThemes {
     lightTheme = ThemeData.light().copyWith(
       colorScheme: ColorScheme.light(
         primary: AppColors.darkBlack,
+        secondary: AppColors.darkBlack,
       ),
       primaryColor: AppColors.darkBlack,
       backgroundColor: AppColors.white,
@@ -33,6 +34,7 @@ class AppThemes {
     darkTheme = ThemeData.light().copyWith(
       colorScheme: ColorScheme.light(
         primary: AppColors.darkBlack,
+        secondary: AppColors.white,
       ),
       primaryColor: AppColors.white,
       backgroundColor: AppColors.darkBlack,

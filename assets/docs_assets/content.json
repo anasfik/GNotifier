@@ -1,0 +1,8 @@
+{
+  "informationContent": {
+"title" : "GNotifier",
+"shortDescription": "easily create scheduled notifications about anything you don't want to forget", 
+"version": "1.0.0",
+"longDescription": "GNotifier gives you the possibility to create/schedule simple notifications easily for your needs \\n features: \\n super based white / black theme \\n clean friendly UI design\\n control notifications from app \\n repeat notification daily option \\n auto delete for notifications option \\n favorites page \\n auto search page \\n dark mode \\n possibility to show/hide delete button for notifications \\n possibility to set notification to be fixed on the notifications bar \\n possibility to hide/show notifications when phone is locked \\n on/off notification sound \\n on/off notification vibration \\possibility to delete all notification at once"
+  }
+}

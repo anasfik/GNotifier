@@ -7,6 +7,15 @@ import '../../view/main__page/tabs__screens/settings/widgets/change__username__b
 class ChangeUsernameSetting extends GetxController {
   ChangeUsernameSetting({required this.context});
 
+// Init input value with username
+  @override
+  void onInit() {
+    editUsernameController =
+        TextEditingController(text: localBox.get("username"));
+    super.onInit();
+  }
+
+  // Variables
   late BuildContext context;
   final DialogsController dialogsController = Get.put(DialogsController());
 
@@ -15,7 +24,10 @@ class ChangeUsernameSetting extends GetxController {
   int usernameWrittenLength = 0;
   double usernameCountBoxScale = 0;
 
-  TextEditingController editUsernameController = TextEditingController();
+  // TextEditingController
+  late TextEditingController editUsernameController;
+
+  // Box
   Box localBox = Hive.box("locals");
   showEditUsernameBottomSheet() {
     Get.bottomSheet(
@@ -45,7 +57,7 @@ class ChangeUsernameSetting extends GetxController {
     Get.back();
 
     // Showing snackbar
-    dialogsController.showSnackbar( "username modified successfully");
+    dialogsController.showSnackbar("username modified successfully");
   }
 
   // Method handler for username text field

@@ -6,6 +6,7 @@ import 'package:watch_it_later/view/general__widgets/nothing__to__show__text.dar
 import 'package:watch_it_later/view/main__page/tabs__screens/home/widgets/open__Container__button.dart';
 import '../../../../controllers/get__username__controller/get__username__controller.dart';
 import '../../../../controllers/main__controller.dart';
+import '../../../../controllers/settings__controller/dark__mode_setting.dart';
 import '../../../../model/newItemNotificationModel.dart';
 import '../../../general__widgets/notification__card.dart';
 import '../../../add_new_item/add__new__item.dart';
@@ -45,10 +46,14 @@ class HomeScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   // Avatar
-                  GestureDetector(
-                    child: const CircleAvatar(
-                      radius: 25,
-                      backgroundImage: AssetImage("assets/images/avatar.png"),
+                  GetBuilder<ThemeController>(
+                    init: ThemeController(),
+                    builder: (themeController) => CircleAvatar(
+                      backgroundColor: Colors.transparent,
+                      radius: 27,
+                      backgroundImage: AssetImage(
+                      themeController.logoBasedOnTheme,
+                      ),
                     ),
                   ),
 

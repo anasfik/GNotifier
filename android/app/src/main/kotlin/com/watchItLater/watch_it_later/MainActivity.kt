@@ -1,4 +1,4 @@
-package com.watchItLater.watch_it_later
+package com.gwhyyy.gnotifier
 
 import io.flutter.embedding.android.FlutterActivity
 

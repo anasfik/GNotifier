@@ -16,8 +16,8 @@ class ShowDeleteButtonForFavoritesSetting extends GetxController {
     isDeleteButtonHidden = boolValue;
     update();
     localBox.put("isDeleteButtonHidden", isDeleteButtonHidden);
-    dialogsController
-        .showSnackbar("those changes will be applied after app restart");
+    // dialogsController
+    //     .showSnackbar("those changes will be applied after app restart");
   }
 
   getIsHideDeleteButton() {
