@@ -315,12 +315,21 @@ class SettingsScreen extends StatelessWidget {
                   },
                 ),
                 SettingCard(
+                  icon: Icons.email,
+                  mainController: mainController,
+                  description: "contact the dev or report bugs",
+                  title: "Contact",
+                  onTap: () {
+                    Get.to(const PrivacyPage());
+                  },
+                ),
+                SettingCard(
                   icon: Icons.shield,
                   mainController: mainController,
                   description: "read about the privacy policy",
                   title: "Privacy",
                   onTap: () {
-                    Get.to(PrivacyPage());
+                    Get.to(const PrivacyPage());
                   },
                 ),
               ],
