@@ -5,17 +5,18 @@ class CustomTextField extends StatelessWidget {
     Key? key,
     required this.controller,
     required this.hintText,
-    this.suffixIcon,
+    required this.textColor,
+    required this.backgroundColor,
+    required this.counterBpxColor,
+    required this.counterTextColor,
     required this.maxLength,
+    this.suffixIcon,
     this.onChanged,
     this.titleWrittenLength,
     this.animationDuration = const Duration(milliseconds: 50),
     this.counterBoxScale,
     this.showCounter = false,
-    required this.textColor,
-    required this.backgroundColor,
-    required this.counterBpxColor,
-    required this.counterTextColor,
+    this.isTextArea = false,
     this.hintColor = Colors.grey,
     this.contentPadding = const EdgeInsets.all(15),
   })  : assert(hintText != null, "hintText must not be null"),
@@ -24,7 +25,7 @@ class CustomTextField extends StatelessWidget {
   final void Function(String)? onChanged;
   final String? hintText;
   final Icon? suffixIcon;
-  final bool showCounter;
+  final bool showCounter, isTextArea;
   final EdgeInsets contentPadding;
   final TextEditingController? controller;
   final int? maxLength, titleWrittenLength;
@@ -66,6 +67,7 @@ class CustomTextField extends StatelessWidget {
           ),
         ),
         TextField(
+          maxLines: isTextArea ? 12 : 1,
           style: TextStyle(
             color: textColor,
           ),

@@ -321,7 +321,7 @@ class SettingsScreen extends StatelessWidget {
                   description: "contact the dev or report bugs",
                   title: "Contact",
                   onTap: () {
-                    Get.to(const ContactPage());
+                    Get.to(ContactPage());
                   },
                 ),
                 SettingCard(
