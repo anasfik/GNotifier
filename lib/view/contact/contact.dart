@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:watch_it_later/controllers/main__controller.dart';
 import 'package:watch_it_later/view/add_new_item/widgets/description.dart';
+import 'package:watch_it_later/view/add_new_item/widgets/new__title.dart';
 import 'package:watch_it_later/view/general__widgets/button.dart';
 
 import '../../controllers/contact_controller/contact_controller.dart';
@@ -16,33 +17,43 @@ class ContactPage extends StatelessWidget {
   final ContactController contactController = Get.put(ContactController());
   @override
   Widget build(BuildContext context) {
-    return ConstrainedBox(
-      constraints: BoxConstraints(
-        maxHeight: MediaQuery.of(context).size.height,
-        maxWidth: MediaQuery.of(context).size.width,
+    return Scaffold(
+      backgroundColor: Theme.of(context).backgroundColor,
+      appBar: AppBar(
+        title: AutoSizeText(
+          mainController.allFirstWordLetterToUppercase("contact"),
+          maxLines: 1,
+        ),
       ),
-      child: SingleChildScrollView(
-        child: Scaffold(
-          backgroundColor: Theme.of(context).backgroundColor,
-          // appBar: AppBar(
-          //   title: AutoSizeText(
-          //     mainController
-          //         .allFirstWordLetterToUppercase("feel free to contact"),
-          //     maxLines: 1,
-          //   ),
-          // ),
-          body: Padding(
+      body: SingleChildScrollView(
+        child: ConstrainedBox(
+          constraints: BoxConstraints(
+            maxHeight: MediaQuery.of(context).size.height,
+            maxWidth: MediaQuery.of(context).size.width,
+          ),
+          child: Padding(
             padding: const EdgeInsets.symmetric(
               horizontal: 20,
               vertical: 10,
             ),
             child: Column(
-              mainAxisSize: MainAxisSize.max,
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 const Spacer(
-                  flex: 3,
+                  flex: 1,
+                ),
+                Align(
+                  alignment: Alignment.center,
+                  child: NewTitle(
+                    text: "feel\nFree to talk",
+                    fontSize: 30,
+                    mainController: mainController,
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+                const Spacer(
+                  flex: 1,
                 ),
                 GetBuilder<ContactController>(
                   builder: (contactController) {
@@ -60,7 +71,7 @@ class ContactPage extends StatelessWidget {
                       titleWrittenLength:
                           contactController.contactTextWrittenLength,
                       onChanged: (value) {
-                        contactController.countcontactTextLength(value);
+                        contactController.countContactTextLength(value);
                       },
                       maxLength: contactController.contactTextMaxLength,
                       controller: contactController.textAreaEditingController,
@@ -78,7 +89,9 @@ class ContactPage extends StatelessWidget {
                   child: CustomButton(
                     text: "Send",
                     radiusValue: 10,
-                    onPressed: () {},
+                    onPressed: () {
+                      contactController.sendMailto();
+                    },
                     shouldReverseColors: true,
                   ),
                 ),
