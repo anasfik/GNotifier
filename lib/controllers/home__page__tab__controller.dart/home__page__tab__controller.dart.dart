@@ -79,7 +79,11 @@ class BottomBarController extends GetxController
 ///////////////////////////////
 
   void gotoSearchScreen() {
-    tabController.animateTo(1);
+    tabController.animateTo(
+      tabsIcons.indexWhere(
+        (tab) => tab["icon"] == Icons.search,
+      ),
+    );
   }
 
   @override
