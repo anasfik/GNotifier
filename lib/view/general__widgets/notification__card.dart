@@ -72,7 +72,7 @@ class _NotificationCardState extends State<NotificationCard> {
                 duration: const Duration(milliseconds: 100),
                 curve: Curves.easeInOutQuart,
                 child: Row(
-                  children: [
+                  children: <Widget>[
                     Container(
                       width: 15,
                       height: 15,
@@ -141,7 +141,6 @@ class _NotificationCardState extends State<NotificationCard> {
                       child: Transform.scale(
                         scale: widget.isFavoriteButtonHidden ? 0 : 1,
                         child: FavoriteIconButton(
-                        
                           size: 23,
                           isChecked:
                               widget.currentNotification?.isFavorite ?? false,

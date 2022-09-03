@@ -8,7 +8,7 @@ class GetUsernameController extends GetxController {
 
   // Username variables
   String? username;
-  int usernameMaxLength = 10;
+  int usernameMaxLength = 15;
   int usernameWrittenLength = 0;
   double usernameCountBoxScale = 0;
 

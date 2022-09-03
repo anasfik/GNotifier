@@ -20,7 +20,7 @@ class NothingToShow extends StatelessWidget {
         child: AutoSizeText(
           mainController.allFirstWordLetterToUppercase(text),
           style: TextStyle(
-            color: Theme.of(context).primaryColor.withOpacity(.3),
+            color: Theme.of(context).primaryColor.withOpacity(.25),
             fontSize: 25,
             fontWeight: FontWeight.bold,
           ),

@@ -132,9 +132,12 @@ class HomeScreen extends StatelessWidget {
                 builder: (BuildContext context,
                     Box<NewItemNotifcationModel> box, __) {
                   if (box.values.isEmpty) {
-                    return NothingToShow(
-                      text: "schedule your first\n notification",
-                      mainController: mainController,
+                    return Container(
+                      margin: const EdgeInsets.only(right: 20),
+                      child: NothingToShow(
+                        text: "schedule your first\n notification",
+                        mainController: mainController,
+                      ),
                     );
                   }
                   return Column(
