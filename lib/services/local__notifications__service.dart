@@ -83,7 +83,7 @@ class NotificationService {
   Future<void> init() async {
     // Declaring the android settings with icon
     const AndroidInitializationSettings initializationSettingsAndroid =
-        AndroidInitializationSettings('@drawable/app_icon');
+        AndroidInitializationSettings('@drawable/ic_stat_notification_logo');
 
     // Declaring the ios permission settings
     IOSInitializationSettings initializationSettingsIOS =

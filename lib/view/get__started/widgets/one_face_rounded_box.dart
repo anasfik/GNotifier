@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class OneFaceRoundedBox extends StatelessWidget {
-  OneFaceRoundedBox({
+  const OneFaceRoundedBox({
     Key? key,
     this.child,
     required this.color,
@@ -14,11 +14,11 @@ class OneFaceRoundedBox extends StatelessWidget {
     this.allSidesRounded = false,
     required this.roundedBy,
   }) : super(key: key);
-  Color color;
+  final Color color;
 
-  Widget? child;
-  double height, width, roundedBy;
-  bool hasTopLeftRounded,
+  final Widget? child;
+  final double height, width, roundedBy;
+  final bool hasTopLeftRounded,
       hasTopRightRounded,
       hasBottomLeftRounded,
       hasBottomRightRounded,

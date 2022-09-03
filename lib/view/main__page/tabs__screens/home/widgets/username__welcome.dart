@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import '../../../../../controllers/get__username__controller/get__username__controller.dart';
 
 class UsernameWelcome extends StatelessWidget {
-  UsernameWelcome({
+ const UsernameWelcome({
     Key? key,
     required this.mainController,
     required this.getUsernameController,
@@ -13,7 +13,7 @@ class UsernameWelcome extends StatelessWidget {
 
   final mainController;
   final GetUsernameController getUsernameController;
-  String textToShowBeforeUsername;
+  final String textToShowBeforeUsername;
 
   @override
   Widget build(BuildContext context) {
