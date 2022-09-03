@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -5,9 +6,11 @@ import 'package:watch_it_later/controllers/notifications__controllers/new__item_
 import 'package:watch_it_later/view/general__widgets/nothing__to__show__text.dart';
 import 'package:watch_it_later/view/main__page/tabs__screens/home/widgets/open__Container__button.dart';
 import '../../../../controllers/get__username__controller/get__username__controller.dart';
+import '../../../../controllers/home__page__tab__controller.dart/home__page__tab__controller.dart.dart';
 import '../../../../controllers/main__controller.dart';
 import '../../../../controllers/settings__controller/dark__mode_setting.dart';
 import '../../../../model/newItemNotificationModel.dart';
+import '../../../general__widgets/action__button.dart';
 import '../../../general__widgets/notification__card.dart';
 import '../../../add_new_item/add__new__item.dart';
 import '../../../general__widgets/screen__title.dart';
@@ -27,9 +30,10 @@ class HomeScreen extends StatelessWidget {
   final GetUsernameController getUsernameController =
       Get.put(GetUsernameController());
 
-  //
   @override
   Widget build(BuildContext context) {
+    final BottomBarController bottomBarController =
+        Get.put(BottomBarController(context: context));
     return Container(
       width: double.infinity,
       margin: const EdgeInsets.only(left: 20),
@@ -46,14 +50,24 @@ class HomeScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
                   // Avatar
-                  GetBuilder<ThemeController>(
-                    init: ThemeController(),
-                    builder: (themeController) => CircleAvatar(
-                      backgroundColor: Colors.transparent,
-                      radius: 27,
-                      backgroundImage: AssetImage(
-                        themeController.logoBasedOnTheme,
-                      ),
+                  // GetBuilder<ThemeController>(
+                  //   init: ThemeController(),
+                  //   builder: (themeController) => CircleAvatar(
+                  //     backgroundColor: Colors.transparent,
+                  //     radius: 27,
+                  //     backgroundImage: AssetImage(
+                  //       themeController.logoBasedOnTheme,
+                  //     ),
+                  //   ),
+                  // ),
+
+                  GestureDetector(
+                    onTap: () {
+                      bottomBarController.gotoSearchScreen();
+                    },
+                    child: const Icon(
+                      Icons.search,
+                      size: 25,
                     ),
                   ),
 
@@ -62,7 +76,7 @@ class HomeScreen extends StatelessWidget {
                     key: const Key("create notification button"),
                     screenToOpen: AddNewItemScreen(),
                     icon: Icons.add,
-                  )
+                  ),
                 ],
               ),
             ),
@@ -70,18 +84,39 @@ class HomeScreen extends StatelessWidget {
 
             // Username welcome
             UsernameWelcome(
-              textToShowBeforeUsername: "hey, ",
+              textToShowBeforeUsername: "hi, ",
               mainController: mainController,
               getUsernameController: getUsernameController,
             ),
+            ValueListenableBuilder(
+                valueListenable:
+                    Hive.box<NewItemNotifcationModel>("newNotificationsBox")
+                        .listenable(),
+                builder: (BuildContext context,
+                    Box<NewItemNotifcationModel> notificationsBox, child) {
+                  return AutoSizeText(
+                    mainController.allFirstWordLetterToUppercase(
+                        "you have ${notificationsBox.values.length} notifications"),
+                    style: TextStyle(
+                      fontSize: 13,
+                      color: Theme.of(context).primaryColor.withOpacity(.6),
+                    ),
+                  );
+                }),
+            const SizedBox(height: 20),
 
-            const Divider(),
+            Container(
+              margin: const EdgeInsets.only(right: 20),
+              child: const Divider(
+                thickness: 1,
+              ),
+            ),
             const SizedBox(height: 20),
 
             //
             ScreenTitle(
               mainController: mainController,
-              title: "latest added notification",
+              title: "All your notification",
             ),
 
             const SizedBox(height: 20),
@@ -94,7 +129,7 @@ class HomeScreen extends StatelessWidget {
                     Box<NewItemNotifcationModel> box, __) {
                   if (box.values.isEmpty) {
                     return NothingToShow(
-                      text: "press ' + ' to begin",
+                      text: "schedule your first\n notification",
                       mainController: mainController,
                     );
                   }

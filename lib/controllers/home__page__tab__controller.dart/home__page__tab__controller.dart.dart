@@ -21,7 +21,7 @@ class BottomBarController extends GetxController
               color: Theme.of(context).primaryColor,
               borderRadius: BorderRadius.circular(3),
             ),
-            textStyle:  TextStyle(
+            textStyle: TextStyle(
               color: Theme.of(context).backgroundColor,
               fontSize: 12,
             ),
@@ -77,6 +77,10 @@ class BottomBarController extends GetxController
   //tabs wrapped with tooltip to show, it's value is in the constructor block
   late List<Tooltip> tabs;
 ///////////////////////////////
+
+  void gotoSearchScreen() {
+    tabController.animateTo(1);
+  }
 
   @override
   void onInit() {
