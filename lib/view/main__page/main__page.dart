@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter_point_tab_bar/pointTabBar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -57,6 +58,7 @@ class MainPage extends StatelessWidget {
           ),
         ),
         body: TabBarView(
+          dragStartBehavior: DragStartBehavior.down,
           controller: bottomBarController.tabController,
           children: <Widget>[
             ...List.generate(

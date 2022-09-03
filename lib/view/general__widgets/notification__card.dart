@@ -37,10 +37,15 @@ class _NotificationCardState extends State<NotificationCard> {
     return GestureDetector(
       onTapDown: (details) {
         setState(() {
-          scale = 0.95;
+          scale = 1.05;
         });
       },
       onTapCancel: () {
+        setState(() {
+          scale = 1;
+        });
+      },
+      onTapUp: (details) {
         setState(() {
           scale = 1;
         });
@@ -62,19 +67,28 @@ class _NotificationCardState extends State<NotificationCard> {
           height: 120,
           child: Row(
             children: <Widget>[
-              Container(
-                width: 15,
-                height: 15,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(50),
-                  border: Border.all(
-                      width: 3.5, color: Theme.of(context).primaryColor),
+              AnimatedOpacity(
+                opacity: scale == 1 ? 1 : 0.1,
+                duration: const Duration(milliseconds: 100),
+                curve: Curves.easeInOutQuart,
+                child: Row(
+                  children: [
+                    Container(
+                      width: 15,
+                      height: 15,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(50),
+                        border: Border.all(
+                            width: 3.5, color: Theme.of(context).primaryColor),
+                      ),
+                    ),
+                    Container(
+                      width: 7,
+                      height: 2,
+                      color: Theme.of(context).primaryColor,
+                    ),
+                  ],
                 ),
-              ),
-              Container(
-                width: 7,
-                height: 2,
-                color: Theme.of(context).primaryColor,
               ),
               Expanded(
                 child: Stack(
@@ -191,10 +205,15 @@ class _NotificationCardState extends State<NotificationCard> {
                   ],
                 ),
               ),
-              Container(
-                width: 7 * 2,
-                height: 2,
-                color: Theme.of(context).primaryColor,
+              AnimatedOpacity(
+                opacity: scale == 1 ? 1 : 0.1,
+                duration: const Duration(milliseconds: 100),
+                curve: Curves.easeInOutQuart,
+                child: Container(
+                  width: 7 * 2,
+                  height: 2,
+                  color: Theme.of(context).primaryColor,
+                ),
               ),
             ],
           ),
