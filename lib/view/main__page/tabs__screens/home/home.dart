@@ -65,9 +65,12 @@ class HomeScreen extends StatelessWidget {
                     onTap: () {
                       bottomBarController.gotoSearchScreen();
                     },
-                    child: const Icon(
-                      Icons.search,
-                      size: 25,
+                    child: const Padding(
+                      padding: EdgeInsets.only(bottom: 10, right: 10, top: 10),
+                      child: Icon(
+                        Icons.search,
+                        size: 25,
+                      ),
                     ),
                   ),
 
