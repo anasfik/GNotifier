@@ -25,7 +25,7 @@ class NotificationFullPage extends StatelessWidget {
   final MainController mainController = Get.put(MainController());
   final NewNotificationController newNotificationController =
       Get.put(NewNotificationController());
-  DateController dateController = Get.put(DateController());
+  final DateController dateController = Get.put(DateController());
   final DialogsController dialogsController = Get.put(DialogsController());
   final ShowDeleteButtonForFavoritesSetting
       showdeleteButtonForFavoritesSetting =
@@ -34,9 +34,9 @@ class NotificationFullPage extends StatelessWidget {
   ///
   // we got those with Get.arguments from previous page
   // it's weird but I see it best solution to pass arguments to a page
-  NewItemNotifcationModel gettedNotification = Get.arguments[0];
-  int reversedIndex = Get.arguments[1];
-  bool showDeleteButtonOnFullPage = Get.arguments[2];
+  final NewItemNotifcationModel gettedNotification = Get.arguments[0];
+  final int reversedIndex = Get.arguments[1];
+  final bool showDeleteButtonOnFullPage = Get.arguments[2];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -48,7 +48,7 @@ class NotificationFullPage extends StatelessWidget {
         elevation: 0,
         actions: [
           FavoriteIconButton(
-            isChecked: gettedNotification.isFavorite as bool,
+            isChecked: gettedNotification.isFavorite ?? false,
             passedIndex: reversedIndex,
             size: 28,
           ),

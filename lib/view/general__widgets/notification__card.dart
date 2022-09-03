@@ -7,7 +7,7 @@ import '../../model/newItemNotificationModel.dart';
 import 'favorite_icon__button.dart';
 
 class NotificationCard extends StatefulWidget {
-  NotificationCard({
+  const NotificationCard({
     Key? key,
     this.showDeleteButtonOnFullPage = false,
     required this.currentNotification,
@@ -141,6 +141,7 @@ class _NotificationCardState extends State<NotificationCard> {
                       child: Transform.scale(
                         scale: widget.isFavoriteButtonHidden ? 0 : 1,
                         child: FavoriteIconButton(
+                        
                           size: 23,
                           isChecked:
                               widget.currentNotification?.isFavorite ?? false,

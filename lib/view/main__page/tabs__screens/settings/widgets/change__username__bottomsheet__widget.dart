@@ -48,7 +48,7 @@ class ChangeUsernameBottomSheetWidget extends StatelessWidget {
                     onChanged: (value) {
                       changeUsernameSetting.countUsernameLength(value);
                     },
-                    hintText: "username",
+                    hintText: "Username",
                     maxLength: changeUsernameSetting.usernameMaxLength,
                     titleWrittenLength:
                         changeUsernameSetting.usernameWrittenLength,

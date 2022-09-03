@@ -10,7 +10,7 @@ class FavoriteIconButton extends StatefulWidget {
     this.size = 26,
   }) : super(key: key);
   bool isChecked;
-  double size;
+  final double size;
   final int passedIndex;
   static final FavoritesController favoritesController =
       Get.put(FavoritesController());
@@ -77,8 +77,9 @@ class _FavoriteIconButtonState extends State<FavoriteIconButton>
                   scale: scale.value,
                   child: IconButton(
                     onPressed: () {
-                      widget.isChecked = !widget.isChecked;
-
+                      setState(() {
+                        widget.isChecked = !widget.isChecked;
+                      });
                       favoritesController.addToFavorites(widget.passedIndex);
 
                       animate(widget.isChecked);

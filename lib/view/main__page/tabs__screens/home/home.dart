@@ -110,7 +110,8 @@ class HomeScreen extends StatelessWidget {
 
             Container(
               margin: const EdgeInsets.only(right: 20),
-              child: const Divider(
+              child: Divider(
+                color: Theme.of(context).primaryColor,
                 thickness: 1,
               ),
             ),

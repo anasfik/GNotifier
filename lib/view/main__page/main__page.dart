@@ -57,15 +57,19 @@ class MainPage extends StatelessWidget {
             ),
           ),
         ),
-        body: TabBarView(
-          dragStartBehavior: DragStartBehavior.down,
-          controller: bottomBarController.tabController,
-          children: <Widget>[
-            ...List.generate(
-              bottomBarController.tabScreens.length,
-              (index) => bottomBarController.tabScreens[index],
-            ),
-          ],
+        body: ScrollConfiguration(
+          behavior: const ScrollBehavior().copyWith(
+            overscroll: false,
+          ),
+          child: TabBarView(
+            controller: bottomBarController.tabController,
+            children: <Widget>[
+              ...List.generate(
+                bottomBarController.tabScreens.length,
+                (index) => bottomBarController.tabScreens[index],
+              ),
+            ],
+          ),
         ),
       ),
     );
