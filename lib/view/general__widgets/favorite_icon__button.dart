@@ -12,7 +12,7 @@ class FavoriteIconButton extends StatefulWidget {
   bool isChecked;
   double size;
   final int passedIndex;
-  static final  FavoritesController favoritesController =
+  static final FavoritesController favoritesController =
       Get.put(FavoritesController());
 
   @override
@@ -35,11 +35,13 @@ class _FavoriteIconButtonState extends State<FavoriteIconButton>
   void initState() {
     favIconController = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 50),
+      duration: const Duration(milliseconds: 100),
     );
 
     scale = Tween(begin: 1.0, end: 1.25)
-        .chain(CurveTween(curve: Curves.easeInOutBack))
+        .chain(CurveTween(
+          curve: Curves.elasticInOut,
+        ))
         .animate(favIconController);
     favIconController.addStatusListener((status) {
       if (status == AnimationStatus.completed) {

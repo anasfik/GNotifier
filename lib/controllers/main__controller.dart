@@ -37,4 +37,16 @@ class MainController extends GetxController {
       return word[0].toUpperCase() + word.substring(1);
     }).join(' ');
   }
+    String setDateShow(DateTime dateToShow) {
+// write date properly
+
+    int years = dateToShow.year;
+    int months = dateToShow.month;
+    int days = dateToShow.day;
+    int hours = dateToShow.hour;
+    int minutes = dateToShow.minute;
+    String date =
+        "$years-$months-$days  $hours:${minutes.toString().padLeft(2, '0')}";
+    return date;
+  }
 }
