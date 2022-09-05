@@ -195,6 +195,8 @@ class NewNotificationController extends GetxController {
         // Success method
         onSuccess: () {
           setNewTitle(titleController.text);
+
+          update();
         },
 
         // Specify the type of the bottom sheet
@@ -225,6 +227,8 @@ class NewNotificationController extends GetxController {
       // Success method
       onSuccess: () {
         setNewDescription(descriptionController.text);
+
+        update();
       },
       // Specify the type of the bottom sheet
       forDescription: true,
@@ -358,9 +362,12 @@ class NewNotificationController extends GetxController {
       );
       // Going back
     }
-// Re init inputs
 
+    // Re init inputs
     clear();
+
+    // Re init the the marked new Variables
+    reInitNewVariables();
 
     // Going back
     Get.back();
@@ -445,5 +452,14 @@ class NewNotificationController extends GetxController {
     descriptionCountBoxScale = 0;
     hasAutoDeleteEnabled = false;
     isRepeatedOptionEnabled = false;
+  }
+
+  void reInitNewVariables() {
+    newTitle = null;
+    newDescription = null;
+    newIsAlarmed = null;
+    newIsRepeated = null;
+    newIsRepeated = null;
+    newDate = null;
   }
 }
