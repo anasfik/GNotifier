@@ -7,6 +7,7 @@ import 'package:watch_it_later/controllers/main__controller.dart';
 import 'package:watch_it_later/view/add_new_item/widgets/option.dart';
 import 'package:watch_it_later/view/general__widgets/button.dart';
 import 'package:watch_it_later/view/notification__full__page/widgets/dashed__lines__decoration.dart';
+import 'package:watch_it_later/view/notification__full__page/widgets/full__screen__notification__description.dart';
 
 import '../../controllers/notifications__controllers/date__Controller.dart';
 import '../../controllers/notifications__controllers/new__item__notification__controller.dart';
@@ -14,8 +15,7 @@ import '../../controllers/settings__controller/show__delete__button__for__favori
 import '../../model/newItemNotificationModel.dart';
 import '../general__widgets/edit__icon__button.dart';
 import '../general__widgets/favorite_icon__button.dart';
-import 'delete__button.dart';
-import 'widgets/full__screen__notification__description.dart';
+import 'delete_button.dart';
 import 'widgets/full__screen__notification__title.dart';
 
 class NotificationFullPage extends StatelessWidget {

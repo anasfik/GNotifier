@@ -10,7 +10,7 @@ import 'package:watch_it_later/view/general__widgets/favorite_icon__button.dart'
 import 'package:watch_it_later/view/general__widgets/notification__card.dart';
 import 'package:watch_it_later/view/get__started/widgets/one_face_rounded_box.dart';
 import 'package:watch_it_later/view/main__page/tabs__screens/settings/widgets/setting__card.dart';
-import 'package:watch_it_later/view/notification__full__page/delete__button.dart';
+import 'package:watch_it_later/view/notification__full__page/delete_button.dart';
 
 main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();

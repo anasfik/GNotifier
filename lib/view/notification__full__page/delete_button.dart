@@ -24,7 +24,6 @@ class DeleteButton extends StatelessWidget {
           color: Colors.red.withOpacity(.15),
         ),
         child: IconButton(
-          
           splashColor: Colors.transparent,
           highlightColor: Colors.transparent,
           onPressed: onPressed,
