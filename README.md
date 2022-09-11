@@ -33,4 +33,8 @@ Easily create scheduled notifications about anything you don't want to forget to
 
 
 # Features
-(To-do)
+there are so many other features in the app that I'm lazy to write it
+
+
+
+To-do: write them
