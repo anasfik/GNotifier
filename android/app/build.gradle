@@ -58,9 +58,7 @@ android {
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
         multiDexEnabled = true
-     ndk {
-                debugSymbolLevel 'FULL'
-            }
+    
     }
 
       signingConfigs {
@@ -74,9 +72,7 @@ android {
    buildTypes {
        release {
            signingConfig signingConfigs.release
-            ndk {
-                debugSymbolLevel 'FULL'
-            }
+          
        }
    }
 
@@ -91,3 +87,6 @@ dependencies {
     implementation("androidx.multidex:multidex:2.0.1")
 
 }
+
+
+android.defaultConfig.ndk.debugSymbolLevel = 'FULL'

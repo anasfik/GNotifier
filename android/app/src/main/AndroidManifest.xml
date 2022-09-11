@@ -8,6 +8,9 @@
         android:label="GNotifier"
         android:name="${applicationName}"
         android:icon="@mipmap/launcher_icon">
+         <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-xxxxxxxxxxxxxxxx~yyyyyyyyyy"/>
         <service
     android:name="dev.fluttercommunity.plus.androidalarmmanager.AlarmService"
     android:permission="android.permission.BIND_JOB_SERVICE"
@@ -52,4 +55,6 @@
             android:name="flutterEmbedding"
             android:value="2" />
     </application>
+    <uses-permission android:name="com.google.android.gms.permission.AD_ID"/>
+
 </manifest>
