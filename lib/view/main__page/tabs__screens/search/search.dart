@@ -44,7 +44,7 @@ class SearchScreen extends StatelessWidget {
                       margin: const EdgeInsets.only(right: 20),
                       child: CustomTextField(
                         key: const Key("search field"),
-                        autoFocus: true,
+                        autoFocus: false,
                         counterTextColor: Theme.of(context).primaryColor,
                         counterBpxColor: Theme.of(context).backgroundColor,
                         textColor: Theme.of(context).primaryColor,
