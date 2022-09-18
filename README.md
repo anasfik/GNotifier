@@ -3,6 +3,8 @@
 
 # GNotifier
 
+<a href="https://play.google.com/store/apps/details?id=com.gwhyyy.gnotifier"><img src="assets/docs_assets/play_store_download.png" width="200" alt="play store image"/></a>
+
 Easily create scheduled notifications about anything you don't want to forget to do, watch, learn, listen to...
 
 ![GitHub commit activity](https://img.shields.io/github/commit-activity/y/anasfik/I-will-watch-later)
