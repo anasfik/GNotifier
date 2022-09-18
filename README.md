@@ -33,8 +33,17 @@ Easily create scheduled notifications about anything you don't want to forget to
 
 
 # Features
-there are so many other features in the app that I'm lazy to write it
+- Light/Dark mode
+- Clean friendly UI design
+- Notifications control from the app
+- Repeat notification daily option
+- Auto delete option for notifications
+- Add to favorites option with favorites page
+- Auto search page
+- Possibility to show/hide delete button for your priority notifications
+- Possibility to set a notification to be fixed on the notifications bar
+- Possibility to hide/show notifications when the phone is locked
+- Possibility to delete all notifications at once
+- On/off the notification sound
+- On/off notification vibration
 
-
-
-To-do: write them
