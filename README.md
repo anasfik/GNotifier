@@ -19,16 +19,16 @@ Easily create scheduled notifications about anything you don't want to forget to
 <br>
 <br>
 <br>
-<img src="assets/docs_assets/2 – 2.png" alt="showcase-screenshot" width="30%"">
-<img src="assets/docs_assets/1 – 3.png" alt="showcase-screenshot" width="30%"">
-<img src="assets/docs_assets/2 – 3.png" alt="showcase-screenshot" width="30%"">
+<img src="assets/docs_assets/2 – 2.png" alt="showcase-screenshot" width="30%">
+<img src="assets/docs_assets/1 – 3.png" alt="showcase-screenshot" width="30%">
+<img src="assets/docs_assets/2 – 3.png" alt="showcase-screenshot" width="30%" />
 <br>
 <br>
 <br>
 <br>
-<img src="assets/docs_assets/1 – 4.png" alt="showcase-screenshot" width="30%">
-<img src="assets/docs_assets/1.png" alt="showcase-screenshot" width="30%">
-<img src="assets/docs_assets/1 – 1.png" alt="showcase-screenshot" width="30%">
+<img src="assets/docs_assets/1 – 4.png" alt="showcase-screenshot" width="30%" />
+<img src="assets/docs_assets/1.png" alt="showcase-screenshot" width="30%" />
+<img src="assets/docs_assets/1 – 1.png" alt="showcase-screenshot" width="30%" />
 </p>
 
 
@@ -46,4 +46,35 @@ Easily create scheduled notifications about anything you don't want to forget to
 - Possibility to delete all notifications at once
 - On/off the notification sound
 - On/off notification vibration
+
+
+
+# Usage
+Happy that I see that you want to try it :)
+
+first, clone this project into your machine with : 
+```
+git clone https://github.com/anasfik/GNotifier.git
+```
+
+then open it with your code editor and run : 
+```
+flutter pub get
+```
+
+since like I've say there's no data collected, it doesn't interact with any network database, so don't worry about more configurations
+
+tools used:
+Framework: flutter
+State management: Getx
+local Database: Hive DB
+
+
+and here you go !
+
+
+
+contributing
+Hi again, any type of contributions are acceptable and welcome, if you find any issues, word mistakes, bugs, or features to add, just do it
+I will be happy to add you in the head of this project
 
