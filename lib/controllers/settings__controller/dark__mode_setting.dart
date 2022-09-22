@@ -12,10 +12,9 @@ class ThemeController extends GetxController {
     if (isDarkMode) {
       logoBasedOnTheme = 'assets/docs_assets/Logo_dark_mode.png';
       return ThemeMode.dark;
-    } else {
-      logoBasedOnTheme = 'assets/docs_assets/Logo_light_mode.png';
-      return ThemeMode.light;
     }
+    logoBasedOnTheme = 'assets/docs_assets/Logo_light_mode.png';
+    return ThemeMode.light;
   }
 
   void toggleDarkMode() {

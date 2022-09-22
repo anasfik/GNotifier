@@ -1,7 +1,7 @@
 import 'package:hive/hive.dart';
 
 import '../../../model/newItemNotificationModel.dart';
-import '../main_methods.dart';
+import '../main_init_methods.dart';
 
 typedef HiveBoxesInit = Future Function(
     {required bool shouldClearBoxesOnAppRestart});

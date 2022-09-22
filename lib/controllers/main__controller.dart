@@ -6,20 +6,8 @@ class MainController extends GetxController {
 
   // Variables
   String? payload;
-  late bool isNewUsingApp;
 
-  /// Watch user status
-  bool getUserStatus() {
-    // Getting the locals Box
-    Box localBox = Hive.box("locals");
 
-    // Getting the value from the box if it's not null(if the user is old one), if it's null, the user is new one
-    // In the  getUsernameController, the saveUsernameInBox method, we will set the isNewUsingApp to false, so the user will be redirected to the mainPage directly
-    isNewUsingApp = localBox.get('isNewUsingApp') ?? true;
-
-    //
-    return isNewUsingApp;
-  }
 
   /// Make all first letters of strings uppercase
   allFirstWordLetterToUppercase(String text) {
