@@ -10,7 +10,6 @@ import 'package:watch_it_later/view/get__started/get__started__page.dart';
 import 'services/main_init_methods/main_init_methods.dart';
 import 'utils/get_pages.dart';
 import 'utils/themes.dart';
-import 'view/main__page/main__page.dart';
 
 Future<void> main() async {
   await MainMethodsService().init();

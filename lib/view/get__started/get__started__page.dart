@@ -1,8 +1,8 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:watch_it_later/controllers/main__controller.dart';
 import 'package:watch_it_later/utils/AppColors.dart';
+import 'package:watch_it_later/utils/extensions/string_extension.dart';
 import 'package:watch_it_later/view/get__started/Constants/dimensions.dart';
 import 'package:watch_it_later/view/get__started/widgets/one_face_rounded_box.dart';
 
@@ -10,8 +10,7 @@ import '../general__widgets/button.dart';
 import 'widgets/graph__bars.dart';
 
 class GetStartedPage extends StatelessWidget {
-  const GetStartedPage({Key? key}) : super(key: key);
-  static final MainController mainController = Get.put(MainController());
+  const GetStartedPage({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -160,8 +159,7 @@ class GetStartedPage extends StatelessWidget {
               child: Column(
                 children: <Widget>[
                   AutoSizeText(
-                    mainController.allFirstWordLetterToUppercase(
-                        "never forget \n anymore"),
+                    "never forget \n anymore".capitalizeAllWordsFirstLetter(),
                     maxLines: 2,
                     textAlign: TextAlign.center,
                     style: TextStyle(
@@ -177,10 +175,9 @@ class GetStartedPage extends StatelessWidget {
                       radiusValue: 10,
                       shouldReverseColors: false,
                       onPressed: () {
-                        Get.toNamed('/getUsernamePage');
+                        Get.toNamed('/getUsername');
                       },
-                      text: mainController
-                          .allFirstWordLetterToUppercase("get started")),
+                      text: "get started".capitalizeAllWordsFirstLetter()),
                   const SizedBox(
                     height: 15,
                   ),
