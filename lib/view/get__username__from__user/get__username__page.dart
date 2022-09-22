@@ -2,26 +2,24 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:watch_it_later/controllers/get__username__controller/get__username__controller.dart';
+import 'package:watch_it_later/utils/extensions/string_extension.dart';
 import 'package:watch_it_later/view/general__widgets/button.dart';
 
-import '../../controllers/main__controller.dart';
 import '../../utils/AppColors.dart';
 import '../general__widgets/text__field.dart';
 
-class GetUsernamePage extends StatelessWidget {
-  const GetUsernamePage({Key? key}) : super(key: key);
-
-  // Dependency injection
-  static final MainController mainController = Get.find<MainController>();
+class GetUsernamePage extends GetView<GetUsernameController> {
+  const GetUsernamePage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    Size mq = MediaQuery.of(context).size;
     return Scaffold(
       body: SingleChildScrollView(
         child: ConstrainedBox(
           constraints: BoxConstraints(
-            maxHeight: Get.height,
-            maxWidth: Get.width,
+            maxHeight: mq.height,
+            maxWidth: mq.width,
           ),
           child: Container(
             margin: const EdgeInsets.symmetric(vertical: 30, horizontal: 20),
@@ -47,8 +45,7 @@ class GetUsernamePage extends StatelessWidget {
                 Column(
                   children: [
                     AutoSizeText(
-                      mainController.allFirstWordLetterToUppercase(
-                          "what we can call you ?"),
+                      "what we can call you ?".capitalizeAllWordsFirstLetter(),
                       maxLines: 2,
                       style: TextStyle(
                         fontSize: 30,
@@ -58,27 +55,22 @@ class GetUsernamePage extends StatelessWidget {
                     ),
                     const SizedBox(height: 20),
                     GetBuilder<GetUsernameController>(
-                      init: GetUsernameController(),
-                      builder: (getUsernameController) {
+                      builder: (controller) {
                         return CustomTextField(
                           key: const Key("get username text field"),
                           counterTextColor: AppColors.white,
                           counterBpxColor: AppColors.darkBlack,
                           textColor: AppColors.darkBlack,
                           backgroundColor: AppColors.darkBlack.withOpacity(.4),
-                          counterBoxScale:
-                              getUsernameController.usernameCountBoxScale,
-                          titleWrittenLength:
-                              getUsernameController.usernameWrittenLength,
+                          counterBoxScale: controller.usernameCountBoxScale,
+                          titleWrittenLength: controller.usernameWrittenLength,
                           showCounter: true,
                           onChanged: (value) {
-                            getUsernameController.countUsernameLength(value);
+                            controller.countUsernameLength(value);
                           },
-                          maxLength: getUsernameController.usernameMaxLength,
-                          controller:
-                              getUsernameController.usernameTextFieldController,
-                          hintText: mainController
-                              .allFirstWordLetterToUppercase("your name"),
+                          maxLength: controller.usernameMaxLength,
+                          controller: controller.usernameTextFieldController,
+                          hintText: "your name".capitalizeAllWordsFirstLetter(),
                         );
                       },
                     ),
@@ -88,27 +80,24 @@ class GetUsernamePage extends StatelessWidget {
                   flex: 2,
                 ),
                 GetBuilder<GetUsernameController>(
-                  builder: (getUsernameController) {
+                  builder: (controller) {
                     return CustomButton(
                       key: const Key("get username button"),
                       isBtnColorForGetStarted: true,
-                      onPressed: getUsernameController
-                              .usernameTextFieldController.text
+                      onPressed: controller.usernameTextFieldController.text
                               .trim()
                               .isNotEmpty
                           ? () {
-                              getUsernameController.setUserName(
-                                getUsernameController
-                                    .usernameTextFieldController.text
+                              controller.setUserName(
+                                controller.usernameTextFieldController.text
                                     .trim(),
                               );
 
-                              Get.offAllNamed('/mainPage');
+                              Get.offAllNamed('/main');
                             }
                           : null,
                       shouldReverseColors: true,
-                      text:
-                          mainController.allFirstWordLetterToUppercase("next"),
+                      text: "next".capitalizeAllWordsFirstLetter(),
                     );
                   },
                 )
