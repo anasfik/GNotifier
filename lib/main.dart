@@ -14,6 +14,7 @@ import 'utils/themes.dart';
 Future<void> main() async {
   await MainMethodsService().init();
   InitialBinding().dependencies();
+
   runApp(const WatchItLaterApp());
 }
 

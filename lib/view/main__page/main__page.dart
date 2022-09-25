@@ -6,12 +6,11 @@ import '../../controllers/home__page__tab__controller.dart/home__page__tab__cont
 
 class MainPage extends StatelessWidget {
   const MainPage({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
-    // should be here
     ThemeData theme = Theme.of(context);
 
     final BottomBarController bottomBarController =

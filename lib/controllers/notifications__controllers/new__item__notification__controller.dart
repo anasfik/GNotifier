@@ -7,7 +7,7 @@ import 'package:hive/hive.dart';
 import 'package:watch_it_later/view/notification__full__page/widgets/bottom__sheet_widget.dart';
 import '../../model/newItemNotificationModel.dart';
 import '../../services/local__notifications__service.dart';
-import '../favorites__controller.dart/favorites__controller.dart';
+import '../favorites__controller/favorites__controller.dart';
 import '../helpers__controllers/dialogs__controller.dart';
 import '../main__controller.dart';
 
