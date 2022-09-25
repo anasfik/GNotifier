@@ -1,6 +1,8 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:watch_it_later/controllers/contact_controller/extensions/send_email.dart';
+import 'package:watch_it_later/controllers/contact_controller/extensions/text_field_counter_handler.dart';
 import 'package:watch_it_later/controllers/main__controller.dart';
 import 'package:watch_it_later/view/add_new_item/widgets/new__title.dart';
 import 'package:watch_it_later/view/general__widgets/button.dart';
