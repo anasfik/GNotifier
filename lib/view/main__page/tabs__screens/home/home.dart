@@ -6,7 +6,7 @@ import 'package:watch_it_later/controllers/notifications__controllers/new__item_
 import 'package:watch_it_later/view/general__widgets/nothing__to__show__text.dart';
 import 'package:watch_it_later/view/main__page/tabs__screens/home/widgets/open__Container__button.dart';
 import '../../../../controllers/get__username__controller/get__username__controller.dart';
-import '../../../../controllers/home__page__tab__controller.dart/home__page__tab__controller.dart.dart';
+import '../../../../controllers/home__page__tab__controller/home__page__tab__controller.dart.dart';
 import '../../../../controllers/main__controller.dart';
 import '../../../../model/newItemNotificationModel.dart';
 import '../../../general__widgets/notification__card.dart';

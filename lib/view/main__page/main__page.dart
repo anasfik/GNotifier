@@ -2,7 +2,7 @@ import 'package:flutter_point_tab_bar/pointTabBar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../controllers/helpers__controllers/on__notification__click.dart';
-import '../../controllers/home__page__tab__controller.dart/home__page__tab__controller.dart.dart';
+import '../../controllers/home__page__tab__controller/home__page__tab__controller.dart.dart';
 
 class MainPage extends StatelessWidget {
   const MainPage({
