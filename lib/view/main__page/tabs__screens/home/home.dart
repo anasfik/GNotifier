@@ -2,6 +2,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:watch_it_later/controllers/home__page__tab__controller/extensions/goto_search_tab_screen.dart';
 import 'package:watch_it_later/controllers/notifications__controllers/new__item__notification__controller.dart';
 import 'package:watch_it_later/view/general__widgets/nothing__to__show__text.dart';
 import 'package:watch_it_later/view/main__page/tabs__screens/home/widgets/open__Container__button.dart';
