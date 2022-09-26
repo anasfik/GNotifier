@@ -1,15 +1,13 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:watch_it_later/utils/extensions/string_extension.dart';
 import '../../utils/AppColors.dart';
 import '../../view/general__widgets/dialog__text__button.dart';
 import '../main__controller.dart';
 import 'package:oktoast/oktoast.dart';
 
 class DialogsController extends GetxController {
-  // Dependencies injection
-  final MainController mainController = Get.put(MainController());
-
   showConfirmWithActions(
       String infoText, String actionButtonText, void Function()? function,
       {forDelete = false}) {
@@ -29,7 +27,7 @@ class DialogsController extends GetxController {
           SizedBox(
             width: 200,
             child: Text(
-              mainController.allFirstWordLetterToUppercase(infoText),
+              (infoText).capitalizeAllWordsFirstLetter(),
               style: TextStyle(
                 color: AppColors.darkBlack,
                 fontSize: 17,
@@ -43,7 +41,6 @@ class DialogsController extends GetxController {
       actions: [
         DialogTextButton(
           hasBackground: false,
-          mainController: mainController,
           text: "no",
           onPressed: () {
             Get.back();
@@ -51,7 +48,6 @@ class DialogsController extends GetxController {
         ),
         DialogTextButton(
           forDelete: forDelete,
-          mainController: mainController,
           onPressed: function,
           text: actionButtonText,
           hasBackground: true,
@@ -74,7 +70,7 @@ class DialogsController extends GetxController {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               AutoSizeText(
-                mainController.allFirstWordLetterToUppercase(infoTitle),
+                infoTitle.capitalizeAllWordsFirstLetter(),
                 style: TextStyle(
                   color: AppColors.darkBlack,
                   fontSize: 22,
@@ -84,7 +80,7 @@ class DialogsController extends GetxController {
               ),
               const SizedBox(height: 10),
               AutoSizeText(
-                mainController.allFirstWordLetterToUppercase(infoText),
+                infoText.capitalizeAllWordsFirstLetter(),
                 style: TextStyle(
                   color: AppColors.darkBlack,
                   fontSize: 17,
@@ -101,7 +97,6 @@ class DialogsController extends GetxController {
           alignment: Alignment.centerRight,
           child: DialogTextButton(
             hasBackground: false,
-            mainController: mainController,
             text: "ok",
             onPressed: () {
               Get.back();
@@ -140,7 +135,7 @@ class DialogsController extends GetxController {
             ),
             Expanded(
               child: Text(
-                mainController.allFirstWordLetterToUppercase(title),
+                title.capitalizeAllWordsFirstLetter(),
                 style: TextStyle(
                   fontWeight: FontWeight.w400,
                   color: Theme.of(Get.overlayContext!).backgroundColor,

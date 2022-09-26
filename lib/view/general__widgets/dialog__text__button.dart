@@ -1,13 +1,13 @@
 // ignore_for_file: prefer_typing_uninitialized_variables
 
 import 'package:flutter/material.dart';
+import 'package:watch_it_later/utils/extensions/string_extension.dart';
 
 import '../../utils/AppColors.dart';
 
 class DialogTextButton extends StatelessWidget {
   const DialogTextButton({
     Key? key,
-    required this.mainController,
     required this.onPressed,
     required this.text,
     required this.hasBackground,
@@ -15,7 +15,6 @@ class DialogTextButton extends StatelessWidget {
   }) : super(key: key);
 
   // Variables
-  final mainController;
   final String text;
   final void Function()? onPressed;
   final bool hasBackground, forDelete;
@@ -41,7 +40,7 @@ class DialogTextButton extends StatelessWidget {
         ),
         onPressed: onPressed,
         child: Text(
-          mainController.allFirstWordLetterToUppercase(text),
+          text.capitalizeAllWordsFirstLetter(),
           style: TextStyle(
             color: hasBackground
                 ? forDelete
