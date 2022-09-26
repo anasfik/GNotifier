@@ -1,10 +1,11 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:watch_it_later/controllers/get__username__controller/extensions/get_username_from_box.dart';
 
 import '../../../../../controllers/get__username__controller/get__username__controller.dart';
 
 class UsernameWelcome extends StatelessWidget {
- const UsernameWelcome({
+  const UsernameWelcome({
     Key? key,
     required this.mainController,
     required this.getUsernameController,

@@ -1,6 +1,8 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:watch_it_later/controllers/get__username__controller/extensions/count_length.dart';
+import 'package:watch_it_later/controllers/get__username__controller/extensions/set_username_to_box.dart';
 import 'package:watch_it_later/controllers/get__username__controller/get__username__controller.dart';
 import 'package:watch_it_later/utils/extensions/string_extension.dart';
 import 'package:watch_it_later/view/general__widgets/button.dart';
