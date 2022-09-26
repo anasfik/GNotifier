@@ -4,17 +4,15 @@ import 'package:get/get.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:watch_it_later/controllers/favorites__controller/favorites__controller.dart';
 import 'package:watch_it_later/model/newItemNotificationModel.dart';
+import 'package:watch_it_later/utils/extensions/string_extension.dart';
 import 'package:watch_it_later/view/general__widgets/notification__card.dart';
 import '../../../../controllers/main__controller.dart';
 import '../../../general__widgets/nothing__to__show__text.dart';
 
-class FavoritesScreen extends StatelessWidget {
+class FavoritesScreen extends GetView<FavoritesController> {
   FavoritesScreen({Key? key}) : super(key: key);
 
-  // Dependencies injection
-  final MainController mainController = Get.put(MainController());
-  final FavoritesController favoritesController =
-      Get.put(FavoritesController());
+
 
   @override
   Widget build(BuildContext context) {
@@ -29,8 +27,7 @@ class FavoritesScreen extends StatelessWidget {
 
             // Page title
             AutoSizeText(
-              mainController
-                  .allFirstWordLetterToUppercase("Saved notifications"),
+              "Saved notifications".capitalizeAllWordsFirstLetter(),
               maxLines: 2,
               style: const TextStyle(
                 fontSize: 25,
@@ -54,7 +51,6 @@ class FavoritesScreen extends StatelessWidget {
                       .isEmpty) {
                     return NothingToShow(
                       text: "no favorites",
-                      mainController: mainController,
                     );
                   }
                   return Column(

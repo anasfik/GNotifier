@@ -134,7 +134,6 @@ class HomeScreen extends StatelessWidget {
                       margin: const EdgeInsets.only(right: 20),
                       child: NothingToShow(
                         text: "schedule your first\n notification",
-                        mainController: mainController,
                       ),
                     );
                   }

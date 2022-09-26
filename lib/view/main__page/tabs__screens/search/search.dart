@@ -72,10 +72,9 @@ class SearchScreen extends StatelessWidget {
                             children: <Widget>[
                               if (searchController
                                   .searchBarController.text.isEmpty) ...[
-                                NothingToShow(
-                                  key: const Key("nothing to show"),
+                                const NothingToShow(
+                                  key: Key("nothing to show"),
                                   text: "search\nIn your notifications",
-                                  mainController: mainController,
                                 )
                               ],
                               // const SizedBox(height: 100),
@@ -110,7 +109,6 @@ class SearchScreen extends StatelessWidget {
                                           margin: const EdgeInsets.only(
                                               right: 20, top: 20),
                                           text: "no notifications\nfound",
-                                          mainController: mainController,
                                         )
                                       ],
                                     ),

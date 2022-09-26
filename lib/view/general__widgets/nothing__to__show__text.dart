@@ -1,15 +1,15 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:watch_it_later/controllers/main__controller.dart';
 
-class NothingToShow extends StatelessWidget {
+class NothingToShow extends GetView<MainController> {
   const NothingToShow({
     Key? key,
     required this.text,
-    required this.mainController,
     this.margin = const EdgeInsets.only(right: 20, top: 150),
   }) : super(key: key);
 
-  final mainController;
   final String text;
   final EdgeInsets margin;
   @override
@@ -18,7 +18,7 @@ class NothingToShow extends StatelessWidget {
       child: Container(
         margin: margin,
         child: AutoSizeText(
-          mainController.allFirstWordLetterToUppercase(text),
+controller.allFirstWordLetterToUppercase(text),
           style: TextStyle(
             color: Theme.of(context).primaryColor.withOpacity(.25),
             fontSize: 25,
