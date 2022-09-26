@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:watch_it_later/controllers/helpers__controllers/extensions/show_info.dart';
 
 import 'dialogs__controller.dart';
 
@@ -11,7 +12,7 @@ class OnNotificationClick extends GetxController {
   @override
   void onReady() {
     if (payload != null) {
-      dialogsController.showInfo("deleted",
+      dialogsController.showInfoDialog("deleted",
           "the mission of this notification is completed, so it's automatically deleted .");
     }
     super.onReady();

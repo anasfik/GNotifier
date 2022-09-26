@@ -1,5 +1,6 @@
 import 'package:hive/hive.dart';
 import 'package:watch_it_later/controllers/favorites__controller/favorites__controller.dart';
+import 'package:watch_it_later/controllers/helpers__controllers/extensions/show_snackbar.dart';
 
 import '../../../model/newItemNotificationModel.dart';
 

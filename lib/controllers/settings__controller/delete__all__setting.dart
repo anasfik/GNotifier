@@ -1,5 +1,8 @@
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
+import 'package:watch_it_later/controllers/helpers__controllers/extensions/show_confirm_with_actions.dart';
+import 'package:watch_it_later/controllers/helpers__controllers/extensions/show_info.dart';
+import 'package:watch_it_later/controllers/helpers__controllers/extensions/show_snackbar.dart';
 
 import '../../model/newItemNotificationModel.dart';
 import '../../services/local__notifications__service.dart';
@@ -13,13 +16,13 @@ class DeleteAllSetting extends GetxController {
 
     // check first if it's already empty
     if (newNotificationsBox.isEmpty) {
-      dialogsController.showInfo("Already empty",
+      dialogsController.showInfoDialog("Already empty",
           "there is not notification saved yet, you can schedule new notification from the home page");
       return;
     }
 
     // else show confirm
-    dialogsController.showConfirmWithActions(
+    dialogsController.showConfirmWithActionsDialog(
         "are you sure you want to delete/Cancel all your notifications ?",
         "delete", () async {
       await newNotificationsBox.clear();

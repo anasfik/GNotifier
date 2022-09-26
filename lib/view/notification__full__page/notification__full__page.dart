@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:watch_it_later/controllers/helpers__controllers/dialogs__controller.dart';
+import 'package:watch_it_later/controllers/helpers__controllers/extensions/show_confirm_with_actions.dart';
 import 'package:watch_it_later/controllers/main__controller.dart';
 import 'package:watch_it_later/view/add_new_item/widgets/option.dart';
 import 'package:watch_it_later/view/general__widgets/button.dart';
@@ -205,7 +206,7 @@ class NotificationFullPage extends StatelessWidget {
                       radiusValue: 10,
                       shouldReverseColors: true,
                       onPressed: () {
-                        dialogsController.showConfirmWithActions(
+                        dialogsController.showConfirmWithActionsDialog(
                           "are you sure you want to update it ?",
                           mainController.allFirstWordLetterToUppercase("yes"),
                           () {
@@ -241,7 +242,7 @@ class NotificationFullPage extends StatelessWidget {
                       newNotificationController: newNotificationController,
                       reversedIndex: reversedIndex,
                       onPressed: () {
-                        dialogsController.showConfirmWithActions(
+                        dialogsController.showConfirmWithActionsDialog(
                             "are you sure to delete this ?", "delete", () {
                           newNotificationController
                               .deleteNotification(reversedIndex);

@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
 import 'package:watch_it_later/controllers/helpers__controllers/dialogs__controller.dart';
+import 'package:watch_it_later/controllers/helpers__controllers/extensions/show_info.dart';
+import 'package:watch_it_later/controllers/helpers__controllers/extensions/show_snackbar.dart';
 import '../../view/main__page/tabs__screens/settings/widgets/change__username__bottomsheet__widget.dart';
 
 class ChangeUsernameSetting extends GetxController {
@@ -45,7 +47,7 @@ class ChangeUsernameSetting extends GetxController {
 
   changeUsername(String newUsername) {
     if (newUsername.isEmpty) {
-      dialogsController.showInfo(
+      dialogsController.showInfoDialog(
           "no username written", "please, write a username");
       return;
     }

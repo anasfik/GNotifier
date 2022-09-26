@@ -2,6 +2,7 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
 import 'package:watch_it_later/controllers/helpers__controllers/dialogs__controller.dart';
+import 'package:watch_it_later/controllers/helpers__controllers/extensions/show_snackbar.dart';
 
 class ShowOnLockScreenSetting extends GetxController {
   DialogsController dialogsController = Get.put(DialogsController());

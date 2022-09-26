@@ -1,5 +1,6 @@
 import 'package:url_launcher/url_launcher.dart';
 import 'package:watch_it_later/controllers/contact_controller/contact_controller.dart';
+import 'package:watch_it_later/controllers/helpers__controllers/extensions/show_snackbar.dart';
 import 'package:watch_it_later/utils/extensions/string_extension.dart';
 
 extension SendEmailExtension on ContactController {

@@ -1,3 +1,20 @@
-{
-  "cSpell.words": ["Cupertino", "MYID", "oktoast"]
-}
+[
+  {
+    "cSpell.words": ["Cupertino", "MYID", "oktoast"]
+  },
+  {
+    "key": "ctrl+shift+n",
+    "command": "workbench.action.newWindow",
+    "when": "!explorerViewletFocus"
+  },
+  {
+    "key": "ctrl+n",
+    "command": "explorer.newFile",
+    "when": "explorerViewletFocus"
+  },
+  {
+    "key": "ctrl+shift+n",
+    "command": "explorer.newFolder",
+    "when": "explorerViewletFocus"
+  }
+]

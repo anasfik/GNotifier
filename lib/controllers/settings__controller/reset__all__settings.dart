@@ -1,11 +1,13 @@
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
+import 'package:watch_it_later/controllers/helpers__controllers/extensions/show_confirm_with_actions.dart';
+import 'package:watch_it_later/controllers/helpers__controllers/extensions/show_snackbar.dart';
 import 'package:watch_it_later/controllers/notifications__controllers/new__item__notification__error__controller.dart';
 
 class ResetAllSettings extends GetxController {
   Box localBox = Hive.box('locals');
   reset() {
-    dialogsController.showConfirmWithActions(
+    dialogsController.showConfirmWithActionsDialog(
         "are you sure you want to reset all settings to default ?", "reset",
         () async {
       String? username = localBox.get("username");

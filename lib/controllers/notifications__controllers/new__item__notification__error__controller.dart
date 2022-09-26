@@ -1,9 +1,9 @@
 import 'package:get/get.dart';
+import 'package:watch_it_later/controllers/helpers__controllers/extensions/show_info.dart';
 
 import '../helpers__controllers/dialogs__controller.dart';
 
 final DialogsController dialogsController = Get.put(DialogsController());
-
 
 /////////////////////
 /// Title
@@ -14,10 +14,9 @@ bool checkTitleValidity(String title) {
 
 //
 void checkTitleValidityDialog() {
-  dialogsController.showInfo(
+  dialogsController.showInfoDialog(
       "Title is empty", "please, set a title for your notification");
 }
-
 
 /////////////////////
 /// Description
@@ -28,10 +27,9 @@ bool checkDescriptionValidity(String description) {
 
 //
 void checkDescriptionValidityDialog() {
-  dialogsController.showInfo("description is empty",
+  dialogsController.showInfoDialog("description is empty",
       "please, set a description for your notification");
 }
-
 
 /////////////////////
 /// DateTime (year, month, day)
@@ -42,10 +40,9 @@ bool checkDateTimeValidity(DateTime? date) {
 
 //
 void checkDateTimeValidityDialog() {
-  dialogsController.showInfo("no date selected",
+  dialogsController.showInfoDialog("no date selected",
       "please, choose the schedule date for your notification");
 }
-
 
 /////////////////////
 /// TimeOfDay (hours, minutes)
@@ -56,10 +53,9 @@ bool checkTimeOfDayValidity(DateTime? date) {
 
 //
 void checkTimeOfDayValidityDialog() {
-  dialogsController.showInfo("no hours / minutes selected",
+  dialogsController.showInfoDialog("no hours / minutes selected",
       "please, set a specific time for scheduling your notification");
 }
-
 
 /////////////////////
 /// Fulltime validity
@@ -68,6 +64,6 @@ bool checkFullTimeValidity(DateTime? date) {
 }
 
 void checkFullTimeValidityDialog() {
-  dialogsController.showInfo("date not accepted",
+  dialogsController.showInfoDialog("date not accepted",
       "we can't show you a notification in the past, please, pick a schedule date");
 }
