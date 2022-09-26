@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:watch_it_later/controllers/favorites__controller/extensions/add_to_favorites.dart';
 import '../../controllers/favorites__controller/favorites__controller.dart';
 
 class FavoriteIconButton extends StatefulWidget {

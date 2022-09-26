@@ -4,8 +4,9 @@ import 'dialogs__controller.dart';
 
 class OnNotificationClick extends GetxController {
   OnNotificationClick({this.payload});
-  final DialogsController dialogsController = Get.put(DialogsController());
   String? payload;
+
+  final DialogsController dialogsController = Get.find();
 
   @override
   void onReady() {

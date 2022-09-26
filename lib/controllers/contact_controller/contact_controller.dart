@@ -19,7 +19,6 @@ class ContactController extends GetxController {
   void onInit() {
     // Init the variables
     textAreaEditingController = TextEditingController();
-
     _username = Hive.box("locals").get("username");
     super.onInit();
   }
