@@ -5,6 +5,8 @@ import 'package:get/get.dart';
 import 'package:watch_it_later/controllers/helpers__controllers/dialogs__controller.dart';
 import 'package:watch_it_later/controllers/helpers__controllers/extensions/show_confirm_with_actions.dart';
 import 'package:watch_it_later/controllers/main__controller.dart';
+import 'package:watch_it_later/controllers/notifications__controllers/extensions/assing_dull_date.dart';
+import 'package:watch_it_later/controllers/notifications__controllers/extensions/get_date_and_time_both_full.dart';
 import 'package:watch_it_later/view/add_new_item/widgets/option.dart';
 import 'package:watch_it_later/view/general__widgets/button.dart';
 import 'package:watch_it_later/view/notification__full__page/widgets/dashed__lines__decoration.dart';
@@ -139,7 +141,7 @@ class NotificationFullPage extends StatelessWidget {
                       child: GestureDetector(
                         onTap: () async {
                           newNotificationController.newDate =
-                              dateController.setFullDate(
+                              dateController.fullDate(
                             await dateController.getFullDateFromUser(
                                 gettedDate: gettedNotification.dateToShow),
                           );
