@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:watch_it_later/controllers/home__page__tab__controller/home__page__tab__controller.dart.dart';
 
-mixin TabsFromExtension {
+mixin TabsFromMethodMixin {
   /// This function will return a list of tabs wrapped with tooltip from
   List<Tooltip> tabsFrom(List<Map<String, dynamic>> tabsIcons, context) {
     return tabsIcons

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../utils/strict__mode__for production.dart';
-import 'extensions/tabs_from.dart';
+import 'mixins/tabs_from.dart';
 import 'home__page__tab__errors_controller.dart';
 import 'mixins/tabs_icons.dart';
 import 'mixins/tabs_screens.dart';
@@ -12,11 +12,12 @@ class BottomBarController extends GetxController
         TabsScreensMixins,
         TabsIconsListMixin,
         GetSingleTickerProviderStateMixin,
-        TabsFromExtension {
+        TabsFromMethodMixin {
+  //
   BottomBarController({required this.context}) {
     tabs = tabsFrom(tabsIcons, context);
   }
-  
+
   late final TabController tabController;
   late final List<Tooltip> tabs;
   final BuildContext context;
